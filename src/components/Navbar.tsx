@@ -6,13 +6,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 
-const navLinks = [
+interface NavLinkItem {
+  name: string;
+  href: string;
+  dropdown?: boolean;
+  badge?: string;
+}
+
+const navLinks: NavLinkItem[] = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Services", href: "/#services", dropdown: true },
-  { name: "Industries", href: "/#industries" },
+  { name: "Tax Calculator", href: "/calculator" },
   { name: "Process", href: "/process" },
-  { name: "FAQ", href: "/#faq" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -86,7 +92,7 @@ export default function Navbar() {
           {/* Desktop navigation */}
           <nav
             aria-label="Main navigation"
-            className="hidden items-center gap-5 xl:gap-6 2xl:gap-7 xl:flex"
+            className="hidden items-center gap-4 xl:gap-6 2xl:gap-7 lg:flex"
           >
             {navLinks.map((link) => {
               const active = isActive(link.href);
@@ -94,13 +100,19 @@ export default function Navbar() {
                 <div key={link.name} className="relative group">
                   <Link
                     href={link.href}
-                    className={`nav-link inline-flex items-center gap-1.5 py-3 text-[14px] font-medium transition-colors ${
+                    className={`nav-link inline-flex items-center gap-1.5 py-3 text-[13px] xl:text-[14px] font-medium transition-colors ${
                       active
                         ? "text-[var(--brand-teal-dark)] font-semibold"
                         : "text-[var(--brand-navy)] hover:text-[var(--brand-teal)]"
                     }`}
                   >
                     <span>{link.name}</span>
+                    {link.badge && (
+                      <span className="hidden xl:inline-flex items-center gap-1 text-[9px] font-mono font-bold px-1.5 py-0.5 rounded-full bg-[#EAF4F0] text-[#216D56] border border-[#36A783]/25 uppercase tracking-wide">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#36A783] animate-pulse" />
+                        {link.badge}
+                      </span>
+                    )}
                     {link.dropdown && (
                       <ChevronDown
                         size={14}
@@ -121,10 +133,16 @@ export default function Navbar() {
                         <div className="space-y-0.5 mt-1">
                           {[
                             { title: "Audit & Assurance", href: "/#services" },
-                            { title: "Accounting & Bookkeeping", href: "/#services" },
+                            {
+                              title: "Accounting & Bookkeeping",
+                              href: "/#services",
+                            },
                             { title: "UAE VAT Services", href: "/#services" },
                             { title: "UAE Corporate Tax", href: "/#services" },
-                            { title: "CFO & Finance Advisory", href: "/#services" },
+                            {
+                              title: "CFO & Finance Advisory",
+                              href: "/#services",
+                            },
                             { title: "Business Advisory", href: "/#services" },
                           ].map((item, idx) => (
                             <Link
@@ -136,7 +154,26 @@ export default function Navbar() {
                             </Link>
                           ))}
                         </div>
-                        <div className="mt-2 pt-2 border-t border-slate-100 px-3 py-1">
+
+                        {/* Direct Tax Calculator Callout inside Dropdown */}
+                        <div className="mt-2 pt-2 border-t border-slate-100 px-1">
+                          <Link
+                            href="/calculator"
+                            className="flex items-center justify-between p-2 rounded-xl bg-gradient-to-r from-[#EAF4F0] to-[#F1F6F4] border border-[#36A783]/20 hover:border-[#36A783] transition-all group/calc"
+                          >
+                            <div className="flex items-center gap-1.5">
+                              <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
+                              <span className="text-[11px] font-bold text-[#071426]">
+                                UAE Tax Calculator
+                              </span>
+                            </div>
+                            <span className="text-[10px] font-mono text-[#216D56] font-bold group-hover/calc:translate-x-0.5 transition-transform">
+                              Try ↳
+                            </span>
+                          </Link>
+                        </div>
+
+                        <div className="mt-1 pt-1 border-t border-slate-100 px-3 py-1">
                           <Link
                             href="/#services"
                             className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#36A783] hover:text-[#216D56]"
@@ -154,7 +191,7 @@ export default function Navbar() {
           </nav>
 
           {/* Primary CTA (Desktop Only) */}
-          <div className="hidden xl:block">
+          <div className="hidden lg:block">
             <Link
               href="/contact"
               className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-brand-teal px-5 py-2.5 text-[13px] font-semibold text-white shadow-[0_4px_16px_rgba(54,167,131,0.25)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_8px_24px_rgba(23,45,67,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]"
@@ -195,10 +232,10 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Stylish Mobile & Tablet Toggle (Below XL) */}
+          {/* Stylish Mobile & Tablet Toggle (Below LG) */}
           <button
             type="button"
-            className="group relative z-[60] inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200/90 bg-white/95 text-[var(--brand-navy)] shadow-[0_2px_10px_rgba(35,63,91,0.08)] backdrop-blur-md transition-all duration-300 hover:border-[var(--brand-teal)] hover:shadow-[0_4px_16px_rgba(54,167,131,0.2)] active:scale-95 xl:hidden"
+            className="group relative z-[60] inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200/90 bg-white/95 text-[var(--brand-navy)] shadow-[0_2px_10px_rgba(35,63,91,0.08)] backdrop-blur-md transition-all duration-300 hover:border-[var(--brand-teal)] hover:shadow-[0_4px_16px_rgba(54,167,131,0.2)] active:scale-95 lg:hidden"
             onClick={() => setMenuOpen((open) => !open)}
             aria-label={
               menuOpen ? "Close navigation menu" : "Open navigation menu"
@@ -235,7 +272,7 @@ export default function Navbar() {
 
       {/* Mobile navigation drawer */}
       <div
-        className={`fixed inset-0 z-40 xl:hidden overflow-hidden ${
+        className={`fixed inset-0 z-40 lg:hidden overflow-hidden ${
           menuOpen ? "pointer-events-auto" : "pointer-events-none"
         }`}
         aria-hidden={!menuOpen}
@@ -285,7 +322,15 @@ export default function Navbar() {
                     transitionDelay: menuOpen ? `${index * 35}ms` : "0ms",
                   }}
                 >
-                  {link.name}
+                  <div className="flex items-center gap-2">
+                    <span>{link.name}</span>
+                    {link.badge && (
+                      <span className="inline-flex items-center gap-1 text-[9px] font-mono font-bold px-2 py-0.5 rounded-full bg-[#EAF4F0] text-[#216D56] border border-[#36A783]/25 uppercase tracking-wide">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#36A783] animate-pulse" />
+                        {link.badge}
+                      </span>
+                    )}
+                  </div>
                   <ArrowUpRight
                     size={17}
                     className="text-[var(--brand-teal)]"
