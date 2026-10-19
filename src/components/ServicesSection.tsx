@@ -32,30 +32,30 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// Curated high-resolution corporate photography for each service domain
+// Curated bespoke corporate imagery for each service domain from public/images/services-images/
 const serviceImages: Record<string, string> = {
   "corporate-tax":
-    "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
+    "/images/services-images/UAE Corporate Tax Finance Poster.webp",
   "audit-assurance":
-    "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80",
+    "/images/services-images/Magnified Audit Assurance Workspace.webp",
   "accounting-bookkeeping":
-    "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80",
+    "/images/services-images/Bookkeeping Desk with Financial Reports.webp",
   "vat-services":
-    "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80",
+    "/images/services-images/Corporate VAT Interface Touchscreen.webp",
   "business-setup":
-    "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80",
+    "/images/services-images/Business Advisory Brushstroke Concept.webp",
   "cfo-advisory":
-    "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
+    "/images/services-images/CFO Strategy Mind Map.webp",
   "transfer-pricing":
-    "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80",
+    "/images/services-images/Transfer Pricing_ UAE Documentation Essentials.webp",
   "corporate-finance":
-    "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80",
+    "/images/services-images/Corporate Compliance Desk with Financial Records.webp",
   "business-advisory":
-    "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=80",
+    "/images/services-images/Business Advisory Brushstroke Concept.webp",
   "compliance-services":
-    "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1200&q=80",
+    "/images/services-images/Modern Compliance Office Workspace.webp",
   "technology-digital":
-    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    "/images/services-images/Futuristic Financial Technology Dashboard.webp",
 };
 
 // Filter tab groups (preserved for future category filtering if needed)
@@ -97,6 +97,7 @@ export default function ServicesSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const stackWrapperRef = useRef<HTMLDivElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
 
   // Filtered categories based on selected tab and search query
   const filteredCategories = useMemo(() => {
@@ -299,6 +300,19 @@ export default function ServicesSection() {
           );
         }
       }
+
+      // Pin background atmosphere image throughout the entire services section until it ends
+      if (bgRef.current && sectionRef.current) {
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom bottom",
+          pin: bgRef.current,
+          pinSpacing: false,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        });
+      }
     };
 
     // Desktop configuration
@@ -353,9 +367,27 @@ export default function ServicesSection() {
     <section
       id="services"
       ref={sectionRef}
-      className="relative bg-white text-[#071426] py-14 sm:py-20 lg:py-24 overflow-x-clip"
+      className="relative bg-[#F8FAFC] text-[#071426] py-14 sm:py-20 lg:py-24"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Background Atmosphere Image with Subtle Blur (Pinned across entire Services section until it ends) */}
+      <div
+        ref={bgRef}
+        className="pointer-events-none absolute top-0 left-0 w-full h-screen z-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <Image
+          src="/images/bg/bg-service-audit.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center blur-[2px] opacity-90"
+          priority
+        />
+        {/* Subtle elegant wash to preserve contrast while keeping graphics clearly visible */}
+        <div className="absolute inset-0 bg-white/10" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ========================================================= */}
         {/* EDITORIAL HEADER */}
         {/* ========================================================= */}
@@ -404,7 +436,7 @@ export default function ServicesSection() {
               const isFirst = index === 0;
               const imageUrl =
                 serviceImages[category.id] ||
-                "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80";
+                "/images/services-images/Magnified Audit Assurance Workspace.webp";
 
               return (
                 <div
