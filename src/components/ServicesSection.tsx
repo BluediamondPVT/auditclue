@@ -44,8 +44,7 @@ const serviceImages: Record<string, string> = {
     "/images/services-images/Corporate VAT Interface Touchscreen.webp",
   "business-setup":
     "/images/services-images/Business Advisory Brushstroke Concept.webp",
-  "cfo-advisory":
-    "/images/services-images/CFO Strategy Mind Map.webp",
+  "cfo-advisory": "/images/services-images/CFO Strategy Mind Map.webp",
   "transfer-pricing":
     "/images/services-images/Transfer Pricing_ UAE Documentation Essentials.webp",
   "corporate-finance":
