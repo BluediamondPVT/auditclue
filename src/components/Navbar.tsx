@@ -7,29 +7,30 @@ import { usePathname } from "next/navigation";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 
 const navLinks = [
-  { name: "Home", href: "#hero" },
-  { name: "About", href: "#about", pageHref: "/about" },
-  { name: "Services", href: "#services", dropdown: true },
-  { name: "Industries", href: "#industries" },
-  { name: "Process", href: "#process", pageHref: "/process" },
-  { name: "FAQ", href: "#faq" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/#services", dropdown: true },
+  { name: "Industries", href: "/#industries" },
+  { name: "Process", href: "/process" },
+  { name: "FAQ", href: "/#faq" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
-  const isHome = pathname === "/";
 
-  const getHref = (link: { href: string; pageHref?: string }) => {
-    if (isHome) return link.href;
-    if (link.pageHref && pathname === link.pageHref) return link.pageHref;
-    if (link.href.startsWith("#")) return `/${link.href}`;
-    return link.href;
+  const isActive = (href: string) => {
+    if (!mounted) return false;
+    if (href === "/") return pathname === "/";
+    if (href.startsWith("/#")) return false;
+    return pathname === href;
   };
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => setScrolled(window.scrollY > 12);
 
     handleScroll();
@@ -67,7 +68,7 @@ export default function Navbar() {
         <div className="mx-auto flex h-[76px] max-w-[1320px] items-center justify-between px-5 sm:px-8 lg:h-[86px] lg:px-10">
           {/* Brand */}
           <Link
-            href={isHome ? "#hero" : "/#hero"}
+            href="/"
             onClick={closeMenu}
             className="relative z-[60] flex shrink-0 items-center"
             aria-label="Auditclue home"
@@ -88,11 +89,11 @@ export default function Navbar() {
             className="hidden items-center gap-5 xl:gap-6 2xl:gap-7 xl:flex"
           >
             {navLinks.map((link) => {
-              const active = link.pageHref ? pathname === link.pageHref : false;
+              const active = isActive(link.href);
               return (
                 <div key={link.name} className="relative group">
                   <Link
-                    href={getHref(link)}
+                    href={link.href}
                     className={`nav-link inline-flex items-center gap-1.5 py-3 text-[14px] font-medium transition-colors ${
                       active
                         ? "text-[var(--brand-teal-dark)] font-semibold"
@@ -119,16 +120,16 @@ export default function Navbar() {
                         </div>
                         <div className="space-y-0.5 mt-1">
                           {[
-                            { title: "Audit & Assurance", href: "#services" },
-                            { title: "Accounting & Bookkeeping", href: "#services" },
-                            { title: "UAE VAT Services", href: "#services" },
-                            { title: "UAE Corporate Tax", href: "#services" },
-                            { title: "CFO & Finance Advisory", href: "#services" },
-                            { title: "Business Advisory", href: "#services" },
+                            { title: "Audit & Assurance", href: "/#services" },
+                            { title: "Accounting & Bookkeeping", href: "/#services" },
+                            { title: "UAE VAT Services", href: "/#services" },
+                            { title: "UAE Corporate Tax", href: "/#services" },
+                            { title: "CFO & Finance Advisory", href: "/#services" },
+                            { title: "Business Advisory", href: "/#services" },
                           ].map((item, idx) => (
                             <Link
                               key={idx}
-                              href={isHome ? item.href : `/${item.href}`}
+                              href={item.href}
                               className="block px-3 py-2 text-xs font-medium text-[#233F5B] hover:text-[#36A783] hover:bg-[#EAF4F0] rounded-lg transition-colors"
                             >
                               {item.title}
@@ -137,7 +138,7 @@ export default function Navbar() {
                         </div>
                         <div className="mt-2 pt-2 border-t border-slate-100 px-3 py-1">
                           <Link
-                            href={isHome ? "#services" : "/#services"}
+                            href="/#services"
                             className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#36A783] hover:text-[#216D56]"
                           >
                             <span>Explore all 10 practices</span>
@@ -155,7 +156,7 @@ export default function Navbar() {
           {/* Primary CTA (Desktop Only) */}
           <div className="hidden xl:block">
             <Link
-              href={isHome ? "#consult-form" : "/#consult-form"}
+              href="/contact"
               className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-brand-teal px-5 py-2.5 text-[13px] font-semibold text-white shadow-[0_4px_16px_rgba(54,167,131,0.25)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_8px_24px_rgba(23,45,67,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]"
             >
               {/* Liquid Fill Wipe */}
@@ -268,11 +269,11 @@ export default function Navbar() {
 
           <div className="flex flex-col">
             {navLinks.map((link, index) => {
-              const active = link.pageHref ? pathname === link.pageHref : false;
+              const active = isActive(link.href);
               return (
                 <Link
                   key={link.name}
-                  href={getHref(link)}
+                  href={link.href}
                   onClick={closeMenu}
                   tabIndex={menuOpen ? 0 : -1}
                   className={`flex items-center justify-between border-b border-[var(--border-default)] py-4 text-base font-medium transition-colors ${
@@ -295,7 +296,7 @@ export default function Navbar() {
           </div>
 
           <Link
-            href={isHome ? "#consult-form" : "/#consult-form"}
+            href="/contact"
             onClick={closeMenu}
             tabIndex={menuOpen ? 0 : -1}
             className="group relative mt-7 inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-brand-teal py-3.5 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(54,167,131,0.25)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_8px_24px_rgba(23,45,67,0.3)] active:scale-[0.98]"

@@ -101,7 +101,7 @@ const ARCHITECTURAL_BENCHMARKS = [
   {
     num: "03",
     title: "FTA Registered Team",
-    desc: "Chartered CPA & Tax Agents",
+    desc: " Agents",
   },
   {
     num: "04",
@@ -126,8 +126,8 @@ export default function ProcessPage() {
             className="pointer-events-none absolute inset-0 z-0 overflow-hidden flex items-center justify-center select-none"
             aria-hidden="true"
           >
-            {/* The 3D Abstract Sculpture centered in background with subtle blur, radial mask & organic aura */}
-            <div className="relative w-[700px] h-[480px] sm:w-[920px] sm:h-[600px] lg:w-[1100px] lg:h-[700px] opacity-30 sm:opacity-35 filter blur-[12px] sm:blur-[18px] scale-105 pointer-events-none transform-gpu [mask-image:radial-gradient(ellipse_65%_65%_at_50%_50%,#000_30%,transparent_85%)]">
+            {/* The 3D Abstract Sculpture centered in background with cinematic floating motion & organic aura */}
+            <div className="relative w-[700px] h-[480px] sm:w-[920px] sm:h-[600px] lg:w-[1100px] lg:h-[700px] opacity-30 sm:opacity-35 filter blur-[12px] sm:blur-[18px] pointer-events-none transform-gpu animate-bg-drift [mask-image:radial-gradient(ellipse_65%_65%_at_50%_50%,#000_30%,transparent_85%)]">
               <Image
                 src="/images/process/abstract-hero-ribbon.jpg"
                 alt=""
@@ -138,8 +138,8 @@ export default function ProcessPage() {
               />
             </div>
 
-            {/* Subtle emerald atmospheric glow halo */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#36A783]/14 rounded-full blur-[140px] pointer-events-none" />
+            {/* Subtle emerald atmospheric glow halo with living pulse */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#36A783]/14 rounded-full blur-[140px] pointer-events-none animate-glow-pulse" />
 
             {/* Fine architectural grid overlay */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(35,63,91,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(35,63,91,0.025)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_75%_55%_at_50%_45%,#000_65%,transparent_100%)]" />
@@ -172,7 +172,7 @@ export default function ProcessPage() {
                 />
               </h1>
 
-              <p className="text-lg sm:text-xl lg:text-2xl text-[#4A5D73] font-sans font-light leading-relaxed max-w-3xl">
+              <p className="text-lg sm:text-xl lg:text-xl text-[#363636] font-sans font-light leading-relaxed max-w-3xl">
                 Traditional advisory relied on physical office visits, courier
                 envelopes, and unpredictable bills. We engineered an uncompromising,
                 fully digital protocol for UAE Mainland and Free Zone enterprises.

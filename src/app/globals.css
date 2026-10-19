@@ -1062,3 +1062,47 @@ label {
     background-position: 70% center;
   }
 }
+
+/* =========================================================
+   CINEMATIC ABSTRACT BACKGROUND DRIFT & BREATHING ANIMATION
+   ========================================================= */
+
+@keyframes bgDriftMotion {
+  0% {
+    transform: translate3d(0px, 0px, 0px) rotate(0deg) scale(1.04);
+  }
+  25% {
+    transform: translate3d(24px, -22px, 0px) rotate(3deg) scale(1.09);
+  }
+  50% {
+    transform: translate3d(-20px, 18px, 0px) rotate(-2.5deg) scale(1.03);
+  }
+  75% {
+    transform: translate3d(18px, 20px, 0px) rotate(2deg) scale(1.08);
+  }
+  100% {
+    transform: translate3d(0px, 0px, 0px) rotate(0deg) scale(1.04);
+  }
+}
+
+@keyframes ambientPulseGlow {
+  0%, 100% {
+    opacity: 0.14;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.24;
+    transform: translate(-50%, -50%) scale(1.18);
+  }
+}
+
+.animate-bg-drift {
+  animation: bgDriftMotion 16s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-glow-pulse {
+  animation: ambientPulseGlow 12s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
