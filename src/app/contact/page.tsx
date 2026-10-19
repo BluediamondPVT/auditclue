@@ -56,16 +56,88 @@ export default function ContactPage() {
 
       <main className="flex-1 pt-[76px] lg:pt-[86px]">
         {/* ================================================================= */}
-        {/* 1. EDITORIAL HEADER SECTION (Clean Typographic Breath)            */}
+        {/* 1. EDITORIAL HEADER SECTION with Multi-Layer Wave Gradients       */}
         {/* ================================================================= */}
-        <section className="relative bg-white border-b border-[#E2E8F0] pt-12 pb-14 sm:pt-16 sm:pb-20 overflow-hidden">
-          {/* Subtle ambient glow in background */}
+        <section className="relative bg-[#F8FAFC] border-b border-[#E2E8F0] pt-14 pb-16 sm:pt-20 sm:pb-24 overflow-hidden">
+          {/* Multi-Layer Flowing Gradient Waves Container */}
           <div
-            className="pointer-events-none absolute inset-0 z-0 overflow-hidden flex items-center justify-center select-none"
+            className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
             aria-hidden="true"
           >
-            <div className="absolute top-1/3 right-1/4 w-[550px] h-[350px] bg-[#36A783]/10 rounded-full blur-[130px] pointer-events-none" />
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(35,63,91,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(35,63,91,0.025)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_75%_55%_at_50%_45%,#000_65%,transparent_100%)]" />
+            {/* Layer 1: Base Atmospheric Pastel Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#EAF4F0]/85 via-[#F8FAFC] to-[#EEF5F2]/90" />
+
+            {/* Layer 2: Glowing Radial Ambient Aura Orbs */}
+            <div className="absolute -top-24 right-1/4 w-[650px] h-[450px] bg-gradient-to-br from-[#36A783]/18 via-[#83D9BE]/20 to-transparent rounded-full blur-[100px] pointer-events-none animate-glow-pulse" />
+            <div className="absolute -bottom-20 -left-20 w-[550px] h-[400px] bg-gradient-to-tr from-[#233F5B]/12 via-[#36A783]/15 to-transparent rounded-full blur-[110px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[450px] h-[300px] bg-[#C6F850]/10 rounded-full blur-[90px] pointer-events-none" />
+
+            {/* Layer 3: Flowing Wave Layer A (Emerald Mint Ribbon) */}
+            <svg
+              className="absolute inset-0 w-full h-full opacity-60 mix-blend-multiply pointer-events-none animate-wave-1"
+              viewBox="0 0 1440 500"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="contact-wave-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#36A783" stopOpacity="0.22" />
+                  <stop offset="45%" stopColor="#83D9BE" stopOpacity="0.16" />
+                  <stop offset="85%" stopColor="#216D56" stopOpacity="0.1" />
+                  <stop offset="100%" stopColor="#233F5B" stopOpacity="0.04" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M 0,160 C 280,240, 520,80, 800,160 C 1080,240, 1260,110, 1440,180 L 1440,0 L 0,0 Z"
+                fill="url(#contact-wave-grad-1)"
+              />
+            </svg>
+
+            {/* Layer 4: Flowing Wave Layer B (Counter-Swaying Cyan & Acid Lime Ribbon) */}
+            <svg
+              className="absolute inset-0 w-full h-full opacity-50 pointer-events-none animate-wave-2"
+              viewBox="0 0 1440 500"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="contact-wave-grad-2" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#83D9BE" stopOpacity="0.25" />
+                  <stop offset="50%" stopColor="#36A783" stopOpacity="0.14" />
+                  <stop offset="100%" stopColor="#C6F850" stopOpacity="0.1" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M 0,90 C 360,190, 680,40, 1020,130 C 1220,180, 1340,70, 1440,110 L 1440,0 L 0,0 Z"
+                fill="url(#contact-wave-grad-2)"
+              />
+            </svg>
+
+            {/* Layer 5: Flowing Wave Layer C (Bottom Horizon Soft Wave) */}
+            <svg
+              className="absolute bottom-0 left-0 right-0 w-full h-44 opacity-40 pointer-events-none"
+              viewBox="0 0 1440 180"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="contact-wave-grad-3" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#233F5B" stopOpacity="0.08" />
+                  <stop offset="50%" stopColor="#36A783" stopOpacity="0.12" />
+                  <stop offset="100%" stopColor="#EAF4F0" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M 0,80 C 320,140, 640,20, 960,80 C 1200,120, 1360,50, 1440,70 L 1440,180 L 0,180 Z"
+                fill="url(#contact-wave-grad-3)"
+              />
+            </svg>
+
+            {/* Layer 6: Architectural Precision Dot & Grid Texture Overlay */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(35,63,91,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(35,63,91,0.025)_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_75%_60%_at_50%_45%,#000_65%,transparent_100%)]" />
           </div>
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">

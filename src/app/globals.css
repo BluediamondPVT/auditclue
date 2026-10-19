@@ -1106,3 +1106,33 @@ label {
   will-change: transform, opacity;
 }
 
+/* Multi-layer flowing gradient waves */
+@keyframes waveSway {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-20px, 12px, 0) scale(1.03);
+  }
+}
+
+@keyframes waveSwayReverse {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(24px, -15px, 0) scale(1.04);
+  }
+}
+
+.animate-wave-1 {
+  animation: waveSway 16s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-wave-2 {
+  animation: waveSwayReverse 20s ease-in-out infinite;
+  will-change: transform;
+}
+
+
