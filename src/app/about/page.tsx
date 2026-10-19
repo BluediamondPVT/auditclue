@@ -5,288 +5,366 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FlowText from "@/components/FlowText";
-import { REGULATORY_FRAMEWORKS } from "@/data/servicesData";
 import {
+  Star,
+  Sparkles,
+  Laptop,
   ShieldCheck,
-  CheckCircle2,
+  Clock,
+  Lock,
+  FileText,
+  Users2,
   ArrowUpRight,
   ArrowRight,
-  Laptop,
-  FileCheck2,
-  Lock,
   Building2,
-  Users2,
-  Sparkles,
-  BarChart3,
+  CheckCircle2,
   Award,
-  Compass,
   Layers,
+  ChevronRight,
 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About Us | Auditclue Global Advisory Services LLC",
   description:
-    "Learn about Auditclue, the UAE's digital-first audit, tax, and corporate advisory firm. Combining international standards (IFRS, ISA) with deep UAE regulatory expertise across Mainland and 40+ Free Zones.",
+    "A fully digital professional advisory firm providing audit, accounting, tax, finance, and corporate advisory services to businesses in the UAE and beyond.",
 };
 
+// Client's exact 5 Core Capabilities
+const CORE_CAPABILITIES = [
+  "End-to-end digital service delivery — anytime, anywhere",
+  "UAE corporate tax, VAT & compliance expertise",
+  "Fast turnaround with professional documentation",
+  "Transparent pricing with no hidden charges",
+  "Secure, confidential client data handling",
+];
+
+// Client's exact 6 Operational Pillars
+const OPERATIONAL_PILLARS = [
+  {
+    icon: Laptop,
+    number: "01",
+    title: "Fully Digital Operations",
+    description:
+      "Complete digital service delivery — no physical office visits required.",
+    tag: "100% Cloud Execution",
+  },
+  {
+    icon: ShieldCheck,
+    number: "02",
+    title: "UAE Compliance Expertise",
+    description:
+      "Deep knowledge of UAE tax, regulatory, and legal frameworks.",
+    tag: "FTA & Ministry Aligned",
+  },
+  {
+    icon: Clock,
+    number: "03",
+    title: "Fast Response & Execution",
+    description:
+      "Committed turnaround times with clear communication at every stage.",
+    tag: "Committed SLAs",
+  },
+  {
+    icon: Lock,
+    number: "04",
+    title: "Secure & Confidential",
+    description:
+      "Bank-grade document security and strict client confidentiality.",
+    tag: "256-Bit Vault Security",
+  },
+  {
+    icon: FileText,
+    number: "05",
+    title: "Professional Reporting",
+    description:
+      "Clear, accurate, and timely financial and compliance reports.",
+    tag: "Board-Ready Deliverables",
+  },
+  {
+    icon: Users2,
+    number: "06",
+    title: "Dedicated Advisory Support",
+    description:
+      "Ongoing guidance beyond a single engagement — we become your partners.",
+    tag: "Continuous Partnership",
+  },
+];
+
+// UAE Regulatory & Authority Coverage
+const REGULATORY_BADGES = [
+  {
+    badge: "FTA Registered",
+    title: "Federal Tax Authority",
+    subtitle: "Corporate Tax & VAT Compliant",
+  },
+  {
+    badge: "Global Standard",
+    title: "IFRS & ISA Standards",
+    subtitle: "Statutory Audit & Assurance",
+  },
+  {
+    badge: "Mainland & Free Zones",
+    title: "40+ UAE Jurisdictions",
+    subtitle: "DIFC, ADGM, DMCC & Mainland DED",
+  },
+  {
+    badge: "Digital First",
+    title: "Paperless Operations",
+    subtitle: "Encrypted Cloud Workflows",
+  },
+];
+
 export default function AboutPage() {
-  const whyAuditcluePillars = [
-    {
-      title: "Digital-First Operations",
-      desc: "Cloud-native workflows, encrypted document repositories, and real-time ledger access replace outdated paper-heavy processes.",
-      icon: Laptop,
-      badge: "100% Cloud Delivery",
-    },
-    {
-      title: "UAE Regulatory Rigor",
-      desc: "In-depth compliance with UAE Federal Decree-Law No. 47 on Corporate Tax, Cabinet Decisions, and FTA Tax Agent regulations.",
-      icon: ShieldCheck,
-      badge: "FTA & Ministry Aligned",
-    },
-    {
-      title: "Actionable Executive Reporting",
-      desc: "Beyond historical compliance, we generate structured monthly MIS reports and strategic financial dashboards that guide board decisions.",
-      icon: BarChart3,
-      badge: "Decision-Ready MIS",
-    },
-    {
-      title: "Bank-Grade Confidentiality",
-      desc: "All client workpapers, tax documents, and financial data are protected by 256-bit AES encryption and strict confidentiality agreements.",
-      icon: Lock,
-      badge: "256-Bit Encryption",
-    },
-    {
-      title: "Fixed Transparent Engagements",
-      desc: "Clear milestone-based agreements with no hidden billable hours or unexpected surcharges. Predictable finance management from day one.",
-      icon: FileCheck2,
-      badge: "Predictable Pricing",
-    },
-    {
-      title: "Cross-Emirate Jurisdiction Reach",
-      desc: "End-to-end structuring and advisory across Mainland licensing authorities and 40+ specialized UAE Free Zones including DMCC, DIFC, and ADGM.",
-      icon: Building2,
-      badge: "40+ Free Zones & Mainland",
-    },
-  ];
-
-  const approachSteps = [
-    {
-      number: "01",
-      title: "Requirement Assessment",
-      desc: "We analyze your business activities, corporate structure, accounting backlog, and upcoming regulatory deadlines within 24 hours.",
-    },
-    {
-      number: "02",
-      title: "Scope & Milestone Definition",
-      desc: "We formulate a transparent, fixed-fee engagement letter outlining deliverables, timelines, and compliance milestones with complete clarity.",
-    },
-    {
-      number: "03",
-      title: "Technical Execution",
-      desc: "Qualified senior Chartered Accountants and FTA Tax Agents execute fieldwork, audit testing, reconciliations, or tax return computations.",
-    },
-    {
-      number: "04",
-      title: "Partner Review & Validation",
-      desc: "Every workpaper, audit pack, and statutory filing undergoes multi-tier partner review to ensure total adherence to IFRS, ISA, and FTA laws.",
-    },
-    {
-      number: "05",
-      title: "Ongoing Compliance Continuity",
-      desc: "Post-delivery, your business benefits from compliance calendar alerts, regulatory tax updates, and direct advisor support year-round.",
-    },
-  ];
-
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--bg-main)]">
+    <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#071426]">
       <Navbar />
 
       <main className="flex-1 pt-[76px] lg:pt-[86px]">
-        
-        {/* Page Hero Section */}
-        <section className="relative bg-[#FFFFFF] border-b border-slate-200/80 pt-14 pb-16 sm:pt-20 sm:pb-24 overflow-hidden">
-          {/* Subtle Ambient Background Gradient */}
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,rgba(54,167,131,0.08),transparent_60%)]" />
+        {/* ================================================================= */}
+        {/* 1. HERO SECTION: Brand Statement & Thesis                         */}
+        {/* ================================================================= */}
+        <section className="relative bg-white border-b border-[#E2E8F0] pt-12 sm:pt-16 lg:pt-20 pb-0 overflow-hidden">
+          {/* Subtle Ambient Background Texture */}
+          <div
+            className="pointer-events-none absolute inset-0 z-0 opacity-40"
+            aria-hidden="true"
+          >
+            <div className="absolute -top-24 right-1/4 w-[600px] h-[350px] bg-[#36A783]/8 rounded-full blur-[120px]" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(35,63,91,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(35,63,91,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_50%_at_50%_40%,#000_70%,transparent_100%)]" />
+          </div>
 
-          <div className="relative max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-10 z-10">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
             {/* Breadcrumb Navigation */}
-            <div className="flex items-center gap-2 text-xs text-slate-500 font-medium mb-6">
-              <Link href="/" className="hover:text-[var(--brand-teal)] transition-colors">
+            <nav
+              aria-label="Breadcrumb"
+              className="flex items-center gap-2 text-xs text-[#64748B] font-medium mb-8"
+            >
+              <Link
+                href="/"
+                className="hover:text-[#36A783] transition-colors"
+              >
                 Home
               </Link>
               <span>/</span>
-              <span className="text-[var(--brand-navy)] font-semibold">About Us</span>
-            </div>
+              <span className="text-[#071426] font-semibold">About Us</span>
+            </nav>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-              <div className="lg:col-span-7">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[var(--bg-mint)] text-[var(--brand-teal-dark)] text-xs font-semibold tracking-[0.16em] uppercase mb-5 border border-[var(--brand-teal)]/20">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-teal)]" />
-                  ABOUT AUDITCLUE GLOBAL ADVISORY
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
+              {/* Left Column: Client's Core Identity */}
+              <div className="lg:col-span-7 pb-12 sm:pb-16 lg:pb-20">
+                {/* Eyebrow Label */}
+                <div className="inline-flex items-center gap-2 bg-[#EAF4F0] text-[#216D56] border border-[#36A783]/25 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-5 font-mono">
+                  <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
+                  <span>About Auditclue Global Advisory</span>
                 </div>
 
-                <h1 className="font-serif text-[34px] sm:text-[46px] lg:text-[54px] font-normal leading-[1.12] tracking-[-0.035em] text-[var(--brand-navy)] mb-6">
+                {/* Client's Main Heading */}
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#071426] tracking-tight leading-[1.15] mb-6">
                   <FlowText
-                    text="A modern advisory partner for a"
+                    text="A Fully Digital Advisory Firm Built for the UAE"
                     as="span"
-                    className="text-[var(--brand-navy)]"
-                  />{" "}
-                  <FlowText
-                    text="changing business landscape."
-                    as="span"
-                    startDelay={0.3}
-                    className="text-[var(--brand-teal)] italic"
                   />
                 </h1>
 
-                <p className="text-base sm:text-lg text-slate-600 font-sans leading-[1.8] max-w-[640px] mb-8">
-                  Auditclue Global Advisory Services LLC provides digital-first audit,
-                  accounting, taxation, and corporate advisory services for enterprises
-                  across the UAE. We replace outdated legacy practices with high-velocity
-                  digital delivery, senior technical acumen, and absolute transparency.
-                </p>
+                {/* Client's Exact Intro Paragraphs */}
+                <div className="space-y-4 text-base sm:text-lg text-[#4A5D73] font-sans leading-relaxed max-w-2xl mb-8">
+                  <p>
+                    <strong className="text-[#071426] font-semibold">
+                      Auditclue Global Advisory Services LLC
+                    </strong>{" "}
+                    is a fully digital professional advisory firm providing
+                    audit, accounting, tax, finance, and corporate advisory
+                    services to businesses in the UAE and beyond.
+                  </p>
+                  <p>
+                    We focus on technology-enabled service delivery, timely
+                    reporting, transparent communication, and practical business
+                    solutions — helping SMEs, startups, and growing businesses
+                    navigate UAE&apos;s complex regulatory landscape with
+                    confidence.
+                  </p>
+                </div>
 
+                {/* Action CTA Buttons */}
                 <div className="flex flex-wrap items-center gap-4">
+                  {/* Signature Kinetic Lime Button */}
                   <Link
                     href="/#consult-form"
-                    className="inline-flex items-center gap-3 bg-[var(--brand-teal)] hover:bg-[var(--brand-teal-hover)] text-white text-[14px] sm:text-[15px] font-medium px-6 py-3.5 rounded-full shadow-[0_4px_18px_rgba(54,167,131,0.25)] hover:shadow-[0_8px_24px_rgba(54,167,131,0.35)] transition-all duration-300 group"
+                    className="group/btn relative inline-flex items-center gap-2.5 overflow-hidden rounded-xl bg-[#C6F850] px-6 py-3.5 text-sm sm:text-base font-bold text-[#071426] shadow-sm transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-lg hover:shadow-[#C6F850]/20 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
                   >
-                    <span>Talk to an Advisor</span>
-                    <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                      <ArrowUpRight className="w-3.5 h-3.5 text-white" strokeWidth={2.2} />
+                    <span
+                      className="absolute inset-0 bg-[#071426] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] translate-y-full group-hover/btn:translate-y-0 rounded-xl"
+                      aria-hidden="true"
+                    />
+                    <span
+                      className="absolute -left-full top-0 h-full w-1/2 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 transition-all duration-700 ease-out group-hover/btn:left-[150%]"
+                      aria-hidden="true"
+                    />
+                    <span className="relative z-10 block overflow-hidden leading-tight">
+                      <span className="block transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:-translate-y-full">
+                        Book a Consultation
+                      </span>
+                      <span
+                        className="absolute top-0 left-0 block translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:translate-y-0 text-[#C6F850]"
+                        aria-hidden="true"
+                      >
+                        Book a Consultation
+                      </span>
+                    </span>
+                    <span className="relative z-10 flex h-6 w-6 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#071426]/10 group-hover/btn:bg-[#C6F850] text-[#071426] transition-all duration-500">
+                      <span className="absolute text-base sm:text-lg leading-none font-sans transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:translate-x-4 group-hover/btn:translate-y-4 group-hover/btn:opacity-0">
+                        ↳
+                      </span>
+                      <span className="absolute text-base sm:text-lg leading-none font-sans -translate-x-4 -translate-y-4 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:translate-x-0 group-hover/btn:translate-y-0 group-hover/btn:opacity-100">
+                        ↳
+                      </span>
                     </span>
                   </Link>
 
                   <Link
                     href="/#services"
-                    className="inline-flex items-center gap-2 bg-[var(--bg-main)] hover:bg-slate-100 text-[var(--brand-navy)] text-[14px] sm:text-[15px] font-medium px-6 py-3.5 rounded-full border border-slate-200 transition-colors"
+                    className="inline-flex items-center gap-2 bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#071426] text-sm sm:text-base font-semibold px-5 py-3.5 rounded-xl border border-[#CBD5E1] transition-colors"
                   >
-                    <span>Explore 11 Practice Areas</span>
-                    <ArrowRight className="w-4 h-4 text-slate-500" />
+                    <span>Explore 10 Practice Areas</span>
+                    <ArrowRight className="w-4 h-4 text-[#64748B]" />
                   </Link>
                 </div>
               </div>
 
-              {/* Right Hero Image Composition */}
-              <div className="lg:col-span-5">
-                <div className="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-[0_20px_50px_rgba(35,63,91,0.08)] bg-white">
-                  <div className="relative aspect-[4/3] w-full">
-                    <Image
-                      src="/images/about-advisory.jpg"
-                      alt="Auditclue advisory headquarters and executive meeting"
-                      fill
-                      priority
-                      sizes="(max-width: 1024px) 100vw, 40vw"
-                      className="object-cover object-center"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--brand-navy-dark)]/40 via-transparent to-transparent pointer-events-none" />
-                  </div>
-                  <div className="p-5 bg-white border-t border-slate-100 flex items-center justify-between">
-                    <div>
-                      <p className="text-xs font-semibold text-[var(--brand-navy-dark)]">
-                        UAE Headquartered Advisory
-                      </p>
-                      <p className="text-[11px] text-slate-500">
-                        Mainland & 40+ Free Zone Regulatory Practice
-                      </p>
-                    </div>
-                    <span className="text-xs font-semibold text-[var(--brand-teal-dark)] bg-[var(--bg-mint)] px-2.5 py-1 rounded-md">
-                      100% Digital
-                    </span>
-                  </div>
+              {/* Right Column: Professional Corporate Advisor (PNG Cutout anchored flush to section bottom) */}
+              <div className="lg:col-span-5 flex justify-center lg:justify-end items-end relative self-end">
+                {/* Subtle soft ambient light glow behind advisor */}
+                <div
+                  className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-80 sm:w-96 h-80 sm:h-96 bg-[radial-gradient(circle_at_center,rgba(54,167,131,0.18),transparent_70%)] blur-2xl"
+                  aria-hidden="true"
+                />
+
+                {/* Large High-Res Transparent Advisor Image - Flush to Section Bottom */}
+                <div className="relative z-10 w-full max-w-[480px] flex justify-center lg:justify-end items-end">
+                  <Image
+                    src="/images/advisor-man.png"
+                    alt="Auditclue senior chartered corporate advisor"
+                    width={560}
+                    height={750}
+                    priority
+                    className="w-auto h-auto max-h-[500px] sm:max-h-[580px] lg:max-h-[640px] xl:max-h-[680px] object-contain object-bottom block -mb-[1px] drop-shadow-2xl"
+                  />
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Mission and Vision Section */}
-        <section className="py-18 sm:py-24 bg-[#FFFFFF]">
-          <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-              
-              {/* Mission Card */}
-              <div className="p-8 sm:p-10 rounded-2xl bg-[var(--bg-main)] border border-slate-200/80 relative overflow-hidden group hover:border-[var(--brand-teal)]/40 transition-colors">
-                <div className="w-12 h-12 rounded-xl bg-[var(--bg-mint)] text-[var(--brand-teal)] flex items-center justify-center mb-6">
-                  <Compass className="w-6 h-6" strokeWidth={1.75} />
-                </div>
-                <div className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand-teal-dark)] mb-2">
-                  OUR PURPOSE
-                </div>
-                <h2 className="font-serif text-2xl sm:text-3xl font-medium text-[var(--brand-navy)] mb-4">
-                  Our Mission
-                </h2>
-                <p className="text-sm sm:text-base text-slate-600 font-sans leading-[1.8]">
-                  To empower businesses operating in the UAE with transparent, technology-driven
-                  financial advisory, statutory assurance, and tax structuring. We eliminate
-                  administrative friction, protect clients against punitive non-compliance
-                  penalties, and deliver actionable clarity at every growth milestone.
-                </p>
+        {/* ================================================================= */}
+        {/* 2. THE 5 CORE CAPABILITIES (With Star Icons)                      */}
+        {/* ================================================================= */}
+        <section className="py-14 sm:py-20 bg-[#F1F6F9] border-b border-[#E2E8F0] relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mb-8 sm:mb-10">
+              <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[#216D56] bg-[#EAF4F0] border border-[#36A783]/30 px-3 py-1 rounded-full mb-3">
+                <Sparkles className="w-3.5 h-3.5 text-[#36A783]" />
+                <span>Our Core Delivery Model</span>
               </div>
-
-              {/* Vision Card */}
-              <div className="p-8 sm:p-10 rounded-2xl bg-[var(--bg-main)] border border-slate-200/80 relative overflow-hidden group hover:border-[var(--brand-teal)]/40 transition-colors">
-                <div className="w-12 h-12 rounded-xl bg-[var(--bg-mint)] text-[var(--brand-teal)] flex items-center justify-center mb-6">
-                  <Sparkles className="w-6 h-6" strokeWidth={1.75} />
-                </div>
-                <div className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand-teal-dark)] mb-2">
-                  OUR HORIZON
-                </div>
-                <h2 className="font-serif text-2xl sm:text-3xl font-medium text-[var(--brand-navy)] mb-4">
-                  Our Vision
-                </h2>
-                <p className="text-sm sm:text-base text-slate-600 font-sans leading-[1.8]">
-                  To become the UAE&apos;s most trusted digital-first professional services firm,
-                  recognized globally for setting the benchmark in automated client workflows,
-                  ethical governance, and comprehensive statutory excellence for the next
-                  generation of multinational enterprises.
-                </p>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        {/* Why Auditclue — 6 Strategic Pillars */}
-        <section className="py-18 sm:py-24 bg-[var(--bg-main)] border-y border-slate-200/80">
-          <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-10">
-            <div className="max-w-3xl mb-14">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-[var(--brand-teal-dark)] text-xs font-semibold tracking-wider uppercase mb-3 border border-slate-200">
-                <ShieldCheck className="w-3.5 h-3.5 text-[var(--brand-teal)]" />
-                FOUNDATIONAL STRENGTHS
-              </div>
-              <h2 className="font-serif text-3xl sm:text-4xl font-normal text-[var(--brand-navy)] leading-tight tracking-tight mb-4">
-                Why Industry Leaders Choose Auditclue
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#071426] tracking-tight">
+                Designed for Velocity, Precision & Certainty
               </h2>
-              <p className="text-base text-slate-600 font-sans leading-relaxed">
-                Combining senior professional judgment with a modern digital operating
-                model designed specifically for the UAE&apos;s regulatory landscape.
-              </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
-              {whyAuditcluePillars.map((pillar, idx) => {
+            {/* The 5 Star Highlight Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+              {CORE_CAPABILITIES.map((point, idx) => (
+                <div
+                  key={idx}
+                  className="p-5 sm:p-6 rounded-2xl bg-white border border-[#CBD5E1]/80 hover:border-[#36A783]/50 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-3.5 group"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-[#EAF4F0] text-[#216D56] flex items-center justify-center shrink-0 group-hover:bg-[#36A783] group-hover:text-white transition-colors duration-300">
+                    <Star className="w-4 h-4 fill-current" />
+                  </div>
+                  <div>
+                    <span className="font-mono text-[11px] font-bold text-[#64748B] block mb-1">
+                      STANDARD [0{idx + 1}]
+                    </span>
+                    <p className="text-sm sm:text-base font-semibold text-[#071426] leading-snug">
+                      {point}
+                    </p>
+                  </div>
+                </div>
+              ))}
+
+              {/* 6th Complementary Summary Card */}
+              <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[#071426] to-[#12273F] text-white flex flex-col justify-between shadow-sm">
+                <div>
+                  <span className="font-mono text-[11px] font-bold text-[#83D9BE] block mb-1">
+                    CLIENT GUARANTEE
+                  </span>
+                  <h3 className="text-base sm:text-lg font-serif font-normal text-white leading-snug mb-2">
+                    Zero Bureaucracy, 100% Peace of Mind
+                  </h3>
+                  <p className="text-xs text-white/70 leading-relaxed font-sans">
+                    Every deliverable is handled by certified senior advisors
+                    aligned with UAE Federal Tax Authority mandates.
+                  </p>
+                </div>
+                <div className="pt-3 flex items-center gap-2 text-xs font-bold text-[#C6F850]">
+                  <span>Explore Practice Standards</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* 3. THE 6 OPERATIONAL PILLARS (Architectural 3x2 Grid)             */}
+        {/* ================================================================= */}
+        <section className="py-16 sm:py-24 lg:py-28 bg-white border-b border-[#E2E8F0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-2xl mb-12 sm:mb-16">
+              <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[#216D56] bg-[#EAF4F0] border border-[#36A783]/30 px-3 py-1 rounded-full mb-3">
+                <Building2 className="w-3.5 h-3.5 text-[#36A783]" />
+                <span>Operational Pillars</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#071426] tracking-tight leading-[1.15]">
+                Six Strategic Pillars Behind Our Digital Practice
+              </h2>
+            </div>
+
+            {/* 3x2 Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {OPERATIONAL_PILLARS.map((pillar) => {
                 const Icon = pillar.icon;
+
                 return (
                   <div
-                    key={idx}
-                    className="p-7 rounded-2xl bg-white border border-slate-200/80 hover:border-[var(--brand-teal)]/50 hover:shadow-[0_12px_32px_rgba(35,63,91,0.06)] transition-all duration-300 flex flex-col justify-between"
+                    key={pillar.number}
+                    className="rounded-2xl sm:rounded-3xl p-6 sm:p-8 bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#36A783]/50 hover:bg-white hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300 flex flex-col justify-between group"
                   >
                     <div>
-                      <div className="flex items-center justify-between gap-3 mb-5">
-                        <div className="w-11 h-11 rounded-xl bg-[var(--bg-mint)] flex items-center justify-center text-[var(--brand-teal)]">
-                          <Icon className="w-5 h-5" strokeWidth={1.8} />
+                      {/* Top Row: Icon + Number */}
+                      <div className="flex items-center justify-between mb-5">
+                        <div className="w-12 h-12 rounded-xl bg-white border border-[#CBD5E1] text-[#216D56] flex items-center justify-center group-hover:bg-[#36A783] group-hover:text-white group-hover:border-[#36A783] transition-colors duration-300 shadow-sm">
+                          <Icon className="w-6 h-6" strokeWidth={1.75} />
                         </div>
-                        <span className="text-[11px] font-semibold text-[var(--brand-teal-dark)] bg-[var(--bg-main)] border border-slate-200/70 px-2.5 py-1 rounded-full">
-                          {pillar.badge}
+                        <span className="font-mono text-xs font-bold text-[#64748B] bg-white border border-[#E2E8F0] px-2.5 py-1 rounded-md">
+                          {pillar.number}
                         </span>
                       </div>
-                      <h3 className="text-lg font-semibold text-[var(--brand-navy)] mb-2.5 leading-snug">
+
+                      {/* Title */}
+                      <h3 className="text-xl sm:text-2xl font-serif font-medium text-[#071426] mb-3 tracking-tight leading-snug">
                         {pillar.title}
                       </h3>
-                      <p className="text-sm text-slate-600 leading-relaxed font-sans">
-                        {pillar.desc}
+
+                      {/* Client's Exact Description */}
+                      <p className="text-sm sm:text-base text-[#4A5D73] font-sans leading-relaxed mb-6">
+                        {pillar.description}
                       </p>
+                    </div>
+
+                    {/* Tag Footer */}
+                    <div className="pt-4 border-t border-[#E2E8F0] flex items-center justify-between text-xs text-[#216D56] font-semibold">
+                      <span>{pillar.tag}</span>
+                      <CheckCircle2 className="w-4 h-4 text-[#36A783]" />
                     </div>
                   </div>
                 );
@@ -295,91 +373,25 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Regulatory Framework Alignment */}
-        <section className="py-18 sm:py-24 bg-[#FFFFFF]">
-          <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-              <div className="lg:col-span-5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-mint)] text-[var(--brand-teal-dark)] text-xs font-semibold tracking-wider uppercase mb-4 border border-[var(--brand-teal)]/20">
-                  <Award className="w-3.5 h-3.5 text-[var(--brand-teal)]" />
-                  STANDARDS & MANDATES
-                </div>
-                <h2 className="font-serif text-3xl sm:text-4xl font-normal text-[var(--brand-navy)] leading-tight mb-5">
-                  Strict Alignment with Global & UAE Frameworks
-                </h2>
-                <p className="text-base text-slate-600 font-sans leading-relaxed mb-6">
-                  Every engagement is executed according to globally recognized accounting
-                  and assurance benchmarks, backed by active compliance with local UAE
-                  statutory laws and Cabinet Decisions.
-                </p>
-                <div className="flex items-center gap-3 text-sm text-[var(--brand-navy-dark)] font-medium bg-[var(--bg-main)] p-4 rounded-xl border border-slate-200/80">
-                  <CheckCircle2 className="w-5 h-5 text-[var(--brand-teal)] shrink-0" />
-                  <span>Penalty-proof filing defense & verifiable audit trail</span>
-                </div>
-              </div>
-
-              <div className="lg:col-span-7">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {REGULATORY_FRAMEWORKS.map((framework) => (
-                    <div
-                      key={framework.code}
-                      className="p-5 rounded-xl bg-[var(--bg-main)] border border-slate-200/70 hover:border-[var(--brand-teal)]/40 hover:bg-white hover:shadow-sm transition-all"
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-base font-bold text-[var(--brand-navy)] font-mono">
-                          {framework.code}
-                        </span>
-                        <span className="text-[11px] font-semibold text-[var(--brand-teal-dark)] bg-[var(--bg-mint)] px-2.5 py-0.5 rounded-full">
-                          Compliant
-                        </span>
-                      </div>
-                      <h4 className="text-sm font-semibold text-slate-800 mb-1">
-                        {framework.name}
-                      </h4>
-                      <p className="text-xs text-slate-500 leading-relaxed font-sans">
-                        {framework.desc}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Our Approach — 5-Step Structured Engagement */}
-        <section className="py-18 sm:py-24 bg-[var(--bg-main)] border-t border-slate-200/80">
-          <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-10">
-            <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-[var(--brand-teal-dark)] text-xs font-semibold tracking-wider uppercase mb-3 border border-slate-200">
-                <Layers className="w-3.5 h-3.5 text-[var(--brand-teal)]" />
-                HOW WE ENGAGE
-              </div>
-              <h2 className="font-serif text-3xl sm:text-4xl font-normal text-[var(--brand-navy)] tracking-tight mb-4">
-                Our Structured Advisory Approach
-              </h2>
-              <p className="text-base text-slate-600 font-sans leading-relaxed">
-                A disciplined, five-phase methodology engineered to deliver clarity,
-                punctuality, and complete regulatory defensibility.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 lg:gap-6">
-              {approachSteps.map((step, idx) => (
+        {/* ================================================================= */}
+        {/* 4. UAE REGULATORY COVERAGE STRIP                                 */}
+        {/* ================================================================= */}
+        <section className="py-14 sm:py-16 bg-[#F1F6F9] border-b border-[#E2E8F0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+              {REGULATORY_BADGES.map((b, idx) => (
                 <div
                   key={idx}
-                  className="p-6 rounded-2xl bg-white border border-slate-200/80 relative flex flex-col justify-between hover:border-[var(--brand-teal)]/50 transition-colors"
+                  className="p-5 rounded-2xl bg-white border border-[#CBD5E1] text-left shadow-sm"
                 >
-                  <div>
-                    <span className="text-2xl font-serif font-light text-[var(--brand-teal)] mb-3 block">
-                      {step.number}
-                    </span>
-                    <h3 className="text-base font-semibold text-[var(--brand-navy)] mb-2 leading-snug">
-                      {step.title}
-                    </h3>
-                    <p className="text-xs text-slate-600 leading-relaxed font-sans">
-                      {step.desc}
-                    </p>
+                  <span className="inline-block text-[11px] font-mono font-bold text-[#216D56] bg-[#EAF4F0] px-2.5 py-0.5 rounded-full mb-2.5">
+                    {b.badge}
+                  </span>
+                  <div className="text-sm sm:text-base font-bold text-[#071426] leading-snug mb-1">
+                    {b.title}
+                  </div>
+                  <div className="text-xs text-[#64748B] leading-relaxed">
+                    {b.subtitle}
                   </div>
                 </div>
               ))}
@@ -387,51 +399,69 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Closing CTA */}
-        <section className="py-16 sm:py-20 bg-[#FFFFFF] border-t border-slate-200/80">
-          <div className="max-w-[1100px] mx-auto px-5 sm:px-8">
-            <div className="rounded-3xl bg-[var(--brand-navy)] text-white p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-2xl">
-              {/* Subtle background glow */}
-              <div className="pointer-events-none absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-[var(--brand-teal)]/20 blur-3xl" />
-              
-              <div className="relative z-10 max-w-2xl">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[var(--brand-teal)] text-xs font-semibold tracking-wider uppercase mb-5 border border-white/15">
-                  <Sparkles className="w-3.5 h-3.5 text-[var(--brand-teal)]" />
-                  READY TO ELEVATE YOUR COMPLIANCE?
-                </div>
+        {/* ================================================================= */}
+        {/* 5. CLOSING CONVERSION BANNER (Signature Kinetic Callout)          */}
+        {/* ================================================================= */}
+        <section className="py-16 sm:py-24 bg-[#071426] text-white relative overflow-hidden">
+          {/* Subtle Background Glow */}
+          <div
+            className="pointer-events-none absolute inset-0 z-0 opacity-40"
+            aria-hidden="true"
+          >
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#36A783]/15 rounded-full blur-[140px]" />
+          </div>
 
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-white mb-5">
-                  Start a Conversation with a Senior Advisor Today.
-                </h2>
+          <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center z-10">
+            <div className="inline-flex items-center gap-2 bg-[#36A783]/20 border border-[#36A783]/40 text-[#83D9BE] text-xs font-semibold px-3.5 py-1.5 rounded-full mb-6 font-mono">
+              <Sparkles className="w-3.5 h-3.5 text-[#83D9BE]" />
+              <span>EXPERIENCE DIGITAL ADVISORY</span>
+            </div>
 
-                <p className="text-base text-white/80 font-sans leading-relaxed mb-8">
-                  Schedule an initial diagnostic consultation with our Chartered
-                  Accountants and FTA Tax Agents. We examine your requirements and
-                  provide fixed-fee scoping within 24 hours.
-                </p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-white tracking-tight leading-tight mb-5">
+              Ready to Navigate UAE Regulations with Absolute Confidence?
+            </h2>
 
-                <div className="flex flex-wrap items-center gap-4">
-                  <Link
-                    href="/#consult-form"
-                    className="inline-flex items-center gap-3 bg-[var(--brand-teal)] hover:bg-[var(--brand-teal-hover)] text-white text-[15px] font-medium px-7 py-4 rounded-full shadow-lg transition-all duration-300 group"
+            <p className="text-base sm:text-lg text-[#CBD5E1] max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
+              Schedule an introductory consultation with our senior advisors. We
+              analyze your requirements and provide transparent, fixed-fee
+              scoping within 24 hours.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/#consult-form"
+                className="group/btn relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-[#C6F850] px-7 py-4 text-base font-bold text-[#071426] shadow-lg hover:shadow-[#C6F850]/20 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer w-full sm:w-auto"
+              >
+                <span
+                  className="absolute inset-0 bg-[#FFFFFF] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] translate-y-full group-hover/btn:translate-y-0 rounded-xl"
+                  aria-hidden="true"
+                />
+                <span className="relative z-10 block overflow-hidden leading-tight">
+                  <span className="block transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:-translate-y-full">
+                    Book a Free Consultation
+                  </span>
+                  <span
+                    className="absolute top-0 left-0 block translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:translate-y-0 text-[#071426]"
+                    aria-hidden="true"
                   >
-                    <span>Talk to an Advisor</span>
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </Link>
+                    Book a Free Consultation
+                  </span>
+                </span>
+                <span className="relative z-10 text-lg leading-none font-sans">
+                  ↳
+                </span>
+              </Link>
 
-                  <Link
-                    href="/#services"
-                    className="inline-flex items-center gap-2 text-white/80 hover:text-white text-[15px] font-medium px-6 py-4 rounded-full border border-white/20 hover:border-white/40 transition-colors"
-                  >
-                    <span>View All Services</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
+              <Link
+                href="/#services"
+                className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white text-base font-medium px-6 py-4 rounded-xl border border-white/15 transition-colors w-full sm:w-auto"
+              >
+                <span>View All 10 Services</span>
+                <ArrowRight className="w-4 h-4 text-white/70" />
+              </Link>
             </div>
           </div>
         </section>
-
       </main>
 
       <Footer />

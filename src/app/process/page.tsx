@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FlowText from "@/components/FlowText";
@@ -18,16 +19,20 @@ import {
   Sparkles,
   Lock,
   Clock,
-  Shield,
   Laptop,
+  Check,
+  Shield,
+  Layers,
+  Compass,
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Our Simple 6-Step Process | Auditclue Global Advisory Services LLC",
+  title: "Operating Process | Auditclue Global Advisory Services LLC",
   description:
-    "From your first query to ongoing support — a clear, transparent, and fully digital process designed for modern UAE businesses.",
+    "An open, transparent, 6-phase digital operating architecture engineered for modern UAE businesses across Mainland and Free Zones.",
 };
 
+// Map icons to the 6 steps
 const STEP_ICONS = [
   MessageSquareQuote,
   Calculator,
@@ -37,193 +42,393 @@ const STEP_ICONS = [
   Headphones,
 ];
 
-const OPERATIONAL_PILLARS = [
+// Architectural Stage Labels
+const STAGE_LABELS = [
+  "STAGE 01 — INTAKE & DIAGNOSTIC",
+  "STAGE 02 — SCOPING & PROPOSAL",
+  "STAGE 03 — VAULT & DOCUMENTATION",
+  "STAGE 04 — EXECUTION & TESTING",
+  "STAGE 05 — REPORTING & SIGN-OFF",
+  "STAGE 06 — CONTINUOUS COMPLIANCE",
+];
+
+// Step Key Takeaways
+const STEP_TAKEAWAYS: Record<string, string[]> = {
+  "01": [
+    "Mainland DED & Free Zone activity mapping",
+    "Senior chartered advisor review",
+    "Zero office visits required",
+  ],
+  "02": [
+    "Itemized milestone deliverables",
+    "Fixed-fee engagement contract",
+    "Clear statutory deadlines guaranteed",
+  ],
+  "03": [
+    "AES-256 cloud encryption vault",
+    "Bank-grade confidentiality protocols",
+    "Secure global upload anytime",
+  ],
+  "04": [
+    "Chartered Accountants & FTA Tax Agents",
+    "IFRS & ISA audit trail validation",
+    "Proactive tax gap resolution",
+  ],
+  "05": [
+    "Bank-ready financial assurance packs",
+    "Official FTA tax filing receipts",
+    "Digital partner sign-off and seal",
+  ],
+  "06": [
+    "Proactive compliance calendar tracking",
+    "Upcoming VAT & Corporate Tax alerts",
+    "Year-round senior advisory access",
+  ],
+};
+
+// Sleek horizontal meta benchmarks (No boxes, pure open typography)
+const ARCHITECTURAL_BENCHMARKS = [
   {
-    icon: Laptop,
-    title: "100% Digital Execution",
-    desc: "Complete your onboarding, file transfer, and compliance reviews without a single in-office visit.",
+    num: "01",
+    title: "100% Cloud Execution",
+    desc: "Complete remote delivery across UAE",
   },
   {
-    icon: Lock,
-    title: "Bank-Grade Encryption",
-    desc: "All client ledgers, audit workpapers, and tax filings are secured in our 256-bit encrypted digital vault.",
+    num: "02",
+    title: "AES-256 Encrypted",
+    desc: "Bank-grade client data vault",
   },
   {
-    icon: ShieldCheck,
-    title: "Certified UAE Expertise",
-    desc: "Chartered accountants and registered FTA Tax Agents directly manage and sign off on your deliverables.",
+    num: "03",
+    title: "FTA Registered Team",
+    desc: "Chartered CPA & Tax Agents",
   },
   {
-    icon: Clock,
-    title: "Guaranteed Turnarounds",
-    desc: "Predictable milestones with real-time tracking, proactive reminders, and zero unexpected surcharges.",
+    num: "04",
+    title: "Committed Turnaround",
+    desc: "Predictable, contractual SLAs",
   },
 ];
 
 export default function ProcessPage() {
   return (
-    <main className="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden bg-[#F6F8FA] text-[#233F5B]">
+    <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#071426] selection:bg-[#C6F850] selection:text-[#071426]">
       {/* Navigation Header */}
       <Navbar />
 
-      {/* Editorial Process Hero */}
-      <section className="relative isolate overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-24 border-b border-[#E1E7ED] bg-white">
-        {/* Subtle background glow */}
-        <div className="pointer-events-none absolute inset-0 z-0 opacity-40" aria-hidden="true">
-          <div className="absolute top-0 right-1/4 w-[600px] h-[400px] bg-[#36A783]/8 rounded-full blur-[120px]" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(35,63,91,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(35,63,91,0.025)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
-        </div>
+      <main className="flex-1 pt-[76px] lg:pt-[86px]">
+        {/* ================================================================= */}
+        {/* 1. HERO SECTION: Pure Editorial Statement (Zero Boxes)            */}
+        {/* ================================================================= */}
+        <section className="relative bg-white border-b border-[#E2E8F0] pt-14 pb-16 sm:pt-20 sm:pb-24 lg:pt-24 lg:pb-28 overflow-hidden">
+          {/* Subtle Atmospheric Background with Centered Blurred 3D Abstract Sculpture */}
+          <div
+            className="pointer-events-none absolute inset-0 z-0 overflow-hidden flex items-center justify-center select-none"
+            aria-hidden="true"
+          >
+            {/* The 3D Abstract Sculpture centered in background with subtle blur, radial mask & organic aura */}
+            <div className="relative w-[700px] h-[480px] sm:w-[920px] sm:h-[600px] lg:w-[1100px] lg:h-[700px] opacity-30 sm:opacity-35 filter blur-[12px] sm:blur-[18px] scale-105 pointer-events-none transform-gpu [mask-image:radial-gradient(ellipse_65%_65%_at_50%_50%,#000_30%,transparent_85%)]">
+              <Image
+                src="/images/process/abstract-hero-ribbon.jpg"
+                alt=""
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 1100px"
+              />
+            </div>
 
-        <div className="relative max-w-5xl mx-auto px-5 sm:px-8 lg:px-10 text-center z-10">
-          <div className="inline-flex items-center gap-2 bg-[#EAF4F0] border border-[#36A783]/30 text-[#216D56] text-xs sm:text-[13px] font-semibold px-4 py-1.5 rounded-full mb-6">
-            <Sparkles className="w-3.5 h-3.5 text-[#36A783]" />
-            <span>HOW WE WORK • OPERATING MODEL</span>
+            {/* Subtle emerald atmospheric glow halo */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#36A783]/14 rounded-full blur-[140px] pointer-events-none" />
+
+            {/* Fine architectural grid overlay */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(35,63,91,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(35,63,91,0.025)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_75%_55%_at_50%_45%,#000_65%,transparent_100%)]" />
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal text-[#233F5B] leading-[1.14] tracking-tight mb-6">
-            <FlowText text={PROCESS_PAGE_INTRO.heading} startDelay={0.1} as="span" />
-          </h1>
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+            {/* Minimalist Breadcrumb */}
+            <nav
+              aria-label="Breadcrumb"
+              className="flex items-center gap-2 text-xs text-[#64748B] font-medium mb-8"
+            >
+              <Link href="/" className="hover:text-[#36A783] transition-colors">
+                Home
+              </Link>
+              <span>/</span>
+              <span className="text-[#071426] font-semibold">Operating Architecture</span>
+            </nav>
 
-          <p className="text-lg sm:text-xl text-[#556980] font-sans leading-relaxed max-w-3xl mx-auto mb-10">
-            {PROCESS_PAGE_INTRO.subtitle}
-          </p>
+            {/* Open Editorial Header (Full Grand Width, Zero Boxes) */}
+            <div className="max-w-4xl mb-12 lg:mb-14">
+              <div className="inline-flex items-center gap-2 bg-[#EAF4F0]/90 backdrop-blur-xs text-[#216D56] border border-[#36A783]/25 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-6 font-mono">
+                <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
+                <span>Operating Model • 6-Step Protocol</span>
+              </div>
 
-          {/* Quick Metrics Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto pt-6 border-t border-slate-100 text-left">
-            {OPERATIONAL_PILLARS.map((p, idx) => {
-              const Icon = p.icon;
-              return (
-                <div key={idx} className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
-                  <Icon className="w-5 h-5 text-[#36A783] mb-2" />
-                  <div className="text-xs font-semibold text-[#233F5B] leading-snug">{p.title}</div>
-                  <div className="text-[11px] text-[#718096] leading-snug mt-1">{p.desc}</div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-serif text-[#071426] tracking-tight leading-[1.08] mb-8">
+                <FlowText
+                  text="The 6-Phase Digital Operating Architecture"
+                  as="span"
+                />
+              </h1>
+
+              <p className="text-lg sm:text-xl lg:text-2xl text-[#4A5D73] font-sans font-light leading-relaxed max-w-3xl">
+                Traditional advisory relied on physical office visits, courier
+                envelopes, and unpredictable bills. We engineered an uncompromising,
+                fully digital protocol for UAE Mainland and Free Zone enterprises.
+              </p>
+            </div>
+
+            {/* Horizontal Specs Bar: Clean Typographic Hairlines (NO BOXES) */}
+            <div className="pt-8 border-t border-[#E2E8F0] grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+              {ARCHITECTURAL_BENCHMARKS.map((item, idx) => (
+                <div key={idx} className="group">
+                  <div className="font-mono text-xs font-bold text-[#36A783] mb-1">
+                    [{item.num}] — SPEC
+                  </div>
+                  <div className="text-base sm:text-lg font-serif font-medium text-[#071426] tracking-tight mb-1">
+                    {item.title}
+                  </div>
+                  <div className="text-xs text-[#64748B] font-sans">
+                    {item.desc}
+                  </div>
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Complete 6-Step Detailed Process Section */}
-      <section className="py-20 sm:py-24 lg:py-28 relative z-10">
-        <div className="max-w-5xl mx-auto px-5 sm:px-8 lg:px-10">
-          
-          <div className="space-y-10 sm:space-y-12">
-            {PROCESS_STEPS_DATA.map((item, index) => {
-              const Icon = STEP_ICONS[index] || CheckCircle2;
+        {/* ================================================================= */}
+        {/* 2. THE 6 OPERATING PHASES: Open Editorial Timeline (Zero Boxes)   */}
+        {/* ================================================================= */}
+        <section className="py-12 sm:py-20 lg:py-24 relative">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-              return (
-                <article
-                  key={item.step}
-                  id={`step-${item.step}`}
-                  className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-9 lg:p-10 shadow-[0_4px_24px_rgba(35,63,91,0.04)] hover:shadow-[0_12px_40px_rgba(35,63,91,0.08)] hover:border-[#36A783]/50 transition-all duration-300 relative overflow-hidden group"
-                >
-                  {/* Subtle decorative step watermarking in background */}
-                  <span className="pointer-events-none absolute -bottom-6 -right-3 text-7xl sm:text-8xl lg:text-9xl font-serif font-bold text-slate-100 select-none opacity-60 group-hover:text-[#EAF4F0] group-hover:opacity-80 transition-colors">
-                    {item.number}
-                  </span>
+            {/* Section Index Header */}
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-8 mb-4 border-b border-[#071426]/10">
+              <div>
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#36A783] font-bold block mb-2">
+                  EXECUTION PROTOCOL
+                </span>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#071426]">
+                  Step-by-Step Delivery Lifecycle
+                </h2>
+              </div>
+              <div className="text-xs sm:text-sm text-[#64748B] font-mono">
+                [06 Phases] • End-to-End SLA Guaranteed
+              </div>
+            </div>
 
-                  <div className="relative z-10">
-                    {/* Step Header Pill */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono text-xs sm:text-sm font-bold text-[#216D56] bg-[#EAF4F0] border border-[#36A783]/30 px-3.5 py-1 rounded-full">
-                          Step {item.number}
-                        </span>
-                        <span className="text-xs font-mono text-[#556980] bg-slate-100 px-3 py-1 rounded-md">
-                          {item.slaBadge}
-                        </span>
+            {/* The 6 Phases Rows */}
+            <div className="divide-y divide-[#E2E8F0]">
+              {PROCESS_STEPS_DATA.map((item, index) => {
+                const Icon = STEP_ICONS[index] || CheckCircle2;
+                const takeaways = STEP_TAKEAWAYS[item.number] || [];
+                const stageLabel = STAGE_LABELS[index] || `STAGE ${item.number}`;
+
+                return (
+                  <article
+                    key={item.step}
+                    id={`stage-${item.step}`}
+                    className="py-14 sm:py-20 lg:py-24 group transition-colors duration-500 hover:bg-white/60 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
+                  >
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+                      
+                      {/* Left Column: Huge Typographic Numeral & Pace Indicator */}
+                      <div className="lg:col-span-4 flex flex-col justify-between space-y-6">
+                        <div>
+                          {/* Giant Minimalist Serif Numeral */}
+                          <div className="flex items-baseline gap-3 mb-4">
+                            <span className="text-6xl sm:text-7xl lg:text-8xl font-serif font-light text-[#216D56]/80 group-hover:text-[#36A783] transition-colors duration-500 tracking-tight leading-none">
+                              {item.number}
+                            </span>
+                            <span className="text-xs font-mono font-bold text-[#64748B] uppercase tracking-wider">
+                              / 06
+                            </span>
+                          </div>
+
+                          {/* Stage Identifier */}
+                          <div className="font-mono text-xs font-bold text-[#071426] tracking-wider uppercase mb-3">
+                            {stageLabel}
+                          </div>
+
+                          {/* SLA Pulse Indicator */}
+                          <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-[#216D56] bg-[#EAF4F0] px-3 py-1.5 rounded-full border border-[#36A783]/25">
+                            <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
+                            <span>{item.slaBadge}</span>
+                          </div>
+                        </div>
+
+                        {/* Subtle Minimal Icon Accent */}
+                        <div className="hidden lg:flex items-center gap-3 pt-6 text-xs text-[#64748B] font-mono">
+                          <div className="w-8 h-8 rounded-lg bg-white border border-[#CBD5E1] flex items-center justify-center text-[#216D56] shadow-2xs group-hover:bg-[#36A783] group-hover:text-white group-hover:border-[#36A783] transition-colors">
+                            <Icon className="w-4 h-4" />
+                          </div>
+                          <span>Stage Protocol Validated</span>
+                        </div>
                       </div>
 
-                      <div className="text-xs font-medium text-[#216D56] flex items-center gap-1.5 bg-[#EAF4F0]/60 px-3 py-1 rounded-full">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#36A783]" />
-                        <span>{item.deliverableHighlight}</span>
+                      {/* Right Column: Editorial Narrative & Scope Breakdown */}
+                      <div className="lg:col-span-8 flex flex-col justify-between">
+                        <div>
+                          {/* Title */}
+                          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#071426] tracking-tight leading-tight mb-3 group-hover:text-[#216D56] transition-colors">
+                            {item.title}
+                          </h3>
+
+                          {/* Preview Tagline */}
+                          <p className="text-base sm:text-lg font-serif italic text-[#36A783] mb-6">
+                            &ldquo;{item.homepagePreview}&rdquo;
+                          </p>
+
+                          {/* Full Deep Walkthrough Paragraph */}
+                          <p className="text-base sm:text-lg text-[#4A5D73] font-sans leading-[1.8] mb-8 font-normal">
+                            {item.fullDescription}
+                          </p>
+
+                          {/* Highlight Deliverable Banner (Ultra-fine Hairline, No Gray Box) */}
+                          <div className="py-3.5 px-4 mb-6 rounded-xl bg-[#EAF4F0]/60 border-l-4 border-[#36A783] text-sm text-[#071426] font-medium flex items-center gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 text-[#36A783] shrink-0" />
+                            <span>{item.deliverableHighlight}</span>
+                          </div>
+                        </div>
+
+                        {/* Three Key Execution Benchmarks (Minimalist check items) */}
+                        <div className="pt-6 border-t border-[#E2E8F0] grid grid-cols-1 sm:grid-cols-3 gap-3">
+                          {takeaways.map((takeaway, tIdx) => (
+                            <div
+                              key={tIdx}
+                              className="flex items-center gap-2 text-xs text-[#556980] font-sans"
+                            >
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#36A783] shrink-0" />
+                              <span className="leading-snug">{takeaway}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
+
                     </div>
+                  </article>
+                );
+              })}
+            </div>
 
-                    {/* Step Title & Icon */}
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="w-12 h-12 rounded-2xl bg-[#EAF4F0] border border-[#36A783]/30 flex items-center justify-center text-[#216D56] shrink-0 group-hover:bg-[#36A783] group-hover:text-white transition-colors duration-300">
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <h2 className="text-2xl sm:text-3xl font-serif font-medium text-[#233F5B] tracking-tight leading-snug">
-                          Step {item.number} — {item.title}
-                        </h2>
-                      </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* 3. EDITORIAL MANIFESTO: Why Operating Architecture Matters         */}
+        {/* ================================================================= */}
+        <section className="py-20 sm:py-28 bg-white border-t border-b border-[#E2E8F0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+              
+              <div className="lg:col-span-5">
+                <div className="font-mono text-xs uppercase tracking-[0.2em] text-[#36A783] font-bold mb-4">
+                  OPERATING PHILOSOPHY
+                </div>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#071426] tracking-tight leading-[1.14]">
+                  Clarity Over Bureaucracy. Speed Over Paperwork.
+                </h2>
+              </div>
+
+              <div className="lg:col-span-7 space-y-6 text-base sm:text-lg text-[#4A5D73] font-sans leading-relaxed">
+                <p>
+                  Every engagement at Auditclue runs through our standardized,
+                  repeatable digital workflow. By eliminating physical paperwork,
+                  courier transit times, and administrative friction, we accelerate
+                  audit completion and statutory filings by up to 60%.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-[#E2E8F0]">
+                  <div>
+                    <div className="text-2xl sm:text-3xl font-serif text-[#071426] mb-1">
+                      24–48 Hours
                     </div>
-
-                    {/* Full Comprehensive Step Description (Exact wording preserved) */}
-                    <div className="mt-4 pt-4 border-t border-slate-100">
-                      <p className="text-base sm:text-lg text-[#363636] font-sans leading-relaxed">
-                        {item.fullDescription}
-                      </p>
-                    </div>
-
-                    {/* Step Practical Takeaways */}
-                    <div className="mt-6 flex flex-wrap gap-2 pt-2">
-                      <span className="inline-flex items-center gap-1.5 text-xs text-[#556980] bg-[#F8FAFC] border border-[#E2E8F0] px-3 py-1 rounded-lg">
-                        <CheckCircle2 className="w-3 h-3 text-[#36A783]" />
-                        <span>Zero physical visits required</span>
-                      </span>
-                      <span className="inline-flex items-center gap-1.5 text-xs text-[#556980] bg-[#F8FAFC] border border-[#E2E8F0] px-3 py-1 rounded-lg">
-                        <CheckCircle2 className="w-3 h-3 text-[#36A783]" />
-                        <span>Dedicated senior partner assigned</span>
-                      </span>
-                      <span className="inline-flex items-center gap-1.5 text-xs text-[#556980] bg-[#F8FAFC] border border-[#E2E8F0] px-3 py-1 rounded-lg">
-                        <CheckCircle2 className="w-3 h-3 text-[#36A783]" />
-                        <span>Encrypted audit-ready vault</span>
-                      </span>
+                    <div className="text-xs text-[#64748B] font-mono">
+                      Average engagement scoping & contract issuance
                     </div>
                   </div>
-                </article>
-              );
-            })}
+                  <div>
+                    <div className="text-2xl sm:text-3xl font-serif text-[#071426] mb-1">
+                      Zero Penalties
+                    </div>
+                    <div className="text-xs text-[#64748B] font-mono">
+                      Strict FTA statutory deadline adherence record
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* 4. CLOSING CONVERSION BANNER (Signature Kinetic Callout)          */}
+        {/* ================================================================= */}
+        <section className="py-20 sm:py-28 bg-[#071426] text-white relative overflow-hidden">
+          {/* Subtle Background Glow */}
+          <div
+            className="pointer-events-none absolute inset-0 z-0 opacity-40"
+            aria-hidden="true"
+          >
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[380px] bg-[#36A783]/15 rounded-full blur-[140px]" />
           </div>
 
-        </div>
-      </section>
+          <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center z-10">
+            <div className="inline-flex items-center gap-2 bg-[#36A783]/20 border border-[#36A783]/40 text-[#83D9BE] text-xs font-semibold px-3.5 py-1.5 rounded-full mb-6 font-mono">
+              <Sparkles className="w-3.5 h-3.5 text-[#83D9BE]" />
+              <span>READY TO BEGIN STAGE 01?</span>
+            </div>
 
-      {/* Bottom Conversion Section */}
-      <section className="bg-[#071426] text-white py-16 sm:py-20 border-t border-white/10 relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#36A783]/10 rounded-full blur-[120px]" />
-        </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-white tracking-tight leading-tight mb-5">
+              Initiate Your 100% Digital Advisory Engagement
+            </h2>
 
-        <div className="relative max-w-4xl mx-auto px-5 sm:px-8 text-center z-10">
-          <div className="inline-flex items-center gap-2 bg-[#36A783]/20 border border-[#36A783]/40 text-[#83D9BE] text-xs font-semibold px-3.5 py-1 rounded-full mb-4 font-mono">
-            <span>READY TO BEGIN STEP 01?</span>
+            <p className="text-base sm:text-lg text-[#CBD5E1] max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
+              Submit your enquiry today. Our senior chartered advisors will review
+              your requirements and provide a clear, itemized proposal within 24 hours.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/#consult-form"
+                className="group/btn relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-[#C6F850] px-7 py-4 text-base font-bold text-[#071426] shadow-lg hover:shadow-[#C6F850]/20 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer w-full sm:w-auto"
+              >
+                <span
+                  className="absolute inset-0 bg-[#FFFFFF] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] translate-y-full group-hover/btn:translate-y-0 rounded-xl"
+                  aria-hidden="true"
+                />
+                <span className="relative z-10 block overflow-hidden leading-tight">
+                  <span className="block transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:-translate-y-full">
+                    Initiate Stage 01 Now
+                  </span>
+                  <span
+                    className="absolute top-0 left-0 block translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:translate-y-0 text-[#071426]"
+                    aria-hidden="true"
+                  >
+                    Initiate Stage 01 Now
+                  </span>
+                </span>
+                <span className="relative z-10 text-lg leading-none font-sans">
+                  ↳
+                </span>
+              </Link>
+
+              <Link
+                href="/#services"
+                className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white text-base font-medium px-6 py-4 rounded-xl border border-white/15 transition-colors w-full sm:w-auto"
+              >
+                <span>Explore All 10 Services</span>
+                <ArrowRight className="w-4 h-4 text-white/70" />
+              </Link>
+            </div>
           </div>
-
-          <h2 className="text-3xl sm:text-4xl font-serif font-normal text-white mb-4 tracking-tight">
-            Initiate Your 100% Digital Advisory Engagement
-          </h2>
-
-          <p className="text-base sm:text-lg text-[#A8B7C9] max-w-2xl mx-auto mb-8 leading-relaxed">
-            Submit your enquiry today. Our senior chartered advisors will review your requirements and provide a clear, fixed-fee proposal within 24 hours.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/#consult-form"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#36A783] hover:bg-[#2B896B] text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-[#36A783]/30 transition-all text-base cursor-pointer"
-            >
-              <span>Submit Your Service Query</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
-
-            <Link
-              href="/#services"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white font-medium px-8 py-4 rounded-xl border border-white/15 transition-all text-base cursor-pointer"
-            >
-              <span>Explore All Practices</span>
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       {/* Comprehensive Corporate Footer */}
       <Footer />
-    </main>
+    </div>
   );
 }
