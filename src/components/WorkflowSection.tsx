@@ -49,7 +49,7 @@ export default function WorkflowSection() {
 
     if (typeof window !== "undefined") {
       const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
+        "(prefers-reduced-motion: reduce)",
       ).matches;
       if (prefersReducedMotion) return;
     }
@@ -77,10 +77,7 @@ export default function WorkflowSection() {
             scrub: 0.7,
             onUpdate: (self) => {
               // Calculate which of the 6 steps should be active based on progress (0 to 1)
-              const stepIdx = Math.min(
-                5,
-                Math.floor(self.progress * 6)
-              );
+              const stepIdx = Math.min(5, Math.floor(self.progress * 6));
               setActiveStepIndex(stepIdx);
             },
           },
@@ -126,7 +123,7 @@ export default function WorkflowSection() {
               start: "top 85%",
               once: true,
             },
-          }
+          },
         );
       });
     }, section);
@@ -216,7 +213,11 @@ export default function WorkflowSection() {
                     height="140%"
                   >
                     <feGaussianBlur stdDeviation="3" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    <feComposite
+                      in="SourceGraphic"
+                      in2="blur"
+                      operator="over"
+                    />
                   </filter>
                 </defs>
 
@@ -312,7 +313,7 @@ export default function WorkflowSection() {
                           <div className="relative z-10">
                             {/* Step Badge & SLA Pill */}
                             <div className="flex items-center justify-between mb-3.5">
-                              <span
+                              {/* <span
                                 className={`font-mono text-xs font-bold px-3 py-1 rounded-full border transition-colors ${
                                   isPassed
                                     ? "bg-[#36A783] text-white border-[#36A783]"
@@ -320,7 +321,7 @@ export default function WorkflowSection() {
                                 }`}
                               >
                                 STEP {item.number}
-                              </span>
+                              </span> */}
                               <span className="text-[11px] font-mono font-medium text-[#556980] bg-slate-100 px-2.5 py-0.5 rounded-md">
                                 {item.slaBadge}
                               </span>
@@ -350,7 +351,9 @@ export default function WorkflowSection() {
                             {/* Deliverable highlight tag */}
                             <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs text-[#216D56] font-medium">
                               <CheckCircle2 className="w-3.5 h-3.5 text-[#36A783] shrink-0" />
-                              <span className="truncate">{item.deliverableHighlight}</span>
+                              <span className="truncate">
+                                {item.deliverableHighlight}
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -414,7 +417,7 @@ export default function WorkflowSection() {
                           <div className="relative z-10">
                             {/* Step Badge & SLA Pill */}
                             <div className="flex items-center justify-between mb-3.5">
-                              <span
+                              {/* <span
                                 className={`font-mono text-xs font-bold px-3 py-1 rounded-full border transition-colors ${
                                   isPassed
                                     ? "bg-[#36A783] text-white border-[#36A783]"
@@ -422,7 +425,7 @@ export default function WorkflowSection() {
                                 }`}
                               >
                                 STEP {item.number}
-                              </span>
+                              </span> */}
                               <span className="text-[11px] font-mono font-medium text-[#556980] bg-slate-100 px-2.5 py-0.5 rounded-md">
                                 {item.slaBadge}
                               </span>
@@ -452,7 +455,9 @@ export default function WorkflowSection() {
                             {/* Deliverable highlight tag */}
                             <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs text-[#216D56] font-medium">
                               <CheckCircle2 className="w-3.5 h-3.5 text-[#36A783] shrink-0" />
-                              <span className="truncate">{item.deliverableHighlight}</span>
+                              <span className="truncate">
+                                {item.deliverableHighlight}
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -517,9 +522,9 @@ export default function WorkflowSection() {
                   </div>
 
                   <div className="flex items-center justify-between mb-2">
-                    <span className="font-mono text-xs font-bold text-[#216D56] bg-[#EAF4F0] border border-[#36A783]/30 px-2.5 py-0.5 rounded-full">
+                    {/* <span className="font-mono text-xs font-bold text-[#216D56] bg-[#EAF4F0] border border-[#36A783]/30 px-2.5 py-0.5 rounded-full">
                       STEP {item.number}
-                    </span>
+                    </span> */}
                     <span className="text-[10px] font-mono text-[#556980] bg-slate-100 px-2 py-0.5 rounded">
                       {item.slaBadge}
                     </span>
