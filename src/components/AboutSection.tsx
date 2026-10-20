@@ -269,14 +269,14 @@ export default function AboutSection() {
           <div className="lg:col-span-6 w-full flex justify-center lg:justify-end">
             <div
               ref={imageWrapperRef}
-              className="relative w-full aspect-[4/3] sm:aspect-[14/11] lg:aspect-[16/12] xl:aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(35,63,91,0.08)] border border-slate-200/80 bg-slate-100"
+              className="relative w-full max-w-[480px] aspect-[3/4] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(35,63,91,0.12)] border border-slate-200/80 bg-slate-100"
             >
-              {/* Underlying Architectural Photograph of Dubai's Business/Financial Architecture */}
+              {/* Modern Dubai Corporate Advisory in Portrait Orientation */}
               <Image
                 src="/images/about-advisory.jpg"
-                alt="Modern Dubai financial district architecture representing Auditclue corporate advisory in the UAE"
+                alt="Auditclue corporate advisory and strategic financial consulting team in Dubai DIFC"
                 fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                sizes="(max-width: 1024px) 100vw, 480px"
                 className="object-cover object-center transition-transform duration-700"
                 priority={false}
               />

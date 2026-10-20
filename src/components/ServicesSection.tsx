@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Building2,
   ShieldCheck,
@@ -18,6 +19,7 @@ import {
   Check,
   Search,
   ChevronRight,
+  ArrowRight,
   X,
   FileCheck2,
   HelpCircle,
@@ -55,6 +57,53 @@ const serviceImages: Record<string, string> = {
     "/images/services-images/Modern Compliance Office Workspace.webp",
   "technology-digital":
     "/images/services-images/Futuristic Financial Technology Dashboard.webp",
+};
+
+const SERVICE_PAGES_MAP: Record<string, { href: string; label: string }> = {
+  "corporate-tax": {
+    href: "/services/corporate-tax",
+    label: "Explore Dedicated Page (16 Services)",
+  },
+  "audit-assurance": {
+    href: "/services/audit-assurance",
+    label: "Explore Dedicated Page (18 Services)",
+  },
+  "business-setup": {
+    href: "/services/business-setup",
+    label: "Explore Dedicated Page (16 Services)",
+  },
+  "vat-services": {
+    href: "/services/vat-services",
+    label: "Explore Dedicated Page (15 Services)",
+  },
+  "cfo-advisory": {
+    href: "/services/cfo-advisory",
+    label: "Explore Dedicated Page (17 Services)",
+  },
+  "accounting-bookkeeping": {
+    href: "/services/accounting-bookkeeping",
+    label: "Explore Dedicated Page (20 Services)",
+  },
+  "transfer-pricing": {
+    href: "/services/transfer-pricing",
+    label: "Explore Dedicated Page (11 Services)",
+  },
+  "corporate-finance": {
+    href: "/services/corporate-finance",
+    label: "Explore Dedicated Page (16 Services)",
+  },
+  "business-advisory": {
+    href: "/services/business-advisory",
+    label: "Explore Dedicated Page (16 Services)",
+  },
+  "compliance-services": {
+    href: "/services/compliance-services",
+    label: "Explore Dedicated Page (13 Services)",
+  },
+  "technology-digital": {
+    href: "/services/technology-digital",
+    label: "Explore Dedicated Page (13 Services)",
+  },
 };
 
 // Filter tab groups (preserved for future category filtering if needed)
@@ -529,18 +578,32 @@ export default function ServicesSection() {
                           </span>
                         </button>
 
-                        {/* Secondary Link: Inspect Full Scope */}
-                        <button
-                          onClick={() => setActiveModalCategory(category)}
-                          className={`inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold transition-colors cursor-pointer py-2 px-3 rounded-lg ${
-                            isDark
-                              ? "text-[#83D9BE] hover:text-white hover:bg-white/5"
-                              : "text-[#216D56] hover:text-[#071426] hover:bg-white"
-                          }`}
-                        >
-                          <span>View all {category.count} deliverables</span>
-                          <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                        </button>
+                        {/* Secondary Link: Inspect Full Scope or Dedicated Page */}
+                        {SERVICE_PAGES_MAP[category.id] ? (
+                          <Link
+                            href={SERVICE_PAGES_MAP[category.id].href}
+                            className={`inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold transition-colors cursor-pointer py-2 px-3 rounded-lg ${
+                              isDark
+                                ? "text-[#C6F850] hover:text-white hover:bg-white/5"
+                                : "text-[#216D56] hover:text-[#071426] hover:bg-white"
+                            }`}
+                          >
+                            <span>{SERVICE_PAGES_MAP[category.id].label}</span>
+                            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                          </Link>
+                        ) : (
+                          <button
+                            onClick={() => setActiveModalCategory(category)}
+                            className={`inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold transition-colors cursor-pointer py-2 px-3 rounded-lg ${
+                              isDark
+                                ? "text-[#83D9BE] hover:text-white hover:bg-white/5"
+                                : "text-[#216D56] hover:text-[#071426] hover:bg-white"
+                            }`}
+                          >
+                            <span>View all {category.count} deliverables</span>
+                            <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                          </button>
+                        )}
                       </div>
                     </div>
 

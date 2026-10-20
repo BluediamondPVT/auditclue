@@ -5,6 +5,7 @@ import AboutSection from "@/components/AboutSection";
 import WhyChooseSection from "@/components/WhyChooseSection";
 import ServicesSection from "@/components/ServicesSection";
 import WorkflowSection from "@/components/WorkflowSection";
+import ClientPortalSection from "@/components/ClientPortalSection";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 
@@ -31,6 +32,9 @@ export default function Home() {
 
       {/* 6-Step Digital Operating Model Workflow */}
       <WorkflowSection />
+
+      {/* Interactive AES-256 Cloud Client Portal & Console */}
+      <ClientPortalSection />
 
       {/* Frequently Asked Questions */}
       <FAQSection />

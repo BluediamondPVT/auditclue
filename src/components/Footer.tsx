@@ -157,7 +157,7 @@ export default function Footer() {
               <li><Link href="/process"         className="hover:text-white transition-colors">Our Process</Link></li>
               <li><Link href="/#consult-form"   className="hover:text-white transition-colors">Book a Consultation</Link></li>
               <li><Link href="/#portal"         className="hover:text-white transition-colors">Client Portal Login</Link></li>
-              <li><a    href="#"                className="hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><Link href="/privacy"        className="hover:text-white transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>
 
@@ -165,13 +165,17 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-bold text-white mb-5 tracking-wide">Practices</h4>
             <ul className="space-y-3 text-[15px] text-[#A8B7C9]">
-              <li><a href="#services" className="hover:text-white transition-colors">Corporate Tax (9%)</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Statutory Audit</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">UAE VAT Compliance</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Free Zone Setup</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Virtual CFO</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Transfer Pricing</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">AML / GoAML</a></li>
+              <li><Link href="/services/corporate-tax" className="hover:text-white transition-colors">Corporate Tax (9%)</Link></li>
+              <li><Link href="/services/audit-assurance" className="hover:text-white transition-colors">Statutory Audit</Link></li>
+              <li><Link href="/services/vat-services" className="hover:text-white transition-colors">UAE VAT Compliance (5%)</Link></li>
+              <li><Link href="/services/accounting-bookkeeping" className="hover:text-white transition-colors">Accounting & Bookkeeping</Link></li>
+              <li><Link href="/services/business-setup" className="hover:text-white transition-colors">Business Setup (Mainland & Free Zone)</Link></li>
+              <li><Link href="/services/cfo-advisory" className="hover:text-white transition-colors">Virtual CFO & Financial Advisory</Link></li>
+              <li><Link href="/services/transfer-pricing" className="hover:text-white transition-colors">Transfer Pricing</Link></li>
+              <li><Link href="/services/corporate-finance" className="hover:text-white transition-colors">Corporate Finance</Link></li>
+              <li><Link href="/services/business-advisory" className="hover:text-white transition-colors">Business Advisory</Link></li>
+              <li><Link href="/services/compliance-services" className="hover:text-white transition-colors">Compliance Services (AML/ESR)</Link></li>
+              <li><Link href="/services/technology-digital" className="hover:text-white transition-colors">Technology & Digital Finance</Link></li>
             </ul>
           </div>
 

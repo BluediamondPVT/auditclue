@@ -25,6 +25,7 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://auditclue.com"),
   title:
     "Auditclue Global Advisory Services LLC | UAE's Fully Digital Audit, Tax & Advisory Firm",
   description:
