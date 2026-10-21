@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -29,6 +29,25 @@ export default function HeroSection() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [heroActive, setHeroActive] = useState(false);
+
+  useEffect(() => {
+    const triggerHero = () => {
+      setHeroActive(true);
+    };
+
+    window.addEventListener("auditclue:curtainOpen", triggerHero);
+
+    // Fallback: in case event was already fired or page accessed directly
+    const fallback = setTimeout(() => {
+      setHeroActive(true);
+    }, 1000);
+
+    return () => {
+      window.removeEventListener("auditclue:curtainOpen", triggerHero);
+      clearTimeout(fallback);
+    };
+  }, []);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -47,7 +66,9 @@ export default function HeroSection() {
         {/* Left: Editorial introduction */}
         <div className="lg:col-span-6">
           <div
-            className="eyebrow mb-4 sm:mb-6 hero-fade-up text-[11px] sm:text-[13px] tracking-wider"
+            className={`eyebrow mb-4 sm:mb-6 text-[11px] sm:text-[13px] tracking-wider transition-opacity duration-500 ${
+              heroActive ? "hero-fade-up" : "opacity-0"
+            }`}
             style={{ animationDelay: "0.05s" }}
           >
             <span className="h-2 w-2 rounded-full bg-brand-teal" />
@@ -55,38 +76,51 @@ export default function HeroSection() {
           </div>
 
           <h1
-            aria-label="Clarity in finance. Confidence in every decision."
+            aria-label="Fully Digital Audit, Tax & Advisory Services for Modern Businesses"
             className="max-w-190 text-[clamp(2rem,6.8vw,4.6rem)] font-medium leading-[1.14] sm:leading-[1.08] tracking-[-0.035em] sm:tracking-[-0.045em] text-brand-navy"
           >
             <span aria-hidden="true">
-              <FlowText
-                text="Fully Digital Audit, Tax"
-                startDelay={0.1}
-                charDelay={0.018}
-              />
-              
-              
-
-              <br />
-              <FlowText
-                text="& Advisory Services for Modern Businesses"
-                startDelay={0.36}
-                charDelay={0.018}
-                className="text-brand-teal-dark"
-              />
+              {heroActive ? (
+                <>
+                  <FlowText
+                    text="Fully Digital Audit, Tax"
+                    startDelay={0.05}
+                    charDelay={0.018}
+                  />
+                  <br />
+                  <FlowText
+                    text="& Advisory Services for Modern Businesses"
+                    startDelay={0.32}
+                    charDelay={0.018}
+                    className="text-brand-teal-dark"
+                  />
+                </>
+              ) : (
+                <span className="opacity-0">
+                  Fully Digital Audit, Tax
+                  <br />
+                  <span className="text-brand-teal-dark">
+                    & Advisory Services for Modern Businesses
+                  </span>
+                </span>
+              )}
             </span>
           </h1>
 
           <p
-            className="hero-fade-up mt-4 sm:mt-7 max-w-147.5 text-[15px] sm:text-lg leading-relaxed sm:leading-8 text-(--text-secondary)"
-            style={{ animationDelay: "0.7s" }}
+            className={`mt-4 sm:mt-7 max-w-147.5 text-[15px] sm:text-lg leading-relaxed sm:leading-8 text-(--text-secondary) transition-opacity duration-500 ${
+              heroActive ? "hero-fade-up" : "opacity-0"
+            }`}
+            style={{ animationDelay: "0.55s" }}
           >
             Auditclue Global Advisory Services LLC provides end-to-end digital solutions for audit, accounting, UAE corporate tax, VAT, finance, compliance, and business advisory services.
           </p>
 
           <div
-            className="hero-fade-up mt-6 sm:mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
-            style={{ animationDelay: "0.85s" }}
+            className={`mt-6 sm:mt-8 flex flex-col gap-3 sm:flex-row sm:items-center transition-opacity duration-500 ${
+              heroActive ? "hero-fade-up" : "opacity-0"
+            }`}
+            style={{ animationDelay: "0.7s" }}
           >
             <a
               href="#consult-form"
@@ -157,8 +191,10 @@ export default function HeroSection() {
 
           {/* Hand-drawn annotation: Growing Businesses Across UAE (Desktop & Tablet) */}
           <div
-            className="hero-fade-up mt-6 hidden items-center gap-2 pl-4 sm:flex lg:mt-8 lg:pl-14"
-            style={{ animationDelay: "1.0s" }}
+            className={`mt-6 hidden items-center gap-2 pl-4 sm:flex lg:mt-8 lg:pl-14 transition-opacity duration-500 ${
+              heroActive ? "hero-fade-up" : "opacity-0"
+            }`}
+            style={{ animationDelay: "0.85s" }}
           >
             <span className="font-caveat text-xl font-bold leading-tight text-[#475569] sm:text-2xl">
               Growing
@@ -186,7 +222,9 @@ export default function HeroSection() {
         {/* Right: Consultation card */}
         <div
           id="consult-form"
-          className="hero-fade-up scroll-mt-20 lg:col-span-6 mt-4 lg:mt-0"
+          className={`scroll-mt-20 lg:col-span-6 mt-4 lg:mt-0 transition-opacity duration-500 ${
+            heroActive ? "hero-fade-up" : "opacity-0"
+          }`}
           style={{ animationDelay: "0.2s" }}
         >
           <div className="relative rounded-2xl border border-[var(--border-default)] bg-white p-5 sm:p-8 lg:p-9 shadow-[0_24px_80px_rgba(35,63,91,0.10)]">
@@ -410,7 +448,7 @@ export default function HeroSection() {
                   </p>
                 </div>
               </>
-            )}
+            )}+
           </div>
         </div>
       </div>

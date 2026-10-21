@@ -38,7 +38,6 @@ const OTHER_SERVICES = [
   { name: "Accounting & Bookkeeping", href: "/services/accounting-bookkeeping" },
   { name: "UAE VAT Services", href: "/services/vat-services" },
   { name: "UAE Corporate Tax", href: "/services/corporate-tax" },
-  { name: "Business Setup & Formation", href: "/services/business-setup" },
   { name: "Transfer Pricing", href: "/services/transfer-pricing" },
   { name: "CFO & Finance Advisory", href: "/services/cfo-advisory" },
   { name: "Corporate Finance", href: "/services/corporate-finance" },
@@ -55,14 +54,14 @@ export default function BusinessAdvisoryClient() {
         {/* ================================================================= */}
         {/* 1. HERO SECTION: Business Advisory                                */}
         {/* ================================================================= */}
-        <section className="relative bg-gradient-to-b from-[#FCEBEF] via-[#F8FAFC] to-[#EEF2F7] border-b border-[#CBD5E1]/60 pt-16 pb-16 sm:pt-20 sm:pb-22 overflow-hidden">
+        <section className="relative bg-gradient-to-b from-[#EDF5F1] via-[#F8FAFC] to-[#EEF2F7] border-b border-[#CBD5E1]/60 pt-16 pb-16 sm:pt-20 sm:pb-22 overflow-hidden">
           {/* Subtle Ambient Glow */}
           <div
             className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
             aria-hidden="true"
           >
-            <div className="absolute -top-32 right-1/4 w-[600px] h-[450px] bg-gradient-to-br from-[#E11D48]/15 via-[#FB7185]/10 to-transparent rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute -bottom-20 -left-10 w-[550px] h-[400px] bg-gradient-to-tr from-[#233F5B]/12 via-[#E11D48]/10 to-transparent rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute -top-32 right-1/4 w-[600px] h-[450px] bg-gradient-to-br from-[#36A783]/20 via-[#83D9BE]/15 to-transparent rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute -bottom-20 -left-10 w-[550px] h-[400px] bg-gradient-to-tr from-[#233F5B]/12 via-[#36A783]/10 to-transparent rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(35,63,91,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(35,63,91,0.025)_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_45%,#000_65%,transparent_100%)]" />
           </div>
 
@@ -84,8 +83,8 @@ export default function BusinessAdvisoryClient() {
             </nav>
 
             <div className="max-w-4xl">
-              <div className="inline-flex items-center gap-2 bg-[#FFE4E6] text-[#BE123C] border border-[#E11D48]/25 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-5 font-mono shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-[#E11D48] animate-pulse" />
+              <div className="inline-flex items-center gap-2 bg-[#EAF4F0] text-[#216D56] border border-[#36A783]/25 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-5 font-mono shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
                 <span>STRATEGIC LIFECYCLE & TRANSACTION SUPPORT</span>
               </div>
 
@@ -139,7 +138,7 @@ export default function BusinessAdvisoryClient() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-8 mb-8 border-b border-[#071426]/10">
               <div>
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#E11D48] font-bold block mb-2">
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#36A783] font-bold block mb-2">
                   PRACTICE SCOPE
                 </span>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#071426]">
@@ -147,11 +146,11 @@ export default function BusinessAdvisoryClient() {
                 </h2>
               </div>
               <div className="text-xs sm:text-sm text-[#64748B] font-mono">
-                16 Deliverables · Growth & Governance
+                16 Deliverables · Fully Digital
               </div>
             </div>
 
-            {/* Editorial Typographic List (Clean 16 Services, No Generic Boxes) */}
+            {/* Editorial Typographic List (16 Deliverables matching Accounting UI) */}
             <div className="divide-y divide-[#E2E8F0]">
               {BUSINESS_ADVISORY_SERVICES.map((serviceName, idx) => {
                 const num = idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`;
@@ -161,16 +160,16 @@ export default function BusinessAdvisoryClient() {
                     className="py-5 sm:py-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center group hover:bg-[#F8FAFC] transition-colors -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-xl"
                   >
                     <div className="md:col-span-2 flex items-center gap-3">
-                      <span className="font-mono text-xs font-bold text-[#E11D48]">
+                      <span className="font-mono text-xs font-bold text-[#36A783]">
                         [{num}]
                       </span>
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-[#64748B] bg-[#FFE4E6] px-2 py-0.5 rounded-md">
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-[#64748B] bg-[#EAF4F0] px-2 py-0.5 rounded-md">
                         Advisory
                       </span>
                     </div>
 
                     <div className="md:col-span-7">
-                      <h3 className="text-lg sm:text-xl font-serif font-medium text-[#071426] group-hover:text-[#BE123C] transition-colors">
+                      <h3 className="text-lg sm:text-xl font-serif font-medium text-[#071426] group-hover:text-[#216D56] transition-colors">
                         {serviceName}
                       </h3>
                     </div>
@@ -178,7 +177,7 @@ export default function BusinessAdvisoryClient() {
                     <div className="md:col-span-3 flex justify-start md:justify-end">
                       <a
                         href="#consultation"
-                        className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#BE123C] group-hover:text-[#E11D48] transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#216D56] group-hover:text-[#36A783] transition-colors"
                       >
                         <span>Talk With an Advisor</span>
                         <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
@@ -194,7 +193,7 @@ export default function BusinessAdvisoryClient() {
         {/* ================================================================= */}
         {/* 3. NEED BUSINESS ADVISORY SUPPORT?                                */}
         {/* ================================================================= */}
-        <section className="py-16 sm:py-20 bg-[#FFF1F2] border-b border-[#FECDD3]">
+        <section className="py-16 sm:py-20 bg-[#EEF2F7] border-b border-[#CBD5E1]">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-serif text-[#071426] mb-3">
               Need Business Advisory Support?
@@ -237,7 +236,7 @@ export default function BusinessAdvisoryClient() {
               {/* Left Column: Direct Contact Details */}
               <div className="lg:col-span-5 space-y-6">
                 <div>
-                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#E11D48] font-bold block mb-2">
+                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#36A783] font-bold block mb-2">
                     DIRECT ADVISORY ACCESS
                   </span>
                   <h2 className="text-3xl sm:text-4xl font-serif text-[#071426] mb-4">
@@ -253,16 +252,16 @@ export default function BusinessAdvisoryClient() {
                   {/* Phone */}
                   <a
                     href="tel:+971547338583"
-                    className="flex items-center gap-4 p-4 rounded-2xl bg-[#F8FAFC] border border-[#CBD5E1] hover:border-[#E11D48] transition-all group"
+                    className="flex items-center gap-4 p-4 rounded-2xl bg-[#F8FAFC] border border-[#CBD5E1] hover:border-[#36A783] transition-all group"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-[#FFE4E6] text-[#BE123C] flex items-center justify-center shrink-0 group-hover:bg-[#E11D48] group-hover:text-white transition-colors">
+                    <div className="w-10 h-10 rounded-xl bg-[#EAF4F0] text-[#216D56] flex items-center justify-center shrink-0 group-hover:bg-[#36A783] group-hover:text-white transition-colors">
                       <Phone className="w-5 h-5" />
                     </div>
                     <div>
                       <div className="text-xs font-mono text-[#64748B]">
                         Call Now / Talk With an Advisor:
                       </div>
-                      <div className="text-base sm:text-lg font-serif font-bold text-[#071426] group-hover:text-[#BE123C] transition-colors">
+                      <div className="text-base sm:text-lg font-serif font-bold text-[#071426] group-hover:text-[#216D56] transition-colors">
                         +971 54 733 8583
                       </div>
                     </div>
@@ -291,14 +290,14 @@ export default function BusinessAdvisoryClient() {
                   {/* Email */}
                   <a
                     href="mailto:info@auditclue.com"
-                    className="flex items-center gap-4 p-4 rounded-2xl bg-[#F8FAFC] border border-[#CBD5E1] hover:border-[#E11D48] transition-all group"
+                    className="flex items-center gap-4 p-4 rounded-2xl bg-[#F8FAFC] border border-[#CBD5E1] hover:border-[#36A783] transition-all group"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-[#FFE4E6] text-[#BE123C] flex items-center justify-center shrink-0 group-hover:bg-[#E11D48] group-hover:text-white transition-colors">
+                    <div className="w-10 h-10 rounded-xl bg-[#EAF4F0] text-[#216D56] flex items-center justify-center shrink-0 group-hover:bg-[#36A783] group-hover:text-white transition-colors">
                       <Mail className="w-5 h-5" />
                     </div>
                     <div>
                       <div className="text-xs font-mono text-[#64748B]">Email:</div>
-                      <div className="text-base sm:text-lg font-serif font-bold text-[#071426] group-hover:text-[#BE123C] transition-colors">
+                      <div className="text-base sm:text-lg font-serif font-bold text-[#071426] group-hover:text-[#216D56] transition-colors">
                         info@auditclue.com
                       </div>
                     </div>
@@ -320,7 +319,7 @@ export default function BusinessAdvisoryClient() {
         <section className="py-16 sm:py-20 bg-[#F8FAFC] border-b border-[#E2E8F0]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8">
-              <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#E11D48] font-bold block mb-1">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#36A783] font-bold block mb-1">
                 PRACTICE DIRECTORY
               </span>
               <h2 className="text-2xl sm:text-3xl font-serif text-[#071426]">
@@ -333,12 +332,12 @@ export default function BusinessAdvisoryClient() {
                 <Link
                   key={idx}
                   href={s.href}
-                  className="p-4 rounded-xl bg-white border border-[#CBD5E1] hover:border-[#E11D48] hover:shadow-sm transition-all flex items-center justify-between group"
+                  className="p-4 rounded-xl bg-white border border-[#CBD5E1] hover:border-[#36A783] hover:shadow-sm transition-all flex items-center justify-between group"
                 >
-                  <span className="text-sm font-serif font-medium text-[#071426] group-hover:text-[#BE123C] transition-colors">
+                  <span className="text-sm font-serif font-medium text-[#071426] group-hover:text-[#216D56] transition-colors">
                     {s.name}
                   </span>
-                  <ArrowRight className="w-4 h-4 text-[#64748B] group-hover:text-[#E11D48] transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4 text-[#64748B] group-hover:text-[#36A783] transition-transform group-hover:translate-x-1" />
                 </Link>
               ))}
             </div>

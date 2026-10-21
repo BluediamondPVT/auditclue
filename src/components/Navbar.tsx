@@ -38,27 +38,27 @@ const navLinks: NavLinkItem[] = [
 ];
 
 const MEGA_SERVICES_COL_1 = [
-  // {
-  //   title: "Business Setup & Formation",
-  //   href: "/services/business-setup",
-  //   svcs: "16 Svcs",
-  //   desc: "Mainland DED, Free Zones & bank-ready setup",
-  //   icon: Building2,
-  // },
-  // {
-  //   title: "UAE Corporate Tax (9%)",
-  //   href: "/services/corporate-tax",
-  //   svcs: "16 Svcs",
-  //   desc: "Small Business Relief, QFZP 0% & FTA filing",
-  //   icon: Scale,
-  // },
-  // {
-  //   title: "Statutory Audit & Assurance",
-  //   href: "/services/audit-assurance",
-  //   svcs: "18 Svcs",
-  //   desc: "IFRS financial statements & Free Zone renewal",
-  //   icon: ShieldCheck,
-  // },
+  {
+    title: "Business Setup & Formation",
+    href: "/services/business-setup",
+    svcs: "16 Svcs",
+    desc: "Mainland DED, Free Zones & bank-ready setup",
+    icon: Building2,
+  },
+  {
+    title: "UAE Corporate Tax (9%)",
+    href: "/services/corporate-tax",
+    svcs: "16 Svcs",
+    desc: "Small Business Relief, QFZP 0% & FTA filing",
+    icon: Scale,
+  },
+  {
+    title: "Statutory Audit & Assurance",
+    href: "/services/audit-assurance",
+    svcs: "18 Svcs",
+    desc: "IFRS financial statements & Free Zone renewal",
+    icon: ShieldCheck,
+  },
   {
     title: "UAE VAT Services (5%)",
     href: "/services/vat-services",
@@ -80,7 +80,10 @@ const MEGA_SERVICES_COL_1 = [
     desc: "Monthly bookkeeping, MIS & year-end closing",
     icon: Calculator,
   },
-    {
+];
+
+const MEGA_SERVICES_COL_2 = [
+  {
     title: "Transfer Pricing",
     href: "/services/transfer-pricing",
     svcs: "11 Svcs",
@@ -95,10 +98,6 @@ const MEGA_SERVICES_COL_1 = [
     desc: "Bank loan facilities, trade finance & debt advisory",
     icon: Briefcase,
   },
-];
-
-const MEGA_SERVICES_COL_2 = [
-
   {
     title: "Business Advisory",
     href: "/services/business-advisory",
@@ -185,12 +184,12 @@ export default function Navbar() {
           scrolled ? "shadow-[0_8px_30px_rgba(35,63,91,0.07)]" : "shadow-none"
         }`}
       >
-        <div className="mx-auto flex h-[76px] max-w-[1320px] items-center justify-between px-5 sm:px-8 lg:h-[86px] lg:px-10">
+        <div className="mx-auto flex h-19 max-w-330 items-center justify-between px-5 sm:px-8 lg:h-21.5 lg:px-10">
           {/* Brand Logo */}
           <Link
             href="/"
             onClick={closeMenu}
-            className="relative z-[60] flex shrink-0 items-center"
+            className="relative z-60 flex shrink-0 items-center"
             aria-label="Auditclue home"
           >
             <Image
@@ -199,7 +198,7 @@ export default function Navbar() {
               width={340}
               height={120}
               priority
-              className="h-auto w-[175px] object-contain sm:w-[250px]"
+              className="h-auto w-43.75 object-contain sm:w-62.5"
             />
           </Link>
 
@@ -216,8 +215,8 @@ export default function Navbar() {
                     href={link.href}
                     className={`nav-link inline-flex items-center gap-1.5 py-3 text-[13px] xl:text-[14px] font-medium transition-colors ${
                       active
-                        ? "text-[var(--brand-teal-dark)] font-semibold"
-                        : "text-[var(--brand-navy)] hover:text-[var(--brand-teal)]"
+                        ? "text-brand-teal-dark font-semibold"
+                        : "text-brand-navy hover:text-brand-teal"
                     }`}
                   >
                     <span>{link.name}</span>
@@ -240,13 +239,11 @@ export default function Navbar() {
                   {/* STUDIO-GRADE BESPOKE MEGA-DROPDOWN ON HOVER */}
                   {link.dropdown && (
                     <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto z-50 before:content-[''] before:absolute before:-top-3 before:inset-x-0 before:h-4">
-                      <div className="w-[780px] max-w-[95vw] rounded-3xl bg-white p-5 shadow-2xl border border-slate-200/90 backdrop-blur-2xl text-[#071426]">
+                      <div className="w-195 max-w-[95vw] rounded-3xl bg-white p-5 shadow-2xl border border-slate-200/90 backdrop-blur-2xl text-[#071426]">
                         {/* Two Columns Grid 50% - 50% */}
                         <div className="grid grid-cols-2 gap-5">
                           {/* Column 1: Core Corporate, Tax & Assurance Portals (50%) */}
                           <div className="pr-3 border-r border-slate-100">
-                           
-
                             <div className="space-y-1">
                               {MEGA_SERVICES_COL_1.map((item, idx) => {
                                 const Icon = item.icon;
@@ -280,8 +277,6 @@ export default function Navbar() {
 
                           {/* Column 2: Strategic, Finance & Technology Portals (50%) */}
                           <div className="pl-1">
-                           
-
                             <div className="space-y-1">
                               {MEGA_SERVICES_COL_2.map((item, idx) => {
                                 const Icon = item.icon;
@@ -292,7 +287,7 @@ export default function Navbar() {
                                     href={item.href}
                                     className={`group/item flex items-start gap-2.5 p-2 rounded-xl transition-all ${
                                       isCalc
-                                        ? "bg-gradient-to-r from-[#EAF4F0] to-[#F1F6F4] border border-[#36A783]/20 hover:border-[#36A783]"
+                                        ? "bg-linear-to-r from-[#EAF4F0] to-[#F1F6F4] border border-[#36A783]/20 hover:border-[#36A783]"
                                         : "hover:bg-[#F8FAFC] border border-transparent hover:border-slate-200"
                                     }`}
                                   >
@@ -330,8 +325,6 @@ export default function Navbar() {
                             </div>
                           </div>
                         </div>
-
-                      
                       </div>
                     </div>
                   )}
@@ -351,7 +344,7 @@ export default function Navbar() {
                 aria-hidden="true"
               />
               <span
-                className="absolute -left-full top-0 h-full w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transition-all duration-700 ease-out group-hover:left-[150%]"
+                className="absolute -left-full top-0 h-full w-1/2 bg-linear-to-r from-transparent via-white/20 to-transparent -skew-x-12 transition-all duration-700 ease-out group-hover:left-[150%]"
                 aria-hidden="true"
               />
               <span className="relative z-10 block overflow-hidden leading-tight">
@@ -373,7 +366,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="group relative z-[60] flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100/80 p-2 transition-colors hover:bg-slate-200/80 lg:hidden cursor-pointer"
+            className="group relative z-60 flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100/80 p-2 transition-colors hover:bg-slate-200/80 lg:hidden cursor-pointer"
             aria-label={
               menuOpen ? "Close navigation menu" : "Open navigation menu"
             }
@@ -382,24 +375,24 @@ export default function Navbar() {
           >
             <div className="flex h-5 w-5 flex-col items-center justify-center gap-1.5">
               <span
-                className={`h-[2px] rounded-full bg-[var(--brand-navy)] transition-all duration-300 ease-in-out ${
+                className={`h-0.5 rounded-full bg-brand-navy transition-all duration-300 ease-in-out ${
                   menuOpen
-                    ? "w-5 translate-y-[8px] rotate-45 bg-[var(--brand-teal-dark)]"
-                    : "w-5 group-hover:bg-[var(--brand-teal)]"
+                    ? "w-5 translate-y-2 rotate-45 bg-brand-teal-dark"
+                    : "w-5 group-hover:bg-brand-teal"
                 }`}
               />
               <span
-                className={`h-[2px] rounded-full bg-[var(--brand-navy)] transition-all duration-300 ease-in-out ${
+                className={`h-0.5 rounded-full bg-brand-navy transition-all duration-300 ease-in-out ${
                   menuOpen
                     ? "w-5 opacity-0 translate-x-2"
-                    : "w-3.5 self-start group-hover:w-5 group-hover:bg-[var(--brand-teal)]"
+                    : "w-3.5 self-start group-hover:w-5 group-hover:bg-brand-teal"
                 }`}
               />
               <span
-                className={`h-[2px] rounded-full bg-[var(--brand-navy)] transition-all duration-300 ease-in-out ${
+                className={`h-0.5 rounded-full bg-brand-navy transition-all duration-300 ease-in-out ${
                   menuOpen
-                    ? "w-5 -translate-y-[8px] -rotate-45 bg-[var(--brand-teal-dark)]"
-                    : "w-5 group-hover:bg-[var(--brand-teal)]"
+                    ? "w-5 -translate-y-2 -rotate-45 bg-brand-teal-dark"
+                    : "w-5 group-hover:bg-brand-teal"
                 }`}
               />
             </div>
@@ -427,7 +420,7 @@ export default function Navbar() {
         <nav
           id="mobile-navigation"
           aria-label="Mobile navigation"
-          className={`absolute right-0 top-0 flex h-[100dvh] w-[min(90%,420px)] flex-col bg-white px-7 pb-8 pt-24 shadow-2xl transition-transform duration-300 ease-out overflow-y-auto ${
+          className={`absolute right-0 top-0 flex h-dvh w-[min(90%,420px)] flex-col bg-white px-7 pb-8 pt-24 shadow-2xl transition-transform duration-300 ease-out overflow-y-auto ${
             menuOpen ? "translate-x-0" : "translate-x-full"
           }`}
           style={{
@@ -436,7 +429,7 @@ export default function Navbar() {
         >
           <div className="mb-4">
             <p className="eyebrow">Auditclue Advisory</p>
-            <p className="mt-1 text-xs text-[var(--text-muted)]">
+            <p className="mt-1 text-xs text-muted">
               100% digital audit, tax & corporate advisory.
             </p>
           </div>
@@ -451,9 +444,7 @@ export default function Navbar() {
                   <div key={link.name} className="py-3">
                     <button
                       type="button"
-                      onClick={() =>
-                        setMobileServicesOpen(!mobileServicesOpen)
-                      }
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
                       className="w-full flex items-center justify-between text-base font-semibold text-[#071426] py-1 cursor-pointer"
                     >
                       <span>{link.name}</span>
@@ -467,14 +458,14 @@ export default function Navbar() {
 
                     {mobileServicesOpen && (
                       <div className="mt-2 pl-3 space-y-2 border-l-2 border-[#36A783] py-2 bg-slate-50 rounded-r-xl">
-                        {/* <Link
+                        <Link
                           href="/services/business-setup"
                           onClick={closeMenu}
                           className="block text-xs font-semibold text-[#071426] hover:text-[#216D56]"
                         >
                           🏢 Business Setup & Formation (16 Svcs)
-                        </Link> */}
-                        {/* <Link
+                        </Link>
+                        <Link
                           href="/services/corporate-tax"
                           onClick={closeMenu}
                           className="block text-xs font-semibold text-[#071426] hover:text-[#216D56]"
@@ -487,7 +478,7 @@ export default function Navbar() {
                           className="block text-xs font-semibold text-[#071426] hover:text-[#216D56]"
                         >
                           🛡️ Statutory Audit & Assurance (18 Svcs)
-                        </Link> */}
+                        </Link>
                         <Link
                           href="/services/vat-services"
                           onClick={closeMenu}
@@ -565,8 +556,8 @@ export default function Navbar() {
                   tabIndex={menuOpen ? 0 : -1}
                   className={`flex items-center justify-between py-3.5 text-base font-medium transition-colors ${
                     active
-                      ? "text-[var(--brand-teal-dark)] font-semibold"
-                      : "text-[var(--brand-navy)] hover:text-[var(--brand-teal-dark)]"
+                      ? "text-brand-teal-dark font-semibold"
+                      : "text-brand-navy hover:text-brand-teal-dark"
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -578,7 +569,7 @@ export default function Navbar() {
                       </span>
                     )}
                   </div>
-                  <ArrowUpRight size={17} className="text-[var(--brand-teal)]" />
+                  <ArrowUpRight size={17} className="text-brand-teal" />
                 </Link>
               );
             })}
