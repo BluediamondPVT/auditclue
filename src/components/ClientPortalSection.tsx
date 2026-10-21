@@ -148,7 +148,7 @@ export default function ClientPortalSection() {
                   </div>
                   <div className="flex items-center gap-1.5 bg-black/40 border border-white/10 px-3 py-1 rounded-lg text-xs font-mono text-[#A8B7C9]">
                     <Lock className="w-3 h-3 text-[#36A783]" />
-                    <span>vault.auditclue.ae/client-console</span>
+                    <span>vault.auditclue.com/client-console</span>
                   </div>
                 </div>
 
@@ -347,14 +347,22 @@ export default function ClientPortalSection() {
 
             </div>
 
-            {/* Direct Onboarding CTA Button */}
-            <div className="portal-narrative-item pt-4">
+            {/* Direct Onboarding & Existing Client Login CTAs */}
+            <div className="portal-narrative-item pt-4 flex flex-wrap items-center gap-3.5">
               <a
                 href="#consult-form"
-                className="inline-flex items-center gap-2.5 bg-[#36A783] hover:bg-[#2B896B] text-white text-sm sm:text-base font-semibold px-7 py-3.5 rounded-xl transition-all shadow-lg hover:shadow-[#36A783]/30 group cursor-pointer"
+                className="inline-flex items-center gap-2.5 bg-[#36A783] hover:bg-[#2B896B] text-white text-sm sm:text-base font-semibold px-6 py-3.5 rounded-xl transition-all shadow-lg hover:shadow-[#36A783]/30 group cursor-pointer"
               >
                 <span>Onboard Your Enterprise Today</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+
+              <a
+                href="#portal"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[#83D9BE] hover:text-white px-5 py-3.5 rounded-xl border border-white/10 hover:border-[#36A783]/40 bg-white/[0.04] hover:bg-white/[0.08] transition-all cursor-pointer"
+              >
+                <Lock className="w-4 h-4 text-[#36A783]" />
+                <span>Existing client? Log in</span>
               </a>
             </div>
 

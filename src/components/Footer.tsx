@@ -191,15 +191,15 @@ export default function Footer() {
             <div className="-mt-5">
               <p className="text-[15px] text-[#A8B7C9] leading-relaxed">
                 <span className="text-white font-semibold">Auditclue® Dubai</span><br />
-                Business Bay, Level 14<br />
-                Boulevard Plaza Tower<br />
+                Boulevard Plaza Tower 1, Level 14<br />
+                Downtown Dubai / Business Bay<br />
                 Dubai, UAE
               </p>
               <a
-                href="mailto:contact@auditclue.ae"
+                href="mailto:info@auditclue.com"
                 className="block mt-3 text-[15px] text-[#A8B7C9] hover:text-white transition-colors"
               >
-                contact@auditclue.ae
+                info@auditclue.com
               </a>
             </div>
 
@@ -212,10 +212,10 @@ export default function Footer() {
                 Abu Dhabi, UAE
               </p>
               <a
-                href="tel:+97140000000"
+                href="tel:+971547338583"
                 className="block mt-3 text-[15px] text-[#A8B7C9] hover:text-white transition-colors"
               >
-                +971 4 000 0000
+                +971 54 733 8583
               </a>
             </div>
 
@@ -227,7 +227,7 @@ export default function Footer() {
       {/* ── BOTTOM BAR ── */}
       <div className="border-t border-white/10">
         <div className="w-full px-5 sm:px-12 lg:px-20 xl:px-28 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-[#6A7B8E] text-center sm:text-left">
-          <span>© 2025 Auditclue Global Advisory Services LLC</span>
+          <span>© 2026 Auditclue Global Advisory Services LLC</span>
           <span className="text-center">FTA Registered · IFRS / ISA Compliant · 100% Digital UAE Delivery</span>
           <button
             onClick={scrollToTop}

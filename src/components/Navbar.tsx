@@ -19,6 +19,7 @@ import {
   Compass,
   ShieldAlert,
   Cpu,
+  Lock,
 } from "lucide-react";
 
 interface NavLinkItem {
@@ -333,8 +334,18 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Primary CTA (Desktop Only) */}
-          <div className="hidden lg:block">
+          {/* Primary CTA & Client Login (Desktop Only) */}
+          <div className="hidden lg:flex items-center gap-2.5">
+            {/* Client Portal Login */}
+            <Link
+              href="/#portal"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold text-[#233F5B] hover:text-[#36A783] rounded-full border border-slate-200 hover:border-[#36A783]/40 bg-white/80 hover:bg-[#EAF4F0]/60 transition-all shadow-xs"
+            >
+              <Lock className="w-3.5 h-3.5 text-[#36A783]" />
+              <span>Client Login</span>
+            </Link>
+
+            {/* Book a Consultation */}
             <Link
               href="/contact"
               className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-brand-teal px-5 py-2.5 text-[13px] font-semibold text-white shadow-[0_4px_16px_rgba(54,167,131,0.25)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_8px_24px_rgba(23,45,67,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]"
@@ -575,15 +586,27 @@ export default function Navbar() {
             })}
           </div>
 
-          <Link
-            href="/contact"
-            onClick={closeMenu}
-            tabIndex={menuOpen ? 0 : -1}
-            className="group relative mt-6 inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-brand-teal py-3.5 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(54,167,131,0.25)] transition-all duration-500 active:scale-[0.98]"
-          >
-            <span>Book a Consultation</span>
-            <span className="text-xs">↳</span>
-          </Link>
+          <div className="mt-6 flex flex-col gap-2.5">
+            <Link
+              href="/#portal"
+              onClick={closeMenu}
+              tabIndex={menuOpen ? 0 : -1}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-slate-200 bg-white py-3 text-sm font-semibold text-[#233F5B] hover:text-[#36A783] hover:bg-[#EAF4F0]/60 transition-all shadow-xs"
+            >
+              <Lock className="w-4 h-4 text-[#36A783]" />
+              <span>Client Portal Login</span>
+            </Link>
+
+            <Link
+              href="/contact"
+              onClick={closeMenu}
+              tabIndex={menuOpen ? 0 : -1}
+              className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-brand-teal py-3.5 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(54,167,131,0.25)] transition-all duration-500 active:scale-[0.98]"
+            >
+              <span>Book a Consultation</span>
+              <span className="text-xs">↳</span>
+            </Link>
+          </div>
 
           <div className="mt-auto pt-6 text-center text-xs text-[#64748B]">
             UAE Toll-Free / WhatsApp: <br />
