@@ -448,7 +448,7 @@ export default function HeroSection() {
                   </p>
                 </div>
               </>
-            )}+
+            )}
           </div>
         </div>
       </div>
