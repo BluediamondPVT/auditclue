@@ -11,9 +11,9 @@ export interface ProcessStepItem {
 }
 
 export const PROCESS_PAGE_INTRO = {
-  heading: "Our Simple 6-Step Process",
+  heading: "How We Deliver: 6-Step Digital Onboarding",
   subtitle:
-    "From your first query to ongoing support — a clear, transparent, and fully digital process designed for modern UAE businesses.",
+    "From your initial diagnostic to final statutory filing — a seamless, transparent engagement model with zero office visits required.",
 };
 
 export const PROCESS_STEPS_DATA: ProcessStepItem[] = [
@@ -47,13 +47,13 @@ export const PROCESS_STEPS_DATA: ProcessStepItem[] = [
     step: "03",
     number: "03",
     title: "Submit Documents Digitally",
-    homepagePreview: "Share documents securely from anywhere.",
+    homepagePreview: "Share documents securely via our encrypted portal.",
     fullDescription:
-      "Securely share your documents through our digital portal or encrypted file transfer. No physical visits required — work from anywhere in the UAE or abroad.",
+      "Securely upload financial statements, invoices, and statutory files through our digital client portal. No physical office visits required — work from anywhere globally.",
     slaBadge: "AES-256 Vault Provisioned",
     iconName: "UploadCloud",
     side: "left",
-    deliverableHighlight: "No in-office visits; upload from anywhere globally",
+    deliverableHighlight: "Direct access to AES-256 cloud portal — upload from anywhere globally",
   },
   {
     step: "04",

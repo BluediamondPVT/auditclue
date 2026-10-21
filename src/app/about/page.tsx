@@ -104,8 +104,8 @@ const REGULATORY_BADGES = [
   },
   {
     badge: "Mainland & Free Zones",
-    title: "40+ UAE Jurisdictions",
-    subtitle: "DIFC, ADGM, DMCC & Mainland DED",
+    title: "All 7 Emirates & 40+ Free Zones",
+    subtitle: "Mainland DED + DMCC, IFZA, DAFZA, JAFZA, ADGM & DIFC",
   },
   {
     badge: "Digital First",
@@ -298,11 +298,11 @@ export default function AboutPage() {
                     CLIENT GUARANTEE
                   </span>
                   <h3 className="text-base sm:text-lg font-serif font-normal text-white leading-snug mb-2">
-                    Zero Bureaucracy, 100% Peace of Mind
+                    Contractual SLAs & 100% Statutory Compliance
                   </h3>
                   <p className="text-xs text-white/70 leading-relaxed font-sans">
-                    Every deliverable is handled by certified senior advisors
-                    aligned with UAE Federal Tax Authority mandates.
+                    Every deliverable is signed off by chartered CPAs and FTA Tax Agents
+                    strictly adhering to UAE Federal Tax Authority mandates.
                   </p>
                 </div>
                 <div className="pt-3 flex items-center gap-2 text-xs font-bold text-[#C6F850]">

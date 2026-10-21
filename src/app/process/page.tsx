@@ -101,7 +101,7 @@ const ARCHITECTURAL_BENCHMARKS = [
   {
     num: "03",
     title: "FTA Registered Team",
-    desc: " Agents",
+    desc: "Chartered CPAs & FTA Tax Agents",
   },
   {
     num: "04",
@@ -287,10 +287,24 @@ export default function ProcessPage() {
                           </p>
 
                           {/* Highlight Deliverable Banner (Ultra-fine Hairline, No Gray Box) */}
-                          <div className="py-3.5 px-4 mb-6 rounded-xl bg-[#EAF4F0]/60 border-l-4 border-[#36A783] text-sm text-[#071426] font-medium flex items-center gap-2.5">
+                          <div className="py-3.5 px-4 mb-4 rounded-xl bg-[#EAF4F0]/60 border-l-4 border-[#36A783] text-sm text-[#071426] font-medium flex items-center gap-2.5">
                             <CheckCircle2 className="w-4 h-4 text-[#36A783] shrink-0" />
                             <span>{item.deliverableHighlight}</span>
                           </div>
+
+                          {/* Step 3 Direct Portal Access Button */}
+                          {item.number === "03" && (
+                            <div className="mb-6">
+                              <Link
+                                href="/#portal"
+                                className="inline-flex items-center gap-2.5 text-xs font-mono font-bold text-[#071426] bg-[#C6F850] hover:bg-[#36A783] hover:text-white px-4 py-2.5 rounded-xl border border-[#071426]/10 shadow-xs transition-all group/btn"
+                              >
+                                <Lock className="w-3.5 h-3.5 text-[#071426] group-hover/btn:text-white" />
+                                <span>Access Digital Client Portal (AES-256 Vault)</span>
+                                <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                              </Link>
+                            </div>
+                          )}
                         </div>
 
                         {/* Three Key Execution Benchmarks (Minimalist check items) */}

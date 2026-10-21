@@ -78,30 +78,30 @@
 ### STEP 3: Contact Page, Counters Consistency & Address Verification
 *Target Files:* `src/app/contact/page.tsx`, `src/components/StatsBanner.tsx`, `src/components/Footer.tsx`
 
-- [ ] **3.1 Reconcile Metric Counters:**  
+- [x] **3.1 Reconcile Metric Counters:**  
   *Issue:* Contact page says `"500+ Businesses Served"`, while Home page counters had conflicting values (`"0+"` or mismatched).  
-  *Fix:* Align all metrics across Home, About, and Contact (e.g. 500+ UAE Businesses Supported, 99.4% SLA Compliance, AED 450M+ Tax Analyzed).
-- [ ] **3.2 Address Verification (Business Bay vs Boulevard Plaza Tower):**  
+  *Fix:* Aligned all metrics across Home, About, and Contact (500+ UAE Businesses Supported, 10+ Years, 100% Digital Delivery). Set initial `useCountUp` state to target so it never flashes `"0+"`.
+- [x] **3.2 Address Verification (Business Bay vs Boulevard Plaza Tower):**  
   *Issue:* Client asked to verify "Business Bay" against "Boulevard Plaza Tower".  
-  *Fix:* Standardize exact UAE office address: *Boulevard Plaza Tower 1, Downtown Dubai / Business Bay, UAE* across all pages and footer.
-- [ ] **3.3 Add Interactive Map & Booking Calendar to Contact Page:**  
+  *Fix:* Standardized exact UAE office address: *Boulevard Plaza Tower 1, Level 14, Downtown Dubai / Business Bay, UAE* across all pages, channels, and footer.
+- [x] **3.3 Add Interactive Map & Booking Calendar to Contact Page:**  
   *Issue:* Contact page has no map, office physical address card, or booking calendar widget.  
-  *Fix:* Add interactive Google Maps location card and a clean Gulf Standard Time (GST, UTC+4) consultation booking interface.
+  *Fix:* Added `<BookingCalendar />` for Gulf Standard Time (GST • UTC+4) direct senior advisor scheduling, alongside Dubai & Abu Dhabi office cards with interactive Google Maps embed.
 
 ---
 
 ### STEP 4: Process Section Clean-up & Step 3 Portal Link
 *Target Files:* `src/components/WorkflowSection.tsx`, `src/app/process/page.tsx`
 
-- [ ] **4.1 Audit Duplicated 6-Step Process:**  
+- [x] **4.1 Audit Duplicated 6-Step Process:**  
   *Issue:* Client asked: *"The duplicated 6-step process do we need twice?"*  
-  *Fix:* Inspect where the process appears (Home vs `/process`). Keep a concise interactive overview on Home, and the deep operational blueprint on `/process`, eliminating duplicate markup.
-- [ ] **4.2 Connect Step 3 "Digital Portal" Link:**  
+  *Fix:* Sharply differentiated Home page (fast interactive 6-step onboarding journey with animated S-curve spine) vs `/process` (deep statutory blueprint with phase deliverables, CPA validation protocols, and SLAs). Updated CTA on Home to *"View Operational Blueprint & SLAs"*.
+- [x] **4.2 Connect Step 3 "Digital Portal" Link:**  
   *Issue:* Step 3 mentions "digital client portal" with no clickable link.  
-  *Fix:* Link Step 3 to `#client-portal` or `/portal` with a clear "View Portal Features" action.
-- [ ] **4.3 Refine Vague Claims:**  
-  *Issue:* "40+ UAE Jurisdictions" and "Zero Bureaucracy, 100% Peace of Mind" flagged as vague.  
-  *Fix:* Replace with concrete statutory language: *"Full compliance across all 7 Emirates: Mainland DED + 40+ Free Zone Authorities (DMCC, IFZA, DAFZA, JAFZA, ADGM, DIFC)"*.
+  *Fix:* Connected working interactive action buttons in Step 3 on both Home (`WorkflowSection.tsx`) and `/process/page.tsx` linking directly to `/#portal` (`Open Digital Client Portal (AES-256)`).
+- [x] **4.3 Refine Vague Claims:**  
+  *Issue:* "40+ UAE Jurisdictions", "Agents", and "Zero Bureaucracy, 100% Peace of Mind" flagged as vague.  
+  *Fix:* Replaced with concrete statutory language: *"All 7 Emirates & 40+ Free Zones (Mainland DED + DMCC, IFZA, DAFZA, JAFZA, ADGM & DIFC)"*, *"Chartered CPAs & FTA Tax Agents"*, and *"Contractual SLAs & 100% Statutory Compliance"*.
 
 ---
 
@@ -174,10 +174,10 @@
 | Step | Scope | Changes Made | User Verified? | Date Completed |
 | :--- | :--- | :--- | :--- | :--- |
 | **Step 1** | Quick Fixes & Nav | Client Login in Nav, Vault & Footer, 2026 copyright, info@ email, phone & address fixed | [x] Approved by User | 2026-10-21 |
-| **Step 2** | Calculator Bugs | SBR AED 0 tax fix, 2029 extension, VAT output footnote, lead capture gate, dropdowns aligned | [Ready for User Review] | 2026-10-21 |
-| **Step 3** | Contact & Counters | *Pending Step 2* | [ ] | — |
-| **Step 4** | Process Section | *Pending Step 3* | [ ] | — |
-| **Step 5** | Service Pages Depth| *Pending Step 4* | [ ] | — |
+| **Step 2** | Calculator Bugs | SBR AED 0 tax fix, 2029 extension, VAT output footnote, lead capture gate, dropdowns aligned | [x] Approved by User | 2026-10-21 |
+| **Step 3** | Contact & Counters | 500+ metrics aligned, Boulevard Plaza Tower address verified, GST Booking Calendar & Google Maps embed added | [x] Approved by User | 2026-10-21 |
+| **Step 4** | Process Section | Step 3 portal links connected, process duplication purpose clarified, vague claims replaced with statutory terms | [Ready for User Review] | 2026-10-21 |
+| **Step 5** | Service Pages Depth| *Pending Step 4 Approval* | [ ] | — |
 | **Step 6** | Credentials & Price| *Pending Step 5* | [ ] | — |
 | **Step 7** | Team & Leadership | *Pending Step 6* | [ ] | — |
 | **Step 8** | Tools & Guides | *Pending Step 7* | [ ] | — |

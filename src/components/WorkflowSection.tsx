@@ -16,6 +16,7 @@ import {
   ArrowUpRight,
   Shield,
   Layers,
+  Lock,
 } from "lucide-react";
 import FlowText from "@/components/FlowText";
 import { PROCESS_STEPS_DATA, PROCESS_PAGE_INTRO } from "@/data/processData";
@@ -355,6 +356,20 @@ export default function WorkflowSection() {
                                 {item.deliverableHighlight}
                               </span>
                             </div>
+
+                            {/* Step 3 Portal Action Link */}
+                            {item.number === "03" && (
+                              <div className="mt-3.5 pt-2 border-t border-dashed border-slate-200">
+                                <Link
+                                  href="/#portal"
+                                  className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#216D56] hover:text-[#071426] bg-[#EAF4F0] hover:bg-[#C6F850] px-3.5 py-1.5 rounded-lg border border-[#36A783]/30 transition-all shadow-2xs group/btn"
+                                >
+                                  <Lock className="w-3.5 h-3.5 text-[#36A783]" />
+                                  <span>Open Digital Client Portal (AES-256)</span>
+                                  <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
+                                </Link>
+                              </div>
+                            )}
                           </div>
                         </div>
                       )}
@@ -543,6 +558,19 @@ export default function WorkflowSection() {
                       </p>
                     </div>
                   </div>
+
+                  {item.number === "03" && (
+                    <div className="mt-3 pt-2 border-t border-dashed border-slate-200">
+                      <Link
+                        href="/#portal"
+                        className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#216D56] bg-[#EAF4F0] px-3 py-1.5 rounded-lg border border-[#36A783]/30"
+                      >
+                        <Lock className="w-3.5 h-3.5 text-[#36A783]" />
+                        <span>Client Portal Link</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -573,13 +601,13 @@ export default function WorkflowSection() {
             />
             <span className="relative z-10 block overflow-hidden leading-tight">
               <span className="block transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">
-                Explore Our Process
+                View Operational Blueprint & SLAs
               </span>
               <span
                 className="absolute top-0 left-0 block translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 text-white"
                 aria-hidden="true"
               >
-                Explore Our Process
+                View Operational Blueprint & SLAs
               </span>
             </span>
             <span className="relative z-10 flex h-6 w-6 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/20 transition-all duration-500 group-hover:bg-white text-white group-hover:text-[#172D43]">

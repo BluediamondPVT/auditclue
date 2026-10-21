@@ -13,10 +13,10 @@ if (typeof window !== "undefined") {
 const stats = [
   {
     icon: Users,
-    countTo: 350,
+    countTo: 500,
     suffix: "+",
-    label: "Clients Served",
-    desc: "Across all 7 Emirates",
+    label: "Enterprises Supported",
+    desc: "500+ across all 7 Emirates",
   },
   {
     icon: CalendarDays,
@@ -42,7 +42,7 @@ const stats = [
 ];
 
 function useCountUp(target: number | null, duration = 1400, start = false) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(target || 0);
 
   useEffect(() => {
     if (!start || target === null) return;

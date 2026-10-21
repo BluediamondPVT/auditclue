@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FlowText from "@/components/FlowText";
 import ContactForm from "@/components/ContactForm";
+import BookingCalendar from "@/components/BookingCalendar";
 import {
   Phone,
   Mail,
@@ -17,6 +18,9 @@ import {
   MapPin,
   Building2,
   Layers,
+  Compass,
+  Navigation,
+  ExternalLink,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -203,6 +207,27 @@ export default function ContactPage() {
                         </div>
                       </div>
                     </a>
+
+                    {/* Head Office Address */}
+                    <a
+                      href="#offices"
+                      className="group flex items-start gap-4 p-4 rounded-2xl bg-white border border-[#CBD5E1]/80 hover:border-[#36A783] hover:shadow-md transition-all"
+                    >
+                      <div className="w-11 h-11 rounded-xl bg-[#EAF4F0] text-[#216D56] flex items-center justify-center shrink-0 group-hover:bg-[#36A783] group-hover:text-white transition-colors">
+                        <MapPin className="w-5 h-5" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-xs font-mono font-medium text-[#64748B] uppercase tracking-wider mb-0.5">
+                          Dubai Head Office
+                        </div>
+                        <div className="text-base font-serif font-medium text-[#071426] group-hover:text-[#216D56] transition-colors leading-snug">
+                          Boulevard Plaza Tower 1, Level 14
+                        </div>
+                        <div className="text-xs text-[#64748B] font-sans mt-0.5">
+                          Downtown Dubai / Business Bay, UAE
+                        </div>
+                      </div>
+                    </a>
                   </div>
                 </div>
 
@@ -276,7 +301,177 @@ export default function ContactPage() {
         </section>
 
         {/* ================================================================= */}
-        {/* 3. JURISDICTION COVERAGE (Editorial Specifications Bar)           */}
+        {/* 3. CALENDAR RESERVATION: Direct Senior Advisor Booking            */}
+        {/* ================================================================= */}
+        <section id="book-session" className="py-16 sm:py-20 bg-gradient-to-b from-[#F8FAFC] via-[#EDF5F1]/40 to-[#F8FAFC] border-t border-[#E2E8F0] relative overflow-hidden">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#36A783] font-bold block mb-2">
+                SCHEDULE INSTANT CONSULTATION
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#071426] mb-3">
+                Prefer a Dedicated Video or Phone Call?
+              </h2>
+              <p className="text-sm sm:text-base text-[#475569] font-sans">
+                Select your preferred date and time slot in Gulf Standard Time (GST • UTC+4). An invite with meeting credentials will be sent directly to your calendar.
+              </p>
+            </div>
+
+            <BookingCalendar />
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* 4. PHYSICAL OFFICE LOCATIONS & INTERACTIVE MAP                    */}
+        {/* ================================================================= */}
+        <section id="offices" className="py-16 sm:py-24 bg-white border-t border-[#E2E8F0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mb-12">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#36A783] font-bold block mb-2">
+                STRATEGIC PRESENCE ACROSS THE UAE
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-serif text-[#071426] mb-4">
+                Verified Office Locations & In-Person Advisory
+              </h2>
+              <p className="text-base text-[#475569]">
+                While our digital client portal enables 100% remote advisory and document submission, our senior partners are available for scheduled boardroom meetings at our UAE offices.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* Office Details Cards (5 cols) */}
+              <div className="lg:col-span-5 space-y-6">
+                
+                {/* Dubai Headquarters Card */}
+                <div className="p-6 sm:p-7 rounded-3xl bg-[#071426] text-white border border-white/10 relative overflow-hidden shadow-xl">
+                  <div className="absolute top-0 right-0 w-48 h-48 bg-[#36A783]/15 rounded-full blur-2xl pointer-events-none" />
+                  
+                  <div className="relative z-10">
+                    <div className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#83D9BE] bg-white/10 px-2.5 py-1 rounded-full mb-4">
+                      <Building2 className="w-3.5 h-3.5 text-[#36A783]" />
+                      <span>DUBAI HEADQUARTERS</span>
+                    </div>
+
+                    <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2">
+                      Boulevard Plaza Tower 1
+                    </h3>
+                    <div className="text-sm font-sans text-[#CBD5E1] mb-5">
+                      Level 14, Downtown Dubai / Business Bay<br />
+                      Opposite Burj Khalifa, Dubai, United Arab Emirates
+                    </div>
+
+                    <div className="space-y-2 text-xs font-sans text-[#94A3B8] border-t border-white/10 pt-4 mb-6">
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-[#CBD5E1]">Office Hours:</span>
+                        <span>Mon – Sat: 9:00 AM – 6:00 PM GST</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-[#CBD5E1]">Metro Access:</span>
+                        <span>Burj Khalifa / Dubai Mall Station (Red Line)</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-[#CBD5E1]">Visitor Parking:</span>
+                        <span>Dedicated basement guest parking available</span>
+                      </div>
+                    </div>
+
+                    <a
+                      href="https://maps.google.com/?q=Boulevard+Plaza+Tower+1+Downtown+Dubai"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-[#36A783] hover:bg-[#216D56] text-white text-xs font-semibold uppercase tracking-wider font-mono transition-colors shadow-md"
+                    >
+                      <Navigation className="w-3.5 h-3.5" />
+                      <span>Open in Google Maps</span>
+                      <ExternalLink className="w-3.5 h-3.5 ml-0.5" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Abu Dhabi Office Card */}
+                <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#CBD5E1]/80 shadow-md">
+                  <div className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#216D56] bg-[#EAF4F0] px-2.5 py-1 rounded-full mb-4">
+                    <Building2 className="w-3.5 h-3.5 text-[#36A783]" />
+                    <span>ABU DHABI REGIONAL HUB</span>
+                  </div>
+
+                  <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#071426] mb-2">
+                    Al Khatem Tower, ADGM Square
+                  </h3>
+                  <div className="text-sm font-sans text-[#475569] mb-5">
+                    Level 8, Abu Dhabi Global Market Square<br />
+                    Al Maryah Island, Abu Dhabi, United Arab Emirates
+                  </div>
+
+                  <div className="space-y-2 text-xs font-sans text-[#64748B] border-t border-[#E2E8F0] pt-4 mb-6">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono font-medium text-[#071426]">Office Hours:</span>
+                      <span>Mon – Fri: 9:00 AM – 5:00 PM GST</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono font-medium text-[#071426]">Practice Focus:</span>
+                      <span>ADGM SPVs, Free Zone Audit & Structuring</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono font-medium text-[#071426]">Direct Line:</span>
+                      <span>+971 54 733 8583</span>
+                    </div>
+                  </div>
+
+                  <a
+                    href="https://maps.google.com/?q=Al+Khatem+Tower+ADGM+Square+Abu+Dhabi"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-[#F8FAFC] hover:bg-[#EDF5F1] text-[#071426] hover:text-[#216D56] border border-[#CBD5E1] text-xs font-semibold uppercase tracking-wider font-mono transition-colors"
+                  >
+                    <Compass className="w-3.5 h-3.5 text-[#36A783]" />
+                    <span>Directions to ADGM Office</span>
+                    <ExternalLink className="w-3.5 h-3.5 ml-0.5" />
+                  </a>
+                </div>
+
+              </div>
+
+              {/* Interactive Google Map Embed (7 cols) */}
+              <div className="lg:col-span-7 h-full">
+                <div className="rounded-3xl overflow-hidden border border-[#CBD5E1]/80 shadow-xl bg-white p-2 h-full flex flex-col">
+                  <div className="relative w-full h-[480px] lg:h-[590px] rounded-2xl overflow-hidden bg-[#EDF2F7]">
+                    <iframe
+                      title="Auditclue Dubai Head Office Location"
+                      src="https://maps.google.com/maps?q=Boulevard%20Plaza%20Tower%201%2C%20Downtown%20Dubai%20UAE&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen={false}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="w-full h-full grayscale-[25%] contrast-[1.05]"
+                    />
+                    
+                    {/* Floating Info Pill on the Map */}
+                    <div className="absolute top-4 left-4 right-4 sm:right-auto sm:max-w-xs bg-[#071426]/95 backdrop-blur-md text-white p-3.5 rounded-xl border border-white/10 shadow-lg text-xs font-sans">
+                      <div className="flex items-center gap-2 font-mono text-[11px] font-bold text-[#83D9BE] uppercase mb-1">
+                        <MapPin className="w-3.5 h-3.5 text-[#36A783]" />
+                        <span>Boulevard Plaza Tower 1</span>
+                      </div>
+                      <p className="text-[#CBD5E1] leading-relaxed">
+                        Level 14, Downtown Dubai / Business Bay. Free visitor parking on basement levels B1 & B2.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="p-3 text-center text-xs text-[#64748B] font-mono">
+                    Official UAE Commercial Registry: Auditclue Global Advisory Services LLC
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* 5. JURISDICTION COVERAGE (Editorial Specifications Bar)           */}
         {/* ================================================================= */}
         <section className="py-14 sm:py-20 bg-white border-t border-b border-[#E2E8F0]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
