@@ -60,6 +60,9 @@ export default function TaxCalculator() {
   const [revenue, setRevenue] = useState<number>(2500000);
   const [netProfit, setNetProfit] = useState<number>(650000);
   const [hasVatRegistration, setHasVatRegistration] = useState<boolean>(true);
+  const [electSBR, setElectSBR] = useState<boolean>(true);
+  const [leadEmail, setLeadEmail] = useState<string>("");
+  const [leadSubmitted, setLeadSubmitted] = useState<boolean>(false);
 
   // Formatting helper
   const formatAED = (val: number) => {
@@ -70,7 +73,7 @@ export default function TaxCalculator() {
     }).format(Math.max(0, val));
   };
 
-  // Statutory Calculations based on UAE Corporate Tax Law (Federal Decree-Law No. 47 of 2022)
+  // Statutory Calculations based on UAE Corporate Tax Law (Federal Decree-Law No. 47 of 2022 & Decision 73 of 2023)
   const calculation = useMemo(() => {
     const safeRevenue = Math.max(0, revenue);
     const safeProfit = Math.max(0, netProfit);
@@ -83,17 +86,23 @@ export default function TaxCalculator() {
     const statutoryExemptSlice = Math.min(safeProfit, 375000);
     const taxableProfitSlice = Math.max(0, safeProfit - 375000);
 
+    // Standard 9% tax without SBR:
+    const standardCorporateTax = taxableProfitSlice * 0.09;
+    const taxSavedByExemption = statutoryExemptSlice * 0.09;
+
     let corporateTax = 0;
-    let taxSavedByExemption = 0;
+    let sbrSavings = 0;
 
     if (businessType === "freezone_qualifying") {
       // 0% on Qualifying Income for Qualifying Free Zone Person
       corporateTax = 0;
-      taxSavedByExemption = safeProfit * 0.09;
+    } else if (isEligibleForSBR && electSBR) {
+      // Small Business Relief elected: Taxable income treated as zero under Ministerial Decision No. 73 of 2023
+      corporateTax = 0;
+      sbrSavings = standardCorporateTax;
     } else {
       // Standard 9% on profit exceeding AED 375,000
-      corporateTax = taxableProfitSlice * 0.09;
-      taxSavedByExemption = statutoryExemptSlice * 0.09;
+      corporateTax = standardCorporateTax;
     }
 
     // Effective Tax Rate
@@ -101,7 +110,7 @@ export default function TaxCalculator() {
       safeProfit > 0 ? (corporateTax / safeProfit) * 100 : 0;
 
     // Potential SBR savings if elected
-    const potentialSBRSavings = isEligibleForSBR ? corporateTax : 0;
+    const potentialSBRSavings = isEligibleForSBR ? standardCorporateTax : 0;
 
     // Estimated VAT (5% on taxable revenue)
     const vatThresholdStatus =
@@ -117,16 +126,19 @@ export default function TaxCalculator() {
       safeRevenue,
       safeProfit,
       isEligibleForSBR,
+      electSBR,
       statutoryExemptSlice,
       taxableProfitSlice,
+      standardCorporateTax,
       corporateTax,
+      sbrSavings,
       effectiveTaxRate,
       potentialSBRSavings,
       taxSavedByExemption,
       vatThresholdStatus,
       estimatedVatCollection,
     };
-  }, [revenue, netProfit, businessType, hasVatRegistration]);
+  }, [revenue, netProfit, businessType, hasVatRegistration, electSBR]);
 
   // Pre-filled WhatsApp link
   const whatsAppMessage = encodeURIComponent(
@@ -141,7 +153,13 @@ export default function TaxCalculator() {
 - Gross Revenue: AED ${revenue.toLocaleString()}
 - Net Profit: AED ${netProfit.toLocaleString()}
 - Estimated Tax: ${formatAED(calculation.corporateTax)}
-- SBR Eligible: ${calculation.isEligibleForSBR ? "Yes (0% Relief)" : "No"}
+- SBR Status: ${
+      calculation.isEligibleForSBR
+        ? electSBR
+          ? "Applied (AED 0 Tax under SBR)"
+          : "Eligible but Standard 9% viewed"
+        : "Turnover > AED 3M (Standard 9%)"
+    }
 I would like to speak with a chartered tax agent regarding statutory optimization and filing.`
   );
 
@@ -443,14 +461,18 @@ I would like to speak with a chartered tax agent regarding statutory optimizatio
 
             <div className="relative z-10">
               {/* Header */}
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
                 <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-[#83D9BE] uppercase tracking-wider font-semibold">
                   <span className="w-2 h-2 rounded-full bg-[#36A783] animate-ping" />
                   ESTIMATED CORPORATE TAX
                 </span>
 
                 <span className="font-mono text-xs text-[#C6F850] bg-white/10 px-3 py-1 rounded-full border border-white/10 shadow-[inset_1px_1px_3px_rgba(0,0,0,0.6)]">
-                  Effective: {calculation.effectiveTaxRate.toFixed(1)}%
+                  {calculation.isEligibleForSBR && calculation.electSBR
+                    ? "0.0% SBR RELIEF"
+                    : businessType === "freezone_qualifying"
+                    ? "0.0% QFZP RATE"
+                    : `Effective: ${calculation.effectiveTaxRate.toFixed(1)}%`}
                 </span>
               </div>
 
@@ -460,7 +482,19 @@ I would like to speak with a chartered tax agent regarding statutory optimizatio
               </div>
 
               <div className="text-xs text-[#94A3B8] font-sans mb-6">
-                Based on UAE Corporate Tax Law standard 9% statutory rate.
+                {calculation.isEligibleForSBR && calculation.electSBR ? (
+                  <span className="text-[#83D9BE] font-medium">
+                    ✓ Small Business Relief Applied — Taxable income treated as zero (You save {formatAED(calculation.sbrSavings)}).
+                  </span>
+                ) : businessType === "freezone_qualifying" ? (
+                  <span className="text-[#83D9BE] font-medium">
+                    ✓ Qualifying Free Zone Person (QFZP) — 0% on Qualifying Income.
+                  </span>
+                ) : (
+                  <span>
+                    Based on standard UAE Corporate Tax Law 9% statutory rate on profit exceeding AED 375,000.
+                  </span>
+                )}
               </div>
 
               {/* Sunken Visual Tier Meter */}
@@ -512,11 +546,25 @@ I would like to speak with a chartered tax agent regarding statutory optimizatio
                   </span>
                 </div>
 
-                {hasVatRegistration && (
+                {calculation.isEligibleForSBR && calculation.electSBR && (
                   <div className="flex justify-between items-center text-[#CBD5E1] pt-2 border-t border-white/5">
-                    <span>Estimated 5% Annual VAT:</span>
-                    <span className="font-mono font-bold text-white bg-white/10 px-2 py-0.5 rounded-md">
-                      {formatAED(calculation.estimatedVatCollection)}
+                    <span>Small Business Relief (SBR) Saving:</span>
+                    <span className="font-mono font-bold text-[#C6F850] bg-[#C6F850]/15 px-2 py-0.5 rounded-md border border-[#C6F850]/20">
+                      +{formatAED(calculation.sbrSavings)}
+                    </span>
+                  </div>
+                )}
+
+                {hasVatRegistration && (
+                  <div className="flex flex-col gap-1 pt-2 border-t border-white/5">
+                    <div className="flex justify-between items-center text-[#CBD5E1]">
+                      <span>Estimated 5% Output VAT (on turnover):</span>
+                      <span className="font-mono font-bold text-white bg-white/10 px-2 py-0.5 rounded-md">
+                        {formatAED(calculation.estimatedVatCollection)}
+                      </span>
+                    </div>
+                    <span className="text-[10px] text-[#94A3B8] font-sans">
+                      *Output VAT on revenue. Net payable to FTA is reduced by your recoverable input tax credits.
                     </span>
                   </div>
                 )}
@@ -546,23 +594,47 @@ I would like to speak with a chartered tax agent regarding statutory optimizatio
             </div>
           </div>
 
-          {/* Small Business Relief (SBR) Status Deck */}
+          {/* Small Business Relief (SBR) Status Deck with 2029 Extension & Toggle */}
           {calculation.isEligibleForSBR ? (
-            <div className="neu-surface rounded-2xl p-5 border border-white/80 flex items-start gap-3.5">
-              <div className="w-8 h-8 rounded-full neu-pressed shrink-0 flex items-center justify-center text-[#36A783] mt-0.5">
-                <CheckCircle2 className="w-5 h-5 text-[#36A783]" />
+            <div className="neu-surface rounded-2xl p-5 border border-white/80 space-y-4">
+              <div className="flex items-start gap-3.5">
+                <div className="w-8 h-8 rounded-full neu-pressed shrink-0 flex items-center justify-center text-[#36A783] mt-0.5">
+                  <CheckCircle2 className="w-5 h-5 text-[#36A783]" />
+                </div>
+                <div className="flex-1">
+                  <div className="text-xs font-mono font-bold text-[#216D56] uppercase tracking-wider mb-1 flex items-center gap-1.5 flex-wrap">
+                    <span>SMALL BUSINESS RELIEF (SBR) ACTIVE • EXTENDED TO 2029</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#36A783] animate-pulse" />
+                  </div>
+                  <div className="text-xs text-[#334155] leading-relaxed">
+                    Your gross turnover is below <strong>AED 3,000,000</strong>. Under Ministerial Decision No. 73 of 2023, you can elect for <strong>0% Corporate Tax treatment</strong> for all tax periods through <strong>31 December 2029</strong>.
+                  </div>
+                </div>
               </div>
-              <div>
-                <div className="text-xs font-mono font-bold text-[#216D56] uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                  <span>SMALL BUSINESS RELIEF (SBR) ELIGIBLE</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#36A783] animate-pulse" />
+
+              {/* Interactive SBR Elective Toggle */}
+              <div className="neu-pressed p-3 rounded-xl flex items-center justify-between text-xs font-medium text-[#071426]">
+                <div className="flex items-center gap-2">
+                  <input
+                    id="elect-sbr-checkbox"
+                    type="checkbox"
+                    checked={electSBR}
+                    onChange={(e) => setElectSBR(e.target.checked)}
+                    className="w-4 h-4 accent-[#36A783] cursor-pointer"
+                  />
+                  <label htmlFor="elect-sbr-checkbox" className="cursor-pointer font-semibold">
+                    Elect 0% Small Business Relief (Tax Payable = AED 0)
+                  </label>
                 </div>
-                <div className="text-xs text-[#334155] leading-relaxed">
-                  Your gross turnover is below <strong>AED 3,000,000</strong>.
-                  Under Ministerial Decision No. 73 of 2023, you can elect for
-                  <strong> 0% Corporate Tax treatment</strong> for tax periods ending on or before
-                  Dec 31, 2026.
-                </div>
+                <span className="font-mono text-[11px] font-bold text-[#216D56]">
+                  {electSBR ? "0% RATE APPLIED" : "STANDARD 9% VIEW"}
+                </span>
+              </div>
+
+              {/* What Next Statutory Transition Note */}
+              <div className="p-3.5 rounded-xl bg-[#F1F5F9] border border-slate-200 text-[11px] text-[#475569] leading-relaxed">
+                <strong className="text-[#071426] block mb-1">What happens next (Post-2029 or if turnover &gt; AED 3M)?</strong>
+                Once your turnover exceeds AED 3,000,000 or after the extended SBR relief window ends (31 Dec 2029), your entity transitions smoothly into the standard UAE regime: the first AED 375,000 of net profit remains 0% tax exempt, and only net profit exceeding AED 375,000 is taxed at 9%. Auditclue prepares your books in advance to avoid unexpected tax liabilities.
               </div>
             </div>
           ) : (
@@ -572,16 +644,76 @@ I would like to speak with a chartered tax agent regarding statutory optimizatio
               </div>
               <div>
                 <div className="text-xs font-mono font-bold text-[#071426] uppercase tracking-wider mb-1">
-                  STATUTORY TAX AUDIT APPLIES
+                  STANDARD 9% CORPORATE TAX REGIME
                 </div>
                 <div className="text-xs text-[#64748B] leading-relaxed">
-                  Turnover exceeds AED 3M. Entities with revenue &gt; AED 50M
-                  or Qualifying Free Zone Persons require certified audited
-                  financial statements for FTA filing.
+                  Turnover exceeds AED 3,000,000. Your entity is taxed at 0% on the first AED 375,000 and 9% on net profit above AED 375,000. Entities with revenue &gt; AED 50M or Qualifying Free Zone Persons require certified audited financial statements.
                 </div>
               </div>
             </div>
           )}
+
+          {/* Statutory Assumptions & Email Lead Gate */}
+          <div className="neu-surface rounded-2xl p-5 border border-white/80 space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="text-xs font-mono font-bold text-[#071426] uppercase tracking-wider flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-[#36A783]" />
+                <span>STATUTORY RULES & ASSUMPTIONS</span>
+              </div>
+              <span className="text-[10px] font-mono text-[#64748B] bg-white px-2 py-0.5 rounded border border-slate-200">
+                FTA Decree-Law 47
+              </span>
+            </div>
+
+            <ul className="text-xs text-[#475569] space-y-1.5 list-disc pl-4 font-sans">
+              <li><strong>0% First Tier:</strong> First AED 375,000 of taxable net profit is 0% tax exempt.</li>
+              <li><strong>9% Standard Rate:</strong> Applies strictly to taxable profits exceeding AED 375,000.</li>
+              <li><strong>Small Business Relief:</strong> 0% tax for revenue $\le$ AED 3M (extended to 31 Dec 2029).</li>
+              <li><strong>Free Zone QFZP:</strong> 0% on Qualifying Income; 9% on mainland non-qualifying income.</li>
+            </ul>
+
+            {/* Email Lead Gate for Detailed Itemized Report */}
+            <div className="pt-3 border-t border-slate-200">
+              {!leadSubmitted ? (
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (leadEmail.trim()) {
+                      setLeadSubmitted(true);
+                    }
+                  }}
+                  className="space-y-2.5"
+                >
+                  <div className="text-xs font-semibold text-[#071426]">
+                    Unlock Detailed Statutory Deduction Report & PDF
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <input
+                      type="email"
+                      required
+                      value={leadEmail}
+                      onChange={(e) => setLeadEmail(e.target.value)}
+                      placeholder="Enter work email for full report..."
+                      className="flex-1 px-3.5 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-[#36A783]"
+                    />
+                    <button
+                      type="submit"
+                      className="px-4 py-2 bg-[#36A783] hover:bg-[#2B896B] text-white text-xs font-bold rounded-xl transition-colors cursor-pointer"
+                    >
+                      Unlock Report
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <div className="p-3 rounded-xl bg-[#EAF4F0] border border-[#36A783]/30 text-xs text-[#216D56] flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#36A783] shrink-0" />
+                  <span>
+                    Full report unlocked! An itemized compliance dossier has been sent to <strong>{leadEmail}</strong>.
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
 
         </div>
 

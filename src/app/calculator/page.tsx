@@ -17,9 +17,9 @@ import {
 
 export const metadata: Metadata = {
   title:
-    "UAE Corporate Tax & VAT Calculator 2024–2026 | Auditclue Advisory",
+    "UAE Corporate Tax & VAT Calculator (2024–2029 Statutory Rules) | Auditclue Advisory",
   description:
-    "Calculate your UAE Corporate Tax liability (9%), check Small Business Relief eligibility (up to AED 3M revenue), and estimate VAT (5%) in real time.",
+    "Calculate your UAE Corporate Tax liability (9%), check Small Business Relief eligibility (up to AED 3M revenue extended to 2029), and estimate VAT (5%) in real time.",
 };
 
 const STATUTORY_FAQS = [
@@ -31,9 +31,9 @@ const STATUTORY_FAQS = [
   },
   {
     num: "02",
-    question: "How does Small Business Relief (SBR) apply?",
+    question: "How does Small Business Relief (SBR) apply & what happens after 2029?",
     answer:
-      "Ministerial Decision No. 73 of 2023 allows resident taxable persons with gross revenue equal to or below AED 3,000,000 in a tax period to elect for Small Business Relief, treating their taxable income as zero (0% tax liability) for periods ending on or before Dec 31, 2026.",
+      "Ministerial Decision No. 73 of 2023 allows resident taxable persons with gross revenue equal to or below AED 3,000,000 in a tax period to elect for Small Business Relief, treating their taxable income as zero (0% tax liability) for tax periods ending on or before Dec 31, 2029. Post-2029, or once revenue exceeds AED 3M, businesses transition to the standard regime: 0% up to AED 375,000, and 9% on net profits exceeding AED 375,000.",
   },
   {
     num: "03",
@@ -96,7 +96,7 @@ export default function CalculatorPage() {
             <div className="max-w-4xl">
               <div className="inline-flex items-center gap-2 bg-[#EAF4F0] text-[#216D56] border border-[#36A783]/25 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-5 font-mono shadow-xs">
                 <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
-                <span>FTA STATUTORY SIMULATOR • 2024–2026</span>
+                <span>FTA STATUTORY SIMULATOR • 2024–2029 EXTENDED</span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-[#071426] tracking-tight leading-[1.1] mb-6">

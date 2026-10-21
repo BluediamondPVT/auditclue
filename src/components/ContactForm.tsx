@@ -4,15 +4,16 @@ import React, { useState } from "react";
 import { CheckCircle2, ArrowRight, Loader2, Sparkles, Send } from "lucide-react";
 
 const SERVICES_LIST = [
-  "Audit & Assurance",
+  "UAE Corporate Tax (9%)",
+  "Statutory Audit & Assurance",
+  "Business Setup & Formation",
   "Accounting & Bookkeeping",
-  "UAE VAT Services",
-  "UAE Corporate Tax",
+  "UAE VAT Services (5%)",
+  "Virtual CFO & Finance Advisory",
   "Transfer Pricing",
-  "CFO & Finance Advisory",
   "Corporate Finance",
   "Business Advisory",
-  "Compliance Services",
+  "Compliance Services (AML/ESR/UBO)",
   "Technology & Digital Finance",
   "Other / General Enquiry",
 ];

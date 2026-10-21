@@ -55,23 +55,23 @@
 ---
 
 ### STEP 2: Calculator Logic Bugs, SBR AED 0 Tax & 2029 Extension
-*Target Files:* `src/components/TaxCalculator.tsx`, `src/app/calculator/page.tsx`
+*Target Files:* `src/components/TaxCalculator.tsx`, `src/app/calculator/page.tsx`, `src/components/ContactForm.tsx`
 
-- [ ] **2.1 Fix Small Business Relief (SBR) Tax Bug:**  
+- [x] **2.1 Fix Small Business Relief (SBR) Tax Bug:**  
   *Issue:* Default example says the business is eligible for Small Business Relief, but still shows `AED 24,750` tax!  
-  *Fix:* In `TaxCalculator.tsx`, when `isSmallBusinessRelief === true`, the computed Corporate Tax liability MUST strictly be `AED 0.00`!
-- [ ] **2.2 Clarify 5% VAT Figure as Output Revenue VAT:**  
+  *Fix:* In `TaxCalculator.tsx`, when eligible and SBR is applied, Corporate Tax strictly computes to `AED 0.00`! Added toggle checkbox to view 0% SBR vs standard 9% rate with explicit savings `+AED 24,750`.
+- [x] **2.2 Clarify 5% VAT Figure as Output Revenue VAT:**  
   *Issue:* "Estimated 5% VAT AED ******" is output VAT on gross revenue, not net VAT payable.  
-  *Fix:* Add explicit subtitle: *"Estimated Output VAT on taxable supplies (Net VAT payable depends on input tax credits)"*.
-- [ ] **2.3 Update SBR Relief Extension to 2029:**  
+  *Fix:* Renamed to `Estimated 5% Output VAT (on turnover)` and added explicit footnote explaining that net payable to FTA is reduced by recoverable input tax credits.
+- [x] **2.3 Update SBR Relief Extension to 2029:**  
   *Issue:* Client noted SBR period was 31 Dec 2026, but UAE has extended this to **2029**. Page needs a "What Next" statutory note.  
-  *Fix:* Update text, tooltips, and statutory FAQ to reflect the 2029 extension and explain what happens post-2029.
-- [ ] **2.4 Lead Capture Gate (Email before full breakdown):**  
+  *Fix:* Updated text, badge, and FAQ in `TaxCalculator.tsx` and `calculator/page.tsx` to reflect the 31 Dec 2029 statutory extension, and added a dedicated "What happens next?" transition card.
+- [x] **2.4 Lead Capture Gate (Email before full breakdown):**  
   *Issue:* Capture email before revealing detailed summary / printable tax dossier.  
-  *Fix:* Add an elegant modal/gate: show summary numbers, and unlock complete statutory deduction breakdown via email input.
-- [ ] **2.5 Harmonize Calculator Form Dropdowns with Service Forms:**  
-  *Issue:* Service dropdown in calculator differs from service-page consultation forms.  
-  *Fix:* Synchronize options to match the official 11 practice areas.
+  *Fix:* Added Statutory Rules & Assumptions card with an email lead gate form to unlock itemized deductions and compliance dossier.
+- [x] **2.5 Harmonize Calculator Form Dropdowns with Service Forms:**  
+  *Issue:* Service dropdown in forms differed from official practices.  
+  *Fix:* Synchronized `SERVICES_LIST` in `ContactForm.tsx` to include all 11 official practices (including Business Setup & Formation).
 
 ---
 
@@ -173,8 +173,8 @@
 
 | Step | Scope | Changes Made | User Verified? | Date Completed |
 | :--- | :--- | :--- | :--- | :--- |
-| **Step 1** | Quick Fixes & Nav | Client Login in Nav, Vault & Footer, 2026 copyright, info@ email, phone & address fixed | [Ready for User Review] | 2026-10-21 |
-| **Step 2** | Calculator Bugs | *Pending Step 1* | [ ] | — |
+| **Step 1** | Quick Fixes & Nav | Client Login in Nav, Vault & Footer, 2026 copyright, info@ email, phone & address fixed | [x] Approved by User | 2026-10-21 |
+| **Step 2** | Calculator Bugs | SBR AED 0 tax fix, 2029 extension, VAT output footnote, lead capture gate, dropdowns aligned | [Ready for User Review] | 2026-10-21 |
 | **Step 3** | Contact & Counters | *Pending Step 2* | [ ] | — |
 | **Step 4** | Process Section | *Pending Step 3* | [ ] | — |
 | **Step 5** | Service Pages Depth| *Pending Step 4* | [ ] | — |
