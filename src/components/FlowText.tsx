@@ -79,9 +79,9 @@ export default function FlowText({
   return (
     <Element
       ref={containerRef}
-      aria-label={text}
       className={className}
     >
+      <span className="sr-only">{text}</span>
       <span aria-hidden="true">
         {words.map((word, wordIndex) => {
           const letters = Array.from(word);

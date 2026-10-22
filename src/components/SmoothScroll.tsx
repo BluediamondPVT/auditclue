@@ -22,6 +22,13 @@ export default function SmoothScroll({
     ).matches;
     if (prefersReducedMotion) return;
 
+    // Use native hardware-accelerated 120fps scrolling on touch/mobile devices
+    // to avoid main-thread touch hijacking and forced reflows during page audits
+    const isTouchMobile =
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches;
+    if (isTouchMobile) return;
+
     gsap.registerPlugin(ScrollTrigger);
 
     // Initialize Lenis with calibrated momentum:

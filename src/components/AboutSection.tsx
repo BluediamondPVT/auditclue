@@ -288,10 +288,10 @@ export default function AboutSection() {
             >
               {/* Modern Dubai Corporate Advisory in Portrait Orientation */}
               <Image
-                src="/images/about-advisory.jpg"
+                src="/images/about-advisory.webp"
                 alt="Auditclue corporate advisory and strategic financial consulting team in Dubai DIFC"
                 fill
-                sizes="(max-width: 1024px) 100vw, 480px"
+                sizes="(max-width: 640px) 92vw, 480px"
                 className="object-cover object-center transition-transform duration-700"
                 priority={false}
               />

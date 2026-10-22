@@ -213,9 +213,11 @@ export default function Navbar() {
             <Image
               src="/logo-transparent.png"
               alt="Auditclue Global Advisory Services LLC"
-              width={340}
-              height={120}
+              width={250}
+              height={75}
               priority
+              fetchPriority="high"
+              sizes="(max-width: 640px) 175px, 250px"
               className="h-auto w-43.75 object-contain sm:w-62.5"
             />
           </Link>
@@ -582,7 +584,7 @@ export default function Navbar() {
                   href={link.href}
                   onClick={closeMenu}
                   tabIndex={menuOpen ? 0 : -1}
-                  className={`flex items-center justify-between py-3.5 text-base font-medium transition-colors ${
+                  className={`flex items-center justify-between py-3.5 text-base font-medium ${
                     active
                       ? "text-brand-teal-dark font-semibold"
                       : "text-brand-navy hover:text-brand-teal-dark"

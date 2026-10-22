@@ -1,4 +1,3 @@
-import Preloader from "@/components/Preloader";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import StatsBanner from "@/components/StatsBanner";
@@ -15,9 +14,6 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <main className="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden">
-      {/* Home Page Clean Minimalist Preloader */}
-      <Preloader />
-
       {/* Navigation Header */}
       <Navbar />
 

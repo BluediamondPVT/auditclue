@@ -308,9 +308,9 @@ export default function ClientPortalSection() {
                   <ShieldCheck className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-white mb-0.5">
+                  <h3 className="text-sm font-semibold text-white mb-0.5">
                     Immutable Audit Documentation
-                  </h4>
+                  </h3>
                   <p className="text-xs text-[#A8B7C9] leading-relaxed">
                     Bank-ready IFRS financial statements and tax return receipts archived permanently with tamper-proof audit trails.
                   </p>
@@ -322,9 +322,9 @@ export default function ClientPortalSection() {
                   <Calendar className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-white mb-0.5">
+                  <h3 className="text-sm font-semibold text-white mb-0.5">
                     Automated Statutory Deadlines
-                  </h4>
+                  </h3>
                   <p className="text-xs text-[#A8B7C9] leading-relaxed">
                     Automated SMS and email reminders prior to any FTA VAT or Corporate Tax due date, eliminating penalty risks.
                   </p>
@@ -336,9 +336,9 @@ export default function ClientPortalSection() {
                   <HardDrive className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-white mb-0.5">
+                  <h3 className="text-sm font-semibold text-white mb-0.5">
                     Multi-Entity Portfolio Consolidation
-                  </h4>
+                  </h3>
                   <p className="text-xs text-[#A8B7C9] leading-relaxed">
                     Switch between Free Zone entities, mainland trading companies, and offshore holding structures within one dashboard.
                   </p>

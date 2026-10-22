@@ -30,7 +30,7 @@
   /* Typography */
   --text-primary: #233f5b;
   --text-secondary: #363636;
-  --text-muted: #718096;
+  --text-muted: #475569;
   --text-inverse: #ffffff;
 
   /* Borders and effects */
@@ -1004,7 +1004,7 @@ label {
   position: relative;
   isolation: isolate;
   background-color: #ffffff;
-  background-image: url("/images/hero-bg.png");
+  background-image: url("/images/hero-bg.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1039,7 +1039,7 @@ label {
         rgba(246, 248, 250, 0.96) 80%,
         #f6f8fa 100%
       ),
-      url("/images/hero-bg.png");
+      url("/images/hero-bg-mobile.webp");
     background-size: cover;
     background-position: 72% center;
   }
@@ -1057,7 +1057,7 @@ label {
         rgba(246, 248, 250, 0.98) 85%,
         #f6f8fa 100%
       ),
-      url("/images/hero-bg.png");
+      url("/images/hero-bg-mobile.webp");
     background-size: cover;
     background-position: 70% center;
   }

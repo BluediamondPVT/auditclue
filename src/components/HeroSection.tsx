@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useEffect, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import {
   ArrowDown,
   ArrowUpRight,
   CheckCircle2,
   LockKeyhole,
 } from "lucide-react";
-import FlowText from "@/components/FlowText";
 
 const services = [
   { value: "corporate-tax", label: "UAE Corporate Tax" },
@@ -29,25 +28,6 @@ export default function HeroSection() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
-  const [heroActive, setHeroActive] = useState(false);
-
-  useEffect(() => {
-    const triggerHero = () => {
-      setHeroActive(true);
-    };
-
-    window.addEventListener("auditclue:curtainOpen", triggerHero);
-
-    // Fallback: in case event was already fired or page accessed directly
-    const fallback = setTimeout(() => {
-      setHeroActive(true);
-    }, 1000);
-
-    return () => {
-      window.removeEventListener("auditclue:curtainOpen", triggerHero);
-      clearTimeout(fallback);
-    };
-  }, []);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -65,63 +45,24 @@ export default function HeroSection() {
       <div className="mx-auto grid max-w-355 grid-cols-1 items-center gap-8 sm:gap-12 lg:grid-cols-12 lg:gap-14 px-4 sm:px-8 lg:px-10">
         {/* Left: Editorial introduction */}
         <div className="lg:col-span-6">
-          <div
-            className={`eyebrow mb-4 sm:mb-6 text-[11px] sm:text-[13px] tracking-wider transition-opacity duration-500 ${
-              heroActive ? "hero-fade-up" : "opacity-0"
-            }`}
-            style={{ animationDelay: "0.05s" }}
-          >
+          <div className="eyebrow mb-4 sm:mb-6 text-[11px] sm:text-[13px] tracking-wider">
             <span className="h-2 w-2 rounded-full bg-brand-teal" />
             Trusted by Businesses Across UAE
           </div>
 
-          <h1
-            aria-label="Fully Digital Audit, Tax & Advisory Services for Modern Businesses"
-            className="max-w-190 text-[clamp(2rem,6.8vw,4.6rem)] font-medium leading-[1.14] sm:leading-[1.08] tracking-[-0.035em] sm:tracking-[-0.045em] text-brand-navy"
-          >
-            <span aria-hidden="true">
-              {heroActive ? (
-                <>
-                  <FlowText
-                    text="Fully Digital Audit, Tax"
-                    startDelay={0.05}
-                    charDelay={0.018}
-                  />
-                  <br />
-                  <FlowText
-                    text="& Advisory Services for Modern Businesses"
-                    startDelay={0.32}
-                    charDelay={0.018}
-                    className="text-brand-teal-dark"
-                  />
-                </>
-              ) : (
-                <span className="opacity-0">
-                  Fully Digital Audit, Tax
-                  <br />
-                  <span className="text-brand-teal-dark">
-                    & Advisory Services for Modern Businesses
-                  </span>
-                </span>
-              )}
+          <h1 className="max-w-190 text-[clamp(2rem,6.8vw,4.6rem)] font-medium leading-[1.14] sm:leading-[1.08] tracking-[-0.035em] sm:tracking-[-0.045em] text-brand-navy">
+            Fully Digital Audit, Tax
+            <br />
+            <span className="text-brand-teal-dark">
+              & Advisory Services for Modern Businesses
             </span>
           </h1>
 
-          <p
-            className={`mt-4 sm:mt-7 max-w-147.5 text-[15px] sm:text-lg leading-relaxed sm:leading-8 text-(--text-secondary) transition-opacity duration-500 ${
-              heroActive ? "hero-fade-up" : "opacity-0"
-            }`}
-            style={{ animationDelay: "0.55s" }}
-          >
+          <p className="mt-4 sm:mt-7 max-w-147.5 text-[15px] sm:text-lg leading-relaxed sm:leading-8 text-(--text-secondary)">
             Auditclue Global Advisory Services LLC provides end-to-end digital solutions for audit, accounting, UAE corporate tax, VAT, finance, compliance, and business advisory services.
           </p>
 
-          <div
-            className={`mt-6 sm:mt-8 flex flex-col gap-3 sm:flex-row sm:items-center transition-opacity duration-500 ${
-              heroActive ? "hero-fade-up" : "opacity-0"
-            }`}
-            style={{ animationDelay: "0.7s" }}
-          >
+          <div className="mt-6 sm:mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <a
               href="#consult-form"
               className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full bg-brand-teal px-7 min-h-12 sm:min-h-13 text-sm sm:text-base font-semibold text-white shadow-[0_6px_22px_rgba(54,167,131,0.28)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_12px_32px_rgba(23,45,67,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]"
@@ -190,12 +131,7 @@ export default function HeroSection() {
           </div>
 
           {/* Hand-drawn annotation: Growing Businesses Across UAE (Desktop & Tablet) */}
-          <div
-            className={`mt-6 hidden items-center gap-2 pl-4 sm:flex lg:mt-8 lg:pl-14 transition-opacity duration-500 ${
-              heroActive ? "hero-fade-up" : "opacity-0"
-            }`}
-            style={{ animationDelay: "0.85s" }}
-          >
+          <div className="mt-6 hidden items-center gap-2 pl-4 sm:flex lg:mt-8 lg:pl-14">
             <span className="font-caveat text-xl font-bold leading-tight text-[#475569] sm:text-2xl">
               Growing
               <br />
@@ -222,10 +158,7 @@ export default function HeroSection() {
         {/* Right: Consultation card */}
         <div
           id="consult-form"
-          className={`scroll-mt-20 lg:col-span-6 mt-4 lg:mt-0 transition-opacity duration-500 ${
-            heroActive ? "hero-fade-up" : "opacity-0"
-          }`}
-          style={{ animationDelay: "0.2s" }}
+          className="scroll-mt-20 lg:col-span-6 mt-4 lg:mt-0"
         >
           <div className="relative rounded-2xl border border-[var(--border-default)] bg-white p-5 sm:p-8 lg:p-9 shadow-[0_24px_80px_rgba(35,63,91,0.10)]">
             {submitted ? (

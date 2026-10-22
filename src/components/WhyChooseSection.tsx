@@ -310,9 +310,9 @@ export default function WhyChooseSection() {
                   </span>
                 </div>
 
-                <h4 className="text-lg font-serif font-medium text-white mb-2 leading-snug">
+                <h3 className="text-lg font-serif font-medium text-white mb-2 leading-snug">
                   {card3.title}
-                </h4>
+                </h3>
 
                 <p className="text-sm text-[#A8B7C9] leading-relaxed font-sans">
                   {card3.desc}
@@ -338,9 +338,9 @@ export default function WhyChooseSection() {
                   </span>
                 </div>
 
-                <h4 className="text-lg font-serif font-medium text-white mb-2 leading-snug">
+                <h3 className="text-lg font-serif font-medium text-white mb-2 leading-snug">
                   {card4.title}
-                </h4>
+                </h3>
 
                 <p className="text-sm text-[#A8B7C9] leading-relaxed font-sans">
                   {card4.desc}
@@ -366,9 +366,9 @@ export default function WhyChooseSection() {
                   </span>
                 </div>
 
-                <h4 className="text-lg font-serif font-medium text-white mb-2 leading-snug">
+                <h3 className="text-lg font-serif font-medium text-white mb-2 leading-snug">
                   {card5.title}
-                </h4>
+                </h3>
 
                 <p className="text-sm text-[#A8B7C9] leading-relaxed font-sans">
                   {card5.desc}
@@ -394,9 +394,9 @@ export default function WhyChooseSection() {
                   </span>
                 </div>
 
-                <h4 className="text-lg font-serif font-medium text-white mb-2 leading-snug">
+                <h3 className="text-lg font-serif font-medium text-white mb-2 leading-snug">
                   {card6.title}
-                </h4>
+                </h3>
 
                 <p className="text-sm text-[#A8B7C9] leading-relaxed font-sans">
                   {card6.desc}

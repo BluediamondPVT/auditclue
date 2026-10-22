@@ -150,7 +150,7 @@ export default function Footer() {
 
           {/* Column 1 — Links & Tools */}
           <div>
-            <h4 className="text-sm font-bold text-white mb-5 tracking-wide">Navigation & Tools</h4>
+            <h3 className="text-sm font-bold text-white mb-5 tracking-wide">Navigation & Tools</h3>
             <ul className="space-y-2.5 text-[14px] text-[#A8B7C9]">
               <li><Link href="/#hero" className="hover:text-white transition-colors">Home</Link></li>
               <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
@@ -166,7 +166,7 @@ export default function Footer() {
 
           {/* Column 2 — Practices */}
           <div>
-            <h4 className="text-sm font-bold text-white mb-5 tracking-wide">Practices</h4>
+            <h3 className="text-sm font-bold text-white mb-5 tracking-wide">Practices</h3>
             <ul className="space-y-3 text-[15px] text-[#A8B7C9]">
               <li><Link href="/services/corporate-tax" className="hover:text-white transition-colors">Corporate Tax (9%)</Link></li>
               <li><Link href="/services/audit-assurance" className="hover:text-white transition-colors">Statutory Audit</Link></li>
@@ -187,7 +187,7 @@ export default function Footer() {
 
             {/* Heading spanning both */}
             <div className="col-span-1 sm:col-span-2">
-              <h4 className="text-sm font-bold text-white mb-5 tracking-wide">Connect & Verify</h4>
+              <h3 className="text-sm font-bold text-white mb-5 tracking-wide">Connect & Verify</h3>
             </div>
 
             {/* Dubai Desk */}

@@ -20,7 +20,7 @@ const kumbhSans = Kumbh_Sans({
 const caveat = Caveat({
   variable: "--font-caveat",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["700"],
   display: "swap",
 });
 
