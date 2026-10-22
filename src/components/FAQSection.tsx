@@ -3,12 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Plus, Minus, HelpCircle, ArrowUpRight } from "lucide-react";
 import FlowText from "@/components/FlowText";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 const FAQS = [
   {
@@ -43,44 +38,7 @@ export default function FAQSection() {
   };
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    if (typeof window !== "undefined") {
-      const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-      if (prefersReducedMotion) return;
-    }
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      if (faqListRef.current) {
-        const items = faqListRef.current.querySelectorAll(".faq-item-row");
-        gsap.fromTo(
-          items,
-          { opacity: 0, y: 18 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.65,
-            stagger: 0.08,
-            ease: "power2.out",
-            force3D: false,
-            scrollTrigger: {
-              trigger: faqListRef.current,
-              start: "top 85%",
-              once: true,
-            },
-          }
-        );
-      }
-    }, section);
-
-    return () => {
-      ctx.revert();
-    };
+    // Zero forced reflows or blocking scroll triggers
   }, []);
 
   return (

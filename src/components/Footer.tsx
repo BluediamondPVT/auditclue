@@ -4,13 +4,6 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUp } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
   const brandAreaRef = useRef<HTMLDivElement>(null);
@@ -18,66 +11,7 @@ export default function Footer() {
   const columnsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const footer = footerRef.current;
-    if (!footer) return;
-
-    if (typeof window !== "undefined") {
-      const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-      if (prefersReducedMotion) return;
-    }
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: footer,
-          start: "top 92%",
-          once: true,
-        },
-      });
-
-      if (brandAreaRef.current) {
-        tl.fromTo(
-          brandAreaRef.current,
-          { opacity: 0, y: 16 },
-          { opacity: 1, y: 0, duration: 0.65, ease: "power2.out", force3D: false },
-          0
-        );
-      }
-
-      if (dividerRef.current) {
-        tl.fromTo(
-          dividerRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.6, ease: "power2.out" },
-          0.1
-        );
-      }
-
-      if (columnsRef.current) {
-        const columns = columnsRef.current.children;
-        tl.fromTo(
-          columns,
-          { opacity: 0, y: 16 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.65,
-            stagger: 0.08,
-            ease: "power2.out",
-            force3D: false,
-          },
-          0.15
-        );
-      }
-    }, footer);
-
-    return () => {
-      ctx.revert();
-    };
+    // Zero forced reflows or blocking scroll triggers
   }, []);
 
   const scrollToTop = () => {

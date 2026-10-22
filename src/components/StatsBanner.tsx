@@ -2,12 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Users, CalendarDays, Laptop, Zap } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 // Stats config — numeric ones get counted up, text ones display directly
 const stats = [
@@ -113,32 +107,18 @@ export default function StatsBanner() {
       }
     }
 
-    const cards = el.querySelectorAll(".stat-card-item");
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 18 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.75,
-          stagger: 0.1,
-          ease: "power2.out",
-          force3D: false,
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            once: true,
-            onEnter: () => setAnimate(true),
-          },
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setAnimate(true);
+          observer.disconnect();
         }
-      );
-    }, el);
+      },
+      { threshold: 0.15 }
+    );
 
-    return () => {
-      ctx.revert();
-    };
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   return (

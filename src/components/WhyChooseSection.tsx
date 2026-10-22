@@ -20,83 +20,13 @@ import {
 } from "lucide-react";
 import { WHY_CHOOSE_ITEMS } from "@/data/servicesData";
 import FlowText from "@/components/FlowText";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export default function WhyChooseSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    if (typeof window !== "undefined") {
-      const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-      if (prefersReducedMotion) return;
-    }
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      // 1. Header subtle entrance
-      if (headerRef.current) {
-        const headerItems =
-          headerRef.current.querySelectorAll(".why-header-item");
-        if (headerItems.length > 0) {
-          gsap.fromTo(
-            headerItems,
-            { opacity: 0, y: 20 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.75,
-              stagger: 0.1,
-              ease: "power2.out",
-              force3D: false,
-              scrollTrigger: {
-                trigger: headerRef.current,
-                start: "top 85%",
-                once: true,
-              },
-            },
-          );
-        }
-      }
-
-      // 2. Staggered Minimalist Cards Reveal
-      if (gridRef.current) {
-        const cards = gridRef.current.querySelectorAll(".awwwards-card-item");
-        gsap.fromTo(
-          cards,
-          { opacity: 0, y: 24 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.08,
-            ease: "power2.out",
-            force3D: false,
-            scrollTrigger: {
-              trigger: gridRef.current,
-              start: "top 85%",
-              once: true,
-            },
-          },
-        );
-      }
-    }, section);
-
-    return () => {
-      ctx.revert();
-    };
+    // Zero forced reflows or blocking scroll triggers
   }, []);
 
   const card1 = WHY_CHOOSE_ITEMS[0]; // Fully Digital

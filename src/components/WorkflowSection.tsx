@@ -55,82 +55,100 @@ export default function WorkflowSection() {
       if (prefersReducedMotion) return;
     }
 
-    gsap.registerPlugin(ScrollTrigger);
+    let ctx: gsap.Context | null = null;
+    let observer: IntersectionObserver | null = null;
 
-    const ctx = gsap.context(() => {
-      // 1. Desktop Curved SVG Path scroll-scrubbing animation
-      if (desktopSvgPathRef.current && journeyContainerRef.current) {
-        const path = desktopSvgPathRef.current;
-        const totalLen = path.getTotalLength();
+    const initWorkflowAnimations = () => {
+      gsap.registerPlugin(ScrollTrigger);
 
-        gsap.set(path, {
-          strokeDasharray: totalLen,
-          strokeDashoffset: totalLen,
-        });
+      ctx = gsap.context(() => {
+        // 1. Desktop Curved SVG Path scroll-scrubbing animation
+        if (desktopSvgPathRef.current && journeyContainerRef.current) {
+          const path = desktopSvgPathRef.current;
+          const totalLen = path.getTotalLength();
 
-        gsap.to(path, {
-          strokeDashoffset: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: journeyContainerRef.current,
-            start: "top 72%",
-            end: "bottom 82%",
-            scrub: 0.7,
-            onUpdate: (self) => {
-              // Calculate which of the 6 steps should be active based on progress (0 to 1)
-              const stepIdx = Math.min(5, Math.floor(self.progress * 6));
-              setActiveStepIndex(stepIdx);
-            },
-          },
-        });
-      }
+          gsap.set(path, {
+            strokeDasharray: totalLen,
+            strokeDashoffset: totalLen,
+          });
 
-      // 2. Mobile Spine SVG Path scroll-scrubbing animation
-      if (mobileSvgPathRef.current && journeyContainerRef.current) {
-        const mPath = mobileSvgPathRef.current;
-        const mTotalLen = mPath.getTotalLength();
-
-        gsap.set(mPath, {
-          strokeDasharray: mTotalLen,
-          strokeDashoffset: mTotalLen,
-        });
-
-        gsap.to(mPath, {
-          strokeDashoffset: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: journeyContainerRef.current,
-            start: "top 72%",
-            end: "bottom 82%",
-            scrub: 0.7,
-          },
-        });
-      }
-
-      // 3. Staggered reveal for each process step item
-      const stepCards = section.querySelectorAll(".workflow-card-item");
-      stepCards.forEach((card) => {
-        gsap.fromTo(
-          card,
-          { opacity: 0, y: 22 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.65,
-            ease: "power2.out",
-            force3D: false,
+          gsap.to(path, {
+            strokeDashoffset: 0,
+            ease: "none",
             scrollTrigger: {
-              trigger: card,
-              start: "top 85%",
-              once: true,
+              trigger: journeyContainerRef.current,
+              start: "top 72%",
+              end: "bottom 82%",
+              scrub: 0.7,
+              onUpdate: (self) => {
+                const stepIdx = Math.min(5, Math.floor(self.progress * 6));
+                setActiveStepIndex(stepIdx);
+              },
             },
-          },
-        );
-      });
-    }, section);
+          });
+        }
+
+        // 2. Mobile Spine SVG Path scroll-scrubbing animation
+        if (mobileSvgPathRef.current && journeyContainerRef.current) {
+          const mPath = mobileSvgPathRef.current;
+          const mTotalLen = mPath.getTotalLength();
+
+          gsap.set(mPath, {
+            strokeDasharray: mTotalLen,
+            strokeDashoffset: mTotalLen,
+          });
+
+          gsap.to(mPath, {
+            strokeDashoffset: 0,
+            ease: "none",
+            scrollTrigger: {
+              trigger: journeyContainerRef.current,
+              start: "top 72%",
+              end: "bottom 82%",
+              scrub: 0.7,
+            },
+          });
+        }
+
+        // 3. Staggered reveal for each process step item
+        const stepCards = section.querySelectorAll(".workflow-card-item");
+        stepCards.forEach((card) => {
+          gsap.fromTo(
+            card,
+            { opacity: 0, y: 22 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.65,
+              ease: "power2.out",
+              force3D: false,
+              scrollTrigger: {
+                trigger: card,
+                start: "top 85%",
+                once: true,
+              },
+            },
+          );
+        });
+      }, section);
+    };
+
+    observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          initWorkflowAnimations();
+          observer?.disconnect();
+          observer = null;
+        }
+      },
+      { rootMargin: "300px" }
+    );
+
+    observer.observe(section);
 
     return () => {
-      ctx.revert();
+      observer?.disconnect();
+      ctx?.revert();
     };
   }, []);
 

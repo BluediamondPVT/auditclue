@@ -5,125 +5,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Star } from "lucide-react";
 import FlowText from "@/components/FlowText";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = React.useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
-    if (typeof window !== "undefined") {
-      const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-      if (prefersReducedMotion) return;
-    }
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      // 1. Restrained content reveal: Paragraphs, Benefit Cards, and CTA
-      if (contentRef.current) {
-        const revealItems = contentRef.current.querySelectorAll(
-          ".about-reveal-item",
-        );
-        if (revealItems.length > 0) {
-          gsap.fromTo(
-            revealItems,
-            { opacity: 0, y: 20 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.75,
-              stagger: 0.1,
-              ease: "power2.out",
-              force3D: false,
-              scrollTrigger: {
-                trigger: contentRef.current,
-                start: "top 85%",
-                once: true,
-              },
-            },
-          );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
         }
-      }
+      },
+      { threshold: 0.1 }
+    );
 
-      // 2. Tasteful overflow-hidden image reveal with subtle scale easing
-      if (imageWrapperRef.current) {
-        const wrapper = imageWrapperRef.current;
-        const img = wrapper.querySelector("img");
-
-        gsap.fromTo(
-          wrapper,
-          { opacity: 0, y: 24 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.85,
-            ease: "power2.out",
-            force3D: false,
-            scrollTrigger: {
-              trigger: wrapper,
-              start: "top 85%",
-              once: true,
-            },
-          },
-        );
-
-        if (img) {
-          gsap.fromTo(
-            img,
-            { scale: 1.06 },
-            {
-              scale: 1,
-              duration: 1.1,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: wrapper,
-                start: "top 85%",
-                once: true,
-              },
-            },
-          );
-        }
-      }
-
-      // 3. Bottom Proof Points Staggered Reveal
-      const proofRow = section.querySelector(".about-proof-points");
-      if (proofRow) {
-        const points = proofRow.querySelectorAll(".proof-point-item");
-        gsap.fromTo(
-          points,
-          { opacity: 0, y: 18 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.75,
-            stagger: 0.1,
-            ease: "power2.out",
-            force3D: false,
-            scrollTrigger: {
-              trigger: proofRow,
-              start: "top 90%",
-              once: true,
-            },
-          },
-        );
-      }
-    }, section);
-
-    return () => {
-      ctx.revert();
-    };
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
   const highlights = [
@@ -284,7 +187,9 @@ export default function AboutSection() {
           <div className="lg:col-span-6 w-full flex justify-center lg:justify-end">
             <div
               ref={imageWrapperRef}
-              className="relative w-full max-w-[480px] aspect-[3/4] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(35,63,91,0.12)] border border-slate-200/80 bg-slate-100"
+              className={`relative w-full max-w-[480px] aspect-[3/4] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(35,63,91,0.12)] border border-slate-200/80 bg-slate-100 transition-all duration-700 ease-out ${
+                inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
             >
               {/* Modern Dubai Corporate Advisory in Portrait Orientation */}
               <Image

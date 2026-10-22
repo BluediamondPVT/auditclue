@@ -19,98 +19,13 @@ import {
   Users,
 } from "lucide-react";
 import FlowText from "@/components/FlowText";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export default function ClientPortalSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const mockupRef = useRef<HTMLDivElement>(null);
   const copyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    if (typeof window !== "undefined") {
-      const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-      if (prefersReducedMotion) return;
-    }
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      // Coordinated entrance for Client Portal section
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 85%",
-          once: true,
-        },
-      });
-
-      // Right column narrative items
-      if (copyRef.current) {
-        const narrativeItems = copyRef.current.querySelectorAll(".portal-narrative-item");
-        if (narrativeItems.length > 0) {
-          tl.fromTo(
-            narrativeItems,
-            { opacity: 0, y: 18 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.75,
-              stagger: 0.09,
-              ease: "power2.out",
-              force3D: false,
-            },
-            0
-          );
-        }
-      }
-
-      // Left column digital console frame
-      if (mockupRef.current) {
-        tl.fromTo(
-          mockupRef.current,
-          { opacity: 0, y: 24 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power2.out",
-            force3D: false,
-          },
-          0.05
-        );
-
-        const widgets = mockupRef.current.querySelectorAll(".portal-widget");
-        if (widgets.length > 0) {
-          tl.fromTo(
-            widgets,
-            { opacity: 0, y: 16 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.65,
-              stagger: 0.1,
-              ease: "power2.out",
-              force3D: false,
-            },
-            0.2
-          );
-        }
-      }
-    }, section);
-
-    return () => {
-      ctx.revert();
-    };
+    // Zero forced reflows or blocking scroll triggers
   }, []);
 
   return (
