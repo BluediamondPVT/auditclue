@@ -91,9 +91,9 @@ export default function Footer() {
               <li><Link href="/process" className="hover:text-white transition-colors">Our Process</Link></li>
               <li><Link href="/compliance-calendar" className="text-[#83D9BE] hover:text-white font-medium transition-colors inline-flex items-center gap-1.5">Compliance Calendar 2026/27</Link></li>
               <li><Link href="/freezone-vs-mainland" className="text-[#83D9BE] hover:text-white font-medium transition-colors inline-flex items-center gap-1.5">Mainland vs Free Zone Guide</Link></li>
-              <li><Link href="/calculator" className="hover:text-white transition-colors">Tax & SBR Calculator</Link></li>
               <li><Link href="/#consult-form" className="hover:text-white transition-colors">Book a Consultation</Link></li>
-              <li><Link href="/#portal" className="hover:text-white transition-colors">Client Portal Login</Link></li>
+              <li><a href="https://google.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a></li>
+              <li><a href="https://google.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Employee Portal</a></li>
               <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>

@@ -27,14 +27,25 @@ interface NavLinkItem {
   name: string;
   href: string;
   dropdown?: boolean;
+  dropdownType?: "services" | "knowledge";
   badge?: string;
 }
 
 const navLinks: NavLinkItem[] = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Services", href: "/#services", dropdown: true },
-  { name: "Tax Calculator", href: "/calculator" },
+  {
+    name: "Services",
+    href: "/#services",
+    dropdown: true,
+    dropdownType: "services",
+  },
+  {
+    name: "Knowledge Hub",
+    href: "/#knowledge-hub",
+    dropdown: true,
+    dropdownType: "knowledge",
+  },
   { name: "Process", href: "/process" },
   { name: "Contact", href: "/contact" },
 ];
@@ -48,7 +59,7 @@ const MEGA_SERVICES_COL_1 = [
     icon: Building2,
   },
   {
-    title: "UAE Corporate Tax (9%)",
+    title: "UAE Corporate Tax",
     href: "/services/corporate-tax",
     svcs: "16 Svcs",
     desc: "Small Business Relief, QFZP 0% & FTA filing",
@@ -62,7 +73,7 @@ const MEGA_SERVICES_COL_1 = [
     icon: ShieldCheck,
   },
   {
-    title: "UAE VAT Services (5%)",
+    title: "UAE VAT Services",
     href: "/services/vat-services",
     svcs: "15 Svcs",
     desc: "Registrations, return filing & refund claims",
@@ -92,7 +103,6 @@ const MEGA_SERVICES_COL_2 = [
     desc: "Arm's length policy, Local & Master file",
     icon: Repeat,
   },
-
   {
     title: "Corporate Finance",
     href: "/services/corporate-finance",
@@ -121,29 +131,22 @@ const MEGA_SERVICES_COL_2 = [
     desc: "Zoho, QuickBooks, Xero & e-invoicing Peppol",
     icon: Cpu,
   },
+];
+
+const KNOWLEDGE_HUB_ITEMS = [
   {
     title: "Compliance Calendar",
     href: "/compliance-calendar",
-    svcs: "2026/27",
+    badge: "2026/27",
     desc: "CT, VAT, ESR & Free Zone statutory deadlines",
     icon: Calendar,
-    highlight: true,
   },
   {
     title: "Mainland vs Free Zone",
     href: "/freezone-vs-mainland",
-    svcs: "Guide",
+    badge: "Guide",
     desc: "10-point statutory comparison & decision tool",
     icon: Compass,
-    highlight: true,
-  },
-  {
-    title: "UAE Tax Calculator",
-    href: "/calculator",
-    svcs: "Interactive",
-    desc: "Simulate corporate tax & VAT liability in seconds",
-    icon: Sparkles,
-    highlight: true,
   },
 ];
 
@@ -151,6 +154,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileKnowledgeOpen, setMobileKnowledgeOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
 
@@ -193,6 +197,7 @@ export default function Navbar() {
   const closeMenu = () => {
     setMenuOpen(false);
     setMobileServicesOpen(false);
+    setMobileKnowledgeOpen(false);
   };
 
   return (
@@ -256,8 +261,8 @@ export default function Navbar() {
                     )}
                   </Link>
 
-                  {/* STUDIO-GRADE BESPOKE MEGA-DROPDOWN ON HOVER */}
-                  {link.dropdown && (
+                  {/* DROPDOWN MENUS ON HOVER */}
+                  {link.dropdown && link.dropdownType === "services" && (
                     <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto z-50 before:content-[''] before:absolute before:-top-3 before:inset-x-0 before:h-4">
                       <div className="w-195 max-w-[95vw] rounded-3xl bg-white p-5 shadow-2xl border border-slate-200/90 backdrop-blur-2xl text-[#071426]">
                         {/* Two Columns Grid 50% - 50% */}
@@ -300,24 +305,13 @@ export default function Navbar() {
                             <div className="space-y-1">
                               {MEGA_SERVICES_COL_2.map((item, idx) => {
                                 const Icon = item.icon;
-                                const isCalc = item.highlight;
                                 return (
                                   <Link
                                     key={idx}
                                     href={item.href}
-                                    className={`group/item flex items-start gap-2.5 p-2 rounded-xl transition-all ${
-                                      isCalc
-                                        ? "bg-linear-to-r from-[#EAF4F0] to-[#F1F6F4] border border-[#36A783]/20 hover:border-[#36A783]"
-                                        : "hover:bg-[#F8FAFC] border border-transparent hover:border-slate-200"
-                                    }`}
+                                    className="group/item flex items-start gap-2.5 p-2 rounded-xl hover:bg-[#F8FAFC] border border-transparent hover:border-slate-200 transition-all"
                                   >
-                                    <div
-                                      className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors mt-0.5 ${
-                                        isCalc
-                                          ? "bg-[#36A783] text-white"
-                                          : "bg-[#EAF4F0] text-[#216D56] group-hover/item:bg-[#36A783] group-hover/item:text-white"
-                                      }`}
-                                    >
+                                    <div className="w-8 h-8 rounded-lg bg-[#EAF4F0] text-[#216D56] flex items-center justify-center shrink-0 group-hover/item:bg-[#36A783] group-hover/item:text-white transition-colors mt-0.5">
                                       <Icon className="w-4 h-4" />
                                     </div>
                                     <div className="min-w-0 flex-1">
@@ -325,13 +319,7 @@ export default function Navbar() {
                                         <span className="text-xs font-bold text-[#071426] group-hover/item:text-[#216D56] transition-colors truncate">
                                           {item.title}
                                         </span>
-                                        <span
-                                          className={`text-[9px] font-mono font-bold px-1.5 py-0.2 rounded ${
-                                            isCalc
-                                              ? "bg-[#C6F850] text-[#071426]"
-                                              : "text-[#36A783] bg-[#EAF4F0]"
-                                          }`}
-                                        >
+                                        <span className="text-[9px] font-mono font-bold text-[#36A783] bg-[#EAF4F0] px-1.5 py-0.2 rounded">
                                           {item.svcs}
                                         </span>
                                       </div>
@@ -348,21 +336,148 @@ export default function Navbar() {
                       </div>
                     </div>
                   )}
+
+                  {/* KNOWLEDGE HUB DEDICATED DROPDOWN */}
+                  {link.dropdown && link.dropdownType === "knowledge" && (
+                    <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto z-50 before:content-[''] before:absolute before:-top-3 before:inset-x-0 before:h-4">
+                      <div className="w-96 rounded-2xl bg-white p-3.5 shadow-2xl border border-slate-200/90 backdrop-blur-2xl text-[#071426]">
+                        {/* Header Banner */}
+                        {/* <div className="px-3.5 py-2 mb-2 rounded-xl bg-gradient-to-r from-[#EAF4F0] to-[#F1F6F4] border border-[#36A783]/20 flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
+                            <span className="text-[11px] font-mono font-bold tracking-wider uppercase text-[#216D56]">
+                              Knowledge Hub
+                            </span>
+                          </div>
+                          <span className="text-[10px] text-[#64748B] font-medium">UAE Statutory Guides</span>
+                        </div> */}
+
+                        {/* List Items */}
+                        <div className="space-y-1.5">
+                          {KNOWLEDGE_HUB_ITEMS.map((item, idx) => {
+                            const Icon = item.icon;
+                            return (
+                              <Link
+                                key={idx}
+                                href={item.href}
+                                className="group/item flex items-start gap-3 p-2.5 rounded-xl bg-[#F8FAFC]/70 hover:bg-[#EAF4F0]/70 border border-slate-200/80 hover:border-[#36A783]/50 transition-all shadow-xs"
+                              >
+                                <div className="w-8 h-8 rounded-full bg-[#36A783] text-white flex items-center justify-center shrink-0 shadow-xs mt-0.5">
+                                  <Icon className="w-4 h-4" />
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-xs font-bold text-[#071426] group-hover/item:text-[#216D56] transition-colors">
+                                      {item.title}
+                                    </span>
+                                    <span className="text-[9px] font-mono font-bold bg-[#C6F850] text-[#071426] px-1.5 py-0.2 rounded-full">
+                                      {item.badge}
+                                    </span>
+                                  </div>
+                                  <p className="text-[11px] text-[#64748B] leading-snug mt-0.5">
+                                    {item.desc}
+                                  </p>
+                                </div>
+                                <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover/item:text-[#36A783] transition-colors mt-1" />
+                              </Link>
+                            );
+                          })}
+                        </div>
+
+                        {/* Footer */}
+                        <div className="mt-2.5 pt-2 border-t border-slate-100 px-2.5 flex items-center justify-between text-[11px] text-[#64748B]">
+                          <span>Official FTA & statutory aligned</span>
+                          <span className="text-[#216D56] font-semibold text-[10px] font-mono uppercase tracking-wider">
+                            FY 2026/27
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })}
           </nav>
 
-          {/* Primary CTA & Client Login (Desktop Only) */}
+          {/* Primary CTA & Portal Login (Desktop Only) */}
           <div className="hidden lg:flex items-center gap-2.5">
-            {/* Client Portal Login */}
-            <Link
-              href="/#portal"
-              className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold text-[#233F5B] hover:text-[#36A783] rounded-full border border-slate-200 hover:border-[#36A783]/40 bg-white/80 hover:bg-[#EAF4F0]/60 transition-all shadow-xs"
-            >
-              <Lock className="w-3.5 h-3.5 text-[#36A783]" />
-              <span>Client Login</span>
-            </Link>
+            {/* Portal Login Dropdown */}
+            <div className="relative group">
+              <button
+                type="button"
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold text-[#233F5B] hover:text-[#36A783] rounded-full border border-slate-200 hover:border-[#36A783]/40 bg-white/80 hover:bg-[#EAF4F0]/60 transition-all shadow-xs cursor-pointer"
+                aria-haspopup="true"
+              >
+                <Lock className="w-3.5 h-3.5 text-[#36A783]" />
+                <span>Portal Login</span>
+                <ChevronDown
+                  size={13}
+                  strokeWidth={2}
+                  className="transition-transform duration-200 group-hover:rotate-180 text-slate-400 group-hover:text-[#36A783]"
+                  aria-hidden="true"
+                />
+              </button>
+
+              {/* Portal Hover Dropdown Menu */}
+              <div className="absolute right-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto z-50 before:content-[''] before:absolute before:-top-3 before:inset-x-0 before:h-4">
+                <div className="w-64 rounded-2xl bg-white p-2.5 shadow-2xl border border-slate-200/90 backdrop-blur-2xl text-[#071426]">
+                  {/* <div className="px-2.5 py-1.5 mb-1 border-b border-slate-100 flex items-center justify-between">
+                    <span className="text-[10px] font-mono font-bold tracking-wider uppercase text-[#64748B]">
+                      Secure Portals
+                    </span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#36A783]" />
+                  </div> */}
+
+                  <div className="space-y-1">
+                    {/* Client Portal */}
+                    <a
+                      href="https://google.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group/item flex items-center justify-between p-2.5 rounded-xl hover:bg-[#EAF4F0]/70 border border-transparent hover:border-[#36A783]/30 transition-all"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-lg bg-[#EAF4F0] text-[#216D56] flex items-center justify-center shrink-0 group-hover/item:bg-[#36A783] group-hover/item:text-white transition-colors">
+                          <Lock className="w-3.5 h-3.5" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-[#071426] group-hover/item:text-[#216D56] transition-colors">
+                            Client Portal
+                          </p>
+                          <p className="text-[10px] text-[#64748B]">
+                            Access documents & audits
+                          </p>
+                        </div>
+                      </div>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover/item:text-[#36A783] transition-colors" />
+                    </a>
+
+                    {/* Employee Portal */}
+                    <a
+                      href="https://google.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group/item flex items-center justify-between p-2.5 rounded-xl hover:bg-[#EAF4F0]/70 border border-transparent hover:border-[#36A783]/30 transition-all"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-lg bg-[#EAF4F0] text-[#216D56] flex items-center justify-center shrink-0 group-hover/item:bg-[#36A783] group-hover/item:text-white transition-colors">
+                          <Briefcase className="w-3.5 h-3.5" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-[#071426] group-hover/item:text-[#216D56] transition-colors">
+                            Employee Portal
+                          </p>
+                          <p className="text-[10px] text-[#64748B]">
+                            Staff workspace & tools
+                          </p>
+                        </div>
+                      </div>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover/item:text-[#36A783] transition-colors" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             {/* Book a Consultation */}
             <Link
@@ -465,27 +580,38 @@ export default function Navbar() {
 
           <div className="flex flex-col divide-y divide-slate-100">
             {navLinks.map((link) => {
-              const active = isActive(link.href);
-
-              // If link has dropdown, render expandable mobile submenu
+              const active = isActive(link.href); // If link has dropdown, render expandable mobile submenu
               if (link.dropdown) {
+                const isServices = link.dropdownType === "services";
+                const isOpen = isServices
+                  ? mobileServicesOpen
+                  : mobileKnowledgeOpen;
+                const toggleDropdown = () => {
+                  if (isServices) {
+                    setMobileServicesOpen(!mobileServicesOpen);
+                  } else {
+                    setMobileKnowledgeOpen(!mobileKnowledgeOpen);
+                  }
+                };
+
                 return (
                   <div key={link.name} className="py-3">
                     <button
                       type="button"
-                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                      onClick={toggleDropdown}
                       className="w-full flex items-center justify-between text-base font-semibold text-[#071426] py-1 cursor-pointer"
                     >
                       <span>{link.name}</span>
                       <ChevronDown
                         size={18}
                         className={`text-[#216D56] transition-transform duration-200 ${
-                          mobileServicesOpen ? "rotate-180" : ""
+                          isOpen ? "rotate-180" : ""
                         }`}
                       />
                     </button>
 
-                    {mobileServicesOpen && (
+                    {/* Services Accordion */}
+                    {isOpen && isServices && (
                       <div className="mt-2 pl-3 space-y-2 border-l-2 border-[#36A783] py-2 bg-slate-50 rounded-r-xl">
                         <Link
                           href="/services/business-setup"
@@ -573,6 +699,35 @@ export default function Navbar() {
                         </Link>
                       </div>
                     )}
+
+                    {/* Knowledge Hub Accordion */}
+                    {isOpen && !isServices && (
+                      <div className="mt-2 pl-3 space-y-2.5 border-l-2 border-[#36A783] py-2 bg-slate-50 rounded-r-xl pr-2">
+                        {KNOWLEDGE_HUB_ITEMS.map((item, idx) => {
+                          const Icon = item.icon;
+                          return (
+                            <Link
+                              key={idx}
+                              href={item.href}
+                              onClick={closeMenu}
+                              className="group/km flex items-center justify-between text-xs font-semibold text-[#071426] hover:text-[#216D56] py-1"
+                            >
+                              <div className="flex items-center gap-2">
+                                <div className="w-6 h-6 rounded-full bg-[#36A783] text-white flex items-center justify-center shrink-0">
+                                  <Icon className="w-3.5 h-3.5" />
+                                </div>
+                                <span className="group-hover/km:text-[#216D56] transition-colors">
+                                  {item.title}
+                                </span>
+                              </div>
+                              <span className="text-[9px] font-mono font-bold bg-[#C6F850] text-[#071426] px-1.5 py-0.2 rounded-full">
+                                {item.badge}
+                              </span>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                 );
               }
@@ -605,15 +760,30 @@ export default function Navbar() {
           </div>
 
           <div className="mt-6 flex flex-col gap-2.5">
-            <Link
-              href="/#portal"
-              onClick={closeMenu}
-              tabIndex={menuOpen ? 0 : -1}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-slate-200 bg-white py-3 text-sm font-semibold text-[#233F5B] hover:text-[#36A783] hover:bg-[#EAF4F0]/60 transition-all shadow-xs"
-            >
-              <Lock className="w-4 h-4 text-[#36A783]" />
-              <span>Client Portal Login</span>
-            </Link>
+            <div className="grid grid-cols-2 gap-2">
+              <a
+                href="https://google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                tabIndex={menuOpen ? 0 : -1}
+                className="inline-flex items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white py-2.5 text-xs font-semibold text-[#233F5B] hover:text-[#36A783] hover:bg-[#EAF4F0]/60 transition-all shadow-xs"
+              >
+                <Lock className="w-3.5 h-3.5 text-[#36A783]" />
+                <span>Client Portal</span>
+              </a>
+              <a
+                href="https://google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                tabIndex={menuOpen ? 0 : -1}
+                className="inline-flex items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white py-2.5 text-xs font-semibold text-[#233F5B] hover:text-[#36A783] hover:bg-[#EAF4F0]/60 transition-all shadow-xs"
+              >
+                <Briefcase className="w-3.5 h-3.5 text-[#36A783]" />
+                <span>Employee Portal</span>
+              </a>
+            </div>
 
             <Link
               href="/contact"
