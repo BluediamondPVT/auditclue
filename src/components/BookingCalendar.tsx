@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Calendar as CalendarIcon,
   Clock,
@@ -21,9 +21,24 @@ const TIME_SLOTS = [
   "05:30 PM GST",
 ];
 
-// Helper to generate next 5 business days
-function getNextBusinessDays() {
-  const days = [];
+interface BusinessDay {
+  dayName: string;
+  dateStr: string;
+  fullDate: string;
+}
+
+const DEFAULT_DAYS: BusinessDay[] = [
+  { dayName: "Mon", dateStr: "Next Day", fullDate: "Next Business Day" },
+  { dayName: "Tue", dateStr: "Day 2", fullDate: "Day 2" },
+  { dayName: "Wed", dateStr: "Day 3", fullDate: "Day 3" },
+  { dayName: "Thu", dateStr: "Day 4", fullDate: "Day 4" },
+  { dayName: "Fri", dateStr: "Day 5", fullDate: "Day 5" },
+];
+
+// Helper to generate next 5 business days on the client
+function getNextBusinessDays(): BusinessDay[] {
+  if (typeof window === "undefined") return DEFAULT_DAYS;
+  const days: BusinessDay[] = [];
   const now = new Date();
   let added = 0;
   let offset = 1;
@@ -52,7 +67,7 @@ function getNextBusinessDays() {
 }
 
 export default function BookingCalendar() {
-  const businessDays = getNextBusinessDays();
+  const [businessDays, setBusinessDays] = useState<BusinessDay[]>(DEFAULT_DAYS);
   const [selectedDayIndex, setSelectedDayIndex] = useState(0);
   const [selectedSlot, setSelectedSlot] = useState(TIME_SLOTS[1]);
   const [meetingType, setMeetingType] = useState<"video" | "phone">("video");
@@ -62,7 +77,11 @@ export default function BookingCalendar() {
   const [serviceNeeded, setServiceNeeded] = useState("UAE Corporate Tax & Advisory");
   const [isBooked, setIsBooked] = useState(false);
 
-  const selectedDate = businessDays[selectedDayIndex];
+  useEffect(() => {
+    setBusinessDays(getNextBusinessDays());
+  }, []);
+
+  const selectedDate = businessDays[selectedDayIndex] || DEFAULT_DAYS[0];
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();

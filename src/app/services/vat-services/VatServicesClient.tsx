@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -13,25 +13,306 @@ import {
   ArrowRight,
   ArrowUpRight,
   CheckCircle2,
-  Sparkles,
+  AlertTriangle,
+  FileText,
+  Clock,
+  ShieldCheck,
+  Scale,
+  HelpCircle,
+  ChevronDown,
+  ChevronUp,
+  Layers,
+  Building2,
+  Calendar,
+  Lock,
 } from "lucide-react";
 
-const VAT_SERVICES_LIST = [
-  "VAT Registration",
-  "VAT Deregistration",
-  "VAT Return Filing",
-  "VAT Health Check",
-  "VAT Refund Assistance",
-  "VAT Voluntary Disclosure",
-  "VAT Reconsideration Support",
-  "VAT Group Advisory",
-  "VAT Compliance Review",
-  "VAT Audit Support",
-  "VAT Penalty Review",
-  "VAT Transaction Advisory",
-  "Designated Zone VAT Advisory",
-  "Import / Export VAT Advisory",
-  "VAT Accounting Review",
+// =========================================================================
+// 1. VAT PRACTICE SCOPE & 15 DEEP DELIVERABLES
+// =========================================================================
+const VAT_DETAILED_SERVICES = [
+  {
+    num: "01",
+    title: "VAT Registration & TRN Acquisition",
+    scope:
+      "Full diagnostic of past 12-month and projected 30-day turnover. We prepare the complete EmaraTax dossier, liaise directly with the Federal Tax Authority, and secure your Tax Registration Number (TRN).",
+    deliverable: "Official FTA TRN Certificate & EmaraTax Portal Provisioning",
+    turnaround: "3–5 Business Days",
+  },
+  {
+    num: "02",
+    title: "VAT Return Preparation & Filing (Form 201)",
+    scope:
+      "Comprehensive reconciliation of standard-rated, zero-rated, and exempt supplies. We compute eligible input tax recovery, cross-validate reverse charge liabilities, and handle the formal quarterly/monthly filing.",
+    deliverable: "Reconciled Tax Dossier & Official FTA Form 201 Submission Receipt",
+    turnaround: "Guaranteed Ahead of 28th Deadline",
+  },
+  {
+    num: "03",
+    title: "VAT Health Check & Diagnostic Audit",
+    scope:
+      "Deep forensic audit of your historical VAT filings, sales invoices, tax credit notes, and purchase ledgers. We pinpoint compliance blind spots, misclassified supplies, and unrecovered input VAT credits.",
+    deliverable: "Executive Diagnostic Report with Remediation Roadmap & Exposure Matrix",
+    turnaround: "5–7 Business Days",
+  },
+  {
+    num: "04",
+    title: "VAT Deregistration & Clearance Advisory",
+    scope:
+      "For entities liquidating, restructuring, or whose taxable turnover has fallen below the statutory AED 187,500 threshold. We ensure timely deregistration within 20 business days to avoid punitive AED 10,000 fines.",
+    deliverable: "FTA Final Clearance Letter & Formal TRN Deregistration Approval",
+    turnaround: "Within Statutory Window",
+  },
+  {
+    num: "05",
+    title: "VAT Refund Claims & Input Recovery",
+    scope:
+      "Specialized representation for entities in credit positions (e.g. exporters, capital investors). We build an audit-proof paper trail of supplier invoices and customs declarations to expedite cash refunds from the FTA.",
+    deliverable: "Audit-Ready Refund Application Dossier & Direct FTA Claims Follow-up",
+    turnaround: "Expedited Processing",
+  },
+  {
+    num: "06",
+    title: "Voluntary Disclosure Submissions (Form 211)",
+    scope:
+      "Strategic remediation when an inadvertent error exceeds AED 10,000 in tax payable. We calculate exact retroactive liabilities and submit Form 211 proactively to mitigate heavy percentage-based penalties.",
+    deliverable: "Form 211 Voluntary Disclosure Pack & Penalty Minimization Brief",
+    turnaround: "Urgent Priority (24–48h)",
+  },
+  {
+    num: "07",
+    title: "FTA Penalty Reconsideration & Appeals",
+    scope:
+      "Drafting robust legal reconsiderations under Article 27 of the Tax Procedures Law against erroneous administrative penalties, late registration charges, or contested audit assessments.",
+    deliverable: "Formal Legal Defense Memorandum to FTA Reconsideration Committee",
+    turnaround: "Within 40-Day Appeal Window",
+  },
+  {
+    num: "08",
+    title: "VAT Tax Grouping Formation & Restructuring",
+    scope:
+      "Structuring economically, financially, and organizationally linked UAE entities under a single Tax Group. Eliminates VAT on intercompany recharges and streamlines compliance into a single consolidated return.",
+    deliverable: "Tax Group Eligibility Audit & Consolidated TRN Group Registration",
+    turnaround: "7–10 Business Days",
+  },
+  {
+    num: "09",
+    title: "Tax Invoice & POS System Compliance Audit",
+    scope:
+      "Technical review of your accounting software (Xero, Zoho, QuickBooks, SAP, NetSuite) and billing templates to guarantee compliance with Article 59 criteria (TRN display, sequential numbering, AED exchange rates).",
+    deliverable: "Invoicing Compliance Sign-Off & ERP Tax Matrix Mapping",
+    turnaround: "3 Business Days",
+  },
+  {
+    num: "10",
+    title: "Designated Zone & Free Zone VAT Advisory",
+    scope:
+      "Complex determination of Qualifying vs Non-Qualifying Designated Zones (e.g. JAFZA, DAFZA, KIZAD). We structure cross-border cargo transit, high-sea sales, and local consumption to protect your 0% zero-rated status.",
+    deliverable: "Designated Zone Movement Protocol & Customs Border Validation",
+    turnaround: "Case Specific",
+  },
+  {
+    num: "11",
+    title: "Import / Export VAT & Customs Clearance (Box 6 & 7)",
+    scope:
+      "Reconciling declaration numbers between Federal Customs Authority systems and EmaraTax Box 6 & 7. Eliminates double-taxation and resolves mismatch errors between customs bill of entries and tax returns.",
+    deliverable: "Customs-VAT Reconciliation Ledger & Reverse Charge Validation",
+    turnaround: "Monthly / Quarterly Routine",
+  },
+  {
+    num: "12",
+    title: "Financial Services & Mixed-Supply Apportionment",
+    scope:
+      "For financial institutions, investment funds, and property developers with both taxable commercial and exempt residential supplies. We calculate precise input tax apportionment ratios using special methods.",
+    deliverable: "Standard & Special Input Tax Apportionment Model Signed by Tax Agent",
+    turnaround: "Annual / Bi-annual Review",
+  },
+  {
+    num: "13",
+    title: "FTA Tax Audit Representation & Defense",
+    scope:
+      "Direct representation by certified chartered accountants and registered tax agents during official FTA field inspections, notice requests, and compliance interviews. We manage the audit queue from start to sign-off.",
+    deliverable: "Certified Auditor Representation & Document Disclosure Queue Management",
+    turnaround: "Active Case Management",
+  },
+  {
+    num: "14",
+    title: "Transfer of a Business as a Going Concern (TOGC)",
+    scope:
+      "Structuring corporate acquisitions, business unit spin-offs, and asset transfers outside the scope of VAT under Article 7 of the UAE VAT Law, ensuring seamless asset handover without 5% cash-flow drain.",
+    deliverable: "TOGC Legal Compliance Brief & Joint Declaration Agreement",
+    turnaround: "Transaction Timetable",
+  },
+  {
+    num: "15",
+    title: "Continuous VAT Advisory & Compliance Retainer",
+    scope:
+      "Dedicated tax agent helpline for everyday billing queries, international supplier VAT review, contract vetting, and proactive alerts on evolving FTA cabinet decisions and public clarifications.",
+    deliverable: "Unlimited Senior Advisor Access & Quarterly Compliance Calendar Tracking",
+    turnaround: "Year-Round Ongoing",
+  },
+];
+
+// =========================================================================
+// 2. STATUTORY REGISTRATION THRESHOLDS
+// =========================================================================
+const REGISTRATION_THRESHOLDS = [
+  {
+    type: "Mandatory Registration",
+    amount: "AED 375,000",
+    timeframe: "Past 12 Months or Next 30 Days",
+    tag: "LEGAL REQUIREMENT",
+    tagColor: "bg-red-50 text-red-700 border-red-200",
+    desc: "Applicable to all UAE resident businesses whose taxable supplies and imports have exceeded AED 375,000 over the previous 12 months, or are legally anticipated to exceed this threshold in the next 30 days.",
+    penaltyNote: "Failure to apply within 20 business days results in an automatic AED 10,000 FTA fine.",
+  },
+  {
+    type: "Voluntary Registration",
+    amount: "AED 187,500",
+    timeframe: "Past 12 Months or Next 30 Days",
+    tag: "STRATEGIC BENEFIT",
+    tagColor: "bg-[#EAF4F0] text-[#216D56] border-[#36A783]/30",
+    desc: "Available to growing businesses and startups whose taxable supplies or taxable expenses exceed AED 187,500. Enables full recovery of 5% input VAT incurred on equipment, setup costs, and commercial leases.",
+    penaltyNote: "Voluntary registration provides a verified TRN, significantly improving corporate B2B credibility.",
+  },
+  {
+    type: "Non-Resident Suppliers",
+    amount: "AED 0.00",
+    timeframe: "From First Taxable Supply",
+    tag: "ZERO THRESHOLD",
+    tagColor: "bg-amber-50 text-amber-700 border-amber-200",
+    desc: "Non-resident entities making supplies of goods or services inside the UAE, where no other UAE-registered entity is obligated to account for the tax under the reverse charge mechanism, have NO minimum threshold.",
+    penaltyNote: "Registration is mandatory prior to transacting the very first taxable supply inside the State.",
+  },
+];
+
+// =========================================================================
+// 3. STATUTORY PENALTIES SCHEDULE (Cabinet Decision No. 49 of 2021)
+// =========================================================================
+const VAT_PENALTIES_TABLE = [
+  {
+    violation: "Late Application for VAT Registration",
+    timeLimit: "Within 20 business days of reaching AED 375k threshold",
+    penalty: "AED 10,000 flat fine",
+  },
+  {
+    violation: "Late Application for VAT Deregistration",
+    timeLimit: "Within 20 business days of business cessation or falling below threshold",
+    penalty: "AED 1,000 per month of delay (capped at AED 10,000)",
+  },
+  {
+    violation: "Late Submission of Periodic Tax Return",
+    timeLimit: "By the 28th day following the close of the tax period",
+    penalty: "AED 1,000 for first offence; AED 2,000 if repeated within 24 months",
+  },
+  {
+    violation: "Failure to Settle Tax Due by Due Date",
+    timeLimit: "Payable simultaneously with return submission",
+    penalty: "2% per month (or part thereof) on unpaid tax balance",
+  },
+  {
+    violation: "Failure to Issue Tax Invoices or Credit Notes",
+    timeLimit: "Per non-compliant transaction",
+    penalty: "AED 2,500 per instance or non-compliant document",
+  },
+  {
+    violation: "Failure to Display Prices Inclusive of 5% VAT",
+    timeLimit: "Mandatory on all retail, web, and consumer quotes",
+    penalty: "AED 5,000 per location or retail portal",
+  },
+  {
+    violation: "Submission of Inaccurate Return (Remediated via Voluntary Disclosure)",
+    timeLimit: "Prior to receipt of FTA inspection notice",
+    penalty: "Reduced penalty scale: 5% to 40% based on disclosure timing",
+  },
+];
+
+// =========================================================================
+// 4. REQUIRED DOCUMENTS CHECKLIST
+// =========================================================================
+const REQUIRED_DOCUMENTS = [
+  {
+    category: "Entity Legal Identity",
+    items: [
+      "Valid UAE Commercial License / Trade License (Mainland DED or Free Zone)",
+      "Certificate of Incorporation & Commercial Register Extract",
+      "Memorandum & Articles of Association (MOA / AOA)",
+      "Registered Tenancy Contract & Ejari / Free Zone Lease Agreement",
+    ],
+  },
+  {
+    category: "Signatory & Management",
+    items: [
+      "Passport and valid UAE Residence Visa copy of General Manager",
+      "Emirates ID (Front & Back) of Authorized Signatory",
+      "Power of Attorney (POA) or Board Resolution appointing Tax Agent",
+    ],
+  },
+  {
+    category: "Financial & Transactional Records",
+    items: [
+      "Itemized sales turnover spreadsheet for past 12 consecutive months",
+      "Official UAE Corporate Bank Statements for past 6 to 12 months",
+      "Sample copies of signed sales contracts and issued customer invoices",
+      "Customs Code Certificate & sample Bill of Entry (for importers/exporters)",
+    ],
+  },
+];
+
+// =========================================================================
+// 5. VAT ONBOARDING TIMELINE
+// =========================================================================
+const ENGAGEMENT_TIMELINE = [
+  {
+    day: "DAY 01",
+    phase: "Intake & Threshold Diagnostic",
+    desc: "Our chartered tax advisor reviews your past 12-month financials and verifies whether mandatory registration, voluntary registration, or exception from registration applies.",
+  },
+  {
+    day: "DAYS 02–03",
+    phase: "Document Audit & EmaraTax Compilation",
+    desc: "Upload entity documents into our AES-256 encrypted vault. We validate trade licenses, Ejari, and invoices to eliminate common FTA rejection triggers.",
+  },
+  {
+    day: "DAY 04",
+    phase: "Formal FTA Submission & Tax Agent Sign-Off",
+    desc: "We submit the verified dossier via the FTA EmaraTax platform under our certified Tax Agent credentials and track application progress in real time.",
+  },
+  {
+    day: "DAYS 05–07",
+    phase: "TRN Issuance & Post-Registration Compliance Pack",
+    desc: "Your official Tax Registration Number (TRN) is generated. We configure your tax calendar and issue invoicing compliance guidelines to your finance team.",
+  },
+];
+
+// =========================================================================
+// 6. FREQUENTLY ASKED QUESTIONS (FAQS)
+// =========================================================================
+const VAT_FAQS = [
+  {
+    q: "Do UAE Free Zone companies need to register for VAT?",
+    a: "Yes. UAE Free Zone entities are fully subject to UAE VAT Law (Federal Decree-Law No. 8 of 2017). A Free Zone company must register for VAT if its taxable turnover (including sales to mainland UAE or overseas) exceeds the AED 375,000 mandatory threshold. Companies located in designated Free Zones still require registration, although specific goods stored in designated zones may qualify for out-of-scope treatment.",
+  },
+  {
+    q: "What is the difference between Zero-Rated (0%) and Exempt supplies?",
+    a: "Under Zero-Rated supplies (such as exports of goods and services outside the GCC implementing states, international transport, and certain healthcare/education services), tax is charged at 0%, but the business CAN recover all input VAT paid on its expenses. Under Exempt supplies (such as residential property leases, bare land sales, and margin-based financial services), no VAT is charged, but the business CANNOT recover the input VAT incurred on related expenses.",
+  },
+  {
+    q: "Can I recover input VAT paid on business setup expenses before registration?",
+    a: "Yes. Under Article 56 of the Executive Regulations, a newly registered business can recover input VAT paid on goods purchased prior to the registration date, provided they are still on hand at the effective date of registration. Services acquired within the 6 months prior to the effective registration date can also be recovered if directly used for taxable supplies.",
+  },
+  {
+    q: "What is the exact deadline for submitting UAE VAT returns?",
+    a: "The standard tax period is quarterly for most SMEs (or monthly for high-turnover entities as mandated by the FTA). The statutory deadline for filing Form 201 and settling the net tax payable is the 28th day following the close of the tax period (or the next business day if the 28th falls on a UAE national holiday or weekend).",
+  },
+  {
+    q: "What triggers an FTA VAT Audit, and how should a company prepare?",
+    a: "Common audit triggers include recurring high VAT refund requests, frequent voluntary disclosures, severe mismatches between customs import data and Box 6/7 return figures, or cross-checks against customer/supplier declarations. To prepare, ensure you retain sequentially numbered tax invoices, proof of export, and audited trial balances for a minimum of 5 years.",
+  },
+  {
+    q: "How does Auditclue resolve historical return errors through Voluntary Disclosure (Form 211)?",
+    a: "If an error resulting in a tax shortfall of over AED 10,000 is uncovered, UAE law obligates the taxpayer to file a Voluntary Disclosure (Form 211) within 20 business days. Auditclue prepares the full recalculation, drafts the technical justification brief, and submits it to the FTA, securing significantly reduced penalty tiers compared to discovery via an unannounced FTA audit.",
+  },
 ];
 
 const OTHER_SERVICES = [
@@ -48,13 +329,19 @@ const OTHER_SERVICES = [
 ];
 
 export default function VatServicesClient() {
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#071426] selection:bg-[#C6F850] selection:text-[#071426]">
       <Navbar />
 
       <main className="flex-1 pt-[76px] lg:pt-[86px]">
         {/* ================================================================= */}
-        {/* 1. HERO SECTION: UAE VAT Services                                 */}
+        {/* 1. HERO SECTION: UAE VAT Editorial Master Header                  */}
         {/* ================================================================= */}
         <section className="relative bg-gradient-to-b from-[#EDF5F1] via-[#F8FAFC] to-[#EEF2F7] border-b border-[#CBD5E1]/60 pt-16 pb-16 sm:pt-20 sm:pb-22 overflow-hidden">
           {/* Subtle Ambient Lighting Aura */}
@@ -87,20 +374,40 @@ export default function VatServicesClient() {
             <div className="max-w-4xl">
               <div className="inline-flex items-center gap-2 bg-[#EAF4F0] text-[#216D56] border border-[#36A783]/25 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-5 font-mono shadow-xs">
                 <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
-                <span>FEDERAL TAX AUTHORITY COMPLIANCE</span>
+                <span>FTA REGISTERED TAX AGENT PRACTICE • 5% VAT SPECIALISTS</span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-[#071426] tracking-tight leading-[1.1] mb-6">
-                <FlowText text="UAE VAT Services" as="span" />
+                <FlowText text="UAE VAT Advisory & Statutory Compliance" as="span" />
               </h1>
 
               <p className="text-base sm:text-lg lg:text-xl text-[#334155] font-sans font-normal leading-relaxed max-w-3xl mb-8">
-                Our UAE VAT specialists provide end-to-end VAT compliance
-                services — ensuring your business remains fully compliant with
-                the Federal Tax Authority requirements. From initial
-                registration through to refund claims and voluntary disclosures,
-                we handle every aspect of your VAT obligations.
+                Operating under Federal Decree-Law No. 8 of 2017, Auditclue delivers end-to-end Value Added Tax advisory across Dubai and the UAE. From strategic TRN registration and quarterly return filings to complex designated zone treatments and voluntary disclosures, our certified tax agents protect your business from statutory penalties.
               </p>
+
+              {/* Statutory Metric Highlights Bar */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 pt-6 border-t border-[#CBD5E1]/70">
+                <div>
+                  <div className="text-xs font-mono text-[#64748B] uppercase">Standard Rate</div>
+                  <div className="text-2xl font-serif font-bold text-[#071426]">5.0%</div>
+                  <div className="text-[11px] text-[#216D56] font-sans">Goods & Services</div>
+                </div>
+                <div>
+                  <div className="text-xs font-mono text-[#64748B] uppercase">Mandatory Limit</div>
+                  <div className="text-2xl font-serif font-bold text-[#071426]">AED 375k</div>
+                  <div className="text-[11px] text-[#216D56] font-sans">Annual Turnover</div>
+                </div>
+                <div>
+                  <div className="text-xs font-mono text-[#64748B] uppercase">Filing Frequency</div>
+                  <div className="text-2xl font-serif font-bold text-[#071426]">Quarterly</div>
+                  <div className="text-[11px] text-[#216D56] font-sans">28 Days Post-Close</div>
+                </div>
+                <div>
+                  <div className="text-xs font-mono text-[#64748B] uppercase">Audit Records</div>
+                  <div className="text-2xl font-serif font-bold text-[#071426]">5 Years</div>
+                  <div className="text-[11px] text-[#216D56] font-sans">Statutory Retention</div>
+                </div>
+              </div>
 
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-4">
@@ -134,57 +441,362 @@ export default function VatServicesClient() {
         </section>
 
         {/* ================================================================= */}
-        {/* 2. WHAT'S INCLUDED IN UAE VAT SERVICES                            */}
+        {/* 2. STATUTORY REGISTRATION THRESHOLDS: Mandatory vs Voluntary      */}
         {/* ================================================================= */}
         <section className="py-16 sm:py-24 bg-white border-b border-[#E2E8F0]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-8 mb-8 border-b border-[#071426]/10">
+            <div className="max-w-3xl mb-12">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#36A783] font-bold block mb-2">
+                STATUTORY CRITERIA
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-serif text-[#071426] mb-4">
+                UAE VAT Registration Thresholds & Legal Deadlines
+              </h2>
+              <p className="text-base text-[#475569] font-sans leading-relaxed">
+                Under UAE Federal Decree-Law No. 8 of 2017, determining your exact registration threshold is critical. Missing mandatory deadlines results in automatic FTA administrative fines of AED 10,000.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+              {REGISTRATION_THRESHOLDS.map((tier, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-3xl bg-[#F8FAFC] border border-[#CBD5E1] p-6 sm:p-7 flex flex-col justify-between hover:shadow-lg transition-all relative overflow-hidden"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className={`text-[11px] font-mono font-bold px-2.5 py-1 rounded-full border ${tier.tagColor}`}>
+                        {tier.tag}
+                      </span>
+                      <span className="text-xs font-mono text-[#64748B]">Tier {idx + 1}</span>
+                    </div>
+
+                    <h3 className="text-xl font-serif font-bold text-[#071426] mb-1">
+                      {tier.type}
+                    </h3>
+
+                    <div className="text-3xl font-serif font-bold text-[#216D56] mb-2">
+                      {tier.amount}
+                    </div>
+
+                    <div className="text-xs font-mono text-[#64748B] mb-4 pb-4 border-b border-[#CBD5E1]/80">
+                      Basis: {tier.timeframe}
+                    </div>
+
+                    <p className="text-xs sm:text-sm text-[#475569] font-sans leading-relaxed mb-6">
+                      {tier.desc}
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-[#E2E8F0] text-xs font-sans text-[#216D56] bg-white -mx-6 -mb-6 p-4 rounded-b-3xl border-b">
+                    <span className="font-semibold block mb-0.5">Statutory Note:</span>
+                    <span className="text-[#64748B]">{tier.penaltyNote}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* 3. 15 DETAILED SCOPED DELIVERABLES (Replacing 15 Empty Buttons)    */}
+        {/* ================================================================= */}
+        <section className="py-16 sm:py-24 bg-[#F8FAFC] border-b border-[#E2E8F0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-8 mb-10 border-b border-[#071426]/10">
               <div>
                 <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#36A783] font-bold block mb-2">
-                  PRACTICE SCOPE
+                  FULL PRACTICE SCOPE
                 </span>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#071426]">
-                  What&apos;s Included in UAE VAT Services
+                  15 Scoped Deliverables in UAE VAT Compliance
                 </h2>
               </div>
               <div className="text-xs sm:text-sm text-[#64748B] font-mono">
-                15 Deliverables · FTA Compliant
+                Chartered Tax Agent Oversight · 100% Digital
               </div>
             </div>
 
-            {/* Editorial Typographic List (Clean 15 Services, No Generic Boxes) */}
-            <div className="divide-y divide-[#E2E8F0]">
-              {VAT_SERVICES_LIST.map((serviceName, idx) => {
-                const num = idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`;
-                return (
-                  <div
-                    key={idx}
-                    className="py-5 sm:py-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center group hover:bg-[#F8FAFC] transition-colors -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-xl"
-                  >
-                    <div className="md:col-span-2 flex items-center gap-3">
-                      <span className="font-mono text-xs font-bold text-[#36A783]">
-                        [{num}]
-                      </span>
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-[#64748B] bg-[#EAF4F0] px-2 py-0.5 rounded-md">
-                        VAT Service
-                      </span>
-                    </div>
-
-                    <div className="md:col-span-7">
-                      <h3 className="text-lg sm:text-xl font-serif font-medium text-[#071426] group-hover:text-[#216D56] transition-colors">
-                        {serviceName}
+            {/* Editorial Typographic List with Deep Scope & Specific Deliverables */}
+            <div className="grid grid-cols-1 gap-4">
+              {VAT_DETAILED_SERVICES.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="p-6 sm:p-7 rounded-2xl bg-white border border-[#CBD5E1]/80 hover:border-[#36A783] hover:shadow-md transition-all group"
+                >
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+                    {/* Index & Title (4 cols) */}
+                    <div className="lg:col-span-4">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="font-mono text-xs font-bold text-[#36A783] bg-[#EAF4F0] px-2.5 py-1 rounded-md">
+                          [{item.num}] PRACTICE
+                        </span>
+                        <span className="text-xs font-mono text-[#64748B]">
+                          {item.turnaround}
+                        </span>
+                      </div>
+                      <h3 className="text-lg sm:text-xl font-serif font-bold text-[#071426] group-hover:text-[#216D56] transition-colors leading-snug">
+                        {item.title}
                       </h3>
                     </div>
 
-                    <div className="md:col-span-3 flex justify-start md:justify-end">
-                      <a
-                        href="#consultation"
-                        className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#216D56] group-hover:text-[#36A783] transition-colors"
-                      >
-                        <span>Talk With an Advisor</span>
-                        <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-                      </a>
+                    {/* Scope Narrative (5 cols) */}
+                    <div className="lg:col-span-5">
+                      <p className="text-xs sm:text-sm text-[#475569] font-sans leading-relaxed">
+                        {item.scope}
+                      </p>
                     </div>
+
+                    {/* Concrete Deliverable Badge (3 cols) */}
+                    <div className="lg:col-span-3 lg:border-l lg:border-[#E2E8F0] lg:pl-6">
+                      <div className="text-[11px] font-mono font-bold text-[#64748B] uppercase mb-1">
+                        Key Deliverable:
+                      </div>
+                      <div className="text-xs font-medium text-[#216D56] bg-[#EAF4F0]/60 p-2.5 rounded-xl border border-[#36A783]/20 flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#36A783] shrink-0 mt-0.5" />
+                        <span>{item.deliverable}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* 4. STATUTORY FILING DEADLINES & FTA PENALTIES SCHEDULE            */}
+        {/* ================================================================= */}
+        <section className="py-16 sm:py-24 bg-white border-b border-[#E2E8F0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+              
+              {/* Left Column: Statutory Filing Timetable Callout (5 cols) */}
+              <div className="lg:col-span-5 space-y-6">
+                <div>
+                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#36A783] font-bold block mb-2">
+                    STATUTORY TIMETABLE
+                  </span>
+                  <h2 className="text-3xl sm:text-4xl font-serif text-[#071426] mb-4">
+                    The 28-Day Filing Rule & Penalty Exposure
+                  </h2>
+                  <p className="text-sm sm:text-base text-[#475569] font-sans leading-relaxed">
+                    Under Federal Law, tax periods are assigned on a quarterly basis (e.g. Q1 ending March 31, Q2 ending June 30) or monthly for specific corporate categories.
+                  </p>
+                </div>
+
+                <div className="p-6 rounded-3xl bg-[#071426] text-white border border-white/10 relative overflow-hidden shadow-xl">
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-[#36A783]/15 rounded-full blur-2xl pointer-events-none" />
+                  
+                  <div className="relative z-10 space-y-4">
+                    <div className="inline-flex items-center gap-2 text-xs font-mono text-[#83D9BE] bg-white/10 px-3 py-1 rounded-full">
+                      <Clock className="w-3.5 h-3.5 text-[#36A783]" />
+                      <span>OFFICIAL SUBMISSION RULE</span>
+                    </div>
+
+                    <h3 className="text-xl font-serif font-bold text-white leading-snug">
+                      28th Day of the Subsequent Month
+                    </h3>
+
+                    <p className="text-xs text-[#CBD5E1] font-sans leading-relaxed">
+                      Your Form 201 must be officially submitted and tax payments received into the FTA account by the 28th. If the 28th falls on a weekend or public holiday, the deadline moves to the immediate first business day.
+                    </p>
+
+                    <div className="pt-3 border-t border-white/10 text-xs font-mono text-[#C6F850]">
+                      ⚡ Auditclue guarantees filing sign-off 5 days prior to statutory cut-off.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Official Administrative Penalties Table (7 cols) */}
+              <div className="lg:col-span-7">
+                <div className="bg-[#F8FAFC] border border-[#CBD5E1] rounded-3xl p-6 sm:p-7 shadow-sm">
+                  <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#CBD5E1]">
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4 text-amber-600" />
+                      <span className="font-mono text-xs font-bold text-[#071426] uppercase">
+                        Cabinet Decision No. 49 of 2021 Penalty Schedule
+                      </span>
+                    </div>
+                    <span className="text-[11px] font-mono text-[#64748B]">Updated 2026</span>
+                  </div>
+
+                  <div className="divide-y divide-[#E2E8F0]">
+                    {VAT_PENALTIES_TABLE.map((row, idx) => (
+                      <div key={idx} className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                          <div className="text-xs sm:text-sm font-serif font-bold text-[#071426]">
+                            {row.violation}
+                          </div>
+                          <div className="text-[11px] text-[#64748B] font-sans">
+                            {row.timeLimit}
+                          </div>
+                        </div>
+                        <div className="sm:text-right shrink-0">
+                          <span className="inline-block text-xs font-mono font-bold text-red-700 bg-red-50 px-2.5 py-1 rounded-md border border-red-200">
+                            {row.penalty}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-4 pt-4 border-t border-[#E2E8F0] text-center">
+                    <span className="text-xs text-[#64748B] font-sans">
+                      Need urgent penalty remediation or reconsideration?{" "}
+                      <a href="#consultation" className="text-[#36A783] font-semibold underline hover:text-[#216D56]">
+                        Speak with our Tax Agents
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* 5. REQUIRED DOCUMENTS & KYC ONBOARDING CHECKLIST                  */}
+        {/* ================================================================= */}
+        <section className="py-16 sm:py-24 bg-[#F8FAFC] border-b border-[#E2E8F0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mb-12">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#36A783] font-bold block mb-2">
+                CLIENT PREPARATION
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-serif text-[#071426] mb-4">
+                Required Documents for UAE VAT Registration & Filing
+              </h2>
+              <p className="text-base text-[#475569] font-sans leading-relaxed">
+                To guarantee zero rejection from the FTA EmaraTax portal, your dedicated Auditclue team reviews and pre-validates each of the following documentation sets:
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {REQUIRED_DOCUMENTS.map((group, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-3xl bg-white border border-[#CBD5E1]/80 p-6 sm:p-7 shadow-sm flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center gap-2.5 font-mono text-xs font-bold text-[#216D56] uppercase mb-4 pb-3 border-b border-[#E2E8F0]">
+                      <FileText className="w-4 h-4 text-[#36A783]" />
+                      <span>{group.category}</span>
+                    </div>
+
+                    <ul className="space-y-3">
+                      {group.items.map((itemText, iIdx) => (
+                        <li key={iIdx} className="flex items-start gap-2.5 text-xs text-[#334155] leading-relaxed">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#36A783] shrink-0 mt-0.5" />
+                          <span>{itemText}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-[#E2E8F0] text-[11px] font-mono text-[#64748B]">
+                    Secure AES-256 cloud upload provided via portal.
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* 6. STEP-BY-STEP ENGAGEMENT TIMELINE                               */}
+        {/* ================================================================= */}
+        <section className="py-16 sm:py-24 bg-white border-b border-[#E2E8F0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mb-12">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#36A783] font-bold block mb-2">
+                SYSTEMATIC TIMELINE
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-serif text-[#071426] mb-4">
+                How Auditclue Delivers Your VAT Mandate
+              </h2>
+              <p className="text-base text-[#475569] font-sans leading-relaxed">
+                From initial turnover discovery to official FTA TRN acquisition or return submission, our 4-stage digital protocol eliminates administrative delays:
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {ENGAGEMENT_TIMELINE.map((step, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-2xl p-6 bg-[#F8FAFC] border border-[#CBD5E1] relative overflow-hidden flex flex-col justify-between"
+                >
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-[#36A783]" />
+                  
+                  <div>
+                    <div className="font-mono text-xs font-bold text-[#36A783] mb-2">
+                      {step.day}
+                    </div>
+                    <h3 className="text-lg font-serif font-bold text-[#071426] mb-3">
+                      {step.phase}
+                    </h3>
+                    <p className="text-xs text-[#475569] leading-relaxed font-sans">
+                      {step.desc}
+                    </p>
+                  </div>
+
+                  <div className="mt-5 pt-3 border-t border-[#CBD5E1]/60 flex items-center gap-1.5 text-[11px] font-mono text-[#216D56]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#36A783]" />
+                    <span>Stage Verified</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* 7. FREQUENTLY ASKED QUESTIONS (FAQS) ACCORDION                    */}
+        {/* ================================================================= */}
+        <section className="py-16 sm:py-24 bg-[#F8FAFC] border-b border-[#E2E8F0]">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#36A783] font-bold block mb-2">
+                EXPERT ANSWERS
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-serif text-[#071426] mb-4">
+                UAE VAT Compliance FAQs
+              </h2>
+              <p className="text-base text-[#475569] font-sans">
+                Clear statutory answers to common questions asked by UAE business owners and corporate finance teams.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {VAT_FAQS.map((faq, idx) => {
+                const isOpen = openFaqIndex === idx;
+                return (
+                  <div
+                    key={idx}
+                    className="rounded-2xl bg-white border border-[#CBD5E1]/90 shadow-2xs overflow-hidden transition-colors"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => toggleFaq(idx)}
+                      className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 font-serif font-bold text-base sm:text-lg text-[#071426] hover:text-[#216D56] transition-colors cursor-pointer"
+                    >
+                      <span>{faq.q}</span>
+                      <div className="w-7 h-7 rounded-full bg-[#EAF4F0] text-[#216D56] flex items-center justify-center shrink-0">
+                        {isOpen ? (
+                          <ChevronUp className="w-4 h-4" />
+                        ) : (
+                          <ChevronDown className="w-4 h-4" />
+                        )}
+                      </div>
+                    </button>
+
+                    {isOpen && (
+                      <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-[#475569] font-sans leading-relaxed border-t border-[#F1F5F9]">
+                        {faq.a}
+                      </div>
+                    )}
                   </div>
                 );
               })}
@@ -193,41 +805,7 @@ export default function VatServicesClient() {
         </section>
 
         {/* ================================================================= */}
-        {/* 3. NEED HELP WITH VAT REGISTRATION OR FILING?                     */}
-        {/* ================================================================= */}
-        <section className="py-16 sm:py-20 bg-[#EEF2F7] border-b border-[#CBD5E1]">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl font-serif text-[#071426] mb-3">
-              Need Help With VAT Registration or Filing?
-            </h2>
-            <p className="text-base sm:text-lg text-[#4A5D73] font-sans mb-8">
-              Talk with a VAT specialist now.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="#consultation"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#071426] hover:bg-[#12273F] text-white text-base font-semibold px-7 py-3.5 rounded-xl transition-all shadow-md"
-              >
-                <span>Talk With an Advisor</span>
-                <span className="text-xs">↳</span>
-              </a>
-
-              <a
-                href="https://wa.me/971547338583"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#20BD5A] text-white text-base font-bold px-7 py-3.5 rounded-xl transition-all shadow-md"
-              >
-                <MessageSquare className="w-4 h-4 fill-current" />
-                <span>WhatsApp</span>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* ================================================================= */}
-        {/* 4. GET A FREE CONSULTATION: Contact Details & Form                 */}
+        {/* 8. EMBEDDED CONSULTATION SECTION (With Turnstile & Anti-Spam)      */}
         {/* ================================================================= */}
         <section
           id="consultation"
@@ -242,11 +820,10 @@ export default function VatServicesClient() {
                     DIRECT ADVISORY ACCESS
                   </span>
                   <h2 className="text-3xl sm:text-4xl font-serif text-[#071426] mb-4">
-                    Get a Free Consultation
+                    Speak Directly With a UAE VAT Specialist
                   </h2>
                   <p className="text-base sm:text-lg text-[#4A5D73] font-sans leading-relaxed">
-                    Speak directly with a qualified Auditclue advisor for
-                    practical solutions on uae vat services.
+                    Need immediate assistance with TRN registration, complex input recovery, or upcoming quarterly return filing? Speak with a licensed Tax Agent today.
                   </p>
                 </div>
 
@@ -261,7 +838,7 @@ export default function VatServicesClient() {
                     </div>
                     <div>
                       <div className="text-xs font-mono text-[#64748B]">
-                        Call Now / Talk With an Advisor:
+                        Call Now / Direct Line:
                       </div>
                       <div className="text-base sm:text-lg font-serif font-bold text-[#071426] group-hover:text-[#216D56] transition-colors">
                         +971 54 733 8583
@@ -281,7 +858,7 @@ export default function VatServicesClient() {
                     </div>
                     <div>
                       <div className="text-xs font-mono text-[#83D9BE]">
-                        WhatsApp Us (Quick response guaranteed):
+                        WhatsApp Priority Desk:
                       </div>
                       <div className="text-base sm:text-lg font-serif font-bold text-white group-hover:text-[#83D9BE] transition-colors">
                         +971 54 733 8583
@@ -298,7 +875,7 @@ export default function VatServicesClient() {
                       <Mail className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="text-xs font-mono text-[#64748B]">Email:</div>
+                      <div className="text-xs font-mono text-[#64748B]">Email Inquiries:</div>
                       <div className="text-base sm:text-lg font-serif font-bold text-[#071426] group-hover:text-[#216D56] transition-colors">
                         info@auditclue.com
                       </div>
@@ -308,7 +885,7 @@ export default function VatServicesClient() {
               </div>
 
               {/* Right Column: Embedded Consultation Form */}
-              <div className="lg:col-span-7 bg-[#F8FAFC] border border-[#CBD5E1] p-6 sm:p-8 rounded-3xl shadow-sm">
+              <div className="lg:col-span-7">
                 <ContactForm />
               </div>
             </div>
@@ -316,7 +893,7 @@ export default function VatServicesClient() {
         </section>
 
         {/* ================================================================= */}
-        {/* 5. EXPLORE OTHER SERVICES                                         */}
+        {/* 9. EXPLORE OTHER SERVICES                                         */}
         {/* ================================================================= */}
         <section className="py-16 sm:py-20 bg-[#F8FAFC] border-b border-[#E2E8F0]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -347,16 +924,15 @@ export default function VatServicesClient() {
         </section>
 
         {/* ================================================================= */}
-        {/* 6. SPEAK WITH AN ADVISOR TODAY                                    */}
+        {/* 10. FINAL BOTTOM CALL TO ACTION                                    */}
         {/* ================================================================= */}
         <section className="py-16 sm:py-20 bg-[#071426] text-white text-center relative overflow-hidden">
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 z-10">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-white mb-4">
-              Speak With an Advisor Today
+              Protect Your Enterprise With FTA-Certified Tax Agents
             </h2>
             <p className="text-base sm:text-lg text-[#CBD5E1] font-sans max-w-2xl mx-auto mb-8">
-              Get professional support for audit, tax, accounting, compliance,
-              finance and business advisory services.
+              Guaranteed accuracy, itemized input tax optimization, and zero penalty liability across all seven Emirates.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

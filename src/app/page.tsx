@@ -5,6 +5,8 @@ import StatsBanner from "@/components/StatsBanner";
 import AboutSection from "@/components/AboutSection";
 import WhyChooseSection from "@/components/WhyChooseSection";
 import ServicesSection from "@/components/ServicesSection";
+import PricingPackagesSection from "@/components/PricingPackagesSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import WorkflowSection from "@/components/WorkflowSection";
 import ClientPortalSection from "@/components/ClientPortalSection";
 import FAQSection from "@/components/FAQSection";
@@ -31,8 +33,14 @@ export default function Home() {
       {/* Complete Interactive 11-Practice Services Directory (150+ Services) */}
       <ServicesSection />
 
+      {/* Transparent 'Starting From' Fixed Pricing Packages */}
+      <PricingPackagesSection />
+
       {/* Why Choose Auditclue — 8 Strategic Advantages */}
       <WhyChooseSection />
+
+      {/* Authentic UAE SME Testimonials & Case Studies */}
+      <TestimonialsSection />
 
       {/* 6-Step Digital Operating Model Workflow */}
       <WorkflowSection />

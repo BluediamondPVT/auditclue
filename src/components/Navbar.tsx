@@ -20,6 +20,7 @@ import {
   ShieldAlert,
   Cpu,
   Lock,
+  Calendar,
 } from "lucide-react";
 
 interface NavLinkItem {
@@ -119,6 +120,22 @@ const MEGA_SERVICES_COL_2 = [
     svcs: "13 Svcs",
     desc: "Zoho, QuickBooks, Xero & e-invoicing Peppol",
     icon: Cpu,
+  },
+  {
+    title: "Compliance Calendar",
+    href: "/compliance-calendar",
+    svcs: "2026/27",
+    desc: "CT, VAT, ESR & Free Zone statutory deadlines",
+    icon: Calendar,
+    highlight: true,
+  },
+  {
+    title: "Mainland vs Free Zone",
+    href: "/freezone-vs-mainland",
+    svcs: "Guide",
+    desc: "10-point statutory comparison & decision tool",
+    icon: Compass,
+    highlight: true,
   },
   {
     title: "UAE Tax Calculator",

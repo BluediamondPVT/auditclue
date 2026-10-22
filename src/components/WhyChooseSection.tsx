@@ -258,20 +258,36 @@ export default function WhyChooseSection() {
                 </div>
 
                 <h3 className="text-2xl sm:text-3xl font-serif font-medium text-white tracking-tight leading-snug mb-3">
-                  {card2.title}
+                  FTA Certified Practice & EmaraTax Filing Authority
                 </h3>
 
                 <p className="text-base text-[#A8B7C9] leading-relaxed font-sans mb-6">
-                  {card2.desc}
+                  Direct statutory representation before the Federal Tax Authority. Every audit, corporate tax filing, and VAT reconciliation is prepared under IFRS / ISA standards and signed off by qualified CPAs and registered FTA Tax Agents.
                 </p>
+
+                {/* Explicit Regulatory Verification Checklist */}
+                <div className="space-y-2.5 mb-6 text-xs text-[#CBD5E1]">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#36A783] shrink-0" />
+                    <span>EmaraTax Agency Linked • Direct Return Submissions</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#36A783] shrink-0" />
+                    <span>FTA Audit Defense & Penalty Reconsideration Rights</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#36A783] shrink-0" />
+                    <span>All 7 Emirates & 40+ Free Zones Statutory Accreditation</span>
+                  </div>
+                </div>
               </div>
 
               <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-xs">
                 <span className="font-semibold text-[#83D9BE] bg-[#36A783]/15 px-3 py-1 rounded-md border border-[#36A783]/25">
-                  FTA Registered Tax Agents
+                  FTA Tax Agent Authorization
                 </span>
                 <span className="text-[#A8B7C9] font-mono">
-                  IFRS & ISA Standards
+                  IFRS • ISA • CPA / ACCA
                 </span>
               </div>
             </div>

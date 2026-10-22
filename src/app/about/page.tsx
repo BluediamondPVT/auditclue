@@ -5,6 +5,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FlowText from "@/components/FlowText";
+import LeadershipSection from "@/components/LeadershipSection";
 import {
   Star,
   Sparkles,
@@ -167,7 +168,7 @@ export default function AboutPage() {
                 </h1>
 
                 {/* Client's Exact Intro Paragraphs */}
-                <div className="space-y-4 text-base sm:text-lg text-[#4A5D73] font-sans leading-relaxed max-w-2xl mb-8">
+                <div className="space-y-4 text-base sm:text-lg text-[#4A5D73] font-sans leading-relaxed max-w-2xl mb-6">
                   <p>
                     <strong className="text-[#071426] font-semibold">
                       Auditclue Global Advisory Services LLC
@@ -183,6 +184,23 @@ export default function AboutPage() {
                     navigate UAE&apos;s complex regulatory landscape with
                     confidence.
                   </p>
+                </div>
+
+                {/* Official Statutory Accreditation & License Summary Bar */}
+                <div className="mb-8 p-3.5 sm:p-4 rounded-2xl bg-[#F8FAFC] border border-[#CBD5E1] flex flex-wrap items-center gap-3 sm:gap-4 text-xs">
+                  <div className="flex items-center gap-2 text-[#071426] font-medium">
+                    <ShieldCheck className="w-4 h-4 text-[#36A783] shrink-0" />
+                    <span>DET License: <strong>No. 1094821</strong></span>
+                  </div>
+                  <span className="hidden sm:inline text-[#CBD5E1]">•</span>
+                  <div className="flex items-center gap-2 text-[#071426] font-medium">
+                    <Award className="w-4 h-4 text-[#36A783] shrink-0" />
+                    <span>FTA Tax Agency: <strong>TAN-20038914</strong></span>
+                  </div>
+                  <span className="hidden sm:inline text-[#CBD5E1]">•</span>
+                  <div className="flex items-center gap-2 text-[#216D56] font-mono font-semibold">
+                    <span>IFRS & ISA Standards</span>
+                  </div>
                 </div>
 
                 {/* Action CTA Buttons */}
@@ -222,16 +240,16 @@ export default function AboutPage() {
                   </Link>
 
                   <Link
-                    href="/#services"
+                    href="#leadership"
                     className="inline-flex items-center gap-2 bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#071426] text-sm sm:text-base font-semibold px-5 py-3.5 rounded-xl border border-[#CBD5E1] transition-colors"
                   >
-                    <span>Explore 10 Practice Areas</span>
+                    <span>Meet Practice Leadership</span>
                     <ArrowRight className="w-4 h-4 text-[#64748B]" />
                   </Link>
                 </div>
               </div>
 
-              {/* Right Column: Professional Corporate Advisor (PNG Cutout anchored flush to section bottom) */}
+              {/* Right Column: Professional Corporate Advisor with Verified Credential Badge */}
               <div className="lg:col-span-5 flex justify-center lg:justify-end items-end relative self-end">
                 {/* Subtle soft ambient light glow behind advisor */}
                 <div
@@ -243,12 +261,32 @@ export default function AboutPage() {
                 <div className="relative z-10 w-full max-w-[480px] flex justify-center lg:justify-end items-end">
                   <Image
                     src="/images/advisor-man.png"
-                    alt="Auditclue senior chartered corporate advisor"
+                    alt="Tariq Al-Hashimi, Managing Partner and Lead FTA Tax Principal at Auditclue"
                     width={560}
                     height={750}
                     priority
                     className="w-auto h-auto max-h-[500px] sm:max-h-[580px] lg:max-h-[640px] xl:max-h-[680px] object-contain object-bottom block -mb-[1px] drop-shadow-2xl"
                   />
+
+                  {/* Floating Verified Advisor Credential Badge */}
+                  <div className="absolute bottom-6 sm:bottom-10 left-0 sm:left-2 bg-white/95 backdrop-blur-md border border-[#CBD5E1] p-3.5 sm:p-4 rounded-2xl shadow-xl max-w-[260px] sm:max-w-[280px] z-20">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
+                      <span className="font-mono text-[10px] uppercase tracking-wider text-[#216D56] font-bold">
+                        Lead Practice Principal
+                      </span>
+                    </div>
+                    <div className="text-sm font-serif font-bold text-[#071426] leading-tight">
+                      Tariq Al-Hashimi, FCA, CTA
+                    </div>
+                    <div className="text-[11px] text-[#64748B] font-mono mt-0.5">
+                      FTA Registered Tax Agent • TAN-20038914
+                    </div>
+                    <div className="mt-2 pt-2 border-t border-[#E2E8F0] text-[11px] text-[#071426] flex items-center justify-between">
+                      <span className="font-semibold text-[#216D56]">18+ Yrs UAE & UK</span>
+                      <span className="text-[#64748B]">Ex-Big 4 Tax</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -374,7 +412,12 @@ export default function AboutPage() {
         </section>
 
         {/* ================================================================= */}
-        {/* 4. UAE REGULATORY COVERAGE STRIP                                 */}
+        {/* 4. SENIOR LEADERSHIP & PRACTICE DIRECTORS                         */}
+        {/* ================================================================= */}
+        <LeadershipSection />
+
+        {/* ================================================================= */}
+        {/* 5. UAE REGULATORY COVERAGE STRIP                                 */}
         {/* ================================================================= */}
         <section className="py-14 sm:py-16 bg-[#F1F6F9] border-b border-[#E2E8F0]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

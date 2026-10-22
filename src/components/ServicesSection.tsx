@@ -612,7 +612,11 @@ export default function ServicesSection() {
                       <div className="relative w-full aspect-[21/9] sm:aspect-[16/10] lg:aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden shadow-sm border border-black/10">
                         <Image
                           src={imageUrl}
-                          alt={`${category.title} advisory in UAE`}
+                          alt={
+                            category.title.toLowerCase().includes("advisory")
+                              ? `${category.title} in the UAE`
+                              : `${category.title} advisory in the UAE`
+                          }
                           fill
                           sizes="(max-width: 1024px) 100vw, 40vw"
                           className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"

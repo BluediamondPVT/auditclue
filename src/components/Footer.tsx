@@ -148,16 +148,19 @@ export default function Footer() {
       <div className="w-full px-5 sm:px-12 lg:px-20 xl:px-28 pb-12 sm:pb-16">
         <div ref={columnsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
 
-          {/* Column 1 — Links */}
+          {/* Column 1 — Links & Tools */}
           <div>
-            <h4 className="text-sm font-bold text-white mb-5 tracking-wide">Links</h4>
-            <ul className="space-y-3 text-[15px] text-[#A8B7C9]">
-              <li><Link href="/#hero"          className="hover:text-white transition-colors">Home</Link></li>
-              <li><Link href="/about"           className="hover:text-white transition-colors">About Us</Link></li>
-              <li><Link href="/process"         className="hover:text-white transition-colors">Our Process</Link></li>
-              <li><Link href="/#consult-form"   className="hover:text-white transition-colors">Book a Consultation</Link></li>
-              <li><Link href="/#portal"         className="hover:text-white transition-colors">Client Portal Login</Link></li>
-              <li><Link href="/privacy"        className="hover:text-white transition-colors">Privacy Policy</Link></li>
+            <h4 className="text-sm font-bold text-white mb-5 tracking-wide">Navigation & Tools</h4>
+            <ul className="space-y-2.5 text-[14px] text-[#A8B7C9]">
+              <li><Link href="/#hero" className="hover:text-white transition-colors">Home</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+              <li><Link href="/process" className="hover:text-white transition-colors">Our Process</Link></li>
+              <li><Link href="/compliance-calendar" className="text-[#83D9BE] hover:text-white font-medium transition-colors inline-flex items-center gap-1.5">Compliance Calendar 2026/27</Link></li>
+              <li><Link href="/freezone-vs-mainland" className="text-[#83D9BE] hover:text-white font-medium transition-colors inline-flex items-center gap-1.5">Mainland vs Free Zone Guide</Link></li>
+              <li><Link href="/calculator" className="hover:text-white transition-colors">Tax & SBR Calculator</Link></li>
+              <li><Link href="/#consult-form" className="hover:text-white transition-colors">Book a Consultation</Link></li>
+              <li><Link href="/#portal" className="hover:text-white transition-colors">Client Portal Login</Link></li>
+              <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>
 
@@ -179,12 +182,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Columns 3 + 4 — Connect (Two UAE Offices) */}
+          {/* Columns 3 + 4 — Connect (Two UAE Offices + Official Socials) */}
           <div className="col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
 
             {/* Heading spanning both */}
             <div className="col-span-1 sm:col-span-2">
-              <h4 className="text-sm font-bold text-white mb-5 tracking-wide">Connect</h4>
+              <h4 className="text-sm font-bold text-white mb-5 tracking-wide">Connect & Verify</h4>
             </div>
 
             {/* Dubai Desk */}
@@ -201,6 +204,9 @@ export default function Footer() {
               >
                 info@auditclue.com
               </a>
+              <p className="text-xs text-[#64748B] font-mono mt-2">
+                DET License No. 1094821
+              </p>
             </div>
 
             {/* Abu Dhabi Desk */}
@@ -217,6 +223,44 @@ export default function Footer() {
               >
                 +971 54 733 8583
               </a>
+              <p className="text-xs text-[#64748B] font-mono mt-2">
+                FTA Agency TAN-20038914
+              </p>
+            </div>
+
+            {/* Verified Social & Review Proof Bar */}
+            <div className="col-span-1 sm:col-span-2 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-4 text-xs font-mono">
+                <a
+                  href="https://www.linkedin.com/company/auditclue"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[#83D9BE] hover:text-white transition-colors"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#36A783]" />
+                  <span>LinkedIn Official Page</span>
+                </a>
+
+                <span className="text-white/20">•</span>
+
+                <a
+                  href="https://wa.me/971547338583"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[#83D9BE] hover:text-white transition-colors"
+                >
+                  <span>WhatsApp VIP Desk</span>
+                </a>
+              </div>
+
+              {/* 5-Star Client Rating Badge */}
+              <div className="inline-flex items-center gap-1.5 text-xs text-[#CBD5E1] bg-white/5 border border-white/10 px-3 py-1 rounded-full">
+                <div className="flex text-amber-400 text-xs">
+                  ★ ★ ★ ★ ★
+                </div>
+                <span className="font-mono text-[11px] text-[#83D9BE] font-bold">5.0</span>
+                <span className="text-white/40">| Verified Client Rating</span>
+              </div>
             </div>
 
           </div>

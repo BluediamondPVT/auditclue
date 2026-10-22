@@ -218,7 +218,7 @@ export default function AboutSection() {
             </div>
 
             {/* CTA Button: Discover Auditclue (Next-Level Awwwards Hover Animation) */}
-            <div className="about-reveal-item pt-2">
+            <div className="about-reveal-item pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
               <Link
                 href="/about"
                 className="group relative inline-flex items-center gap-3.5 overflow-hidden rounded-full bg-brand-teal px-7 py-3.5 text-white font-medium shadow-[0_6px_22px_rgba(54,167,131,0.28)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_12px_32px_rgba(23,45,67,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]"
@@ -250,18 +250,33 @@ export default function AboutSection() {
 
                 {/* 4. Dual-Arrow Flight Portal Badge */}
                 <span className="relative z-10 flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/20 backdrop-blur-xs transition-all duration-500 group-hover:bg-white text-white group-hover:text-[#172D43] group-hover:scale-105">
-                  {/* Primary Arrow: shoots top-right */}
                   <ArrowUpRight
                     className="absolute h-3.5 w-3.5 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-5 group-hover:-translate-y-5 group-hover:opacity-0"
                     strokeWidth={2.4}
                   />
-                  {/* Portal Arrow: enters from bottom-left */}
                   <ArrowUpRight
                     className="absolute h-3.5 w-3.5 -translate-x-5 translate-y-5 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100"
                     strokeWidth={2.4}
                   />
                 </span>
               </Link>
+
+              <Link
+                href="/about#leadership"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#233F5B] hover:text-[var(--brand-teal)] transition-colors px-3 py-2"
+              >
+                <span>Senior Partners & CPAs</span>
+                <ArrowUpRight className="w-4 h-4 text-[var(--brand-teal)]" />
+              </Link>
+            </div>
+
+            {/* Quick Verifiable License Strip */}
+            <div className="about-reveal-item mt-6 pt-4 border-t border-slate-200/80 flex flex-wrap items-center gap-3 text-xs font-mono text-[#64748B]">
+              <span className="text-[#233F5B] font-semibold">DET Lic. No. 1094821</span>
+              <span>•</span>
+              <span className="text-[var(--brand-teal)] font-semibold">FTA Agency TAN-20038914</span>
+              <span>•</span>
+              <span>IFRS & ISA Standards</span>
             </div>
           </div>
 
