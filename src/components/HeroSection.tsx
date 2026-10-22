@@ -132,7 +132,7 @@ export default function HeroSection() {
 
           {/* Hand-drawn annotation: Growing Businesses Across UAE (Desktop & Tablet) */}
           <div className="mt-6 hidden items-center gap-2 pl-4 sm:flex lg:mt-8 lg:pl-14">
-            <span className="font-caveat text-xl font-bold leading-tight text-[#475569] sm:text-2xl">
+            <span className="font-caveat text-xl font-bold leading-tight text-[#475569] sm:text-2xl shrink-0">
               Growing
               <br />
               Businesses
@@ -140,7 +140,9 @@ export default function HeroSection() {
               Across UAE
             </span>
             <svg
-              className="-mt-3 h-10 w-14 text-[#475569]"
+              className="-mt-3 h-10 w-14 text-[#475569] shrink-0"
+              width={54}
+              height={36}
               viewBox="0 0 54 36"
               fill="none"
               stroke="currentColor"

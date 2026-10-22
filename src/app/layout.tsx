@@ -6,14 +6,15 @@ import "./globals.css";
 const lora = Lora({
   variable: "--font-lora",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
 const kumbhSans = Kumbh_Sans({
   variable: "--font-kumbh",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
-  preload: true,
 });
 
 const caveat = Caveat({
@@ -21,7 +22,6 @@ const caveat = Caveat({
   subsets: ["latin"],
   weight: ["700"],
   display: "swap",
-  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -42,6 +42,24 @@ export default function RootLayout({
       lang="en"
       className={`${lora.variable} ${kumbhSans.variable} ${caveat.variable} h-full antialiased`}
     >
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hero-bg.webp"
+          type="image/webp"
+          fetchPriority="high"
+          media="(min-width: 1024px)"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hero-bg-mobile.webp"
+          type="image/webp"
+          fetchPriority="high"
+          media="(max-width: 1023px)"
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans">
         <SmoothScroll>{children}</SmoothScroll>
       </body>
