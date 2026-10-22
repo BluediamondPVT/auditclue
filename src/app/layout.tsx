@@ -6,15 +6,14 @@ import "./globals.css";
 const lora = Lora({
   variable: "--font-lora",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
 const kumbhSans = Kumbh_Sans({
   variable: "--font-kumbh",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   display: "swap",
+  preload: true,
 });
 
 const caveat = Caveat({
@@ -22,6 +21,7 @@ const caveat = Caveat({
   subsets: ["latin"],
   weight: ["700"],
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

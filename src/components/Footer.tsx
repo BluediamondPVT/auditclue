@@ -138,7 +138,7 @@ export default function Footer() {
               >
                 info@auditclue.com
               </a>
-              <p className="text-xs text-[#64748B] font-mono mt-2">
+              <p className="text-xs text-[#94A3B8] font-mono mt-2">
                 DET License No. 1094821
               </p>
             </div>
@@ -157,7 +157,7 @@ export default function Footer() {
               >
                 +971 54 733 8583
               </a>
-              <p className="text-xs text-[#64748B] font-mono mt-2">
+              <p className="text-xs text-[#94A3B8] font-mono mt-2">
                 FTA Agency TAN-20038914
               </p>
             </div>
@@ -193,7 +193,7 @@ export default function Footer() {
                   ★ ★ ★ ★ ★
                 </div>
                 <span className="font-mono text-[11px] text-[#83D9BE] font-bold">5.0</span>
-                <span className="text-white/40">| Verified Client Rating</span>
+                <span className="text-[#CBD5E1]">| Verified Client Rating</span>
               </div>
             </div>
 
@@ -204,7 +204,7 @@ export default function Footer() {
 
       {/* ── BOTTOM BAR ── */}
       <div className="border-t border-white/10">
-        <div className="w-full px-5 sm:px-12 lg:px-20 xl:px-28 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-[#6A7B8E] text-center sm:text-left">
+        <div className="w-full px-5 sm:px-12 lg:px-20 xl:px-28 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-[#94A3B8] text-center sm:text-left">
           <span>© 2026 Auditclue Global Advisory Services LLC</span>
           <span className="text-center">FTA Registered · IFRS / ISA Compliant · 100% Digital UAE Delivery</span>
           <button

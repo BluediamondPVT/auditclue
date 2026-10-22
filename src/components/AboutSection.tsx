@@ -174,10 +174,10 @@ export default function AboutSection() {
             </div>
 
             {/* Quick Verifiable License Strip */}
-            <div className="about-reveal-item mt-6 pt-4 border-t border-slate-200/80 flex flex-wrap items-center gap-3 text-xs font-mono text-[#64748B]">
+            <div className="about-reveal-item mt-6 pt-4 border-t border-slate-200/80 flex flex-wrap items-center gap-3 text-xs font-mono text-[#475569]">
               <span className="text-[#233F5B] font-semibold">DET Lic. No. 1094821</span>
               <span>•</span>
-              <span className="text-[var(--brand-teal)] font-semibold">FTA Agency TAN-20038914</span>
+              <span className="text-[#16654E] font-semibold">FTA Agency TAN-20038914</span>
               <span>•</span>
               <span>IFRS & ISA Standards</span>
             </div>

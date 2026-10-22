@@ -547,8 +547,8 @@ export default function WorkflowSection() {
                   <div
                     className={`absolute -left-8 sm:-left-10 top-5 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center text-xs font-mono font-bold transition-all ${
                       isPassed
-                        ? "bg-[#36A783] text-white ring-4 ring-[#EAF4F0] shadow-md shadow-[#36A783]/20"
-                        : "bg-white border-2 border-slate-300 text-[#556980]"
+                        ? "bg-[#1d8062] text-white ring-4 ring-[#EAF4F0] shadow-md shadow-[#1d8062]/20"
+                        : "bg-white border-2 border-slate-400 text-[#172D43]"
                     }`}
                   >
                     {item.number}
@@ -607,7 +607,7 @@ export default function WorkflowSection() {
 
           <Link
             href="/process"
-            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-xl bg-[#36A783] px-6 sm:px-8 py-3.5 text-sm sm:text-base font-semibold text-white shadow-md transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-lg hover:shadow-[#36A783]/30 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
+            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-xl bg-[#1d8062] px-6 sm:px-8 py-3.5 text-sm sm:text-base font-semibold text-white shadow-md transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-lg hover:shadow-[#1d8062]/30 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
           >
             <span
               className="absolute inset-0 bg-[#172D43] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] translate-y-full group-hover:translate-y-0 rounded-xl"

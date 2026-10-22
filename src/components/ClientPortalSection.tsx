@@ -266,7 +266,7 @@ export default function ClientPortalSection() {
             <div className="portal-narrative-item pt-4 flex flex-wrap items-center gap-3.5">
               <a
                 href="#consult-form"
-                className="inline-flex items-center gap-2.5 bg-[#36A783] hover:bg-[#2B896B] text-white text-sm sm:text-base font-semibold px-6 py-3.5 rounded-xl transition-all shadow-lg hover:shadow-[#36A783]/30 group cursor-pointer"
+                className="inline-flex items-center gap-2.5 bg-[#1d8062] hover:bg-[#16654e] text-white text-sm sm:text-base font-semibold px-6 py-3.5 rounded-xl transition-all shadow-lg hover:shadow-[#1d8062]/30 group cursor-pointer"
               >
                 <span>Onboard Your Enterprise Today</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

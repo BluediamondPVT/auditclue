@@ -135,7 +135,7 @@ export default function PricingPackagesSection() {
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#36A783] text-white text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#16654E] text-white text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
                   MOST POPULAR
                 </div>
               )}

@@ -16,9 +16,9 @@
   --brand-navy-dark: #172d43;
   --brand-navy-light: #355776;
 
-  --brand-teal: #36a783;
-  --brand-teal-hover: #2b896b;
-  --brand-teal-dark: #216d56;
+  --brand-teal: #1d8062;
+  --brand-teal-hover: #16654e;
+  --brand-teal-dark: #16654e;
 
   /* Light surfaces */
   --bg-main: #f6f8fa;
@@ -1247,8 +1247,33 @@ input[type="range"].neu-range::-moz-range-thumb {
   border-radius: 50%;
   background: #eef2f7;
   box-shadow: 4px 4px 8px #cad4e2, -4px -4px 8px #ffffff;
-  border: 3px solid #36a783;
+  border: 3px solid #1d8062;
   cursor: grab;
+}
+
+/* =========================================================
+   LENIS SMOOTH SCROLLING STYLES (Inlined to save network request)
+   ========================================================= */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
 

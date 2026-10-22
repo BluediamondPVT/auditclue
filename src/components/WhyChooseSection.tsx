@@ -183,7 +183,7 @@ export default function WhyChooseSection() {
                     <ShieldCheck className="w-3.5 h-3.5" />
                     <span>02 • Statutory Mandate</span>
                   </span>
-                  <span className="font-serif text-3xl font-light text-white/20 group-hover:text-[#83D9BE] transition-colors">
+                  <span className="font-serif text-3xl font-light text-[#83D9BE] transition-colors">
                     {card2.number}
                   </span>
                 </div>
@@ -236,7 +236,7 @@ export default function WhyChooseSection() {
                   <div className="w-10 h-10 rounded-xl bg-[#36A783]/15 border border-[#36A783]/30 flex items-center justify-center text-[#36A783] group-hover:bg-[#36A783] group-hover:text-white transition-colors duration-300">
                     <Clock className="w-5 h-5" strokeWidth={1.6} />
                   </div>
-                  <span className="font-mono text-xs text-white/30 group-hover:text-[#83D9BE] transition-colors">
+                  <span className="font-mono text-xs text-[#83D9BE] font-semibold transition-colors">
                     {card3.number}
                   </span>
                 </div>
@@ -264,7 +264,7 @@ export default function WhyChooseSection() {
                   <div className="w-10 h-10 rounded-xl bg-[#36A783]/15 border border-[#36A783]/30 flex items-center justify-center text-[#36A783] group-hover:bg-[#36A783] group-hover:text-white transition-colors duration-300">
                     <CircleDollarSign className="w-5 h-5" strokeWidth={1.6} />
                   </div>
-                  <span className="font-mono text-xs text-white/30 group-hover:text-[#83D9BE] transition-colors">
+                  <span className="font-mono text-xs text-[#83D9BE] font-semibold transition-colors">
                     {card4.number}
                   </span>
                 </div>
@@ -292,7 +292,7 @@ export default function WhyChooseSection() {
                   <div className="w-10 h-10 rounded-xl bg-[#36A783]/15 border border-[#36A783]/30 flex items-center justify-center text-[#36A783] group-hover:bg-[#36A783] group-hover:text-white transition-colors duration-300">
                     <LockKeyhole className="w-5 h-5" strokeWidth={1.6} />
                   </div>
-                  <span className="font-mono text-xs text-white/30 group-hover:text-[#83D9BE] transition-colors">
+                  <span className="font-mono text-xs text-[#83D9BE] font-semibold transition-colors">
                     {card5.number}
                   </span>
                 </div>
@@ -320,7 +320,7 @@ export default function WhyChooseSection() {
                   <div className="w-10 h-10 rounded-xl bg-[#36A783]/15 border border-[#36A783]/30 flex items-center justify-center text-[#36A783] group-hover:bg-[#36A783] group-hover:text-white transition-colors duration-300">
                     <FileText className="w-5 h-5" strokeWidth={1.6} />
                   </div>
-                  <span className="font-mono text-xs text-white/30 group-hover:text-[#83D9BE] transition-colors">
+                  <span className="font-mono text-xs text-[#83D9BE] font-semibold transition-colors">
                     {card6.number}
                   </span>
                 </div>
@@ -378,7 +378,7 @@ export default function WhyChooseSection() {
 
                 <a
                   href="#consult-form"
-                  className="group/btn relative inline-flex items-center justify-between overflow-hidden rounded-xl bg-[#36A783] px-6 py-3.5 text-sm font-semibold text-white shadow-lg transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[#36A783]/30 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
+                  className="group/btn relative inline-flex items-center justify-between overflow-hidden rounded-xl bg-[#1d8062] px-6 py-3.5 text-sm font-semibold text-white shadow-lg transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[#16654e] hover:shadow-[#1d8062]/30 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
                 >
                   <span
                     className="absolute inset-0 bg-[#071426] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] translate-y-full group-hover/btn:translate-y-0 rounded-xl"
