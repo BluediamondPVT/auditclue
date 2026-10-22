@@ -200,9 +200,8 @@ export default function ServicesSection() {
       }
     }
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    const mm = gsap.matchMedia();
+    let mm: gsap.MatchMedia | null = null;
+    let observer: IntersectionObserver | null = null;
 
     // =========================================================
     // RESPONSIVE COORDINATED GSAP DECK-OF-CARDS STACKING
@@ -216,11 +215,10 @@ export default function ServicesSection() {
 
       const totalCards = cards.length;
 
-      // Measure tallest card so all cards fit comfortably without clipping
+      // Measure tallest card without mutating style before reading (prevents forced reflow)
       let maxCardHeight = 0;
       cards.forEach((card) => {
-        card.style.minHeight = "auto";
-        const h = card.offsetHeight || card.scrollHeight;
+        const h = card.getBoundingClientRect().height;
         if (h > maxCardHeight) maxCardHeight = h;
       });
 
@@ -363,29 +361,42 @@ export default function ServicesSection() {
       }
     };
 
-    // Desktop configuration
-    mm.add("(min-width: 768px)", () => {
-      setupCardStacking(false);
-    });
+    const initAnimation = () => {
+      gsap.registerPlugin(ScrollTrigger);
+      mm = gsap.matchMedia();
 
-    // Mobile configuration
-    mm.add("(max-width: 767px)", () => {
-      setupCardStacking(true);
-    });
+      // Desktop configuration
+      mm.add("(min-width: 768px)", () => {
+        setupCardStacking(false);
+      });
 
-    const refreshTimer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 250);
-
-    const handleResize = () => {
-      ScrollTrigger.refresh();
+      // Mobile configuration
+      mm.add("(max-width: 767px)", () => {
+        setupCardStacking(true);
+      });
     };
-    window.addEventListener("resize", handleResize);
+
+    // Defer initialization with IntersectionObserver (400px margin)
+    // Eliminates initial main-thread blocking time (TBT) while keeping 100% of the visual animation
+    if (typeof IntersectionObserver !== "undefined" && sectionRef.current) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0]?.isIntersecting) {
+            initAnimation();
+            observer?.disconnect();
+            observer = null;
+          }
+        },
+        { rootMargin: "400px" },
+      );
+      observer.observe(sectionRef.current);
+    } else {
+      initAnimation();
+    }
 
     return () => {
-      clearTimeout(refreshTimer);
-      window.removeEventListener("resize", handleResize);
-      mm.revert();
+      observer?.disconnect();
+      mm?.revert();
       if (cardsContainerRef.current) {
         cardsContainerRef.current.style.minHeight = "";
       }
@@ -429,7 +440,6 @@ export default function ServicesSection() {
           fill
           sizes="100vw"
           className="object-cover object-center blur-[2px] opacity-90"
-          priority
         />
         {/* Subtle elegant wash to preserve contrast while keeping graphics clearly visible */}
         <div className="absolute inset-0 bg-white/10" />

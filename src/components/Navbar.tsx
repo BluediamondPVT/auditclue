@@ -432,19 +432,18 @@ export default function Navbar() {
 
       {/* MOBILE NAVIGATION DRAWER */}
       <div
-        className={`fixed inset-0 z-40 lg:hidden overflow-hidden ${
-          menuOpen ? "pointer-events-auto" : "pointer-events-none"
+        className={`fixed inset-0 z-40 lg:hidden overflow-hidden transition-all duration-300 ${
+          menuOpen
+            ? "pointer-events-auto opacity-100 visible"
+            : "pointer-events-none opacity-0 invisible"
         }`}
-        aria-hidden={!menuOpen}
       >
         <button
           type="button"
           aria-label="Close navigation"
           tabIndex={menuOpen ? 0 : -1}
           onClick={closeMenu}
-          className={`absolute inset-0 h-full w-full bg-[rgba(23,45,67,0.45)] backdrop-blur-xs transition-opacity duration-300 ${
-            menuOpen ? "opacity-100" : "opacity-0"
-          }`}
+          className="absolute inset-0 h-full w-full bg-[rgba(23,45,67,0.45)] backdrop-blur-xs"
         />
 
         <nav

@@ -114,6 +114,7 @@ export default function WhyChooseSection() {
                   src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
                   alt="Modern Corporate Advisory Infrastructure"
                   fill
+                  sizes="(max-width: 1024px) 100vw, 58vw"
                   className="object-cover opacity-20 group-hover:opacity-30 group-hover:scale-105 transition-all duration-700 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#071426] via-[#071426]/80 to-[#071426]/40" />
