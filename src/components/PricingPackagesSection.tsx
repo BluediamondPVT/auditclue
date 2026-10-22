@@ -106,7 +106,7 @@ export default function PricingPackagesSection() {
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-[#36A783]/8 rounded-full blur-[140px]" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+      <div className="relative w-full max-w-[1600px] 2xl:max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 z-10">
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 bg-[#EAF4F0] text-[#216D56] border border-[#36A783]/30 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-4 font-mono shadow-xs">
@@ -123,12 +123,12 @@ export default function PricingPackagesSection() {
           </p>
         </div>
 
-        {/* 4 Pricing Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+        {/* 4 Pricing Cards Grid (Fluid Wide Container Layout) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 xl:gap-7 items-stretch">
           {PRICING_PLANS.map((plan) => (
             <div
               key={plan.id}
-              className={`rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 relative ${
+              className={`rounded-3xl p-6 sm:p-7 xl:p-8 flex flex-col justify-between transition-all duration-300 relative ${
                 plan.popular
                   ? "bg-[#071426] text-white border-2 border-[#36A783] shadow-xl hover:-translate-y-1"
                   : "bg-white text-[#071426] border border-[#CBD5E1]/90 shadow-md hover:border-[#36A783] hover:-translate-y-1"
@@ -201,24 +201,62 @@ export default function PricingPackagesSection() {
                 </div>
               </div>
 
-              {/* Bottom Action & SLA */}
+              {/* Bottom Action & SLA with Signature Liquid/Kinetic Button */}
               <div className="pt-4 border-t border-current/10 space-y-4">
                 <div className="flex items-center gap-1.5 text-[11px] font-mono opacity-80">
                   <Clock className="w-3.5 h-3.5 shrink-0 text-[#36A783]" />
                   <span className="truncate">{plan.sla}</span>
                 </div>
 
-                <a
-                  href="#consultation"
-                  className={`w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all shadow-sm ${
+                <Link
+                  href="/#consult-form"
+                  className={`group/btn relative w-full inline-flex items-center justify-between overflow-hidden rounded-2xl py-3 px-4.5 text-xs font-semibold tracking-wide transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] cursor-pointer shadow-sm ${
                     plan.popular
-                      ? "bg-[#C6F850] hover:bg-white text-[#071426]"
-                      : "bg-[#071426] hover:bg-[#216D56] text-white"
+                      ? "bg-[#C6F850] text-[#071426] hover:shadow-lg hover:shadow-[#C6F850]/20"
+                      : "bg-[#071426] text-white hover:shadow-lg hover:shadow-[#071426]/20"
                   }`}
                 >
-                  <span>Request Custom Scope</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
+                  {/* 1. Liquid Fill Wipe */}
+                  <span
+                    className={`absolute inset-0 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] translate-y-full group-hover/btn:translate-y-0 rounded-2xl ${
+                      plan.popular ? "bg-[#FFFFFF]" : "bg-[#36A783]"
+                    }`}
+                    aria-hidden="true"
+                  />
+
+                  {/* 2. Kinetic Text Roll / Flip */}
+                  <span className="relative z-10 block overflow-hidden leading-tight font-sans">
+                    <span className="block transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:-translate-y-full">
+                      Request Custom Scope
+                    </span>
+                    <span
+                      className={`absolute top-0 left-0 block translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:translate-y-0 ${
+                        plan.popular ? "text-[#071426]" : "text-white"
+                      }`}
+                      aria-hidden="true"
+                    >
+                      Request Custom Scope
+                    </span>
+                  </span>
+
+                  {/* 3. Dual-Arrow Flight Portal Badge */}
+                  <span
+                    className={`relative z-10 flex h-6.5 w-6.5 shrink-0 items-center justify-center overflow-hidden rounded-full transition-all duration-500 ${
+                      plan.popular
+                        ? "bg-[#071426]/10 group-hover/btn:bg-[#071426] text-[#071426] group-hover/btn:text-white"
+                        : "bg-white/10 group-hover/btn:bg-white text-white group-hover/btn:text-[#071426]"
+                    }`}
+                  >
+                    <ArrowUpRight
+                      className="absolute h-3.5 w-3.5 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:translate-x-4 group-hover/btn:-translate-y-4 group-hover/btn:opacity-0"
+                      strokeWidth={2.4}
+                    />
+                    <ArrowUpRight
+                      className="absolute h-3.5 w-3.5 -translate-x-4 translate-y-4 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:translate-x-0 group-hover/btn:translate-y-0 group-hover/btn:opacity-100"
+                      strokeWidth={2.4}
+                    />
+                  </span>
+                </Link>
               </div>
             </div>
           ))}

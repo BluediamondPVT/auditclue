@@ -120,7 +120,7 @@ export default function TestimonialsSection() {
 
   return (
     <section id="testimonials" className="py-24 sm:py-32 bg-white text-[#071426] border-b border-[#E2E8F0] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-full max-w-[1600px] 2xl:max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 relative z-10">
         {/* Header */}
         <div className="max-w-3xl mb-14 sm:mb-16">
           <div className="inline-flex items-center gap-2 bg-[#EAF4F0] text-[#216D56] border border-[#36A783]/30 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-4 font-mono shadow-xs">
