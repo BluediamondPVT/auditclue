@@ -9,7 +9,6 @@ import {
   Building2,
   CheckCircle2,
   ArrowUpRight,
-  Sparkles,
   ExternalLink,
   FileCheck2,
   Scale,

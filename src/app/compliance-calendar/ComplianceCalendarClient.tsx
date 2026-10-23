@@ -18,7 +18,6 @@ import {
   ShieldCheck,
   ArrowRight,
   ArrowUpRight,
-  Sparkles,
   Download,
   Info,
   ChevronRight,

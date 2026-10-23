@@ -15,7 +15,6 @@ import {
   Compass,
   ArrowRight,
   ArrowUpRight,
-  Sparkles,
   ShieldCheck,
   Briefcase,
   Layers,
@@ -349,7 +348,6 @@ export default function FreezoneVsMainlandClient() {
             <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#EAF4F0] to-[#F1F6F9] border border-[#36A783]/40 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
               <div className="max-w-3xl">
                 <div className="flex items-center gap-2 mb-2">
-                  <Sparkles className="w-4 h-4 text-[#36A783]" />
                   <span className="font-mono text-xs uppercase tracking-wider text-[#216D56] font-bold">
                     RECOMMENDED DOMICILIATION
                   </span>

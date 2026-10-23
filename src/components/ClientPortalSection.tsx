@@ -8,7 +8,6 @@ import {
   MessageSquare,
   ArrowUpRight,
   ShieldCheck,
-  Sparkles,
   Download,
   CheckCircle2,
   Clock,
@@ -197,7 +196,6 @@ export default function ClientPortalSection() {
           <div ref={copyRef} className="lg:col-span-5 order-1 lg:order-2 space-y-6">
             
             <div className="portal-narrative-item inline-flex items-center gap-2 bg-[#36A783]/15 border border-[#36A783]/30 text-[#83D9BE] text-[13px] font-semibold px-3.5 py-1.5 rounded-full font-mono">
-              <Sparkles className="w-3.5 h-3.5 text-[#36A783]" />
               <span>Proprietary Client Infrastructure</span>
             </div>
 

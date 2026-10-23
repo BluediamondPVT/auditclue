@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   Calculator,
   ShieldCheck,
-  Sparkles,
   ArrowRight,
   CheckCircle2,
   AlertCircle,
@@ -168,9 +167,6 @@ I would like to speak with a chartered tax agent regarding statutory optimizatio
       {/* 1. Quick Presets Bar (Neumorphic Soft Pills) */}
       <div className="neu-surface-sm rounded-2xl p-3 sm:p-4 mb-8 sm:mb-10 flex flex-wrap items-center justify-between gap-3 border border-white/60">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-full neu-pressed flex items-center justify-center text-[#36A783]">
-            <Sparkles className="w-3.5 h-3.5" />
-          </div>
           <span className="font-mono text-xs uppercase tracking-wider text-[#4A5D73] font-bold">
             Simulate Quick Scenarios:
           </span>
@@ -657,7 +653,6 @@ I would like to speak with a chartered tax agent regarding statutory optimizatio
           <div className="neu-surface rounded-2xl p-5 border border-white/80 space-y-4">
             <div className="flex items-center justify-between">
               <div className="text-xs font-mono font-bold text-[#071426] uppercase tracking-wider flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#36A783]" />
                 <span>STATUTORY RULES & ASSUMPTIONS</span>
               </div>
               <span className="text-[10px] font-mono text-[#64748B] bg-white px-2 py-0.5 rounded border border-slate-200">

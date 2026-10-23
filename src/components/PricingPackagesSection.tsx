@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   CheckCircle2,
   ArrowRight,
-  Sparkles,
   ShieldCheck,
   Clock,
   Layers,
@@ -110,7 +109,6 @@ export default function PricingPackagesSection() {
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 bg-[#EAF4F0] text-[#216D56] border border-[#36A783]/30 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-4 font-mono shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#36A783]" />
             <span>TRANSPARENT VALUE ARCHITECTURE</span>
           </div>
 

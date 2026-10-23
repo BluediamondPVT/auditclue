@@ -13,7 +13,6 @@ import {
   Shield,
   Calendar,
   MessageSquare,
-  Sparkles,
   Info,
 } from "lucide-react";
 

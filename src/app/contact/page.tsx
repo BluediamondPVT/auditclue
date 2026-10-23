@@ -13,7 +13,6 @@ import {
   Clock,
   ShieldCheck,
   CheckCircle2,
-  Sparkles,
   ArrowUpRight,
   MapPin,
   Building2,

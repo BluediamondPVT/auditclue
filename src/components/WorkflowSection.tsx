@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
-  Sparkles,
   MessageSquareQuote,
   Calculator,
   UploadCloud,
@@ -171,7 +170,6 @@ export default function WorkflowSection() {
         {/* Section Header & Editorial Introduction */}
         <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 bg-[#EAF4F0] border border-[#36A783]/30 text-[#216D56] text-xs sm:text-[13px] font-semibold px-4 py-1.5 rounded-full mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-[#36A783]" />
             <span>Digital Client Journey</span>
           </div>
 

@@ -8,7 +8,6 @@ import FlowText from "@/components/FlowText";
 import LeadershipSection from "@/components/LeadershipSection";
 import {
   Star,
-  Sparkles,
   Laptop,
   ShieldCheck,
   Clock,
@@ -300,7 +299,6 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mb-8 sm:mb-10">
               <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[#216D56] bg-[#EAF4F0] border border-[#36A783]/30 px-3 py-1 rounded-full mb-3">
-                <Sparkles className="w-3.5 h-3.5 text-[#36A783]" />
                 <span>Our Core Delivery Model</span>
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#071426] tracking-tight">
@@ -456,7 +454,6 @@ export default function AboutPage() {
 
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center z-10">
             <div className="inline-flex items-center gap-2 bg-[#36A783]/20 border border-[#36A783]/40 text-[#83D9BE] text-xs font-semibold px-3.5 py-1.5 rounded-full mb-6 font-mono">
-              <Sparkles className="w-3.5 h-3.5 text-[#83D9BE]" />
               <span>EXPERIENCE DIGITAL ADVISORY</span>
             </div>
 

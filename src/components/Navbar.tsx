@@ -14,7 +14,6 @@ import {
   Briefcase,
   Percent,
   TrendingUp,
-  Sparkles,
   Repeat,
   Compass,
   ShieldAlert,
@@ -47,6 +46,7 @@ const navLinks: NavLinkItem[] = [
     dropdownType: "knowledge",
   },
   { name: "Process", href: "/process" },
+  { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -133,18 +133,24 @@ const MEGA_SERVICES_COL_2 = [
   },
 ];
 
-const KNOWLEDGE_HUB_ITEMS = [
+interface KnowledgeHubItem {
+  title: string;
+  href: string;
+  badge?: string;
+  desc: string;
+  icon: typeof Calendar;
+}
+
+const KNOWLEDGE_HUB_ITEMS: KnowledgeHubItem[] = [
   {
     title: "Compliance Calendar",
     href: "/compliance-calendar",
-    badge: "2026/27",
     desc: "CT, VAT, ESR & Free Zone statutory deadlines",
     icon: Calendar,
   },
   {
     title: "Mainland vs Free Zone",
     href: "/freezone-vs-mainland",
-    badge: "Guide",
     desc: "10-point statutory comparison & decision tool",
     icon: Compass,
   },
@@ -207,30 +213,32 @@ export default function Navbar() {
           scrolled ? "shadow-[0_8px_30px_rgba(35,63,91,0.07)]" : "shadow-none"
         }`}
       >
-        <div className="mx-auto flex h-19 max-w-330 items-center justify-between px-5 sm:px-8 lg:h-21.5 lg:px-10">
-          {/* Brand Logo */}
-          <Link
-            href="/"
-            onClick={closeMenu}
-            className="relative z-60 flex shrink-0 items-center"
-            aria-label="Auditclue home"
-          >
-            <Image
-              src="/logo-transparent.png"
-              alt="Auditclue Global Advisory Services LLC"
-              width={250}
-              height={75}
-              priority
-              fetchPriority="high"
-              sizes="(max-width: 640px) 175px, 250px"
-              className="h-auto w-43.75 object-contain sm:w-62.5"
-            />
-          </Link>
+        <div className="w-full flex h-19 items-center justify-between px-4 sm:px-6 lg:h-21.5 lg:px-8 xl:px-10 2xl:px-12">
+          {/* Brand Logo (Left) */}
+          <div className="flex shrink-0 items-center">
+            <Link
+              href="/"
+              onClick={closeMenu}
+              className="relative z-60 flex shrink-0 items-center"
+              aria-label="Auditclue home"
+            >
+              <Image
+                src="/logo-transparent.png"
+                alt="Auditclue Global Advisory Services LLC"
+                width={250}
+                height={75}
+                priority
+                fetchPriority="high"
+                sizes="(max-width: 640px) 175px, 250px"
+                className="h-auto w-43.75 object-contain sm:w-62.5"
+              />
+            </Link>
+          </div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation (Centered) */}
           <nav
             aria-label="Main navigation"
-            className="hidden items-center gap-4 xl:gap-6 2xl:gap-7 lg:flex"
+            className="hidden items-center justify-center gap-3 xl:gap-5 2xl:gap-6 lg:flex flex-1 mx-2 xl:mx-6"
           >
             {navLinks.map((link) => {
               const active = isActive(link.href);
@@ -370,9 +378,11 @@ export default function Navbar() {
                                     <span className="text-xs font-bold text-[#071426] group-hover/item:text-[#216D56] transition-colors">
                                       {item.title}
                                     </span>
-                                    <span className="text-[9px] font-mono font-bold bg-[#C6F850] text-[#071426] px-1.5 py-0.2 rounded-full">
-                                      {item.badge}
-                                    </span>
+                                    {item.badge && (
+                                      <span className="text-[9px] font-mono font-bold bg-[#C6F850] text-[#071426] px-1.5 py-0.2 rounded-full">
+                                        {item.badge}
+                                      </span>
+                                    )}
                                   </div>
                                   <p className="text-[11px] text-[#64748B] leading-snug mt-0.5">
                                     {item.desc}
@@ -383,14 +393,6 @@ export default function Navbar() {
                             );
                           })}
                         </div>
-
-                        {/* Footer */}
-                        <div className="mt-2.5 pt-2 border-t border-slate-100 px-2.5 flex items-center justify-between text-[11px] text-[#64748B]">
-                          <span>Official FTA & statutory aligned</span>
-                          <span className="text-[#216D56] font-semibold text-[10px] font-mono uppercase tracking-wider">
-                            FY 2026/27
-                          </span>
-                        </div>
                       </div>
                     </div>
                   )}
@@ -399,8 +401,8 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Primary CTA & Portal Login (Desktop Only) */}
-          <div className="hidden lg:flex items-center gap-2.5">
+          {/* Primary CTA & Portal Login (Right) */}
+          <div className="hidden lg:flex items-center justify-end gap-2.5 shrink-0">
             {/* Portal Login Dropdown */}
             <div className="relative group">
               <button
@@ -720,9 +722,11 @@ export default function Navbar() {
                                   {item.title}
                                 </span>
                               </div>
-                              <span className="text-[9px] font-mono font-bold bg-[#C6F850] text-[#071426] px-1.5 py-0.2 rounded-full">
-                                {item.badge}
-                              </span>
+                              {item.badge && (
+                                <span className="text-[9px] font-mono font-bold bg-[#C6F850] text-[#071426] px-1.5 py-0.2 rounded-full">
+                                  {item.badge}
+                                </span>
+                              )}
                             </Link>
                           );
                         })}

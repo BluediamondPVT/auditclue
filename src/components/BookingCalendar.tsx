@@ -7,7 +7,6 @@ import {
   Video,
   Phone,
   CheckCircle2,
-  Sparkles,
   ArrowRight,
   Globe2,
 } from "lucide-react";

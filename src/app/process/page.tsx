@@ -16,7 +16,6 @@ import {
   CheckCircle2,
   ArrowUpRight,
   ArrowRight,
-  Sparkles,
   Lock,
   Clock,
   Laptop,
@@ -391,7 +390,6 @@ export default function ProcessPage() {
 
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center z-10">
             <div className="inline-flex items-center gap-2 bg-[#36A783]/20 border border-[#36A783]/40 text-[#83D9BE] text-xs font-semibold px-3.5 py-1.5 rounded-full mb-6 font-mono">
-              <Sparkles className="w-3.5 h-3.5 text-[#83D9BE]" />
               <span>READY TO BEGIN STAGE 01?</span>
             </div>
 

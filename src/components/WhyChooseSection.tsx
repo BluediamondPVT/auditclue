@@ -13,7 +13,6 @@ import {
   UsersRound,
   ArrowUpRight,
   CheckCircle2,
-  Sparkles,
   ArrowRight,
   Layers,
   Building2,
