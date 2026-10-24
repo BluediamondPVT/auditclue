@@ -1,31 +1,160 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FlowText from "@/components/FlowText";
 import ContactForm from "@/components/ContactForm";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 import {
   MessageSquare,
   Phone,
   Mail,
   ArrowRight,
   ArrowUpRight,
+  CheckCircle2,
+  Clock,
 } from "lucide-react";
 
-const TRANSFER_PRICING_SERVICES = [
-  "Transfer Pricing Assessment",
-  "Related Party Transaction Review",
-  "Transfer Pricing Policy",
-  "Local File Preparation",
-  "Master File Support",
-  "Disclosure Form Assistance",
-  "Arm's Length Pricing Review",
-  "Intra-group Service Fee Review",
-  "Management Fee Documentation",
-  "Shareholder Loan Review",
-  "Benchmarking Support",
+const TRANSFER_PRICING_PAIRS = [
+  {
+    phase: "01",
+    label: "Scoping Assessment & Related Party Review",
+    items: [
+      {
+        num: "01",
+        title: "Transfer Pricing Assessment",
+        scope:
+          "Evaluating global group corporate structure against UAE Corporate Tax Law (Federal Decree-Law No. 47) and OECD TP Guidelines to establish compliance thresholds.",
+        deliverable: "Transfer Pricing Scoping Assessment & Threshold Matrix",
+        turnaround: "3–5 Business Days",
+      },
+      {
+        num: "02",
+        title: "Related Party Transaction Review",
+        scope:
+          "Scrutinizing intercompany sales, cost-allocations, royalty licensing, and management charges to uncover transfer pricing exposures and recharacterization risks.",
+        deliverable: "Related Party Transaction Register & Risk Assessment",
+        turnaround: "4 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "02",
+    label: "Policy Framework & Arm's Length Calibration",
+    items: [
+      {
+        num: "03",
+        title: "Transfer Pricing Policy",
+        scope:
+          "Drafting robust corporate intercompany pricing policies specifying acceptable transfer pricing methods (CUP, Resale Price, Cost Plus, TNMM, Profit Split).",
+        deliverable: "Group Transfer Pricing Policy Document & Method Selection Note",
+        turnaround: "5–7 Business Days",
+      },
+      {
+        num: "04",
+        title: "Arm's Length Pricing Review",
+        scope:
+          "Validating whether controlled commercial and financial conditions mirror transactions executed between independent third parties under comparable conditions.",
+        deliverable: "Arm’s Length Compliance Certification Memorandum",
+        turnaround: "4 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "03",
+    label: "Local File & Master File Documentation",
+    items: [
+      {
+        num: "05",
+        title: "Local File Preparation",
+        scope:
+          "Compiling mandatory OECD Chapter V compliant Local File documentation detailing UAE entity operations, material intercompany transactions, and economic analyses.",
+        deliverable: "Statutory UAE Transfer Pricing Local File Dossier",
+        turnaround: "7–10 Business Days",
+      },
+      {
+        num: "06",
+        title: "Master File Support",
+        scope:
+          "Structuring high-level global group overview documentation detailing organizational structure, intangible assets, financing activities, and consolidated profits.",
+        deliverable: "Global Group Master File Alignment Dossier",
+        turnaround: "7–10 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "04",
+    label: "Intra-Group Services & Management Documentation",
+    items: [
+      {
+        num: "07",
+        title: "Intra-group Service Fee Review",
+        scope:
+          "Applying OECD benefit-test criteria to evaluate centralized management, IT, HR, and shared services allocations across subsidiaries.",
+        deliverable: "Intra-Group Services Benefit Test & Cost Allocation Schedule",
+        turnaround: "4–5 Business Days",
+      },
+      {
+        num: "08",
+        title: "Management Fee Documentation",
+        scope:
+          "Substantiating management fee charges with service level agreements (SLAs), time logs, direct/indirect allocation keys, and markup justifications.",
+        deliverable: "Comprehensive Management Fee Defense Pack & Intercompany SLA",
+        turnaround: "4–5 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "05",
+    label: "Financial Transactions & Shareholder Loans",
+    items: [
+      {
+        num: "09",
+        title: "Shareholder Loan Review",
+        scope:
+          "Benchmarking intra-group loans, cash pooling, promissory notes, and interest rate margins against market credit ratings and UAE thin capitalization rules.",
+        deliverable: "Intercompany Financing & Interest Rate Benchmark Dossier",
+        turnaround: "4–5 Business Days",
+      },
+      {
+        num: "10",
+        title: "Benchmarking Support",
+        scope:
+          "Executing rigorous multi-country database benchmarking (TP Catalyst, Orbis, Amadeus) to identify interquartile arm's length profit and markup ranges.",
+        deliverable: "Independent Economic Benchmarking Study & Search Strategy",
+        turnaround: "5–7 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "06",
+    label: "Statutory Reporting & FTA Audit Defense",
+    items: [
+      {
+        num: "11",
+        title: "Disclosure Form Assistance",
+        scope:
+          "Preparing and validating annual Transfer Pricing Disclosure Forms required to be submitted alongside the UAE Corporate Tax Return on the EmaraTax portal.",
+        deliverable: "Completed EmaraTax Transfer Pricing Disclosure Submission Pack",
+        turnaround: "2–3 Business Days",
+      },
+      {
+        num: "12",
+        title: "TP Audit Defense & Representation",
+        scope:
+          "Defending transfer pricing positions, intercompany margins, and local files during Federal Tax Authority (FTA) tax audits and technical clarification requests.",
+        deliverable: "FTA Audit Defense Dossier & Technical Clarification Mandate",
+        turnaround: "Active Audit Defense",
+      },
+    ],
+  },
 ];
 
 const OTHER_SERVICES = [
@@ -42,6 +171,195 @@ const OTHER_SERVICES = [
 ];
 
 export default function TransferPricingClient() {
+  const stackWrapperRef = useRef<HTMLDivElement>(null);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
+
+  // =========================================================================
+  // GSAP SCROLLTRIGGER DECK-OF-CARDS STACKING
+  // =========================================================================
+  useEffect(() => {
+    if (!cardsContainerRef.current || !stackWrapperRef.current) return;
+
+    if (typeof window !== "undefined") {
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      if (prefersReducedMotion) {
+        const cards = cardsContainerRef.current?.querySelectorAll<HTMLElement>(
+          ".setup-stacked-card",
+        );
+        cards?.forEach((card) => {
+          gsap.set(card, {
+            position: "relative",
+            top: "auto",
+            left: "auto",
+            width: "100%",
+            height: "auto",
+            yPercent: 0,
+            scale: 1,
+            y: 0,
+            opacity: 1,
+            clearProps: "all",
+          });
+        });
+        return;
+      }
+    }
+
+    let mm: gsap.MatchMedia | null = null;
+
+    const setupCardStacking = () => {
+      const cards = cardsContainerRef.current?.querySelectorAll<HTMLElement>(
+        ".setup-stacked-card",
+      );
+      if (!cards || cards.length <= 1) return;
+
+      const totalCards = cards.length;
+
+      let maxCardHeight = 0;
+      cards.forEach((card) => {
+        const h = card.getBoundingClientRect().height;
+        if (h > maxCardHeight) maxCardHeight = h;
+      });
+
+      if (maxCardHeight > 0 && cardsContainerRef.current) {
+        cardsContainerRef.current.style.minHeight = `${Math.ceil(
+          maxCardHeight,
+        )}px`;
+      }
+
+      const startOffset = "top top+=104";
+      const perCardScroll = 380;
+      const totalScrollDistance = (totalCards - 1) * perCardScroll + 180;
+      const scrubSpeed = 0.6;
+
+      cards.forEach((card, idx) => {
+        if (idx === 0) {
+          gsap.set(card, {
+            position: "relative",
+            yPercent: 0,
+            opacity: 1,
+            visibility: "visible",
+            force3D: false,
+          });
+        } else if (idx === 1) {
+          gsap.set(card, {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            minHeight: "100%",
+            yPercent: 100,
+            opacity: 1,
+            visibility: "visible",
+            force3D: false,
+          });
+        } else {
+          gsap.set(card, {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            minHeight: "100%",
+            yPercent: 100,
+            opacity: 0,
+            visibility: "hidden",
+            force3D: false,
+          });
+        }
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: stackWrapperRef.current,
+          start: startOffset,
+          end: `+=${totalScrollDistance}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: scrubSpeed,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      const moveDuration = 1.0;
+      const holdDuration = 0.8;
+      const stepDuration = moveDuration + holdDuration;
+      const initialHold = 0.7;
+
+      for (let i = 1; i < totalCards; i++) {
+        const currCard = cards[i];
+        const nextCard = i + 1 < totalCards ? cards[i + 1] : null;
+        const startTime = initialHold + (i - 1) * stepDuration;
+        const arriveTime = startTime + moveDuration;
+
+        if (i >= 2) {
+          const olderCard = cards[i - 2];
+          tl.to(
+            olderCard,
+            {
+              opacity: 0,
+              visibility: "hidden",
+              ease: "none",
+              duration: 0.2,
+            },
+            startTime,
+          );
+        }
+
+        tl.to(
+          currCard,
+          {
+            yPercent: 0,
+            opacity: 1,
+            visibility: "visible",
+            ease: "none",
+            duration: moveDuration,
+            force3D: false,
+          },
+          startTime,
+        );
+
+        if (nextCard) {
+          tl.to(
+            nextCard,
+            {
+              opacity: 1,
+              visibility: "visible",
+              ease: "none",
+              duration: 0.2,
+            },
+            arriveTime,
+          );
+        }
+      }
+    };
+
+    mm = gsap.matchMedia();
+    mm.add("(min-width: 768px)", () => {
+      setupCardStacking();
+    });
+    mm.add("(max-width: 767px)", () => {
+      const cards = cardsContainerRef.current?.querySelectorAll<HTMLElement>(
+        ".setup-stacked-card",
+      );
+      cards?.forEach((card) => {
+        gsap.set(card, {
+          clearProps: "all",
+        });
+      });
+      if (cardsContainerRef.current) {
+        cardsContainerRef.current.style.minHeight = "";
+      }
+    });
+
+    return () => {
+      mm?.revert();
+      if (cardsContainerRef.current) {
+        cardsContainerRef.current.style.minHeight = "";
+      }
+    };
+  }, []);
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#071426] selection:bg-[#C6F850] selection:text-[#071426]">
       <Navbar />
@@ -127,60 +445,100 @@ export default function TransferPricingClient() {
         </section>
 
         {/* ================================================================= */}
-        {/* 2. WHAT'S INCLUDED IN TRANSFER PRICING                            */}
+        {/* 2. PRACTICE SCOPE: 12 SCOPED DELIVERABLES (Pinned Stacking Deck)  */}
         {/* ================================================================= */}
-        <section className="py-16 sm:py-24 bg-white border-b border-[#E2E8F0]">
+        <section
+          ref={stackWrapperRef}
+          className="py-16 sm:py-24 bg-white border-b border-[#E2E8F0]"
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-8 mb-8 border-b border-[#071426]/10">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 mb-8 border-b border-[#071426]/10">
               <div>
                 <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#7C3AED] font-bold block mb-2">
-                  PRACTICE SCOPE
+                  TRANSFER PRICING PROTOCOL
                 </span>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#071426]">
-                  What&apos;s Included in Transfer Pricing
+                  12 Scoped Deliverables in Transfer Pricing
                 </h2>
               </div>
-              <div className="text-xs sm:text-sm text-[#64748B] font-mono">
-                11 Deliverables · Arm&apos;s Length
+              <div className="text-xs sm:text-sm text-[#64748B] font-mono flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#7C3AED] animate-pulse" />
+                <span className="hidden md:inline">Scroll to Reveal TP Protocol (6 Phases)</span>
+                <span className="md:hidden">12 Scoped Deliverables</span>
               </div>
             </div>
 
-            {/* Editorial Typographic List (Clean 11 Services, No Generic Boxes) */}
-            <div className="divide-y divide-[#E2E8F0]">
-              {TRANSFER_PRICING_SERVICES.map((serviceName, idx) => {
-                const num = idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`;
-                return (
-                  <div
-                    key={idx}
-                    className="py-5 sm:py-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center group hover:bg-[#F8FAFC] transition-colors -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-xl"
-                  >
-                    <div className="md:col-span-2 flex items-center gap-3">
-                      <span className="font-mono text-xs font-bold text-[#7C3AED]">
-                        [{num}]
+            <div
+              ref={cardsContainerRef}
+              className="relative w-full flex flex-col gap-4 md:gap-0 md:overflow-hidden"
+            >
+              {TRANSFER_PRICING_PAIRS.map((pair, pIdx) => (
+                <div
+                  key={pIdx}
+                  className="setup-stacked-card w-full md:rounded-3xl md:bg-white md:p-7 md:border md:border-[#CBD5E1]/80 md:shadow-[0_-14px_36px_rgba(7,20,38,0.08)] flex flex-col justify-between"
+                  style={{ zIndex: 10 + pIdx }}
+                >
+                  {/* Phase Row Header - HIDDEN on mobile as per user request */}
+                  <div className="hidden md:flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b border-[#E2E8F0]">
+                    <div className="flex items-center gap-3">
+                      <span className="font-mono text-xs font-bold text-[#6B21A8] bg-[#F3E8FF] border border-[#7C3AED]/30 px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap">
+                        Phase {pair.phase} / 06
                       </span>
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-[#64748B] bg-[#F3E8FF] px-2 py-0.5 rounded-md">
-                        TP Advisory
-                      </span>
-                    </div>
-
-                    <div className="md:col-span-7">
-                      <h3 className="text-lg sm:text-xl font-serif font-medium text-[#071426] group-hover:text-[#6B21A8] transition-colors">
-                        {serviceName}
+                      <h3 className="text-base sm:text-lg font-serif font-bold text-[#071426]">
+                        {pair.label}
                       </h3>
                     </div>
-
-                    <div className="md:col-span-3 flex justify-start md:justify-end">
-                      <a
-                        href="#consultation"
-                        className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#6B21A8] group-hover:text-[#7C3AED] transition-colors"
-                      >
-                        <span>Talk With an Advisor</span>
-                        <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-                      </a>
+                    <div className="text-xs font-mono text-[#64748B] flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#7C3AED]" />
+                      <span>
+                        Deliverables {pair.items[0].num} &amp; {pair.items[1].num} of 12
+                      </span>
                     </div>
                   </div>
-                );
-              })}
+
+                  {/* 2-by-2 Grid (Left & Right on Desktop, Clean Cards on Mobile) */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                    {pair.items.map((item, itemIdx) => (
+                      <div
+                        key={itemIdx}
+                        className="p-5 sm:p-7 rounded-2xl bg-white md:bg-[#F8FAFC] border border-[#CBD5E1]/90 hover:border-[#7C3AED] hover:shadow-lg transition-all group flex flex-col justify-between shadow-xs"
+                      >
+                        <div>
+                          <div className="flex items-center justify-between gap-3 mb-3">
+                            <span className="font-mono text-xs font-bold text-[#7C3AED] bg-[#F3E8FF] px-2.5 py-1 rounded-md">
+                              [{item.num}] TRANSFER PRICING
+                            </span>
+                            <span className="text-xs font-mono text-[#64748B] flex items-center gap-1.5">
+                              <Clock className="w-3.5 h-3.5 text-[#7C3AED]" />
+                              <span>{item.turnaround}</span>
+                            </span>
+                          </div>
+
+                          <h4 className="text-lg sm:text-xl font-serif font-bold text-[#071426] group-hover:text-[#6B21A8] transition-colors leading-snug mb-3">
+                            {item.title}
+                          </h4>
+
+                          <p className="text-xs sm:text-sm text-[#475569] font-sans leading-relaxed mb-5">
+                            {item.scope}
+                          </p>
+                        </div>
+
+                        <div className="pt-4 border-t border-[#CBD5E1]/70">
+                          <div className="text-[11px] font-mono font-bold text-[#64748B] uppercase mb-1.5">
+                            Key Deliverable:
+                          </div>
+                          <div className="text-xs font-medium text-[#6B21A8] bg-[#F3E8FF] p-3 rounded-xl border border-[#7C3AED]/20 flex items-start gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 text-[#7C3AED] shrink-0 mt-0.5" />
+                            <span className="leading-snug">
+                              {item.deliverable}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>

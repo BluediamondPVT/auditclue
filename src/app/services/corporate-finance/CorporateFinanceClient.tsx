@@ -1,36 +1,204 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FlowText from "@/components/FlowText";
 import ContactForm from "@/components/ContactForm";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 import {
   MessageSquare,
   Phone,
   Mail,
   ArrowRight,
   ArrowUpRight,
+  CheckCircle2,
+  Clock,
 } from "lucide-react";
 
-const CORPORATE_FINANCE_SERVICES = [
-  "Business Loan Advisory",
-  "SME Finance Advisory",
-  "Trade Finance Advisory",
-  "Invoice Discounting Advisory",
-  "Working Capital Finance",
-  "Mortgage Finance Advisory",
-  "Project Finance Advisory",
-  "Asset Finance Advisory",
-  "Loan Restructuring Support",
-  "Bank Proposal Preparation",
-  "Credit Query Response Support",
-  "Financial Document Preparation for Banks",
-  "Investor Pitch Deck Support",
-  "Funding Teaser Preparation",
-  "Private Equity Introduction Support",
-  "Debt Advisory",
+const CORPORATE_FINANCE_PAIRS = [
+  {
+    phase: "01",
+    label: "Commercial Debt & SME Capital",
+    items: [
+      {
+        num: "01",
+        title: "Business Loan Advisory",
+        scope:
+          "Structuring collateral-free and asset-backed corporate debt facilities with UAE conventional and Islamic banking institutions.",
+        deliverable: "Bank Term Sheet & Sanction Advisory Note",
+        turnaround: "7–10 Business Days",
+      },
+      {
+        num: "02",
+        title: "SME Finance Advisory",
+        scope:
+          "Custom borrowing solutions for growing enterprises: cash-flow lending, revenue-based finance, and equipment leases.",
+        deliverable: "SME Credit Appraisal Dossier",
+        turnaround: "5 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "02",
+    label: "Trade Finance & Invoice Liquidity",
+    items: [
+      {
+        num: "03",
+        title: "Trade Finance Advisory",
+        scope:
+          "Securing documentary letters of credit (LC), standby LCs (SBLC), and shipping guarantees for regional and global trade.",
+        deliverable: "Trade Finance Facility Structure & Bank Mandate",
+        turnaround: "Bank Schedule",
+      },
+      {
+        num: "04",
+        title: "Invoice Discounting Advisory",
+        scope:
+          "Unlocking instant working capital by monetizing verified customer invoices through non-recourse factoring facilities.",
+        deliverable: "Receivables Factoring Facility Term Sheet",
+        turnaround: "3–5 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "03",
+    label: "Working Capital & Commercial Real Estate",
+    items: [
+      {
+        num: "05",
+        title: "Working Capital Finance",
+        scope:
+          "Revolving overdraft (OD) lines, short-term promissory notes, and supplier credit lines stabilizing intra-month payroll cycles.",
+        deliverable: "Working Capital Facility Sanction Pack",
+        turnaround: "Bank Schedule",
+      },
+      {
+        num: "06",
+        title: "Mortgage Finance Advisory",
+        scope:
+          "Financing commercial office spaces, industrial warehouses, and freehold investment assets across Dubai and Abu Dhabi.",
+        deliverable: "Commercial Property Mortgage Pre-Approval Dossier",
+        turnaround: "7 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "04",
+    label: "Project Finance & Capital Assets",
+    items: [
+      {
+        num: "07",
+        title: "Project Finance Advisory",
+        scope:
+          "Non-recourse or limited-recourse financial engineering for infrastructure, renewable energy, and industrial development projects.",
+        deliverable: "Project Financial Feasibility & Bankability Memorandum",
+        turnaround: "10–14 Business Days",
+      },
+      {
+        num: "08",
+        title: "Asset Finance Advisory",
+        scope:
+          "Financing machinery, heavy transportation fleets, medical technology, and capital equipment under lease-to-own models.",
+        deliverable: "Asset Financing Terms & Security Schedule",
+        turnaround: "5 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "05",
+    label: "Debt Restructuring & Credit Proposals",
+    items: [
+      {
+        num: "09",
+        title: "Loan Restructuring Support",
+        scope:
+          "Renegotiating distressed loan schedules, interest step-downs, and maturity tenure extensions with banking special recovery units.",
+        deliverable: "Consolidated Debt Settlement & Rescheduling Proposal",
+        turnaround: "Active Mediation",
+      },
+      {
+        num: "10",
+        title: "Bank Proposal Preparation",
+        scope:
+          "Drafting rigorous Credit Information Memorandums (CIM) with audited ratios, debt-service coverage (DSCR), and repayment plans.",
+        deliverable: "Underwriter-Grade Credit Information Memorandum",
+        turnaround: "5 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "06",
+    label: "Credit Queries & Bank Verification",
+    items: [
+      {
+        num: "11",
+        title: "Credit Query Response Support",
+        scope:
+          "Handling risk committee queries, stress-test interrogatories, and AECB credit score clarifications during bank approval stages.",
+        deliverable: "Official Credit Committee Clarification Memo",
+        turnaround: "24–48 Hours",
+      },
+      {
+        num: "12",
+        title: "Financial Document Preparation for Banks",
+        scope:
+          "Compiling trailing 12-month bank statements, VAT cross-checks, ageing ledgers, and signed auditor comfort letters.",
+        deliverable: "Complete Bank Credit Due Diligence Dossier",
+        turnaround: "3 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "07",
+    label: "Pitch Decks & Teasers",
+    items: [
+      {
+        num: "13",
+        title: "Investor Pitch Deck Support",
+        scope:
+          "Designing high-impact visual pitch decks highlighting TAM/SAM, competitive moats, unit economics, and capital ask.",
+        deliverable: "Institutional-Grade Investor Deck (15–20 Slides)",
+        turnaround: "5–7 Business Days",
+      },
+      {
+        num: "14",
+        title: "Funding Teaser Preparation",
+        scope:
+          "Creating blind one-page corporate teasers for distribution across accredited Angel networks and VC syndicates.",
+        deliverable: "Confidential Executive 1-Page Investment Teaser",
+        turnaround: "2 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "08",
+    label: "Private Equity & Debt Advisory",
+    items: [
+      {
+        num: "15",
+        title: "Private Equity Introduction Support",
+        scope:
+          "Targeted buyer mapping and presentation to regional family offices, private equity syndicates, and sovereign-backed funds.",
+        deliverable: "Investor Outreach Matrix & Data Room Staging",
+        turnaround: "Transaction Timetable",
+      },
+      {
+        num: "16",
+        title: "Debt Advisory",
+        scope:
+          "Holistic capital structure optimization balancing equity dilution against senior secured, mezzanine, and venture debt options.",
+        deliverable: "Optimal Capital Structure & WACC Strategy Report",
+        turnaround: "Advisory Mandate",
+      },
+    ],
+  },
 ];
 
 const OTHER_SERVICES = [
@@ -47,6 +215,195 @@ const OTHER_SERVICES = [
 ];
 
 export default function CorporateFinanceClient() {
+  const stackWrapperRef = useRef<HTMLDivElement>(null);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
+
+  // =========================================================================
+  // GSAP SCROLLTRIGGER DECK-OF-CARDS STACKING
+  // =========================================================================
+  useEffect(() => {
+    if (!cardsContainerRef.current || !stackWrapperRef.current) return;
+
+    if (typeof window !== "undefined") {
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      if (prefersReducedMotion) {
+        const cards = cardsContainerRef.current?.querySelectorAll<HTMLElement>(
+          ".setup-stacked-card",
+        );
+        cards?.forEach((card) => {
+          gsap.set(card, {
+            position: "relative",
+            top: "auto",
+            left: "auto",
+            width: "100%",
+            height: "auto",
+            yPercent: 0,
+            scale: 1,
+            y: 0,
+            opacity: 1,
+            clearProps: "all",
+          });
+        });
+        return;
+      }
+    }
+
+    let mm: gsap.MatchMedia | null = null;
+
+    const setupCardStacking = () => {
+      const cards = cardsContainerRef.current?.querySelectorAll<HTMLElement>(
+        ".setup-stacked-card",
+      );
+      if (!cards || cards.length <= 1) return;
+
+      const totalCards = cards.length;
+
+      let maxCardHeight = 0;
+      cards.forEach((card) => {
+        const h = card.getBoundingClientRect().height;
+        if (h > maxCardHeight) maxCardHeight = h;
+      });
+
+      if (maxCardHeight > 0 && cardsContainerRef.current) {
+        cardsContainerRef.current.style.minHeight = `${Math.ceil(
+          maxCardHeight,
+        )}px`;
+      }
+
+      const startOffset = "top top+=104";
+      const perCardScroll = 380;
+      const totalScrollDistance = (totalCards - 1) * perCardScroll + 180;
+      const scrubSpeed = 0.6;
+
+      cards.forEach((card, idx) => {
+        if (idx === 0) {
+          gsap.set(card, {
+            position: "relative",
+            yPercent: 0,
+            opacity: 1,
+            visibility: "visible",
+            force3D: false,
+          });
+        } else if (idx === 1) {
+          gsap.set(card, {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            minHeight: "100%",
+            yPercent: 100,
+            opacity: 1,
+            visibility: "visible",
+            force3D: false,
+          });
+        } else {
+          gsap.set(card, {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            minHeight: "100%",
+            yPercent: 100,
+            opacity: 0,
+            visibility: "hidden",
+            force3D: false,
+          });
+        }
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: stackWrapperRef.current,
+          start: startOffset,
+          end: `+=${totalScrollDistance}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: scrubSpeed,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      const moveDuration = 1.0;
+      const holdDuration = 0.8;
+      const stepDuration = moveDuration + holdDuration;
+      const initialHold = 0.7;
+
+      for (let i = 1; i < totalCards; i++) {
+        const currCard = cards[i];
+        const nextCard = i + 1 < totalCards ? cards[i + 1] : null;
+        const startTime = initialHold + (i - 1) * stepDuration;
+        const arriveTime = startTime + moveDuration;
+
+        if (i >= 2) {
+          const olderCard = cards[i - 2];
+          tl.to(
+            olderCard,
+            {
+              opacity: 0,
+              visibility: "hidden",
+              ease: "none",
+              duration: 0.2,
+            },
+            startTime,
+          );
+        }
+
+        tl.to(
+          currCard,
+          {
+            yPercent: 0,
+            opacity: 1,
+            visibility: "visible",
+            ease: "none",
+            duration: moveDuration,
+            force3D: false,
+          },
+          startTime,
+        );
+
+        if (nextCard) {
+          tl.to(
+            nextCard,
+            {
+              opacity: 1,
+              visibility: "visible",
+              ease: "none",
+              duration: 0.2,
+            },
+            arriveTime,
+          );
+        }
+      }
+    };
+
+    mm = gsap.matchMedia();
+    mm.add("(min-width: 768px)", () => {
+      setupCardStacking();
+    });
+    mm.add("(max-width: 767px)", () => {
+      const cards = cardsContainerRef.current?.querySelectorAll<HTMLElement>(
+        ".setup-stacked-card",
+      );
+      cards?.forEach((card) => {
+        gsap.set(card, {
+          clearProps: "all",
+        });
+      });
+      if (cardsContainerRef.current) {
+        cardsContainerRef.current.style.minHeight = "";
+      }
+    });
+
+    return () => {
+      mm?.revert();
+      if (cardsContainerRef.current) {
+        cardsContainerRef.current.style.minHeight = "";
+      }
+    };
+  }, []);
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#071426] selection:bg-[#C6F850] selection:text-[#071426]">
       <Navbar />
@@ -133,60 +490,100 @@ export default function CorporateFinanceClient() {
         </section>
 
         {/* ================================================================= */}
-        {/* 2. WHAT'S INCLUDED IN CORPORATE FINANCE                           */}
+        {/* 2. PRACTICE SCOPE: 16 SCOPED DELIVERABLES (Pinned Stacking Deck)  */}
         {/* ================================================================= */}
-        <section className="py-16 sm:py-24 bg-white border-b border-[#E2E8F0]">
+        <section
+          ref={stackWrapperRef}
+          className="py-16 sm:py-24 bg-white border-b border-[#E2E8F0]"
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-8 mb-8 border-b border-[#071426]/10">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 mb-8 border-b border-[#071426]/10">
               <div>
                 <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#0284C7] font-bold block mb-2">
-                  PRACTICE SCOPE
+                  FINANCE PROTOCOL
                 </span>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#071426]">
-                  What&apos;s Included in Corporate Finance
+                  16 Scoped Deliverables in Corporate Finance
                 </h2>
               </div>
-              <div className="text-xs sm:text-sm text-[#64748B] font-mono">
-                16 Deliverables · Structured Funding
+              <div className="text-xs sm:text-sm text-[#64748B] font-mono flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#0284C7] animate-pulse" />
+                <span className="hidden md:inline">Scroll to Reveal Finance Protocol (8 Phases)</span>
+                <span className="md:hidden">16 Scoped Deliverables</span>
               </div>
             </div>
 
-            {/* Editorial Typographic List (Clean 16 Services, No Generic Boxes) */}
-            <div className="divide-y divide-[#E2E8F0]">
-              {CORPORATE_FINANCE_SERVICES.map((serviceName, idx) => {
-                const num = idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`;
-                return (
-                  <div
-                    key={idx}
-                    className="py-5 sm:py-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center group hover:bg-[#F8FAFC] transition-colors -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-xl"
-                  >
-                    <div className="md:col-span-2 flex items-center gap-3">
-                      <span className="font-mono text-xs font-bold text-[#0284C7]">
-                        [{num}]
+            <div
+              ref={cardsContainerRef}
+              className="relative w-full flex flex-col gap-4 md:gap-0 md:overflow-hidden"
+            >
+              {CORPORATE_FINANCE_PAIRS.map((pair, pIdx) => (
+                <div
+                  key={pIdx}
+                  className="setup-stacked-card w-full md:rounded-3xl md:bg-white md:p-7 md:border md:border-[#CBD5E1]/80 md:shadow-[0_-14px_36px_rgba(7,20,38,0.08)] flex flex-col justify-between"
+                  style={{ zIndex: 10 + pIdx }}
+                >
+                  {/* Phase Row Header - HIDDEN on mobile as per user request */}
+                  <div className="hidden md:flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b border-[#E2E8F0]">
+                    <div className="flex items-center gap-3">
+                      <span className="font-mono text-xs font-bold text-[#0369A1] bg-[#E0F2FE] border border-[#0284C7]/30 px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap">
+                        Phase {pair.phase} / 08
                       </span>
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-[#64748B] bg-[#E0F2FE] px-2 py-0.5 rounded-md">
-                        Finance
-                      </span>
-                    </div>
-
-                    <div className="md:col-span-7">
-                      <h3 className="text-lg sm:text-xl font-serif font-medium text-[#071426] group-hover:text-[#0369A1] transition-colors">
-                        {serviceName}
+                      <h3 className="text-base sm:text-lg font-serif font-bold text-[#071426]">
+                        {pair.label}
                       </h3>
                     </div>
-
-                    <div className="md:col-span-3 flex justify-start md:justify-end">
-                      <a
-                        href="#consultation"
-                        className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#0369A1] group-hover:text-[#0284C7] transition-colors"
-                      >
-                        <span>Talk With an Advisor</span>
-                        <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-                      </a>
+                    <div className="text-xs font-mono text-[#64748B] flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#0284C7]" />
+                      <span>
+                        Deliverables {pair.items[0].num} &amp; {pair.items[1].num} of 16
+                      </span>
                     </div>
                   </div>
-                );
-              })}
+
+                  {/* 2-by-2 Grid (Left & Right on Desktop, Clean Cards on Mobile) */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                    {pair.items.map((item, itemIdx) => (
+                      <div
+                        key={itemIdx}
+                        className="p-5 sm:p-7 rounded-2xl bg-white md:bg-[#F8FAFC] border border-[#CBD5E1]/90 hover:border-[#0284C7] hover:shadow-lg transition-all group flex flex-col justify-between shadow-xs"
+                      >
+                        <div>
+                          <div className="flex items-center justify-between gap-3 mb-3">
+                            <span className="font-mono text-xs font-bold text-[#0284C7] bg-[#E0F2FE] px-2.5 py-1 rounded-md">
+                              [{item.num}] FINANCE
+                            </span>
+                            <span className="text-xs font-mono text-[#64748B] flex items-center gap-1.5">
+                              <Clock className="w-3.5 h-3.5 text-[#0284C7]" />
+                              <span>{item.turnaround}</span>
+                            </span>
+                          </div>
+
+                          <h4 className="text-lg sm:text-xl font-serif font-bold text-[#071426] group-hover:text-[#0369A1] transition-colors leading-snug mb-3">
+                            {item.title}
+                          </h4>
+
+                          <p className="text-xs sm:text-sm text-[#475569] font-sans leading-relaxed mb-5">
+                            {item.scope}
+                          </p>
+                        </div>
+
+                        <div className="pt-4 border-t border-[#CBD5E1]/70">
+                          <div className="text-[11px] font-mono font-bold text-[#64748B] uppercase mb-1.5">
+                            Key Deliverable:
+                          </div>
+                          <div className="text-xs font-medium text-[#0369A1] bg-[#E0F2FE] p-3 rounded-xl border border-[#0284C7]/20 flex items-start gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 text-[#0284C7] shrink-0 mt-0.5" />
+                            <span className="leading-snug">
+                              {item.deliverable}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>

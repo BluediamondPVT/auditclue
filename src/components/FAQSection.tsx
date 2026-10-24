@@ -4,27 +4,31 @@ import React, { useState, useEffect, useRef } from "react";
 import { Plus, Minus, HelpCircle, ArrowUpRight } from "lucide-react";
 import FlowText from "@/components/FlowText";
 
-
 const FAQS = [
   {
     q: "Who is subject to UAE Corporate Tax (9%)?",
-    a: "Under Federal Decree-Law No. 47 of 2022, UAE Corporate Tax applies to all commercial businesses operating across the UAE. A 0% statutory rate applies to taxable net income up to AED 375,000, while a 9% rate applies to taxable net income exceeding this threshold. Qualifying Free Zone Persons may enjoy 0% on qualifying income subject to strict de minimis and substance rules.",
+    a:
+      "Under Federal Decree-Law No. 47 of 2022, UAE Corporate Tax applies to all commercial businesses operating across the UAE. A 0% statutory rate applies to taxable net income up to AED 375,000, while a 9% rate applies to taxable net income exceeding this threshold. Qualifying Free Zone Persons may enjoy 0% on qualifying income subject to strict de minimis and substance rules.",
   },
   {
     q: "Is annual statutory audit mandatory for UAE companies?",
-    a: "Yes. Major UAE Free Zone authorities (including DMCC, DIFC, ADGM, DAFZA, and JAFZA) legally mandate an annual independent audited financial statement prepared under IFRS to renew business trade licences. For mainland companies, audits are required by commercial law, banking covenants, and corporate tax regulations.",
+    a:
+      "Yes. Major UAE Free Zone authorities (including DMCC, DIFC, ADGM, DAFZA, and JAFZA) legally mandate an annual independent audited financial statement prepared under IFRS to renew business trade licences. For mainland companies, audits are required by commercial law, banking covenants, and corporate tax regulations.",
   },
   {
     q: "Can our advisory engagement be completed 100% digitally?",
-    a: "Absolutely. Auditclue operates on a 100% cloud-native delivery model. From initial requirement scoping and encrypted document upload to statutory auditor sign-off and FTA tax portal filings, all procedures are executed securely via our digital platform without any need for physical office visits.",
+    a:
+      "Absolutely. Auditclue operates on a 100% cloud-native delivery model. From initial requirement scoping and encrypted document upload to statutory auditor sign-off and FTA tax portal filings, all procedures are executed securely via our digital platform without any need for physical office visits.",
   },
   {
     q: "What is the threshold for mandatory UAE VAT registration?",
-    a: "Businesses whose taxable supplies and imports exceed AED 375,000 over the preceding 12 months (or are anticipated to exceed this threshold in the next 30 days) are legally mandated to register for VAT with the Federal Tax Authority (FTA). Voluntary registration is permitted from AED 187,500.",
+    a:
+      "Businesses whose taxable supplies and imports exceed AED 375,000 over the preceding 12 months (or are anticipated to exceed this threshold in the next 30 days) are legally mandated to register for VAT with the Federal Tax Authority (FTA). Voluntary registration is permitted from AED 187,500.",
   },
   {
     q: "How quickly does Auditclue begin work following an enquiry?",
-    a: "Following your query, our qualified senior advisory team reviews your business scope and delivers a transparent, fixed-fee proposal within 24 hours. Once digitally approved, your dedicated encrypted vault is provisioned immediately on Day 1.",
+    a:
+      "Following your query, our qualified senior advisory team reviews your business scope and delivers a transparent, fixed-fee proposal within 24 hours. Once digitally approved, your dedicated encrypted vault is provisioned immediately on Day 1.",
   },
 ];
 
@@ -56,11 +60,16 @@ export default function FAQSection() {
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-serif font-normal text-[#233F5B] leading-[1.18] tracking-tight mb-4">
-            <FlowText text="Frequently Asked Questions" triggerOnScroll as="span" />
+            <FlowText
+              text="Frequently Asked Questions"
+              triggerOnScroll
+              as="span"
+            />
           </h2>
 
           <p className="text-base sm:text-lg text-[#556980] font-sans leading-relaxed">
-            Essential guidance on UAE statutory audit, Corporate Tax (9%), VAT compliance, and our digital delivery model.
+            Essential guidance on UAE statutory audit, Corporate Tax (9%), VAT
+            compliance, and our digital delivery model.
           </p>
         </div>
 
@@ -118,7 +127,7 @@ export default function FAQSection() {
         <div className="mt-12 text-center text-sm text-[#556980]">
           <span>Have a specific compliance question? </span>
           <a
-            href="#consult-form"
+            href="/contact"
             className="font-semibold text-[#216D56] hover:text-[#36A783] inline-flex items-center gap-1 underline underline-offset-4"
           >
             <span>Speak directly with our senior advisors</span>

@@ -1,11 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FlowText from "@/components/FlowText";
 import ContactForm from "@/components/ContactForm";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 import {
   MessageSquare,
   Phone,
@@ -142,12 +148,229 @@ const OTHER_SERVICES = [
   { name: "Technology & Digital Finance", href: "/services/technology-digital" },
 ];
 
+const ACCOUNTING_PAIRS = [
+  {
+    phase: "01",
+    label: "Monthly Ledger & Cash Reconciliations",
+    items: [ACCOUNTING_DETAILED_SERVICES[0], ACCOUNTING_DETAILED_SERVICES[1]],
+  },
+  {
+    phase: "02",
+    label: "Working Capital (AR & AP Operations)",
+    items: [ACCOUNTING_DETAILED_SERVICES[2], ACCOUNTING_DETAILED_SERVICES[3]],
+  },
+  {
+    phase: "03",
+    label: "Chart of Accounts & Cloud ERP Setup",
+    items: [ACCOUNTING_DETAILED_SERVICES[4], ACCOUNTING_DETAILED_SERVICES[5]],
+  },
+  {
+    phase: "04",
+    label: "Executive MIS & Backlog Clean-Up",
+    items: [ACCOUNTING_DETAILED_SERVICES[6], ACCOUNTING_DETAILED_SERVICES[7]],
+  },
+  {
+    phase: "05",
+    label: "WPS Payroll & Controller Sign-Off",
+    items: [ACCOUNTING_DETAILED_SERVICES[8], ACCOUNTING_DETAILED_SERVICES[9]],
+  },
+];
+
 export default function AccountingBookkeepingClient() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const stackWrapperRef = useRef<HTMLDivElement>(null);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
+
+  // =========================================================================
+  // GSAP SCROLLTRIGGER DECK-OF-CARDS STACKING
+  // =========================================================================
+  useEffect(() => {
+    if (!cardsContainerRef.current || !stackWrapperRef.current) return;
+
+    if (typeof window !== "undefined") {
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      if (prefersReducedMotion) {
+        const cards = cardsContainerRef.current?.querySelectorAll<HTMLElement>(
+          ".setup-stacked-card",
+        );
+        cards?.forEach((card) => {
+          gsap.set(card, {
+            position: "relative",
+            top: "auto",
+            left: "auto",
+            width: "100%",
+            height: "auto",
+            yPercent: 0,
+            scale: 1,
+            y: 0,
+            opacity: 1,
+            clearProps: "all",
+          });
+        });
+        return;
+      }
+    }
+
+    let mm: gsap.MatchMedia | null = null;
+
+    const setupCardStacking = () => {
+      const cards = cardsContainerRef.current?.querySelectorAll<HTMLElement>(
+        ".setup-stacked-card",
+      );
+      if (!cards || cards.length <= 1) return;
+
+      const totalCards = cards.length;
+
+      let maxCardHeight = 0;
+      cards.forEach((card) => {
+        const h = card.getBoundingClientRect().height;
+        if (h > maxCardHeight) maxCardHeight = h;
+      });
+
+      if (maxCardHeight > 0 && cardsContainerRef.current) {
+        cardsContainerRef.current.style.minHeight = `${Math.ceil(
+          maxCardHeight,
+        )}px`;
+      }
+
+      const startOffset = "top top+=104";
+      const perCardScroll = 380;
+      const totalScrollDistance = (totalCards - 1) * perCardScroll + 180;
+      const scrubSpeed = 0.6;
+
+      cards.forEach((card, idx) => {
+        if (idx === 0) {
+          gsap.set(card, {
+            position: "relative",
+            yPercent: 0,
+            opacity: 1,
+            visibility: "visible",
+            force3D: false,
+          });
+        } else if (idx === 1) {
+          gsap.set(card, {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            minHeight: "100%",
+            yPercent: 100,
+            opacity: 1,
+            visibility: "visible",
+            force3D: false,
+          });
+        } else {
+          gsap.set(card, {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            minHeight: "100%",
+            yPercent: 100,
+            opacity: 0,
+            visibility: "hidden",
+            force3D: false,
+          });
+        }
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: stackWrapperRef.current,
+          start: startOffset,
+          end: `+=${totalScrollDistance}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: scrubSpeed,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      const moveDuration = 1.0;
+      const holdDuration = 0.8;
+      const stepDuration = moveDuration + holdDuration;
+      const initialHold = 0.7;
+
+      for (let i = 1; i < totalCards; i++) {
+        const currCard = cards[i];
+        const nextCard = i + 1 < totalCards ? cards[i + 1] : null;
+        const startTime = initialHold + (i - 1) * stepDuration;
+        const arriveTime = startTime + moveDuration;
+
+        if (i >= 2) {
+          const olderCard = cards[i - 2];
+          tl.to(
+            olderCard,
+            {
+              opacity: 0,
+              visibility: "hidden",
+              ease: "none",
+              duration: 0.2,
+            },
+            startTime,
+          );
+        }
+
+        tl.to(
+          currCard,
+          {
+            yPercent: 0,
+            opacity: 1,
+            visibility: "visible",
+            ease: "none",
+            duration: moveDuration,
+            force3D: false,
+          },
+          startTime,
+        );
+
+        if (nextCard) {
+          tl.to(
+            nextCard,
+            {
+              opacity: 1,
+              visibility: "visible",
+              ease: "none",
+              duration: 0.2,
+            },
+            arriveTime,
+          );
+        }
+      }
+    };
+
+    mm = gsap.matchMedia();
+    mm.add("(min-width: 768px)", () => {
+      setupCardStacking();
+    });
+    mm.add("(max-width: 767px)", () => {
+      const cards = cardsContainerRef.current?.querySelectorAll<HTMLElement>(
+        ".setup-stacked-card",
+      );
+      cards?.forEach((card) => {
+        gsap.set(card, {
+          clearProps: "all",
+        });
+      });
+      if (cardsContainerRef.current) {
+        cardsContainerRef.current.style.minHeight = "";
+      }
+    });
+
+    return () => {
+      mm?.revert();
+      if (cardsContainerRef.current) {
+        cardsContainerRef.current.style.minHeight = "";
+      }
+    };
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#071426] selection:bg-[#C6F850] selection:text-[#071426]">
@@ -253,60 +476,97 @@ export default function AccountingBookkeepingClient() {
         </section>
 
         {/* ================================================================= */}
-        {/* 2. PRACTICE SCOPE: 10 SCOPED DELIVERABLES                         */}
+        {/* 2. PRACTICE SCOPE: 10 SCOPED DELIVERABLES (Pinned Stacking Deck)  */}
         {/* ================================================================= */}
-        <section className="py-16 sm:py-24 bg-white border-b border-[#E2E8F0]">
+        <section
+          ref={stackWrapperRef}
+          className="py-16 sm:py-24 bg-white border-b border-[#E2E8F0]"
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-8 mb-10 border-b border-[#071426]/10">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 mb-8 border-b border-[#071426]/10">
               <div>
                 <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#36A783] font-bold block mb-2">
                   PRACTICE SCOPE
                 </span>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#071426]">
-                  What&apos;s Included in Our Accounting & Bookkeeping
+                  What&apos;s Included in Our Accounting &amp; Bookkeeping
                 </h2>
               </div>
-              <div className="text-xs sm:text-sm text-[#64748B] font-mono">
-                Chartered CPA Oversight · 100% Digital Delivery
+              <div className="text-xs sm:text-sm text-[#64748B] font-mono flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
+                <span className="hidden md:inline">Scroll to Reveal Accounting Protocol (5 Phases)</span>
+                <span className="md:hidden">10 Scoped Deliverables</span>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-4">
-              {ACCOUNTING_DETAILED_SERVICES.map((item, idx) => (
+            <div
+              ref={cardsContainerRef}
+              className="relative w-full flex flex-col gap-4 md:gap-0 md:overflow-hidden"
+            >
+              {ACCOUNTING_PAIRS.map((pair, pIdx) => (
                 <div
-                  key={idx}
-                  className="p-6 sm:p-7 rounded-2xl bg-[#F8FAFC] border border-[#CBD5E1]/80 hover:border-[#36A783] hover:shadow-md transition-all group"
+                  key={pIdx}
+                  className="setup-stacked-card w-full md:rounded-3xl md:bg-white md:p-7 md:border md:border-[#CBD5E1]/80 md:shadow-[0_-14px_36px_rgba(7,20,38,0.08)] flex flex-col justify-between"
+                  style={{ zIndex: 10 + pIdx }}
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
-                    <div className="lg:col-span-4">
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="font-mono text-xs font-bold text-[#36A783] bg-[#EAF4F0] px-2.5 py-1 rounded-md">
-                          [{item.num}] PRACTICE
-                        </span>
-                        <span className="text-xs font-mono text-[#64748B]">
-                          {item.turnaround}
-                        </span>
-                      </div>
-                      <h3 className="text-lg sm:text-xl font-serif font-bold text-[#071426] group-hover:text-[#216D56] transition-colors leading-snug">
-                        {item.title}
+                  {/* Phase Row Header - HIDDEN on mobile as per user request */}
+                  <div className="hidden md:flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b border-[#E2E8F0]">
+                    <div className="flex items-center gap-3">
+                      <span className="font-mono text-xs font-bold text-[#216D56] bg-[#EAF4F0] border border-[#36A783]/30 px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap">
+                        Phase {pair.phase} / 05
+                      </span>
+                      <h3 className="text-base sm:text-lg font-serif font-bold text-[#071426]">
+                        {pair.label}
                       </h3>
                     </div>
-
-                    <div className="lg:col-span-5">
-                      <p className="text-xs sm:text-sm text-[#475569] font-sans leading-relaxed">
-                        {item.scope}
-                      </p>
+                    <div className="text-xs font-mono text-[#64748B] flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#36A783]" />
+                      <span>
+                        Deliverables {pair.items[0].num} &amp; {pair.items[1].num} of 10
+                      </span>
                     </div>
+                  </div>
 
-                    <div className="lg:col-span-3 lg:border-l lg:border-[#CBD5E1] lg:pl-6">
-                      <div className="text-[11px] font-mono font-bold text-[#64748B] uppercase mb-1">
-                        Key Deliverable:
+                  {/* 2-by-2 Grid (Left & Right on Desktop, Clean Cards on Mobile) */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                    {pair.items.map((item, itemIdx) => (
+                      <div
+                        key={itemIdx}
+                        className="p-5 sm:p-7 rounded-2xl bg-white md:bg-[#F8FAFC] border border-[#CBD5E1]/90 hover:border-[#36A783] hover:shadow-lg transition-all group flex flex-col justify-between shadow-xs"
+                      >
+                        <div>
+                          <div className="flex items-center justify-between gap-3 mb-3">
+                            <span className="font-mono text-xs font-bold text-[#36A783] bg-[#EAF4F0] px-2.5 py-1 rounded-md">
+                              [{item.num}] PRACTICE
+                            </span>
+                            <span className="text-xs font-mono text-[#64748B] flex items-center gap-1.5">
+                              <Clock className="w-3.5 h-3.5 text-[#36A783]" />
+                              <span>{item.turnaround}</span>
+                            </span>
+                          </div>
+
+                          <h4 className="text-lg sm:text-xl font-serif font-bold text-[#071426] group-hover:text-[#216D56] transition-colors leading-snug mb-3">
+                            {item.title}
+                          </h4>
+
+                          <p className="text-xs sm:text-sm text-[#475569] font-sans leading-relaxed mb-5">
+                            {item.scope}
+                          </p>
+                        </div>
+
+                        <div className="pt-4 border-t border-[#CBD5E1]/70">
+                          <div className="text-[11px] font-mono font-bold text-[#64748B] uppercase mb-1.5">
+                            Key Deliverable:
+                          </div>
+                          <div className="text-xs font-medium text-[#216D56] bg-[#EAF4F0] p-3 rounded-xl border border-[#36A783]/20 flex items-start gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 text-[#36A783] shrink-0 mt-0.5" />
+                            <span className="leading-snug">
+                              {item.deliverable}
+                            </span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="text-xs font-medium text-[#216D56] bg-[#EAF4F0] p-2.5 rounded-xl border border-[#36A783]/20 flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-[#36A783] shrink-0 mt-0.5" />
-                        <span>{item.deliverable}</span>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               ))}

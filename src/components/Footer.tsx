@@ -22,13 +22,11 @@ export default function Footer() {
 
   return (
     <footer id="contact" ref={footerRef} className="bg-[#071426] text-white">
-
       {/* ── TOP AREA: Logo Icon + Giant Brand Wordmark ── */}
       <div
         ref={brandAreaRef}
         className="w-full px-5 sm:px-12 lg:px-20 xl:px-28 pt-10 sm:pt-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 overflow-hidden"
       >
-
         {/* Left: Auditclue Logo (white version) */}
         <a href="#hero" aria-label="Auditclue Home" className="shrink-0">
           <Image
@@ -49,11 +47,14 @@ export default function Footer() {
             ®
           </span>
         </div>
-
       </div>
 
       {/* ── WAVY DIVIDER LINE ── */}
-      <div ref={dividerRef} className="w-full px-5 sm:px-12 lg:px-20 xl:px-28 mt-6 sm:mt-10 mb-8 sm:mb-12 overflow-hidden" aria-hidden="true">
+      <div
+        ref={dividerRef}
+        className="w-full px-5 sm:px-12 lg:px-20 xl:px-28 mt-6 sm:mt-10 mb-8 sm:mb-12 overflow-hidden"
+        aria-hidden="true"
+      >
         <svg
           viewBox="0 0 1280 48"
           fill="none"
@@ -68,10 +69,10 @@ export default function Footer() {
           />
           <defs>
             <linearGradient id="footer-wave" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%"   stopColor="#233F5B" stopOpacity="0.3" />
-              <stop offset="25%"  stopColor="#36A783" stopOpacity="0.6" />
-              <stop offset="55%"  stopColor="#83D9BE" stopOpacity="1"   />
-              <stop offset="80%"  stopColor="#36A783" stopOpacity="0.6" />
+              <stop offset="0%" stopColor="#233F5B" stopOpacity="0.3" />
+              <stop offset="25%" stopColor="#36A783" stopOpacity="0.6" />
+              <stop offset="55%" stopColor="#83D9BE" stopOpacity="1" />
+              <stop offset="80%" stopColor="#36A783" stopOpacity="0.6" />
               <stop offset="100%" stopColor="#233F5B" stopOpacity="0.3" />
             </linearGradient>
           </defs>
@@ -80,125 +81,279 @@ export default function Footer() {
 
       {/* ── LINKS COLUMNS ── */}
       <div className="w-full px-5 sm:px-12 lg:px-20 xl:px-28 pb-12 sm:pb-16">
-        <div ref={columnsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
-
-          {/* Column 1 — Links & Tools */}
+        <div
+          ref={columnsRef}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10"
+        >
+          {/* Column 1 — Navigation */}
           <div>
-            <h3 className="text-sm font-bold text-white mb-5 tracking-wide">Navigation & Tools</h3>
-            <ul className="space-y-2.5 text-[14px] text-[#A8B7C9]">
-              <li><Link href="/#hero" className="hover:text-white transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
-              <li><Link href="/process" className="hover:text-white transition-colors">Our Process</Link></li>
-              <li><Link href="/compliance-calendar" className="text-[#83D9BE] hover:text-white font-medium transition-colors inline-flex items-center gap-1.5">Compliance Calendar 2026/27</Link></li>
-              <li><Link href="/freezone-vs-mainland" className="text-[#83D9BE] hover:text-white font-medium transition-colors inline-flex items-center gap-1.5">Mainland vs Free Zone Guide</Link></li>
-              <li><Link href="/#consult-form" className="hover:text-white transition-colors">Book a Consultation</Link></li>
-              <li><a href="https://google.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a></li>
-              <li><a href="https://google.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Employee Portal</a></li>
-              <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+            <h3 className="text-sm font-bold text-white mb-5 tracking-wide">
+              Navigation
+            </h3>
+            <ul className="space-y-3 text-[14px] text-[#A8B7C9]">
+              <li>
+                <Link
+                  href="/#hero"
+                  className="hover:text-white transition-colors"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/about"
+                  className="hover:text-white transition-colors"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/process"
+                  className="hover:text-white transition-colors"
+                >
+                  Our Process
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/blog"
+                  className="hover:text-white transition-colors"
+                >
+                  Blog & Insights
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="hover:text-white transition-colors"
+                >
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/#consult-form"
+                  className="hover:text-white transition-colors"
+                >
+                  Book a Consultation
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3 — Knowledge Hub */}
+          <div>
+            <h3 className="text-sm font-bold text-white mb-5 tracking-wide">
+              Knowledge Hub
+            </h3>
+            <ul className="space-y-3 text-[14px] text-[#A8B7C9]">
+              <li>
+                <Link
+                  href="/compliance-calendar"
+                  className="text-[#83D9BE] hover:text-white font-medium transition-colors inline-flex items-center gap-1.5"
+                >
+                  Compliance Calendar 2026/27
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/freezone-vs-mainland"
+                  className="text-[#83D9BE] hover:text-white font-medium transition-colors inline-flex items-center gap-1.5"
+                >
+                  Mainland vs Free Zone Guide
+                </Link>
+              </li>
+              {/* <li>
+                <Link
+                  href="/calculator"
+                  className="text-[#83D9BE] hover:text-white font-medium transition-colors inline-flex items-center gap-1.5"
+                >
+                  Tax & VAT Calculator
+                </Link>
+              </li> */}
+              <li>
+                <a
+                  href="https://auditcluee.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  Client Portal
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  Employee Portal
+                </a>
+              </li>
+              <li>
+                <Link
+                  href="/privacy"
+                  className="hover:text-white transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
             </ul>
           </div>
 
           {/* Column 2 — Practices */}
           <div>
-            <h3 className="text-sm font-bold text-white mb-5 tracking-wide">Practices</h3>
+            <h3 className="text-sm font-bold text-white mb-5 tracking-wide">
+              Practices
+            </h3>
             <ul className="space-y-3 text-[15px] text-[#A8B7C9]">
-              <li><Link href="/services/corporate-tax" className="hover:text-white transition-colors">Corporate Tax (9%)</Link></li>
-              <li><Link href="/services/audit-assurance" className="hover:text-white transition-colors">Statutory Audit</Link></li>
-              <li><Link href="/services/vat-services" className="hover:text-white transition-colors">UAE VAT Compliance (5%)</Link></li>
-              <li><Link href="/services/accounting-bookkeeping" className="hover:text-white transition-colors">Accounting & Bookkeeping</Link></li>
-              <li><Link href="/services/business-setup" className="hover:text-white transition-colors">Business Setup (Mainland & Free Zone)</Link></li>
-              <li><Link href="/services/cfo-advisory" className="hover:text-white transition-colors">Virtual CFO & Financial Advisory</Link></li>
-              <li><Link href="/services/transfer-pricing" className="hover:text-white transition-colors">Transfer Pricing</Link></li>
-              <li><Link href="/services/corporate-finance" className="hover:text-white transition-colors">Corporate Finance</Link></li>
-              <li><Link href="/services/business-advisory" className="hover:text-white transition-colors">Business Advisory</Link></li>
-              <li><Link href="/services/compliance-services" className="hover:text-white transition-colors">Compliance Services (AML/ESR)</Link></li>
-              <li><Link href="/services/technology-digital" className="hover:text-white transition-colors">Technology & Digital Finance</Link></li>
+              <li>
+                <Link
+                  href="/services/corporate-tax"
+                  className="hover:text-white transition-colors"
+                >
+                  Corporate Tax (9%)
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/audit-assurance"
+                  className="hover:text-white transition-colors"
+                >
+                  Statutory Audit
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/vat-services"
+                  className="hover:text-white transition-colors"
+                >
+                  UAE VAT Compliance (5%)
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/accounting-bookkeeping"
+                  className="hover:text-white transition-colors"
+                >
+                  Accounting & Bookkeeping
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/business-setup"
+                  className="hover:text-white transition-colors"
+                >
+                  Business Setup (Mainland & Free Zone)
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/cfo-advisory"
+                  className="hover:text-white transition-colors"
+                >
+                  Virtual CFO & Financial Advisory
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/transfer-pricing"
+                  className="hover:text-white transition-colors"
+                >
+                  Transfer Pricing
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/corporate-finance"
+                  className="hover:text-white transition-colors"
+                >
+                  Corporate Finance
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/business-advisory"
+                  className="hover:text-white transition-colors"
+                >
+                  Business Advisory
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/compliance-services"
+                  className="hover:text-white transition-colors"
+                >
+                  Compliance Services (AML/ESR)
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/technology-digital"
+                  className="hover:text-white transition-colors"
+                >
+                  Technology & Digital Finance
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Columns 3 + 4 — Connect (Two UAE Offices + Official Socials) */}
-          <div className="col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
+          {/* Column 4 — Connect & Verify */}
+          <div>
+            <h3 className="text-sm font-bold text-white mb-5 tracking-wide">
+              Connect & Verify
+            </h3>
+            <div className="space-y-4 text-[14px] text-[#A8B7C9]">
+              <div>
+                <p className="leading-relaxed">
+                  <span className="text-white font-semibold">
+                    Auditclue® Dubai
+                  </span>
+                  <br />
+                  Dubai, UAE
+                </p>
+                <a
+                  href="mailto:info@auditclue.com"
+                  className="block mt-2 text-[#83D9BE] hover:text-white transition-colors"
+                >
+                  info@auditclue.com
+                </a>
+              </div>
 
-            {/* Heading spanning both */}
-            <div className="col-span-1 sm:col-span-2">
-              <h3 className="text-sm font-bold text-white mb-5 tracking-wide">Connect & Verify</h3>
-            </div>
-
-            {/* Dubai Desk */}
-            <div className="-mt-5">
-              <p className="text-[15px] text-[#A8B7C9] leading-relaxed">
-                <span className="text-white font-semibold">Auditclue® Dubai</span><br />
-                Boulevard Plaza Tower 1, Level 14<br />
-                Downtown Dubai / Business Bay<br />
-                Dubai, UAE
-              </p>
-              <a
-                href="mailto:info@auditclue.com"
-                className="block mt-3 text-[15px] text-[#A8B7C9] hover:text-white transition-colors"
-              >
-                info@auditclue.com
-              </a>
-              <p className="text-xs text-[#94A3B8] font-mono mt-2">
-                DET License No. 1094821
-              </p>
-            </div>
-
-            {/* Abu Dhabi Desk */}
-            <div className="-mt-5">
-              <p className="text-[15px] text-[#A8B7C9] leading-relaxed">
-                <span className="text-white font-semibold">Auditclue® Abu Dhabi</span><br />
-                Al Maryah Island<br />
-                ADGM Financial Square<br />
-                Abu Dhabi, UAE
-              </p>
-              <a
-                href="tel:+971547338583"
-                className="block mt-3 text-[15px] text-[#A8B7C9] hover:text-white transition-colors"
-              >
-                +971 54 733 8583
-              </a>
-              <p className="text-xs text-[#94A3B8] font-mono mt-2">
-                FTA Agency TAN-20038914
-              </p>
-            </div>
-
-            {/* Verified Social & Review Proof Bar */}
-            <div className="col-span-1 sm:col-span-2 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-4 text-xs font-mono">
+              <div className="pt-3 border-t border-white/10 space-y-2.5 text-xs font-mono">
                 <a
                   href="https://www.linkedin.com/company/auditclue"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[#83D9BE] hover:text-white transition-colors"
+                  className="flex items-center gap-2 text-[#83D9BE] hover:text-white transition-colors"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-[#36A783]" />
                   <span>LinkedIn Official Page</span>
                 </a>
 
-                <span className="text-white/20">•</span>
-
                 <a
                   href="https://wa.me/971547338583"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[#83D9BE] hover:text-white transition-colors"
+                  className="flex items-center gap-2 text-[#83D9BE] hover:text-white transition-colors"
                 >
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#36A783]" />
                   <span>WhatsApp VIP Desk</span>
                 </a>
               </div>
 
               {/* 5-Star Client Rating Badge */}
-              <div className="inline-flex items-center gap-1.5 text-xs text-[#CBD5E1] bg-white/5 border border-white/10 px-3 py-1 rounded-full">
-                <div className="flex text-amber-400 text-xs">
-                  ★ ★ ★ ★ ★
-                </div>
-                <span className="font-mono text-[11px] text-[#83D9BE] font-bold">5.0</span>
-                <span className="text-[#CBD5E1]">| Verified Client Rating</span>
+              <div className="inline-flex items-center gap-1.5 text-xs text-[#CBD5E1] bg-white/5 border border-white/10 px-3 py-1.5 rounded-full mt-2">
+                <div className="flex text-amber-400 text-xs">★ ★ ★ ★ ★</div>
+                <span className="font-mono text-[11px] text-[#83D9BE] font-bold">
+                  5.0
+                </span>
+                <span className="text-[#CBD5E1]">| Verified</span>
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
 
@@ -206,7 +361,9 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="w-full px-5 sm:px-12 lg:px-20 xl:px-28 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-[#94A3B8] text-center sm:text-left">
           <span>© 2026 Auditclue Global Advisory Services LLC</span>
-          <span className="text-center">FTA Registered · IFRS / ISA Compliant · 100% Digital UAE Delivery</span>
+          <span className="text-center">
+            FTA Registered · IFRS / ISA Compliant · 100% Digital UAE Delivery
+          </span>
           <button
             onClick={scrollToTop}
             className="inline-flex items-center gap-1.5 text-[#A8B7C9] hover:text-white transition-colors cursor-pointer font-medium group"
@@ -216,7 +373,6 @@ export default function Footer() {
           </button>
         </div>
       </div>
-
     </footer>
   );
 }

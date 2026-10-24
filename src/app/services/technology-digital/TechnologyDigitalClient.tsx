@@ -1,33 +1,182 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FlowText from "@/components/FlowText";
 import ContactForm from "@/components/ContactForm";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 import {
   MessageSquare,
   Phone,
   Mail,
   ArrowRight,
   ArrowUpRight,
+  CheckCircle2,
+  Clock,
 } from "lucide-react";
 
-const TECH_DIGITAL_SERVICES = [
-  "Accounting Software Implementation",
-  "QuickBooks Setup",
-  "ERP Advisory",
-  "E-Invoicing Readiness",
-  "Peppol Readiness Advisory",
-  "Digital Approval Workflow",
-  "Dashboard and Reporting Automation",
-  "Zoho Books Setup",
-  "Xero Setup",
-  "Digital Document Management",
-  "UAE E-Invoicing Gap Analysis",
-  "Finance Automation",
-  "Cloud-Based Accounting Migration",
+const TECH_DIGITAL_PAIRS = [
+  {
+    phase: "01",
+    label: "Core Cloud Architecture & Intuit Deployment",
+    items: [
+      {
+        num: "01",
+        title: "Accounting Software Implementation",
+        scope:
+          "End-to-end evaluation, chart-of-accounts customization, opening balance configuration, and user permission hierarchies tailored to UAE compliance.",
+        deliverable: "Deployed & Configured Cloud Accounting Instance",
+        turnaround: "3–5 Business Days",
+      },
+      {
+        num: "02",
+        title: "QuickBooks Setup",
+        scope:
+          "Certified Intuit QuickBooks Online architecture, multi-currency VAT ledger calibration, bank rule automation, and invoice customization.",
+        deliverable: "Certified QuickBooks Online Environment & User Manual",
+        turnaround: "3 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "02",
+    label: "Alternative Cloud Platforms (Zoho & Xero)",
+    items: [
+      {
+        num: "03",
+        title: "Zoho Books Setup",
+        scope:
+          "End-to-end Zoho Books UAE edition deployment, FTA-compliant VAT templates, customer portal setup, and payment gateway integration.",
+        deliverable: "Configured Zoho Books UAE Production Workspace",
+        turnaround: "3 Business Days",
+      },
+      {
+        num: "04",
+        title: "Xero Setup",
+        scope:
+          "Certified Xero platform configuration, direct banking feeds, automated reconciliation rules, fixed asset schedules, and reporting layouts.",
+        deliverable: "Fully Integrated Xero Ledger & Workflow Pack",
+        turnaround: "3 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "03",
+    label: "UAE E-Invoicing & Peppol Architecture",
+    items: [
+      {
+        num: "05",
+        title: "E-Invoicing Readiness",
+        scope:
+          "Aligning enterprise invoicing architectures with MoF and FTA Phase 1/Phase 2 mandatory digital e-invoicing regulatory frameworks.",
+        deliverable: "FTA E-Invoicing Readiness & Integration Assessment",
+        turnaround: "5–7 Business Days",
+      },
+      {
+        num: "06",
+        title: "Peppol Readiness Advisory",
+        scope:
+          "Connecting billing databases with accredited Peppol Access Points, cryptographic hash validation, and standard XML transmission schemas.",
+        deliverable: "Peppol Transmission Architecture & Pilot Verification",
+        turnaround: "5 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "04",
+    label: "Compliance Gap Analysis & ERP Strategy",
+    items: [
+      {
+        num: "07",
+        title: "UAE E-Invoicing Gap Analysis",
+        scope:
+          "Technical code and process audit across existing POS, billing engines, and legacy ERPs to identify XML/PINT-AE compliance gaps.",
+        deliverable: "UAE E-Invoicing Remediation Matrix & Tech Roadmap",
+        turnaround: "4 Business Days",
+      },
+      {
+        num: "08",
+        title: "ERP Advisory",
+        scope:
+          "Scoping, vendor selection (NetSuite, SAP Business One, Microsoft Dynamics 365, Odoo), RFP drafting, and implementation project governance.",
+        deliverable: "Enterprise ERP Evaluation & Vendor Selection Dossier",
+        turnaround: "7–10 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "05",
+    label: "Digital Approval & Document Governance",
+    items: [
+      {
+        num: "09",
+        title: "Digital Approval Workflow",
+        scope:
+          "Building multi-tiered purchase requisition, bill approval, and expense authorization matrices with cryptographic audit trails.",
+        deliverable: "Automated Delegation-of-Authority (DoA) Approval Engine",
+        turnaround: "3–5 Business Days",
+      },
+      {
+        num: "10",
+        title: "Digital Document Management",
+        scope:
+          "Establishing cloud-based optical character recognition (OCR), paperless receipt capture, centralized tax audit repositories, and FTA retention rules.",
+        deliverable: "Paperless OCR & Audit-Ready Digital Document Repository",
+        turnaround: "3 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "06",
+    label: "Analytics, BI & Financial Automation",
+    items: [
+      {
+        num: "11",
+        title: "Dashboard and Reporting Automation",
+        scope:
+          "Engineering automated executive Power BI / Looker Studio KPI dashboards showing real-time cash flow, EBITDA margins, and receivables aging.",
+        deliverable: "Executive KPI Dashboard & Real-Time Reporting Suite",
+        turnaround: "5–7 Business Days",
+      },
+      {
+        num: "12",
+        title: "Finance Automation",
+        scope:
+          "Deploying no-code / low-code RPA bots to eliminate manual spreadsheet reconciliation, automated payment reminders, and bank imports.",
+        deliverable: "Automated Robotic Reconciliation & Workflow Scripts",
+        turnaround: "4–6 Business Days",
+      },
+    ],
+  },
+  {
+    phase: "07",
+    label: "Legacy Transformation & Training Continuity",
+    items: [
+      {
+        num: "13",
+        title: "Cloud-Based Accounting Migration",
+        scope:
+          "Forensic historical transaction scrubbing, multi-year journal migration from legacy on-premise software (Tally, Sage, Focus) to modern cloud ERP.",
+        deliverable: "Verified Cloud Migration & Balance Sign-Off Certificate",
+        turnaround: "5–7 Business Days",
+      },
+      {
+        num: "14",
+        title: "Continuous Digital Support & Team Training",
+        scope:
+          "Dedicated hands-on finance team training, SOP user guides, quarterly software patch audits, and continuous FTA compliance monitoring.",
+        deliverable: "Staff Training Manual & Annual Digital Support Charter",
+        turnaround: "On-Going Mandate",
+      },
+    ],
+  },
 ];
 
 const OTHER_SERVICES = [
@@ -44,6 +193,195 @@ const OTHER_SERVICES = [
 ];
 
 export default function TechnologyDigitalClient() {
+  const stackWrapperRef = useRef<HTMLDivElement>(null);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
+
+  // =========================================================================
+  // GSAP SCROLLTRIGGER DECK-OF-CARDS STACKING
+  // =========================================================================
+  useEffect(() => {
+    if (!cardsContainerRef.current || !stackWrapperRef.current) return;
+
+    if (typeof window !== "undefined") {
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      if (prefersReducedMotion) {
+        const cards = cardsContainerRef.current?.querySelectorAll<HTMLElement>(
+          ".setup-stacked-card",
+        );
+        cards?.forEach((card) => {
+          gsap.set(card, {
+            position: "relative",
+            top: "auto",
+            left: "auto",
+            width: "100%",
+            height: "auto",
+            yPercent: 0,
+            scale: 1,
+            y: 0,
+            opacity: 1,
+            clearProps: "all",
+          });
+        });
+        return;
+      }
+    }
+
+    let mm: gsap.MatchMedia | null = null;
+
+    const setupCardStacking = () => {
+      const cards = cardsContainerRef.current?.querySelectorAll<HTMLElement>(
+        ".setup-stacked-card",
+      );
+      if (!cards || cards.length <= 1) return;
+
+      const totalCards = cards.length;
+
+      let maxCardHeight = 0;
+      cards.forEach((card) => {
+        const h = card.getBoundingClientRect().height;
+        if (h > maxCardHeight) maxCardHeight = h;
+      });
+
+      if (maxCardHeight > 0 && cardsContainerRef.current) {
+        cardsContainerRef.current.style.minHeight = `${Math.ceil(
+          maxCardHeight,
+        )}px`;
+      }
+
+      const startOffset = "top top+=104";
+      const perCardScroll = 380;
+      const totalScrollDistance = (totalCards - 1) * perCardScroll + 180;
+      const scrubSpeed = 0.6;
+
+      cards.forEach((card, idx) => {
+        if (idx === 0) {
+          gsap.set(card, {
+            position: "relative",
+            yPercent: 0,
+            opacity: 1,
+            visibility: "visible",
+            force3D: false,
+          });
+        } else if (idx === 1) {
+          gsap.set(card, {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            minHeight: "100%",
+            yPercent: 100,
+            opacity: 1,
+            visibility: "visible",
+            force3D: false,
+          });
+        } else {
+          gsap.set(card, {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            minHeight: "100%",
+            yPercent: 100,
+            opacity: 0,
+            visibility: "hidden",
+            force3D: false,
+          });
+        }
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: stackWrapperRef.current,
+          start: startOffset,
+          end: `+=${totalScrollDistance}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: scrubSpeed,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      const moveDuration = 1.0;
+      const holdDuration = 0.8;
+      const stepDuration = moveDuration + holdDuration;
+      const initialHold = 0.7;
+
+      for (let i = 1; i < totalCards; i++) {
+        const currCard = cards[i];
+        const nextCard = i + 1 < totalCards ? cards[i + 1] : null;
+        const startTime = initialHold + (i - 1) * stepDuration;
+        const arriveTime = startTime + moveDuration;
+
+        if (i >= 2) {
+          const olderCard = cards[i - 2];
+          tl.to(
+            olderCard,
+            {
+              opacity: 0,
+              visibility: "hidden",
+              ease: "none",
+              duration: 0.2,
+            },
+            startTime,
+          );
+        }
+
+        tl.to(
+          currCard,
+          {
+            yPercent: 0,
+            opacity: 1,
+            visibility: "visible",
+            ease: "none",
+            duration: moveDuration,
+            force3D: false,
+          },
+          startTime,
+        );
+
+        if (nextCard) {
+          tl.to(
+            nextCard,
+            {
+              opacity: 1,
+              visibility: "visible",
+              ease: "none",
+              duration: 0.2,
+            },
+            arriveTime,
+          );
+        }
+      }
+    };
+
+    mm = gsap.matchMedia();
+    mm.add("(min-width: 768px)", () => {
+      setupCardStacking();
+    });
+    mm.add("(max-width: 767px)", () => {
+      const cards = cardsContainerRef.current?.querySelectorAll<HTMLElement>(
+        ".setup-stacked-card",
+      );
+      cards?.forEach((card) => {
+        gsap.set(card, {
+          clearProps: "all",
+        });
+      });
+      if (cardsContainerRef.current) {
+        cardsContainerRef.current.style.minHeight = "";
+      }
+    });
+
+    return () => {
+      mm?.revert();
+      if (cardsContainerRef.current) {
+        cardsContainerRef.current.style.minHeight = "";
+      }
+    };
+  }, []);
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#071426] selection:bg-[#C6F850] selection:text-[#071426]">
       <Navbar />
@@ -129,60 +467,100 @@ export default function TechnologyDigitalClient() {
         </section>
 
         {/* ================================================================= */}
-        {/* 2. WHAT'S INCLUDED IN TECHNOLOGY & DIGITAL FINANCE                */}
+        {/* 2. PRACTICE SCOPE: 14 SCOPED DELIVERABLES (Pinned Stacking Deck)  */}
         {/* ================================================================= */}
-        <section className="py-16 sm:py-24 bg-white border-b border-[#E2E8F0]">
+        <section
+          ref={stackWrapperRef}
+          className="py-16 sm:py-24 bg-white border-b border-[#E2E8F0]"
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-8 mb-8 border-b border-[#071426]/10">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 mb-8 border-b border-[#071426]/10">
               <div>
                 <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#4F46E5] font-bold block mb-2">
-                  PRACTICE SCOPE
+                  DIGITAL ARCHITECTURE PROTOCOL
                 </span>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#071426]">
-                  What&apos;s Included in Technology & Digital Finance
+                  14 Scoped Deliverables in Technology &amp; Digital Finance
                 </h2>
               </div>
-              <div className="text-xs sm:text-sm text-[#64748B] font-mono">
-                13 Deliverables · Automation & E-Invoicing
+              <div className="text-xs sm:text-sm text-[#64748B] font-mono flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#4F46E5] animate-pulse" />
+                <span className="hidden md:inline">Scroll to Reveal Tech Roadmap (7 Phases)</span>
+                <span className="md:hidden">14 Scoped Deliverables</span>
               </div>
             </div>
 
-            {/* Editorial Typographic List (Clean 13 Services, No Generic Boxes) */}
-            <div className="divide-y divide-[#E2E8F0]">
-              {TECH_DIGITAL_SERVICES.map((serviceName, idx) => {
-                const num = idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`;
-                return (
-                  <div
-                    key={idx}
-                    className="py-5 sm:py-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center group hover:bg-[#F8FAFC] transition-colors -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-xl"
-                  >
-                    <div className="md:col-span-2 flex items-center gap-3">
-                      <span className="font-mono text-xs font-bold text-[#4F46E5]">
-                        [{num}]
+            <div
+              ref={cardsContainerRef}
+              className="relative w-full flex flex-col gap-4 md:gap-0 md:overflow-hidden"
+            >
+              {TECH_DIGITAL_PAIRS.map((pair, pIdx) => (
+                <div
+                  key={pIdx}
+                  className="setup-stacked-card w-full md:rounded-3xl md:bg-white md:p-7 md:border md:border-[#CBD5E1]/80 md:shadow-[0_-14px_36px_rgba(7,20,38,0.08)] flex flex-col justify-between"
+                  style={{ zIndex: 10 + pIdx }}
+                >
+                  {/* Phase Row Header - HIDDEN on mobile as per user request */}
+                  <div className="hidden md:flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b border-[#E2E8F0]">
+                    <div className="flex items-center gap-3">
+                      <span className="font-mono text-xs font-bold text-[#4338CA] bg-[#EEF2FF] border border-[#4F46E5]/30 px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap">
+                        Phase {pair.phase} / 07
                       </span>
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-[#64748B] bg-[#EEF2FF] px-2 py-0.5 rounded-md">
-                        Digital
-                      </span>
-                    </div>
-
-                    <div className="md:col-span-7">
-                      <h3 className="text-lg sm:text-xl font-serif font-medium text-[#071426] group-hover:text-[#4338CA] transition-colors">
-                        {serviceName}
+                      <h3 className="text-base sm:text-lg font-serif font-bold text-[#071426]">
+                        {pair.label}
                       </h3>
                     </div>
-
-                    <div className="md:col-span-3 flex justify-start md:justify-end">
-                      <a
-                        href="#consultation"
-                        className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#4338CA] group-hover:text-[#4F46E5] transition-colors"
-                      >
-                        <span>Talk With an Advisor</span>
-                        <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-                      </a>
+                    <div className="text-xs font-mono text-[#64748B] flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#4F46E5]" />
+                      <span>
+                        Deliverables {pair.items[0].num} &amp; {pair.items[1].num} of 14
+                      </span>
                     </div>
                   </div>
-                );
-              })}
+
+                  {/* 2-by-2 Grid (Left & Right on Desktop, Clean Cards on Mobile) */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                    {pair.items.map((item, itemIdx) => (
+                      <div
+                        key={itemIdx}
+                        className="p-5 sm:p-7 rounded-2xl bg-white md:bg-[#F8FAFC] border border-[#CBD5E1]/90 hover:border-[#4F46E5] hover:shadow-lg transition-all group flex flex-col justify-between shadow-xs"
+                      >
+                        <div>
+                          <div className="flex items-center justify-between gap-3 mb-3">
+                            <span className="font-mono text-xs font-bold text-[#4F46E5] bg-[#EEF2FF] px-2.5 py-1 rounded-md">
+                              [{item.num}] TECH &amp; DIGITAL
+                            </span>
+                            <span className="text-xs font-mono text-[#64748B] flex items-center gap-1.5">
+                              <Clock className="w-3.5 h-3.5 text-[#4F46E5]" />
+                              <span>{item.turnaround}</span>
+                            </span>
+                          </div>
+
+                          <h4 className="text-lg sm:text-xl font-serif font-bold text-[#071426] group-hover:text-[#4338CA] transition-colors leading-snug mb-3">
+                            {item.title}
+                          </h4>
+
+                          <p className="text-xs sm:text-sm text-[#475569] font-sans leading-relaxed mb-5">
+                            {item.scope}
+                          </p>
+                        </div>
+
+                        <div className="pt-4 border-t border-[#CBD5E1]/70">
+                          <div className="text-[11px] font-mono font-bold text-[#64748B] uppercase mb-1.5">
+                            Key Deliverable:
+                          </div>
+                          <div className="text-xs font-medium text-[#4338CA] bg-[#EEF2FF] p-3 rounded-xl border border-[#4F46E5]/20 flex items-start gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 text-[#4F46E5] shrink-0 mt-0.5" />
+                            <span className="leading-snug">
+                              {item.deliverable}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>

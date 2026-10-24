@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import StatsBanner from "@/components/StatsBanner";
+import CrmShowcaseSection from "@/components/CrmShowcaseSection";
 import AboutSection from "@/components/AboutSection";
 import WhyChooseSection from "@/components/WhyChooseSection";
 import ServicesSection from "@/components/ServicesSection";
@@ -22,6 +23,9 @@ export default function Home() {
 
       {/* Trust & Metric Highlights Bar */}
       <StatsBanner />
+
+      {/* Proprietary CRM & Client Portal 4-Screen Cinema Showcase */}
+      <CrmShowcaseSection />
 
       {/* About Auditclue — Editorial Section */}
       <AboutSection />
