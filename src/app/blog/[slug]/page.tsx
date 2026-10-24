@@ -28,6 +28,8 @@ import {
   FileText,
 } from "lucide-react";
 
+import { ArticleSchema, BreadcrumbSchema } from "@/components/JsonLd";
+
 interface PageProps {
   params: Promise<{
     slug: string;
@@ -52,11 +54,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${post.title} | Auditclue Advisory`,
     description: post.excerpt,
+    alternates: {
+      canonical: `https://auditclue.com/blog/${post.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: "article",
       publishedTime: post.dateISO,
+      url: `https://auditclue.com/blog/${post.slug}`,
       images: [
         {
           url: post.image,
@@ -89,6 +95,21 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#071426] selection:bg-[#C6F850] selection:text-[#071426]">
+      <ArticleSchema
+        title={post.title}
+        description={post.excerpt}
+        url={`https://auditclue.com/blog/${post.slug}`}
+        image={post.image}
+        datePublished={post.dateISO}
+        authorName={post.author.name}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://auditclue.com" },
+          { name: "Blog", url: "https://auditclue.com/blog" },
+          { name: post.title, url: `https://auditclue.com/blog/${post.slug}` },
+        ]}
+      />
       <Navbar />
 
       <main className="flex-1 pt-[76px] lg:pt-[86px]">

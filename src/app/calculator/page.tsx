@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FlowText from "@/components/FlowText";
 import TaxCalculator from "@/components/TaxCalculator";
+import { FAQSchema, BreadcrumbSchema } from "@/components/JsonLd";
 import {
   ShieldCheck,
   CheckCircle2,
@@ -19,6 +20,25 @@ export const metadata: Metadata = {
     "UAE Corporate Tax & VAT Calculator (2024–2029 Statutory Rules) | Auditclue Advisory",
   description:
     "Calculate your UAE Corporate Tax liability (9%), check Small Business Relief eligibility (up to AED 3M revenue extended to 2029), and estimate VAT (5%) in real time.",
+  keywords: [
+    "UAE Corporate Tax Calculator",
+    "Corporate tax 9% calculator Dubai",
+    "Small business relief eligibility UAE",
+    "VAT calculator UAE 5%",
+    "EmaraTax tax simulation",
+    "UAE corporate tax liability computation",
+  ],
+  alternates: {
+    canonical: "https://auditclue.com/calculator",
+  },
+  openGraph: {
+    title: "UAE Corporate Tax & VAT Calculator | Auditclue Advisory",
+    description: "Instant real-time simulation of 9% UAE Corporate Tax, 0% threshold, and Small Business Relief.",
+    url: "https://auditclue.com/calculator",
+    siteName: "Auditclue Global Advisory Services LLC",
+    locale: "en_AE",
+    type: "website",
+  },
 };
 
 const STATUTORY_FAQS = [
@@ -51,6 +71,15 @@ const STATUTORY_FAQS = [
 export default function CalculatorPage() {
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#071426] selection:bg-[#C6F850] selection:text-[#071426]">
+      <FAQSchema
+        faqs={STATUTORY_FAQS.map((f) => ({ q: f.question, a: f.answer }))}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://auditclue.com" },
+          { name: "Tax Calculator", url: "https://auditclue.com/calculator" },
+        ]}
+      />
       {/* Navigation Header */}
       <Navbar />
 

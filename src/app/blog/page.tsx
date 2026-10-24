@@ -5,6 +5,7 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FlowText from "@/components/FlowText";
+import { BreadcrumbSchema } from "@/components/JsonLd";
 import {
   BookOpen,
   Calendar,
@@ -18,6 +19,27 @@ export const metadata: Metadata = {
   title: "UAE Tax & Regulatory Insights Blog | Auditclue Advisory",
   description:
     "Authoritative analysis on UAE Corporate Tax (9%), Small Business Relief (extended to 2029), FTA e-invoicing mandates, Qualifying Free Zone Person (QFZP) rules, and IFRS statutory audit compliance.",
+  keywords: [
+    "UAE tax blog",
+    "Corporate tax updates Dubai",
+    "Small business relief 2029",
+    "QFZP qualifying income guide",
+    "FTA VAT audit insights",
+    "E-invoicing Peppol UAE blog",
+    "Statutory audit checklist Dubai",
+  ],
+  alternates: {
+    canonical: "https://auditclue.com/blog",
+  },
+  openGraph: {
+    title: "UAE Tax & Regulatory Insights Blog | Auditclue Advisory",
+    description:
+      "Authoritative commentary on UAE Corporate Tax, FTA audit guidelines, and statutory accounting standards.",
+    url: "https://auditclue.com/blog",
+    siteName: "Auditclue Global Advisory Services LLC",
+    locale: "en_AE",
+    type: "website",
+  },
 };
 
 interface Article {
@@ -113,6 +135,12 @@ const ARTICLES: Article[] = [
 export default function BlogPage() {
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#071426] selection:bg-[#C6F850] selection:text-[#071426]">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://auditclue.com" },
+          { name: "Blog", url: "https://auditclue.com/blog" },
+        ]}
+      />
       <Navbar />
 
       <main className="flex-1 pt-[76px] lg:pt-[86px]">

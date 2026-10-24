@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Plus, Minus, HelpCircle, ArrowUpRight } from "lucide-react";
 import FlowText from "@/components/FlowText";
+import { FAQSchema } from "@/components/JsonLd";
 
 const FAQS = [
   {
@@ -51,6 +52,7 @@ export default function FAQSection() {
       ref={sectionRef}
       className="relative bg-white text-[#233F5B] py-24 sm:py-28 lg:py-32 overflow-hidden border-t border-[#E1E7ED]"
     >
+      <FAQSchema faqs={FAQS} />
       <div className="relative max-w-5xl mx-auto px-5 sm:px-8 lg:px-10 z-10">
         {/* Header */}
         <div className="max-w-2xl mx-auto text-center mb-14 sm:mb-18">

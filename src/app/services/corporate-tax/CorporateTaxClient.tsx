@@ -20,6 +20,7 @@ import {
   ArrowUpRight,
   CheckCircle2,
   Clock,
+  Calculator,
 } from "lucide-react";
 
 const CORPORATE_TAX_PAIRS = [
@@ -473,6 +474,15 @@ export default function CorporateTaxClient() {
                   </span>
                 </a>
 
+                <Link
+                  href="/calculator"
+                  className="inline-flex items-center justify-center gap-2.5 bg-white hover:bg-[#EAF4F0] text-[#071426] text-base font-semibold px-6 py-4 rounded-xl shadow-sm border border-[#CBD5E1] transition-all group"
+                >
+                  <Calculator className="w-4 h-4 text-[#36A783]" />
+                  <span>Calculate Tax (30s)</span>
+                  <ArrowRight className="w-4 h-4 text-[#36A783] group-hover:translate-x-1 transition-transform" />
+                </Link>
+
                 <a
                   href="https://wa.me/971547338583"
                   target="_blank"
@@ -707,6 +717,33 @@ export default function CorporateTaxClient() {
                 <ContactForm />
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* CONTEXTUAL TAX CALCULATOR BANNER (Topic Clustering SEO)          */}
+        {/* ================================================================= */}
+        <section className="py-12 bg-gradient-to-r from-[#EAF4F0] via-white to-[#F1F5F9] border-y border-[#CBD5E1]/80">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="max-w-2xl">
+              <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#216D56] uppercase tracking-wider mb-2">
+                <Calculator className="w-3.5 h-3.5 text-[#36A783]" />
+                <span>INSTANT 2024–2029 STATUTORY SIMULATION</span>
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#071426] mb-2">
+                Calculate Your UAE Corporate Tax Liability in 30 Seconds
+              </h3>
+              <p className="text-sm text-[#475569] leading-relaxed">
+                Check whether your business qualifies for 0% Small Business Relief (revenue under AED 3M extended to 2029) or simulate your 9% liability on profits over AED 375,000.
+              </p>
+            </div>
+            <Link
+              href="/calculator"
+              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#071426] hover:bg-[#216D56] text-white text-sm font-semibold tracking-wide transition-all shadow-md hover:shadow-lg shrink-0 group"
+            >
+              <span>Launch Tax Calculator</span>
+              <ArrowRight className="w-4 h-4 text-[#C6F850] group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </section>
 

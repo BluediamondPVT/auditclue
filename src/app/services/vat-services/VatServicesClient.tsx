@@ -31,6 +31,7 @@ import {
   Building2,
   Calendar,
   Lock,
+  Calculator,
 } from "lucide-react";
 
 // =========================================================================
@@ -1191,6 +1192,33 @@ export default function VatServicesClient() {
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* CONTEXTUAL VAT & TAX CALCULATOR BANNER (Topic Clustering SEO)     */}
+        {/* ================================================================= */}
+        <section className="py-12 bg-gradient-to-r from-[#EAF4F0] via-white to-[#F1F5F9] border-y border-[#CBD5E1]/80">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="max-w-2xl">
+              <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#216D56] uppercase tracking-wider mb-2">
+                <Calculator className="w-3.5 h-3.5 text-[#36A783]" />
+                <span>INSTANT 5% VAT & CORPORATE TAX SIMULATOR</span>
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#071426] mb-2">
+                Estimate Your VAT & Corporate Tax Position in Real Time
+              </h3>
+              <p className="text-sm text-[#475569] leading-relaxed">
+                Calculate input tax recovery, 5% standard rate supplies, and simulate your 2024–2029 UAE Corporate Tax liability with our certified statutory tool.
+              </p>
+            </div>
+            <Link
+              href="/calculator"
+              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#071426] hover:bg-[#216D56] text-white text-sm font-semibold tracking-wide transition-all shadow-md hover:shadow-lg shrink-0 group"
+            >
+              <span>Open Tax & VAT Calculator</span>
+              <ArrowRight className="w-4 h-4 text-[#C6F850] group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </section>
 

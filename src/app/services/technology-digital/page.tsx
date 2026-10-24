@@ -1,14 +1,26 @@
 import React from "react";
 import type { Metadata } from "next";
 import TechnologyDigitalClient from "./TechnologyDigitalClient";
+import { ServiceSchema, BreadcrumbSchema } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title:
-    "Technology & Digital Finance Services | Auditclue Global Advisory Services LLC",
+  title: "Digital Finance & E-Invoicing Peppol Advisory UAE | Auditclue",
   description:
-    "We help businesses transition to digital finance — implementing accounting software, automating workflows, and preparing for UAE e-invoicing mandates. Our technology advisory ensures your finance function is efficient, accurate, and future-ready.",
+    "Future-proof your UAE finance function. Certified cloud ERP implementation (Zoho Books, QuickBooks, Xero, NetSuite) and UAE E-Invoicing System (EES) Peppol integration.",
+  keywords: [
+    "Technology and digital finance UAE",
+    "UAE e-invoicing Peppol mandate",
+    "Zoho Books implementation Dubai",
+    "QuickBooks online setup UAE",
+    "Accounting software migration UAE",
+    "Cloud ERP integration Dubai",
+    "Automated financial reporting dashboards",
+  ],
+  alternates: {
+    canonical: "https://auditclue.com/services/technology-digital",
+  },
   openGraph: {
-    title: "Technology & Digital Finance | Auditclue Advisory",
+    title: "Digital Finance & E-Invoicing Peppol Advisory UAE | Auditclue",
     description:
       "UAE digital finance advisory: Zoho Books, QuickBooks, Xero, ERP advisory, Peppol e-invoicing readiness, and automated financial dashboards.",
     url: "https://auditclue.com/services/technology-digital",
@@ -19,5 +31,22 @@ export const metadata: Metadata = {
 };
 
 export default function TechnologyDigitalPage() {
-  return <TechnologyDigitalClient />;
+  return (
+    <>
+      <ServiceSchema
+        name="Technology & Digital Finance Advisory"
+        description="End-to-end digital finance transformation: cloud accounting implementation, API integrations, and UAE Peppol e-invoicing compliance."
+        url="https://auditclue.com/services/technology-digital"
+        serviceType="TechConsulting"
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://auditclue.com" },
+          { name: "Services", url: "https://auditclue.com/#services" },
+          { name: "Technology & Digital Finance", url: "https://auditclue.com/services/technology-digital" },
+        ]}
+      />
+      <TechnologyDigitalClient />
+    </>
+  );
 }

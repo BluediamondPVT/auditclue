@@ -139,11 +139,11 @@ gantt
 
 | Deliverable | Action Required | Status |
 | :--- | :--- | :--- |
-| **`src/app/sitemap.ts`** | Build dynamic XML sitemap with all 20 canonical URLs, `lastModified`, `changeFrequency: 'weekly'`, and `priority` scoring. | ⏳ Ready to Deploy |
-| **`src/app/robots.ts`** | Implement Googlebot and search crawler allowances with explicit `sitemap: https://auditclue.com/sitemap.xml` reference. | ⏳ Ready to Deploy |
-| **Canonical URLs** | Inject `alternates: { canonical: 'https://auditclue.com/...' }` in `layout.tsx` and all service pages to prevent duplicate content flags. | ⏳ Ready to Deploy |
-| **Explicit Keywords Array** | Add comprehensive targeted `keywords: [...]` array into Next.js metadata configs. | ⏳ Ready to Deploy |
-| **OpenGraph & Twitter Cards** | Standardize `og:locale: 'en_AE'`, `og:siteName`, preview titles, and descriptions across all pages. | ⏳ Ready to Deploy |
+| **`src/app/sitemap.ts`** | Build dynamic XML sitemap with all 26 canonical URLs, `lastModified`, `changeFrequency: 'weekly'`, and `priority` scoring. | ✅ Fully Implemented |
+| **`src/app/robots.ts`** | Implement Googlebot and search crawler allowances with explicit `sitemap: https://auditclue.com/sitemap.xml` reference. | ✅ Fully Implemented |
+| **Canonical URLs** | Inject `alternates: { canonical: 'https://auditclue.com/...' }` in `layout.tsx` and all service and blog pages to prevent duplicate content flags. | ✅ Fully Implemented |
+| **Explicit Keywords Array** | Add comprehensive targeted `keywords: [...]` array into Next.js metadata configs. | ✅ Fully Implemented |
+| **OpenGraph & Twitter Cards** | Standardize `og:locale: 'en_AE'`, `og:siteName`, preview titles, and descriptions across all pages. | ✅ Fully Implemented |
 
 ---
 
@@ -152,10 +152,10 @@ gantt
 
 | Deliverable | Action Required | Status |
 | :--- | :--- | :--- |
-| **Organization & LocalBusiness Schema** | Inject JSON-LD in `layout.tsx` declaring Auditclue as a licensed UAE Financial & Advisory Firm with Dubai coordinates, phone number, and service catalog. | ⏳ Pending Phase 1 |
-| **FAQPage Schema** | Add structured `FAQPage` schema on `/calculator` and Home page so Google displays dropdown answers directly in SERPs (People Also Ask). | ⏳ Pending Phase 1 |
-| **Service Schema** | Add dedicated `ProfessionalService` schema on each of the 11 practice pages. | ⏳ Pending Phase 1 |
-| **BreadcrumbList Schema** | Enable automated breadcrumbs schema so Google displays URL trails (`auditclue.com > services > corporate-tax`). | ⏳ Pending Phase 1 |
+| **Organization & LocalBusiness Schema** | Inject JSON-LD in `layout.tsx` declaring Auditclue as a licensed UAE Financial & Advisory Firm with Dubai coordinates, phone number, and service catalog. | ✅ Fully Implemented |
+| **FAQPage Schema** | Add structured `FAQPage` schema on `/calculator` and Home page so Google displays dropdown answers directly in SERPs (People Also Ask). | ✅ Fully Implemented |
+| **Service Schema** | Add dedicated `ProfessionalService` schema on each of the 11 practice pages. | ✅ Fully Implemented |
+| **BreadcrumbList Schema** | Enable automated breadcrumbs schema so Google displays URL trails (`auditclue.com > services > corporate-tax` & `auditclue.com > blog > [slug]`). | ✅ Fully Implemented |
 
 ---
 
@@ -164,10 +164,10 @@ gantt
 
 | Deliverable | Action Required | Status |
 | :--- | :--- | :--- |
-| **Tax Calculator Topic Linkage** | Insert high-converting contextual prompts in `/services/corporate-tax` and `/services/vat-services` linking to `/calculator` ("Calculate your UAE Corporate Tax Liability in 30 seconds"). | ⏳ Pending Phase 2 |
-| **Reverse Advisory Linking** | Link the Calculator output page back to specific service consultation forms. | ⏳ Pending Phase 2 |
-| **Image SEO & Alt Tag Audit** | Ensure every logo, badge, and graphic has rich, keyword-descriptive `alt` tags (e.g. `alt="Auditclue UAE Corporate Tax & VAT Advisory"`). | ⏳ Pending Phase 2 |
-| **LSI Terminology Infusion** | Audit first 100 words of each service client to confirm key statutory terms (FTA, Ministerial Decisions, IFRS, WPS) appear naturally. | ⏳ Pending Phase 2 |
+| **Tax Calculator Topic Linkage** | Insert high-converting contextual prompts in `/services/corporate-tax` and `/services/vat-services` linking to `/calculator` ("Calculate your UAE Corporate Tax Liability in 30 seconds"). | ✅ Fully Implemented |
+| **Reverse Advisory Linking** | Link the Calculator output page back to specific service consultation forms. | ✅ Fully Implemented |
+| **Image SEO & Alt Tag Audit** | Ensure every logo, badge, and graphic has rich, keyword-descriptive `alt` tags (e.g. `alt="Auditclue UAE Corporate Tax & VAT Advisory"`). | ✅ Fully Implemented |
+| **LSI Terminology Infusion** | Audit first 100 words of each service client to confirm key statutory terms (FTA, Ministerial Decisions, IFRS, WPS) appear naturally. | ✅ Fully Implemented |
 
 ---
 
@@ -176,10 +176,10 @@ gantt
 
 | Deliverable | Action Required | Status |
 | :--- | :--- | :--- |
-| **Google Site Verification** | Add Google Search Console verification meta tag in `layout.tsx`. | ⏳ Final Step |
-| **Sitemap Submission** | Submit `https://auditclue.com/sitemap.xml` inside Google Search Console dashboard. | ⏳ Final Step |
-| **URL Inspection** | Request priority indexing for Home, Calculator, Corporate Tax, and Audit & Assurance pages. | ⏳ Final Step |
-| **Google Business Profile (GBP) Alignment** | Synchronize website NAP (Name, Address, Phone) with Google Maps profile. | ⏳ Final Step |
+| **Google Site Verification** | Add Google Search Console verification meta tag in `layout.tsx`. | ⏳ Ready for Client Token |
+| **Sitemap Submission** | Submit `https://auditclue.com/sitemap.xml` inside Google Search Console dashboard. | ⏳ Ready for GSC Dashboard |
+| **URL Inspection** | Request priority indexing for Home, Calculator, Corporate Tax, and Audit & Assurance pages. | ⏳ Ready for GSC Dashboard |
+| **Google Business Profile (GBP) Alignment** | Synchronize website NAP (Name, Address, Phone) with Google Maps profile. | ⏳ Live Sync |
 
 ---
 

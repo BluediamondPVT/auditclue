@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import BusinessSetupClient from "./BusinessSetupClient";
+import { ServiceSchema, BreadcrumbSchema } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title:
@@ -16,7 +17,12 @@ export const metadata: Metadata = {
     "corporate bank account opening Dubai",
     "UAE trade license cost",
     "100% foreign ownership UAE LLC",
+    "Offshore company incorporation UAE",
+    "Trade license renewal Dubai",
   ],
+  alternates: {
+    canonical: "https://auditclue.com/services/business-setup",
+  },
   openGraph: {
     title: "UAE Company Formation & Business Setup | Auditclue Advisory",
     description:
@@ -37,5 +43,22 @@ export const metadata: Metadata = {
 };
 
 export default function BusinessSetupPage() {
-  return <BusinessSetupClient />;
+  return (
+    <>
+      <ServiceSchema
+        name="UAE Business Setup & Company Formation"
+        description="End-to-end company formation across Dubai Mainland (DED), major Free Zones (DMCC, IFZA, DAFZA, DIFC), and corporate bank account support."
+        url="https://auditclue.com/services/business-setup"
+        serviceType="BusinessConsulting"
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://auditclue.com" },
+          { name: "Services", url: "https://auditclue.com/#services" },
+          { name: "Business Setup & Formation", url: "https://auditclue.com/services/business-setup" },
+        ]}
+      />
+      <BusinessSetupClient />
+    </>
+  );
 }
