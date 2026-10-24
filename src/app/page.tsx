@@ -10,6 +10,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import WorkflowSection from "@/components/WorkflowSection";
 import ClientPortalSection from "@/components/ClientPortalSection";
 import FAQSection from "@/components/FAQSection";
+import HomeBlogSection from "@/components/HomeBlogSection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -50,6 +51,9 @@ export default function Home() {
 
       {/* Frequently Asked Questions */}
       <FAQSection />
+
+      {/* Latest Regulatory Insights & Tax Blogs (SEO Optimized Light Theme) */}
+      <HomeBlogSection />
 
       {/* Comprehensive Corporate Footer */}
       <Footer />

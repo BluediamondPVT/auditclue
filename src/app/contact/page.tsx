@@ -387,47 +387,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Abu Dhabi Office Card */}
-                <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#CBD5E1]/80 shadow-md">
-                  <div className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#216D56] bg-[#EAF4F0] px-2.5 py-1 rounded-full mb-4">
-                    <Building2 className="w-3.5 h-3.5 text-[#36A783]" />
-                    <span>ABU DHABI REGIONAL HUB</span>
-                  </div>
-
-                  <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#071426] mb-2">
-                    Al Khatem Tower, ADGM Square
-                  </h3>
-                  <div className="text-sm font-sans text-[#475569] mb-5">
-                    Level 8, Abu Dhabi Global Market Square<br />
-                    Al Maryah Island, Abu Dhabi, United Arab Emirates
-                  </div>
-
-                  <div className="space-y-2 text-xs font-sans text-[#64748B] border-t border-[#E2E8F0] pt-4 mb-6">
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono font-medium text-[#071426]">Office Hours:</span>
-                      <span>Mon – Fri: 9:00 AM – 5:00 PM GST</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono font-medium text-[#071426]">Practice Focus:</span>
-                      <span>ADGM SPVs, Free Zone Audit & Structuring</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono font-medium text-[#071426]">Direct Line:</span>
-                      <span>+971 54 733 8583</span>
-                    </div>
-                  </div>
-
-                  <a
-                    href="https://maps.google.com/?q=Al+Khatem+Tower+ADGM+Square+Abu+Dhabi"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-[#F8FAFC] hover:bg-[#EDF5F1] text-[#071426] hover:text-[#216D56] border border-[#CBD5E1] text-xs font-semibold uppercase tracking-wider font-mono transition-colors"
-                  >
-                    <Compass className="w-3.5 h-3.5 text-[#36A783]" />
-                    <span>Directions to ADGM Office</span>
-                    <ExternalLink className="w-3.5 h-3.5 ml-0.5" />
-                  </a>
-                </div>
+              
 
               </div>
 

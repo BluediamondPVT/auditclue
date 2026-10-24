@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FlowText from "@/components/FlowText";
@@ -10,10 +11,6 @@ import {
   Clock,
   ArrowRight,
   ShieldCheck,
-  Building2,
-  Scale,
-  Percent,
-  FileCheck2,
   ChevronRight,
 } from "lucide-react";
 
@@ -27,6 +24,7 @@ interface Article {
   slug: string;
   category: string;
   categoryColor: string;
+  image: string;
   title: string;
   excerpt: string;
   readTime: string;
@@ -39,7 +37,8 @@ const ARTICLES: Article[] = [
   {
     slug: "uae-corporate-tax-deadlines-penalties-guide",
     category: "Corporate Tax (9%)",
-    categoryColor: "bg-[#EAF4F0] text-[#216D56] border-[#36A783]/30",
+    categoryColor: "bg-[#EAF4F0]/95 text-[#216D56] border-[#36A783]/40",
+    image: "/images/blog/tax-deadlines.jpg",
     title: "UAE Corporate Tax Filing Deadlines & FTA Penalty Prevention (2024–2026)",
     excerpt:
       "A comprehensive walkthrough of the 9-month statutory filing timeline following your financial year-end, deregistration protocols, and how to avoid the mandatory AED 10,000 to AED 20,000 late-submission penalties.",
@@ -51,7 +50,8 @@ const ARTICLES: Article[] = [
   {
     slug: "small-business-relief-sbr-extended-2029",
     category: "Reliefs & Exemptions",
-    categoryColor: "bg-[#EFF6FF] text-[#1D4ED8] border-[#93C5FD]/40",
+    categoryColor: "bg-[#EFF6FF]/95 text-[#1D4ED8] border-[#93C5FD]/60",
+    image: "/images/blog/sbr-relief.jpg",
     title: "Small Business Relief Extended to 31 December 2029: Eligibility Criteria & Revenue Caps",
     excerpt:
       "Ministerial decision updates on the AED 3,000,000 gross revenue threshold. How resident taxable persons can claim 0% effective tax and simplified accounting rules through tax periods ending 2029.",
@@ -63,7 +63,8 @@ const ARTICLES: Article[] = [
   {
     slug: "qualifying-free-zone-person-qfzp-rules",
     category: "Free Zones",
-    categoryColor: "bg-[#F5F3FF] text-[#6D28D9] border-[#DDD6FE]/50",
+    categoryColor: "bg-[#F5F3FF]/95 text-[#6D28D9] border-[#DDD6FE]/60",
+    image: "/images/blog/qfzp-freezone.jpg",
     title: "Qualifying Free Zone Person (QFZP): 0% vs 9% Tax Treatment Decoded",
     excerpt:
       "Understanding Qualifying Income, de minimis rule requirements, adequate economic substance in UAE Free Zones, and disqualification triggers when dealing with mainland counterparties.",
@@ -74,7 +75,8 @@ const ARTICLES: Article[] = [
   {
     slug: "uae-e-invoicing-mandate-peppol-compliance",
     category: "Digital Finance",
-    categoryColor: "bg-[#FEF3C7] text-[#92400E] border-[#FDE68A]/60",
+    categoryColor: "bg-[#FEF3C7]/95 text-[#92400E] border-[#FDE68A]/70",
+    image: "/images/blog/einvoicing-peppol.jpg",
     title: "UAE E-Invoicing System (EES): Peppol Network Integration & FTA Rollout",
     excerpt:
       "Preparation roadmap for B2B electronic invoice exchange, continuous transaction controls (CTC), data dictionary standards, and ERP connectivity ahead of statutory enforcement.",
@@ -85,7 +87,8 @@ const ARTICLES: Article[] = [
   {
     slug: "ifrs-statutory-audit-checklist-uae",
     category: "Statutory Audit",
-    categoryColor: "bg-[#ECFDF5] text-[#047857] border-[#A7F3D0]/50",
+    categoryColor: "bg-[#ECFDF5]/95 text-[#047857] border-[#A7F3D0]/60",
+    image: "/images/blog/statutory-audit.jpg",
     title: "Annual Statutory Audit Checklist for UAE Mainland & Free Zone Enterprises",
     excerpt:
       "Key preparation schedules, bank confirmations, inventory physical counts, related party disclosures, and ISA standards required for trade license renewal and bank facility compliance.",
@@ -96,7 +99,8 @@ const ARTICLES: Article[] = [
   {
     slug: "uae-vat-common-audit-triggers-fta",
     category: "VAT (5%)",
-    categoryColor: "bg-[#FFF1F2] text-[#BE123C] border-[#FECDD3]/50",
+    categoryColor: "bg-[#FFF1F2]/95 text-[#BE123C] border-[#FECDD3]/60",
+    image: "/images/blog/vat-triggers.jpg",
     title: "Top 7 VAT Audit Triggers by the Federal Tax Authority and How to Protect Your Cashflow",
     excerpt:
       "Inaccurate input tax apportionment, export documentation deficiencies, delayed voluntary disclosures, and reverse charge mechanism errors that lead to automatic FTA tax assessments.",
@@ -124,12 +128,12 @@ export default function BlogPage() {
                 Home
               </Link>
               <span>/</span>
-              <span className="text-[#071426] font-semibold">Blog & Regulatory Insights</span>
+              <span className="text-[#071426] font-semibold">Blog &amp; Regulatory Insights</span>
             </nav>
 
             <div className="inline-flex items-center gap-2 bg-[#EAF4F0] text-[#216D56] border border-[#36A783]/25 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 font-mono shadow-xs">
               <BookOpen className="w-3.5 h-3.5 text-[#36A783]" />
-              <span>UAE STATUTORY INTELLIGENCE & ADVISORY BRIEFS</span>
+              <span>UAE STATUTORY INTELLIGENCE &amp; ADVISORY BRIEFS</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#071426] tracking-tight leading-tight mb-5 max-w-3xl">
@@ -159,23 +163,39 @@ export default function BlogPage() {
             {ARTICLES.filter((a) => a.featured).map((article) => (
               <div
                 key={article.slug}
-                className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm hover:shadow-md hover:border-[#36A783]/40 transition-all flex flex-col justify-between group"
+                className="bg-white rounded-3xl p-5 sm:p-7 border border-slate-200/80 shadow-sm hover:shadow-md hover:border-[#36A783]/40 transition-all flex flex-col justify-between group"
               >
                 <div>
-                  <div className="flex items-center justify-between gap-3 mb-4">
-                    <span
-                      className={`text-xs font-semibold px-3 py-1 rounded-full border font-mono ${article.categoryColor}`}
-                    >
-                      {article.category}
-                    </span>
+                  {/* Featured Card Image */}
+                  <div className="relative w-full h-56 sm:h-64 overflow-hidden rounded-2xl mb-5 bg-[#E2E8F0]">
+                    <Image
+                      src={article.image}
+                      alt={article.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#071426]/30 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute top-3 left-3 z-10">
+                      <span
+                        className={`text-xs font-semibold px-3 py-1 rounded-full border font-mono backdrop-blur-md shadow-xs ${article.categoryColor}`}
+                      >
+                        {article.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-3 mb-3">
                     <div className="flex items-center gap-1.5 text-xs text-[#64748B] font-mono">
-                      <Clock className="w-3.5 h-3.5" />
+                      <Clock className="w-3.5 h-3.5 text-[#36A783]" />
                       <span>{article.readTime}</span>
                     </div>
                   </div>
 
                   <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#071426] group-hover:text-[#216D56] transition-colors leading-snug mb-3">
-                    {article.title}
+                    <Link href={`/blog/${article.slug}`} className="hover:underline">
+                      {article.title}
+                    </Link>
                   </h3>
 
                   <p className="text-sm text-[#475569] leading-relaxed mb-6 font-sans">
@@ -192,7 +212,7 @@ export default function BlogPage() {
                   </div>
 
                   <Link
-                    href="/contact"
+                    href={`/blog/${article.slug}`}
                     className="inline-flex items-center gap-1.5 text-[#216D56] font-semibold group-hover:translate-x-0.5 transition-transform"
                   >
                     <span>Read Advisory</span>
@@ -206,7 +226,7 @@ export default function BlogPage() {
           {/* All Articles Grid */}
           <div className="mb-6">
             <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#071426] mb-2">
-              Recent Analysis & Practice Notes
+              Recent Analysis &amp; Practice Notes
             </h2>
             <p className="text-sm text-[#64748B] mb-8">
               In-depth commentary on UAE Federal Tax Authority decrees and statutory accounting standards.
@@ -216,22 +236,39 @@ export default function BlogPage() {
               {ARTICLES.filter((a) => !a.featured).map((article) => (
                 <div
                   key={article.slug}
-                  className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-[#36A783]/40 transition-all flex flex-col justify-between group"
+                  className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-[#36A783]/40 transition-all flex flex-col justify-between group"
                 >
                   <div>
-                    <div className="flex items-center justify-between gap-3 mb-3">
-                      <span
-                        className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full border font-mono ${article.categoryColor}`}
-                      >
-                        {article.category}
-                      </span>
-                      <span className="text-[11px] text-[#64748B] font-mono">
+                    {/* Recent Article Card Image */}
+                    <div className="relative w-full h-44 sm:h-48 overflow-hidden rounded-xl mb-4 bg-[#E2E8F0]">
+                      <Image
+                        src={article.image}
+                        alt={article.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#071426]/30 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute top-2.5 left-2.5 z-10">
+                        <span
+                          className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full border font-mono backdrop-blur-md shadow-xs ${article.categoryColor}`}
+                        >
+                          {article.category}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-3 mb-2.5">
+                      <span className="text-[11px] text-[#64748B] font-mono flex items-center gap-1">
+                        <Clock className="w-3 h-3 text-[#36A783]" />
                         {article.readTime}
                       </span>
                     </div>
 
-                    <h3 className="text-base sm:text-lg font-serif font-bold text-[#071426] group-hover:text-[#216D56] transition-colors leading-snug mb-2.5">
-                      {article.title}
+                    <h3 className="text-base sm:text-lg font-serif font-bold text-[#071426] group-hover:text-[#216D56] transition-colors leading-snug mb-2.5 line-clamp-2">
+                      <Link href={`/blog/${article.slug}`} className="hover:underline">
+                        {article.title}
+                      </Link>
                     </h3>
 
                     <p className="text-xs sm:text-sm text-[#475569] leading-relaxed mb-5 line-clamp-3 font-sans">
@@ -242,7 +279,7 @@ export default function BlogPage() {
                   <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#64748B]">
                     <span>{article.date}</span>
                     <Link
-                      href="/contact"
+                      href={`/blog/${article.slug}`}
                       className="inline-flex items-center gap-1 text-[#216D56] font-semibold group-hover:translate-x-0.5 transition-transform"
                     >
                       <span>Explore</span>
