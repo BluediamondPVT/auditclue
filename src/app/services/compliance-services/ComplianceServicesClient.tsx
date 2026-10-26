@@ -675,7 +675,7 @@ export default function ComplianceServicesClient() {
 
               {/* Right Column: Embedded Consultation Form */}
               <div className="lg:col-span-7 bg-[#F8FAFC] border border-[#CBD5E1] p-6 sm:p-8 rounded-3xl shadow-sm">
-                <ContactForm />
+                <ContactForm defaultService="Compliance Services" />
               </div>
             </div>
           </div>

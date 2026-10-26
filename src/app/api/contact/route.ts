@@ -2,18 +2,36 @@ import { NextResponse } from "next/server";
 
 // Valid services list to cross-check against manipulation
 const VALID_SERVICES = [
-  "UAE Corporate Tax (9%)",
-  "Statutory Audit & Assurance",
   "Business Setup & Formation",
+  "UAE Corporate Tax",
+  "Statutory Audit & Assurance",
+  "UAE VAT Services",
+  "Virtual CFO Advisory",
   "Accounting & Bookkeeping",
-  "UAE VAT Services (5%)",
-  "Virtual CFO & Finance Advisory",
   "Transfer Pricing",
   "Corporate Finance",
   "Business Advisory",
-  "Compliance Services (AML/ESR/UBO)",
+  "Compliance Services",
   "Technology & Digital Finance",
+  "Other Advisory Requirements",
+  // Legacy & slug variants
+  "UAE Corporate Tax (9%)",
+  "UAE VAT Services (5%)",
+  "Virtual CFO & Finance Advisory",
+  "Compliance Services (AML/ESR/UBO)",
   "Other / General Enquiry",
+  "business-setup",
+  "corporate-tax",
+  "audit-assurance",
+  "vat-services",
+  "cfo-advisory",
+  "accounting-bookkeeping",
+  "transfer-pricing",
+  "corporate-finance",
+  "business-advisory",
+  "compliance-services",
+  "technology-digital",
+  "other",
 ];
 
 export async function POST(request: Request) {

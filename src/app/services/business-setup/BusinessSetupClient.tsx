@@ -849,7 +849,7 @@ export default function BusinessSetupClient() {
               </div>
 
               <div className="lg:col-span-7">
-                <ContactForm />
+                <ContactForm defaultService="Business Setup & Formation" />
               </div>
             </div>
           </div>

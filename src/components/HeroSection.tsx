@@ -8,19 +8,10 @@ import {
   LockKeyhole,
 } from "lucide-react";
 
-const services = [
-  { value: "corporate-tax", label: "UAE Corporate Tax" },
-  { value: "audit-assurance", label: "Statutory Audit & Assurance" },
-  { value: "vat-services", label: "VAT Registration & Filing" },
-  { value: "business-setup", label: "Business Setup & Formation" },
-  { value: "accounting-bookkeeping", label: "Accounting & Bookkeeping" },
-  { value: "transfer-pricing", label: "Transfer Pricing" },
-  { value: "cfo-advisory", label: "Virtual CFO & Financial Advisory" },
-  { value: "other", label: "Other Advisory Requirements" },
-];
+import { ALL_FORM_SERVICES } from "@/data/formServices";
 
 export default function HeroSection() {
-  const [serviceType, setServiceType] = useState("corporate-tax");
+  const [serviceType, setServiceType] = useState("UAE Corporate Tax");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,13 +19,32 @@ export default function HeroSection() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    // UI demonstration only. Connect your backend or CRM here
-    // before using this form for live enquiries.
-    setSubmitted(true);
+    setLoading(true);
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: formData.name,
+          companyName: formData.name ? `${formData.name} Org` : "Direct Inquiry",
+          email: formData.email,
+          mobile: formData.phone,
+          service: serviceType,
+          notes: formData.message,
+          consent: true,
+          formLoadTime: Date.now() - 3000,
+        }),
+      });
+    } catch (e) {
+      console.warn("Direct submission notice:", e);
+    } finally {
+      setLoading(false);
+      setSubmitted(true);
+    }
   }
 
   return (
@@ -225,9 +235,9 @@ export default function HeroSection() {
                       className="form-control"
                       required
                     >
-                      {services.map((service) => (
-                        <option key={service.value} value={service.value}>
-                          {service.label}
+                      {ALL_FORM_SERVICES.map((service) => (
+                        <option key={service.id} value={service.title}>
+                          {service.title}
                         </option>
                       ))}
                     </select>

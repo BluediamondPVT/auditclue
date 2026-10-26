@@ -10,6 +10,7 @@ import {
   ArrowRight,
   Globe2,
 } from "lucide-react";
+import { ALL_FORM_SERVICES } from "@/data/formServices";
 
 const TIME_SLOTS = [
   "09:30 AM GST",
@@ -73,7 +74,7 @@ export default function BookingCalendar() {
   const [clientName, setClientName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
   const [clientPhone, setClientPhone] = useState("");
-  const [serviceNeeded, setServiceNeeded] = useState("UAE Corporate Tax & Advisory");
+  const [serviceNeeded, setServiceNeeded] = useState("UAE Corporate Tax");
   const [isBooked, setIsBooked] = useState(false);
 
   useEffect(() => {
@@ -270,6 +271,23 @@ Please confirm my advisor appointment.`
                 placeholder="you@company.ae"
                 className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD5E1] text-xs bg-white focus:outline-none focus:border-[#36A783]"
               />
+            </div>
+
+            <div className="sm:col-span-2">
+              <label className="block text-xs font-semibold text-[#071426] mb-1">
+                Required Advisory Practice *
+              </label>
+              <select
+                value={serviceNeeded}
+                onChange={(e) => setServiceNeeded(e.target.value)}
+                className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD5E1] text-xs bg-white text-[#071426] focus:outline-none focus:border-[#36A783] cursor-pointer"
+              >
+                {ALL_FORM_SERVICES.map((srv) => (
+                  <option key={srv.id} value={srv.title}>
+                    {srv.title}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 

@@ -15,29 +15,19 @@ import {
   MessageSquare,
   Info,
 } from "lucide-react";
+import { ALL_FORM_SERVICES } from "@/data/formServices";
 
-const SERVICES_LIST = [
-  "UAE Corporate Tax (9%)",
-  "Statutory Audit & Assurance",
-  "Business Setup & Formation",
-  "Accounting & Bookkeeping",
-  "UAE VAT Services (5%)",
-  "Virtual CFO & Finance Advisory",
-  "Transfer Pricing",
-  "Corporate Finance",
-  "Business Advisory",
-  "Compliance Services (AML/ESR/UBO)",
-  "Technology & Digital Finance",
-  "Other / General Enquiry",
-];
+interface ContactFormProps {
+  defaultService?: string;
+}
 
-export default function ContactForm() {
+export default function ContactForm({ defaultService }: ContactFormProps = {}) {
   const [formData, setFormData] = useState({
     fullName: "",
     companyName: "",
     email: "",
     mobile: "",
-    service: "",
+    service: defaultService || "",
     notes: "",
     consent: false,
     honeypot: "", // Anti-spam trap
@@ -442,9 +432,9 @@ export default function ContactForm() {
               className="w-full px-4 py-3.5 rounded-xl bg-[#F8FAFC] border border-[#CBD5E1] text-[#071426] text-sm focus:outline-hidden focus:bg-white focus:border-[#36A783] focus:ring-2 focus:ring-[#36A783]/20 transition-all font-sans appearance-none cursor-pointer"
             >
               <option value="">Select an official UAE service practice</option>
-              {SERVICES_LIST.map((srv, idx) => (
-                <option key={idx} value={srv}>
-                  {srv}
+              {ALL_FORM_SERVICES.map((srv) => (
+                <option key={srv.id} value={srv.title}>
+                  {srv.title}
                 </option>
               ))}
             </select>

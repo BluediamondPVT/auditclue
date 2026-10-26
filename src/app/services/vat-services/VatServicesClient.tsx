@@ -1158,7 +1158,7 @@ export default function VatServicesClient() {
 
               {/* Right Column: Embedded Consultation Form */}
               <div className="lg:col-span-7">
-                <ContactForm />
+                <ContactForm defaultService="UAE VAT Services" />
               </div>
             </div>
           </div>
