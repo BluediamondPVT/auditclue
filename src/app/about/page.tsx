@@ -52,8 +52,7 @@ const OPERATIONAL_PILLARS = [
     icon: ShieldCheck,
     number: "02",
     title: "UAE Compliance Expertise",
-    description:
-      "Deep knowledge of UAE tax, regulatory, and legal frameworks.",
+    description: "Deep knowledge of UAE tax, regulatory, and legal frameworks.",
     tag: "FTA & Ministry Aligned",
   },
   {
@@ -139,10 +138,7 @@ export default function AboutPage() {
               aria-label="Breadcrumb"
               className="flex items-center gap-2 text-xs text-[#64748B] font-medium mb-8"
             >
-              <Link
-                href="/"
-                className="hover:text-[#36A783] transition-colors"
-              >
+              <Link href="/" className="hover:text-[#36A783] transition-colors">
                 Home
               </Link>
               <span>/</span>
@@ -189,12 +185,16 @@ export default function AboutPage() {
                 <div className="mb-8 p-3.5 sm:p-4 rounded-2xl bg-[#F8FAFC] border border-[#CBD5E1] flex flex-wrap items-center gap-3 sm:gap-4 text-xs">
                   <div className="flex items-center gap-2 text-[#071426] font-medium">
                     <ShieldCheck className="w-4 h-4 text-[#36A783] shrink-0" />
-                    <span>DET License: <strong>No. 1094821</strong></span>
+                    <span>
+                      DET License: <strong>No. 1094821</strong>
+                    </span>
                   </div>
                   <span className="hidden sm:inline text-[#CBD5E1]">•</span>
                   <div className="flex items-center gap-2 text-[#071426] font-medium">
                     <Award className="w-4 h-4 text-[#36A783] shrink-0" />
-                    <span>FTA Tax Agency: <strong>TAN-20038914</strong></span>
+                    <span>
+                      FTA Tax Agency: <strong>TAN-20038914</strong>
+                    </span>
                   </div>
                   <span className="hidden sm:inline text-[#CBD5E1]">•</span>
                   <div className="flex items-center gap-2 text-[#216D56] font-mono font-semibold">
@@ -282,7 +282,9 @@ export default function AboutPage() {
                       FTA Registered Tax Agent • TAN-20038914
                     </div>
                     <div className="mt-2 pt-2 border-t border-[#E2E8F0] text-[11px] text-[#071426] flex items-center justify-between">
-                      <span className="font-semibold text-[#216D56]">18+ Yrs UAE & UK</span>
+                      <span className="font-semibold text-[#216D56]">
+                        18+ Yrs UAE & UK
+                      </span>
                       <span className="text-[#64748B]">Ex-Big 4 Tax</span>
                     </div>
                   </div>
@@ -337,8 +339,9 @@ export default function AboutPage() {
                     Contractual SLAs & 100% Statutory Compliance
                   </h3>
                   <p className="text-xs text-white/70 leading-relaxed font-sans">
-                    Every deliverable is signed off by chartered CPAs and FTA Tax Agents
-                    strictly adhering to UAE Federal Tax Authority mandates.
+                    Every deliverable is signed off by chartered CPAs and FTA
+                    Tax Agents strictly adhering to UAE Federal Tax Authority
+                    mandates.
                   </p>
                 </div>
                 <div className="pt-3 flex items-center gap-2 text-xs font-bold text-[#C6F850]">
@@ -412,7 +415,7 @@ export default function AboutPage() {
         {/* ================================================================= */}
         {/* 4. SENIOR LEADERSHIP & PRACTICE DIRECTORS                         */}
         {/* ================================================================= */}
-        <LeadershipSection />
+        {/* <LeadershipSection /> */}
 
         {/* ================================================================= */}
         {/* 5. UAE REGULATORY COVERAGE STRIP                                 */}
