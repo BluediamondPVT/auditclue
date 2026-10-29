@@ -295,7 +295,7 @@ export default function ProcessPage() {
                           {item.number === "03" && (
                             <div className="mb-6">
                               <Link
-                                href="/#portal"
+                                href="https://crm.auditclue.app/client-portal/login"
                                 className="inline-flex items-center gap-2.5 text-xs font-mono font-bold text-[#071426] bg-[#C6F850] hover:bg-[#36A783] hover:text-white px-4 py-2.5 rounded-xl border border-[#071426]/10 shadow-xs transition-all group/btn"
                               >
                                 <Lock className="w-3.5 h-3.5 text-[#071426] group-hover/btn:text-white" />

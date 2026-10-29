@@ -174,7 +174,7 @@ export default function Footer() {
               </li> */}
               <li>
                 <a
-                  href="https://auditcluee.vercel.app/"
+                  href="https://crm.auditclue.app/client-portal/login"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
@@ -184,7 +184,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://google.com"
+                  href="https://crm.auditclue.app/login"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"

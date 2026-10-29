@@ -61,7 +61,8 @@ const CRM_TABS: CrmTab[] = [
     number: "02",
     title: "AES-256 Encrypted Vault",
     subtitle: "Digital Audit Workpapers & Legal Archive",
-    tagline: "Bank-Grade Encryption for Trade Licenses, Workpapers & Tax Filings",
+    tagline:
+      "Bank-Grade Encryption for Trade Licenses, Workpapers & Tax Filings",
     description:
       "Eliminate insecure email attachments. All corporate documents, auditor signed confirmations, audited financial statements, and board resolutions are encrypted at rest with AES-256 GCM.",
     imageSrc: "/images/portal/auditclue-portal-vault.png",
@@ -127,7 +128,8 @@ export default function CrmShowcaseSection() {
   useEffect(() => {
     if (isPaused) {
       if (timerRef.current) clearTimeout(timerRef.current);
-      if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
+      if (progressIntervalRef.current)
+        clearInterval(progressIntervalRef.current);
       return;
     }
 
@@ -151,7 +153,8 @@ export default function CrmShowcaseSection() {
 
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
-      if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
+      if (progressIntervalRef.current)
+        clearInterval(progressIntervalRef.current);
     };
   }, [activeTab, isPaused]);
 
@@ -175,7 +178,7 @@ export default function CrmShowcaseSection() {
               start: "top 80%",
               toggleActions: "play none none none",
             },
-          }
+          },
         );
       }
 
@@ -202,7 +205,7 @@ export default function CrmShowcaseSection() {
               start: "top 85%",
               toggleActions: "play none none none",
             },
-          }
+          },
         );
       }
     }, sectionRef);
@@ -219,7 +222,10 @@ export default function CrmShowcaseSection() {
       className="relative bg-[#071426] text-white pt-10 sm:pt-14 lg:pt-16 pb-16 sm:pb-24 lg:pb-28 overflow-hidden border-t border-b border-white/10"
     >
       {/* Background Architectural Studio Lighting & Aurora (No grid lines) */}
-      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        aria-hidden="true"
+      >
         {/* Top Center Dramatic Spotlight Cone */}
         <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[850px] sm:w-[1150px] h-[550px] bg-[radial-gradient(ellipse_75%_50%_at_50%_15%,rgba(54,167,131,0.24),transparent_75%)] blur-[100px]" />
 
@@ -234,7 +240,10 @@ export default function CrmShowcaseSection() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         {/* Section Editorial Header (Compact & High Impact) */}
-        <div ref={headerRef} className="max-w-4xl mx-auto text-center mb-8 sm:mb-11">
+        <div
+          ref={headerRef}
+          className="max-w-4xl mx-auto text-center mb-8 sm:mb-11"
+        >
           <div className="inline-flex items-center gap-2 bg-[#36A783]/15 border border-[#36A783]/30 text-[#83D9BE] text-xs sm:text-[13px] font-semibold px-4 py-1.5 rounded-full mb-3.5 font-mono shadow-xs">
             <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
             <span>PROPRIETARY CLIENT CONSOLE & CRM</span>
@@ -249,9 +258,10 @@ export default function CrmShowcaseSection() {
           </h2>
 
           <p className="text-base sm:text-lg text-[#CBD5E1] font-sans leading-relaxed max-w-2xl mx-auto">
-            Experience our bespoke client operating system designed to give founders, CFOs,
-            and finance directors continuous, real-time oversight over every statutory filing,
-            tax position, and audited report.
+            Experience our bespoke client operating system designed to give
+            founders, CFOs, and finance directors continuous, real-time
+            oversight over every statutory filing, tax position, and audited
+            report.
           </p>
         </div>
 
@@ -291,7 +301,9 @@ export default function CrmShowcaseSection() {
                   <div className="flex items-center justify-between mb-3">
                     <span
                       className={`font-mono text-xs font-bold transition-colors ${
-                        isActive ? "text-[#83D9BE]" : "text-white/40 group-hover:text-white/70"
+                        isActive
+                          ? "text-[#83D9BE]"
+                          : "text-white/40 group-hover:text-white/70"
                       }`}
                     >
                       {tab.number}
@@ -309,17 +321,23 @@ export default function CrmShowcaseSection() {
 
                   <h3
                     className={`text-sm sm:text-base font-semibold leading-snug transition-colors ${
-                      isActive ? "text-white" : "text-white/70 group-hover:text-white"
+                      isActive
+                        ? "text-white"
+                        : "text-white/70 group-hover:text-white"
                     }`}
                   >
                     {tab.title}
                   </h3>
-                  <p className="text-xs text-white/50 mt-1 line-clamp-1">{tab.subtitle}</p>
+                  <p className="text-xs text-white/50 mt-1 line-clamp-1">
+                    {tab.subtitle}
+                  </p>
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-white/40">
                   <span>{tab.metrics.label}</span>
-                  <span className={isActive ? "text-[#83D9BE] font-semibold" : ""}>
+                  <span
+                    className={isActive ? "text-[#83D9BE] font-semibold" : ""}
+                  >
                     {tab.metrics.value}
                   </span>
                 </div>
@@ -379,7 +397,10 @@ export default function CrmShowcaseSection() {
               {/* Bullet Highlights */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mt-3 pt-3 border-t border-white/10">
                 {currentTab.highlights.map((h, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-white/80">
+                  <div
+                    key={i}
+                    className="flex items-center gap-2 text-xs text-white/80"
+                  >
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#36A783] shrink-0" />
                     <span className="line-clamp-1">{h}</span>
                   </div>
@@ -390,7 +411,7 @@ export default function CrmShowcaseSection() {
             {/* Call to Action Buttons */}
             <div className="flex flex-wrap items-center gap-3 shrink-0">
               <a
-                href="https://auditcluee.vercel.app/"
+                href="https://crm.auditclue.app/client-portal/login"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#36A783] hover:bg-[#2E8C6D] text-[#071426] text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2.5 rounded-xl transition-all shadow-md shadow-[#36A783]/20 hover:scale-[1.02]"

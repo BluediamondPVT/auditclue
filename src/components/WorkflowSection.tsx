@@ -140,7 +140,7 @@ export default function WorkflowSection() {
           observer = null;
         }
       },
-      { rootMargin: "300px" }
+      { rootMargin: "300px" },
     );
 
     observer.observe(section);
@@ -377,11 +377,13 @@ export default function WorkflowSection() {
                             {item.number === "03" && (
                               <div className="mt-3.5 pt-2 border-t border-dashed border-slate-200">
                                 <Link
-                                  href="/#portal"
+                                  href="https://crm.auditclue.app/client-portal/login"
                                   className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#216D56] hover:text-[#071426] bg-[#EAF4F0] hover:bg-[#C6F850] px-3.5 py-1.5 rounded-lg border border-[#36A783]/30 transition-all shadow-2xs group/btn"
                                 >
                                   <Lock className="w-3.5 h-3.5 text-[#36A783]" />
-                                  <span>Open Digital Client Portal (AES-256)</span>
+                                  <span>
+                                    Open Digital Client Portal (AES-256)
+                                  </span>
                                   <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
                                 </Link>
                               </div>
@@ -578,7 +580,7 @@ export default function WorkflowSection() {
                   {item.number === "03" && (
                     <div className="mt-3 pt-2 border-t border-dashed border-slate-200">
                       <Link
-                        href="/#portal"
+                        href="https://crm.auditclue.app/client-portal/login"
                         className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#216D56] bg-[#EAF4F0] px-3 py-1.5 rounded-lg border border-[#36A783]/30"
                       >
                         <Lock className="w-3.5 h-3.5 text-[#36A783]" />

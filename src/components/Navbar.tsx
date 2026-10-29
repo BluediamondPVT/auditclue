@@ -766,7 +766,7 @@ export default function Navbar() {
           <div className="mt-6 flex flex-col gap-2.5">
             <div className="grid grid-cols-2 gap-2">
               <a
-                href="https://google.com"
+                href="https://crm.auditclue.app/client-portal/login"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={closeMenu}
@@ -777,7 +777,7 @@ export default function Navbar() {
                 <span>Client Portal</span>
               </a>
               <a
-                href="https://google.com"
+                href="https://crm.auditclue.app/login"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={closeMenu}
