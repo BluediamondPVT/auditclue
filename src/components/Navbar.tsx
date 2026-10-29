@@ -433,7 +433,7 @@ export default function Navbar() {
                   <div className="space-y-1">
                     {/* Client Portal */}
                     <a
-                      href="https://google.com"
+                      href="https://crm.auditclue.app/client-portal/login"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group/item flex items-center justify-between p-2.5 rounded-xl hover:bg-[#EAF4F0]/70 border border-transparent hover:border-[#36A783]/30 transition-all"
@@ -456,7 +456,7 @@ export default function Navbar() {
 
                     {/* Employee Portal */}
                     <a
-                      href="https://google.com"
+                      href="https://crm.auditclue.app/login"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group/item flex items-center justify-between p-2.5 rounded-xl hover:bg-[#EAF4F0]/70 border border-transparent hover:border-[#36A783]/30 transition-all"
