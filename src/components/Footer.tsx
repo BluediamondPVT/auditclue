@@ -139,6 +139,14 @@ export default function Footer() {
                   Book a Consultation
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/#write-review"
+                  className="hover:text-white transition-colors"
+                >
+                  Client Reviews
+                </Link>
+              </li>
             </ul>
           </div>
 

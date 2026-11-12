@@ -1,4 +1,10 @@
 import { NextResponse } from "next/server";
+import {
+  escapeHtml,
+  formatDubaiTimestamp,
+  generateReferenceId,
+  sendMail,
+} from "@/lib/mailer";
 
 // Valid services list to cross-check against manipulation
 const VALID_SERVICES = [
@@ -119,18 +125,8 @@ export async function POST(request: Request) {
     }
 
     // 4. Generate Official Reference ID & Timestamp (GST • UTC+4)
-    const randomDigits = Math.floor(100000 + Math.random() * 900000);
-    const referenceId = `AC-${new Date().getFullYear()}-${randomDigits}`;
-
-    const timestamp = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Asia/Dubai",
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    }).format(new Date());
+    const referenceId = generateReferenceId("AC");
+    const timestamp = formatDubaiTimestamp();
 
     // 5. Forward lead to CRM Webhook (server-to-server)
     const crmWebhookUrl = (
@@ -174,55 +170,31 @@ export async function POST(request: Request) {
       }
     }
 
-    // 6. Send Email Notification via Resend (when RESEND_API_KEY is configured)
-    const resendApiKey = (process.env.RESEND_API_KEY || "").trim();
+    // 6. Send Email Notification via SMTP or Resend (if configured)
     const notifyTo = (process.env.NOTIFICATION_EMAIL || "info@auditclue.com").trim();
-    const fromEmail = (
-      process.env.NOTIFICATION_FROM_EMAIL || "Auditclue Advisory <noreply@auditclue.com>"
-    ).trim();
+    const notifyCc = (process.env.NOTIFICATION_CC_EMAIL || "").trim();
 
-    if (resendApiKey) {
-      const escapeHtml = (val: unknown) =>
-        String(val ?? "")
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;");
+    const mailResult = await sendMail({
+      to: notifyTo,
+      cc: notifyCc || undefined,
+      replyTo: String(email).trim(),
+      subject: `[${referenceId}] New Website Enquiry — ${String(service).trim()}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; color: #071426; line-height: 1.6;">
+          <h2 style="margin-bottom: 12px; color: #216D56;">New Consultation / Appointment Request (${escapeHtml(referenceId)})</h2>
+          <p><strong>Full Name:</strong> ${escapeHtml(fullName)}</p>
+          <p><strong>Company:</strong> ${escapeHtml(companyName)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+          <p><strong>Phone / WhatsApp:</strong> ${escapeHtml(mobile)}</p>
+          <p><strong>Service:</strong> ${escapeHtml(service)}</p>
+          <p><strong>Details:</strong> ${escapeHtml(notes || "None provided")}</p>
+          <p><strong>Submitted (UAE):</strong> ${escapeHtml(timestamp)} GST</p>
+        </div>
+      `,
+    });
 
-      try {
-        const emailRes = await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${resendApiKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            from: fromEmail,
-            to: [notifyTo],
-            reply_to: String(email).trim(),
-            subject: `[${referenceId}] New Website Enquiry — ${String(service).trim()}`,
-            html: `
-              <h2>New Consultation / Appointment Request (${escapeHtml(referenceId)})</h2>
-              <p><strong>Full Name:</strong> ${escapeHtml(fullName)}</p>
-              <p><strong>Company:</strong> ${escapeHtml(companyName)}</p>
-              <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-              <p><strong>Phone / WhatsApp:</strong> ${escapeHtml(mobile)}</p>
-              <p><strong>Service:</strong> ${escapeHtml(service)}</p>
-              <p><strong>Details:</strong> ${escapeHtml(notes || "None provided")}</p>
-              <p><strong>Submitted (UAE):</strong> ${escapeHtml(timestamp)} GST</p>
-            `,
-          }),
-        });
-
-        if (emailRes.ok) {
-          console.log(`[Email Notification] Sent for ${referenceId} to ${notifyTo}`);
-        } else {
-          const emailErr = await emailRes.text().catch(() => "");
-          console.error(`[Email Notification Error] ${referenceId} - HTTP ${emailRes.status}: ${emailErr}`);
-        }
-      } catch (emailErr) {
-        console.error("[Email Notification Failed]:", emailErr);
-      }
+    if (mailResult.sent) {
+      console.log(`[Email Notification] Sent (${mailResult.provider}) for ${referenceId} to ${notifyTo}`);
     }
 
     console.log(`[Auditclue CRM] Consultation Inquiry Registered: ${referenceId}`, {

@@ -9,7 +9,9 @@ import {
   ChevronLeft,
   ChevronRight,
   MapPin,
+  MessageSquarePlus,
 } from "lucide-react";
+import ReviewModal from "@/components/ReviewModal";
 
 export interface TestimonialItem {
   id: string;
@@ -75,7 +77,7 @@ const TESTIMONIALS: TestimonialItem[] = [
     rating: 5,
     highlightTitle: "Resolved customs Box 6/7 mismatches in 2 weeks",
     quote:
-      "Cross-border cargo movements and customs Box 6/7 reconciliations are notoriously prone to FTA penalties. Auditclue's FTA Registered Tax Agents restructured our billing flow and resolved historical customs mismatches in less than two weeks. I wouldn't trust any other advisory firm with our logistics books.",
+      "Cross-border cargo movements and customs Box 6/7 reconciliations are notoriously prone to FTA penalties. Auditclue's UAE tax specialists restructured our billing flow and resolved historical customs mismatches in less than two weeks. I wouldn't trust any other advisory firm with our logistics books.",
     statHighlight: "100%",
     statLabel: "Customs Mismatch Resolved",
     date: "Verified Logistics Client",
@@ -135,8 +137,8 @@ const TESTIMONIALS: TestimonialItem[] = [
 
 const CREDENTIAL_BADGES = [
   {
-    title: "FTA Registered Tax Agents",
-    desc: "Licensed legal representation for EmaraTax submissions & audits",
+    title: "UAE Tax & Compliance Specialists",
+    desc: "Dedicated advisory support for Corporate Tax, VAT & EmaraTax compliance",
   },
   {
     title: "Chartered CPAs & ACCA",
@@ -173,6 +175,26 @@ export default function TestimonialsSection() {
   const [isPaused, setIsPaused] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [visibleCards, setVisibleCards] = useState(3);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+
+  // Allow direct links like /#write-review or /?review=true to open the modal
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const checkReviewTrigger = () => {
+      const params = new URLSearchParams(window.location.search);
+      if (
+        window.location.hash === "#write-review" ||
+        params.get("review") === "true"
+      ) {
+        const el = document.getElementById("testimonials");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+        setIsReviewModalOpen(true);
+      }
+    };
+    checkReviewTrigger();
+    window.addEventListener("hashchange", checkReviewTrigger);
+    return () => window.removeEventListener("hashchange", checkReviewTrigger);
+  }, []);
 
   // Responsive cards per slide calculation
   useEffect(() => {
@@ -270,18 +292,18 @@ export default function TestimonialsSection() {
               accounting.
             </p>
 
-            {/* Aggregate Rating Proof Pill */}
+            {/* Aggregate Rating Proof Pill (Google Reviews Style) */}
             <div className="mt-5 flex flex-wrap items-center gap-3">
-              <div className="inline-flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full shadow-2xs">
-                <div className="flex items-center gap-0.5 text-amber-400">
+              <div className="inline-flex items-center gap-2 bg-white border border-slate-200 px-3.5 py-1.5 rounded-full shadow-2xs">
+                <span className="text-xs font-extrabold text-[#071426]">4.9</span>
+                <div className="flex items-center gap-0.5 text-[#FBBC04]">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                    <Star key={i} className="w-3.5 h-3.5 fill-[#FBBC04]" />
                   ))}
                 </div>
-                <span className="text-xs font-bold text-[#071426]">4.9 / 5.0</span>
                 <span className="text-slate-300">•</span>
                 <span className="text-xs text-[#64748B] font-medium">
-                  120+ UAE Reviews
+                  120+ Verified UAE Reviews
                 </span>
               </div>
 
@@ -292,24 +314,35 @@ export default function TestimonialsSection() {
             </div>
           </div>
 
-          {/* Navigation Buttons */}
-          <div className="flex items-center gap-2">
+          {/* Right Controls: Prominent "Write a Review" CTA + Slider Arrows */}
+          <div className="flex flex-wrap items-center gap-3">
             <button
               type="button"
-              onClick={handlePrev}
-              aria-label="Previous Reviews"
-              className="w-11 h-11 rounded-full bg-white hover:bg-[#EAF4F0] border border-slate-200 hover:border-[#36A783]/50 text-[#071426] hover:text-[#216D56] flex items-center justify-center transition-all shadow-xs cursor-pointer active:scale-95"
+              onClick={() => setIsReviewModalOpen(true)}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#071426] hover:bg-[#216D56] text-white text-xs sm:text-sm font-semibold shadow-sm hover:shadow-md transition-all cursor-pointer active:scale-95"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <MessageSquarePlus className="w-4 h-4 text-[#C6F850]" />
+              <span>Write a Review</span>
             </button>
-            <button
-              type="button"
-              onClick={handleNext}
-              aria-label="Next Reviews"
-              className="w-11 h-11 rounded-full bg-white hover:bg-[#EAF4F0] border border-slate-200 hover:border-[#36A783]/50 text-[#071426] hover:text-[#216D56] flex items-center justify-center transition-all shadow-xs cursor-pointer active:scale-95"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handlePrev}
+                aria-label="Previous Reviews"
+                className="w-11 h-11 rounded-full bg-white hover:bg-[#EAF4F0] border border-slate-200 hover:border-[#36A783]/50 text-[#071426] hover:text-[#216D56] flex items-center justify-center transition-all shadow-xs cursor-pointer active:scale-95"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                type="button"
+                onClick={handleNext}
+                aria-label="Next Reviews"
+                className="w-11 h-11 rounded-full bg-white hover:bg-[#EAF4F0] border border-slate-200 hover:border-[#36A783]/50 text-[#071426] hover:text-[#216D56] flex items-center justify-center transition-all shadow-xs cursor-pointer active:scale-95"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -340,11 +373,17 @@ export default function TestimonialsSection() {
               >
                 <div className="h-full bg-white rounded-3xl p-6 sm:p-7 xl:p-8 border border-slate-200/90 hover:border-[#36A783]/60 shadow-[0_4px_24px_rgba(35,63,91,0.05)] hover:shadow-[0_16px_36px_rgba(35,63,91,0.1)] transition-all duration-300 flex flex-col justify-between group">
                   <div>
-                    {/* 5 Stars */}
-                    <div className="flex items-center gap-1 text-amber-400 mb-4">
-                      {[...Array(item.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-current" />
-                      ))}
+                    {/* Google-Style Top Row: 5 Gold Stars + Verified Client Pill */}
+                    <div className="flex items-center justify-between gap-2 mb-4">
+                      <div className="flex items-center gap-0.5 text-[#FBBC04]">
+                        {[...Array(item.rating)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-[#FBBC04]" />
+                        ))}
+                      </div>
+                      <span className="inline-flex items-center gap-1 text-[10px] font-mono font-semibold text-[#216D56] bg-[#EAF4F0] px-2.5 py-0.5 rounded-full">
+                        <CheckCircle2 className="w-3 h-3 text-[#36A783]" />
+                        Verified Review
+                      </span>
                     </div>
 
                     {/* Highlight Title */}
@@ -387,8 +426,34 @@ export default function TestimonialsSection() {
           </div>
         </div>
 
+        {/* Google-Style Direct Review Collection Banner */}
+        <div className="mt-10 rounded-2xl bg-white border border-slate-200/90 p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
+          <div className="flex items-center gap-3.5 text-center sm:text-left">
+            <div className="w-11 h-11 rounded-2xl bg-[#FFFBEB] border border-[#FBBC04]/40 flex items-center justify-center shrink-0">
+              <Star className="w-5 h-5 text-[#FBBC04] fill-[#FBBC04]" />
+            </div>
+            <div>
+              <h3 className="text-sm sm:text-base font-serif font-bold text-[#071426]">
+                Have you worked with Auditclue Advisory?
+              </h3>
+              <p className="text-xs text-[#64748B] font-sans mt-0.5">
+                Share your feedback directly — verified reviews help UAE founders and CFOs choose with confidence.
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setIsReviewModalOpen(true)}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#216D56] hover:bg-[#1a5744] text-white text-xs sm:text-sm font-semibold shadow-xs transition-all cursor-pointer shrink-0"
+          >
+            <MessageSquarePlus className="w-4 h-4" />
+            <span>Submit Your Review</span>
+          </button>
+        </div>
+
         {/* Credibility & Statutory Badges Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-16 sm:mt-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12 sm:mt-16">
           {CREDENTIAL_BADGES.map((badge, idx) => (
             <div
               key={idx}
@@ -430,6 +495,12 @@ export default function TestimonialsSection() {
           </div>
         </div>
       </div>
+
+      {/* Google-Style Client Review Modal */}
+      <ReviewModal
+        isOpen={isReviewModalOpen}
+        onClose={() => setIsReviewModalOpen(false)}
+      />
     </section>
   );
 }

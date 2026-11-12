@@ -12,10 +12,7 @@ import {
   ExternalLink,
   ShieldCheck,
   CheckCircle2,
-  ArrowRight,
   ChevronRight,
-  Layers,
-  Cpu,
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -42,71 +39,71 @@ const CRM_TABS: CrmTab[] = [
   {
     id: "dashboard",
     number: "01",
-    title: "Executive Analytics Hub",
-    subtitle: "Real-time Tax, VAT & Financial Visibility",
-    tagline: "Corporate Tax (9%) & VAT Intelligence in a Single Glass Cockpit",
+    title: "Client Overview Dashboard",
+    subtitle: "Live Engagement & Task Visibility",
+    tagline: "All Active Engagements, Pending Actions & Deliverables in One View",
     description:
-      "Enterprise command center aggregating real-time taxable income thresholds, automated 9% Corporate Tax estimations, VAT return reconciliation, and certified statutory audit milestone tracking.",
+      "Log in anytime to check the real-time status of your ongoing accounting, audit, or advisory work — see what is completed, what is in progress, and which documents are requested from your team.",
     imageSrc: "/images/portal/auditclue-portal-dashboard.png",
     icon: LayoutDashboard,
     highlights: [
-      "Dynamic UAE Corporate Tax 9% & Small Business Relief simulator",
-      "Quarterly VAT return computation & FTA XML export readiness",
-      "Instant consolidated ledger & balance sheet health metrics",
+      "Live progress tracking per task",
+      "Clear pending-document checklist",
+      "1-click download of completed files",
     ],
-    metrics: { label: "Statutory SLA", value: "99.98% On-Time" },
+    metrics: { label: "Portal Access", value: "24/7 Cloud Live" },
   },
   {
     id: "vault",
     number: "02",
-    title: "AES-256 Encrypted Vault",
-    subtitle: "Digital Audit Workpapers & Legal Archive",
+    title: "Secure Document Vault",
+    subtitle: "Share Records & Access Final Reports",
     tagline:
-      "Bank-Grade Encryption for Trade Licenses, Workpapers & Tax Filings",
+      "Encrypted Cloud Workspace Replacing Scattered Email Attachments",
     description:
-      "Eliminate insecure email attachments. All corporate documents, auditor signed confirmations, audited financial statements, and board resolutions are encrypted at rest with AES-256 GCM.",
+      "Upload trade licenses, bank statements, contracts, and company records into organized digital folders — and retrieve digitally signed financial statements or deliverables whenever you need them.",
     imageSrc: "/images/portal/auditclue-portal-vault.png",
     icon: Lock,
     highlights: [
-      "Zero-knowledge encrypted cloud repository with granular role-based permissions",
-      "Tamper-proof audit trails for FTA inspection & statutory compliance",
-      "Instant 1-click download of signed audit reports & tax certificates",
+      "AES-256 encrypted file storage",
+      "Structured folders by entity & year",
+      "Instant signed deliverable archive",
     ],
-    metrics: { label: "Data Encryption", value: "AES-256 GCM" },
+    metrics: { label: "File Security", value: "AES-256 GCM" },
   },
   {
     id: "calendar",
     number: "03",
-    title: "FTA Statutory Calendar",
-    subtitle: "Automated Milestone & Penalty Shield",
-    tagline: "Never Miss a Corporate Tax, VAT, or ESR Filing Deadline",
+    title: "Milestone & Deadline Tracker",
+    subtitle: "Scheduled Deliverables & Smart Alerts",
+    tagline: "Stay Ahead of Every Engagement Milestone & Renewal Window",
     description:
-      "Statutory deadlines mapped to your specific UAE financial year-end and jurisdiction. Automated multi-tier alerts guarantee zero late-filing administrative penalties from the Federal Tax Authority.",
+      "View upcoming submission timelines, company license renewals, and agreed deliverable dates tailored to your entity schedule — with automated alerts sent ahead of every key date.",
     imageSrc: "/images/portal/auditclue-portal-calendar.png",
     icon: CalendarCheck2,
     highlights: [
-      "Custom timeline tailored to your UAE Mainland or Free Zone licensing cycle",
-      "Automated countdown to Corporate Tax (CIT) 9-month statutory due date",
-      "Direct calendar sync with Outlook, Google Calendar, and Apple iCal",
+      "Custom company milestone schedule",
+      "Automated email & portal alerts",
+      "Complete log of past submissions",
     ],
-    metrics: { label: "Penalty Shield", value: "AED 0 Incurred" },
+    metrics: { label: "Reminders", value: "Automated Alerts" },
   },
   {
     id: "mobile",
     number: "04",
-    title: "Executive Mobile Suite",
-    subtitle: "24/7 On-The-Go Advisory Governance",
-    tagline: "C-Suite Oversight Anywhere Across Dubai, Abu Dhabi & Globally",
+    title: "Direct Messaging & Mobile Access",
+    subtitle: "Seamless Oversight From Any Device",
+    tagline: "Review Updates, Share Files & Message Advisors On the Go",
     description:
-      "Built for agile business leaders on the move. Review monthly financial dossiers, approve statutory filings, track visa and license renewals, and communicate directly with your dedicated engagement partner.",
+      "Access your Auditclue Client Portal from any desktop, tablet, or mobile browser. Respond directly to advisor requests, approve drafts, and manage multiple UAE entities under a single login.",
     imageSrc: "/images/portal/auditclue-portal-mobile.png",
     icon: Smartphone,
     highlights: [
-      "Responsive PWA architecture optimized for iOS and Android tablets & phones",
-      "Biometric sign-in with instant push notifications on critical tax deadlines",
-      "Direct encrypted messaging with assigned Chartered Tax Advisors",
+      "Mobile & desktop browser ready",
+      "Direct advisor conversation threads",
+      "Multi-entity workspace switching",
     ],
-    metrics: { label: "Mobile Sync", value: "Real-Time 24/7" },
+    metrics: { label: "Multi-Device", value: "Web & Mobile" },
   },
 ];
 
@@ -246,22 +243,21 @@ export default function CrmShowcaseSection() {
         >
           <div className="inline-flex items-center gap-2 bg-[#36A783]/15 border border-[#36A783]/30 text-[#83D9BE] text-xs sm:text-[13px] font-semibold px-4 py-1.5 rounded-full mb-3.5 font-mono shadow-xs">
             <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
-            <span>PROPRIETARY CLIENT CONSOLE & CRM</span>
+            <span>DIGITAL CLIENT PORTAL & WORKSPACE</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-[45px] font-bold text-white leading-[1.14] tracking-[-0.03em] max-w-4xl mx-auto mb-3.5">
             <FlowText
-              text="100% Transparent Cloud Infrastructure for UAE Accounting, Tax & Audit"
+              text="One Secure Client Portal for Every Document, Update & Deliverable"
               triggerOnScroll
               as="span"
             />
           </h2>
 
           <p className="text-base sm:text-lg text-[#CBD5E1] font-sans leading-relaxed max-w-2xl mx-auto">
-            Experience our bespoke client operating system designed to give
-            founders, CFOs, and finance directors continuous, real-time
-            oversight over every statutory filing, tax position, and audited
-            report.
+            Built for UAE founders, CFOs, and finance teams — log in anytime to
+            upload documents safely, track ongoing work in real time, download
+            signed reports, and collaborate directly with your advisory team.
           </p>
         </div>
 
