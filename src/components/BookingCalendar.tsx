@@ -2,91 +2,203 @@
 
 import React, { useState, useEffect } from "react";
 import {
-  Calendar as CalendarIcon,
   Clock,
   Video,
   Phone,
   CheckCircle2,
   ArrowRight,
   Globe2,
+  Loader2,
 } from "lucide-react";
 import { ALL_FORM_SERVICES } from "@/data/formServices";
 
-const TIME_SLOTS = [
-  "09:30 AM GST",
-  "11:00 AM GST",
-  "01:30 PM GST",
-  "03:00 PM GST",
-  "04:30 PM GST",
-  "05:30 PM GST",
+interface TimeSlotItem {
+  label: string;
+  minutesFromMidnight: number;
+}
+
+const TIME_SLOTS: TimeSlotItem[] = [
+  { label: "09:30 AM GST", minutesFromMidnight: 9 * 60 + 30 },
+  { label: "11:00 AM GST", minutesFromMidnight: 11 * 60 },
+  { label: "01:30 PM GST", minutesFromMidnight: 13 * 60 + 30 },
+  { label: "03:00 PM GST", minutesFromMidnight: 15 * 60 },
+  { label: "04:30 PM GST", minutesFromMidnight: 16 * 60 + 30 },
+  { label: "05:30 PM GST", minutesFromMidnight: 17 * 60 + 30 },
 ];
 
 interface BusinessDay {
   dayName: string;
   dateStr: string;
   fullDate: string;
+  isToday: boolean;
 }
 
 const DEFAULT_DAYS: BusinessDay[] = [
-  { dayName: "Mon", dateStr: "Next Day", fullDate: "Next Business Day" },
-  { dayName: "Tue", dateStr: "Day 2", fullDate: "Day 2" },
-  { dayName: "Wed", dateStr: "Day 3", fullDate: "Day 3" },
-  { dayName: "Thu", dateStr: "Day 4", fullDate: "Day 4" },
-  { dayName: "Fri", dateStr: "Day 5", fullDate: "Day 5" },
+  { dayName: "Today", dateStr: "Today", fullDate: "Today", isToday: true },
+  { dayName: "Day 2", dateStr: "Next Day", fullDate: "Next Business Day", isToday: false },
+  { dayName: "Day 3", dateStr: "Day 3", fullDate: "Day 3", isToday: false },
+  { dayName: "Day 4", dateStr: "Day 4", fullDate: "Day 4", isToday: false },
+  { dayName: "Day 5", dateStr: "Day 5", fullDate: "Day 5", isToday: false },
 ];
 
-// Helper to generate next 5 business days on the client
-function getNextBusinessDays(): BusinessDay[] {
-  if (typeof window === "undefined") return DEFAULT_DAYS;
-  const days: BusinessDay[] = [];
-  const now = new Date();
-  let added = 0;
-  let offset = 1;
+function getDubaiNow(): Date {
+  return new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Asia/Dubai" })
+  );
+}
 
-  while (added < 5) {
-    const d = new Date(now);
-    d.setDate(now.getDate() + offset);
+// Helper to generate 5 Gulf business days starting from Today (if slots remain in GST)
+function getUpcomingBusinessDays(): {
+  days: BusinessDay[];
+  currentDubaiMinutes: number;
+} {
+  if (typeof window === "undefined") {
+    return { days: DEFAULT_DAYS, currentDubaiMinutes: 0 };
+  }
+  const dubaiNow = getDubaiNow();
+  const currentDubaiMinutes = dubaiNow.getHours() * 60 + dubaiNow.getMinutes();
+  const lastSlotMinutes = TIME_SLOTS[TIME_SLOTS.length - 1].minutesFromMidnight;
+
+  // Include Today (offset 0) if today is a business day and at least 1 slot is still 15+ mins away
+  const canBookToday =
+    dubaiNow.getDay() !== 0 && currentDubaiMinutes + 15 < lastSlotMinutes;
+
+  const days: BusinessDay[] = [];
+  let offset = canBookToday ? 0 : 1;
+
+  while (days.length < 5) {
+    const d = new Date(dubaiNow);
+    d.setDate(dubaiNow.getDate() + offset);
     const dayOfWeek = d.getDay();
-    // In UAE, business week is Mon-Fri / Mon-Sat (Sunday off)
+    // In UAE, business week is Mon-Sat (Sunday off)
     if (dayOfWeek !== 0) {
       days.push({
-        dayName: d.toLocaleDateString("en-US", { weekday: "short" }),
-        dateStr: d.toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+        dayName:
+          offset === 0
+            ? "Today"
+            : d.toLocaleDateString("en-US", { weekday: "short" }),
+        dateStr: d.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+        }),
         fullDate: d.toLocaleDateString("en-US", {
           weekday: "long",
           month: "long",
           day: "numeric",
           year: "numeric",
         }),
+        isToday: offset === 0,
       });
-      added++;
     }
     offset++;
   }
-  return days;
+  return { days, currentDubaiMinutes };
 }
 
 export default function BookingCalendar() {
   const [businessDays, setBusinessDays] = useState<BusinessDay[]>(DEFAULT_DAYS);
+  const [currentDubaiMinutes, setCurrentDubaiMinutes] = useState<number>(0);
   const [selectedDayIndex, setSelectedDayIndex] = useState(0);
-  const [selectedSlot, setSelectedSlot] = useState(TIME_SLOTS[1]);
+  const [selectedSlot, setSelectedSlot] = useState(TIME_SLOTS[1].label);
   const [meetingType, setMeetingType] = useState<"video" | "phone">("video");
   const [clientName, setClientName] = useState("");
+  const [companyName, setCompanyName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
   const [clientPhone, setClientPhone] = useState("");
   const [serviceNeeded, setServiceNeeded] = useState("UAE Corporate Tax");
+  const [formLoadTime, setFormLoadTime] = useState<number>(0);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [referenceId, setReferenceId] = useState("");
   const [isBooked, setIsBooked] = useState(false);
 
   useEffect(() => {
-    setBusinessDays(getNextBusinessDays());
+    setFormLoadTime(Date.now());
+    const { days, currentDubaiMinutes: dubaiMins } = getUpcomingBusinessDays();
+    setBusinessDays(days);
+    setCurrentDubaiMinutes(dubaiMins);
+
+    if (days[0]?.isToday) {
+      const firstOpenSlot = TIME_SLOTS.find(
+        (s) => s.minutesFromMidnight > dubaiMins + 15
+      );
+      if (firstOpenSlot) {
+        setSelectedSlot(firstOpenSlot.label);
+      }
+    }
   }, []);
 
   const selectedDate = businessDays[selectedDayIndex] || DEFAULT_DAYS[0];
 
-  const handleBookingSubmit = (e: React.FormEvent) => {
+  const isSlotDisabled = (slot: TimeSlotItem): boolean => {
+    if (!selectedDate?.isToday) return false;
+    return slot.minutesFromMidnight <= currentDubaiMinutes + 15;
+  };
+
+  const handleSelectDay = (idx: number) => {
+    setSelectedDayIndex(idx);
+    const targetDay = businessDays[idx];
+    if (targetDay?.isToday) {
+      const currentSelectedObj = TIME_SLOTS.find((s) => s.label === selectedSlot);
+      if (
+        currentSelectedObj &&
+        currentSelectedObj.minutesFromMidnight <= currentDubaiMinutes + 15
+      ) {
+        const nextAvailable = TIME_SLOTS.find(
+          (s) => s.minutesFromMidnight > currentDubaiMinutes + 15
+        );
+        if (nextAvailable) setSelectedSlot(nextAvailable.label);
+      }
+    }
+  };
+
+  const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!clientName || !clientEmail || !clientPhone) return;
-    setIsBooked(true);
+    setErrorMsg("");
+
+    if (!clientName.trim() || !clientEmail.trim() || !clientPhone.trim()) {
+      setErrorMsg("Please fill in your name, phone number, and work email.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const channelLabel =
+        meetingType === "video"
+          ? "Video Session (Zoom/Teams)"
+          : "Direct Phone Call";
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: clientName.trim(),
+          companyName: companyName.trim() || "Direct Appointment Booking",
+          email: clientEmail.trim(),
+          mobile: clientPhone.trim(),
+          service: serviceNeeded,
+          notes: `Scheduled Consultation Booking — Date: ${selectedDate.fullDate}, Slot: ${selectedSlot} (GST • UTC+4), Channel: ${channelLabel}`,
+          consent: true,
+          formLoadTime: formLoadTime || Date.now() - 3000,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Unable to schedule appointment.");
+      }
+
+      setReferenceId(data.referenceId || "");
+      setIsBooked(true);
+    } catch (err: unknown) {
+      setErrorMsg(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please verify your details and try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   const whatsAppBookingUrl = encodeURIComponent(
@@ -139,7 +251,7 @@ Please confirm my advisor appointment.`
                   <button
                     key={idx}
                     type="button"
-                    onClick={() => setSelectedDayIndex(idx)}
+                    onClick={() => handleSelectDay(idx)}
                     className={`py-3 px-2 rounded-xl text-center border transition-all cursor-pointer ${
                       isSelected
                         ? "bg-[#216D56] text-white border-[#216D56] shadow-md font-bold"
@@ -165,20 +277,24 @@ Please confirm my advisor appointment.`
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
               {TIME_SLOTS.map((slot, idx) => {
-                const isSelected = selectedSlot === slot;
+                const disabled = isSlotDisabled(slot);
+                const isSelected = selectedSlot === slot.label && !disabled;
                 return (
                   <button
                     key={idx}
                     type="button"
-                    onClick={() => setSelectedSlot(slot)}
-                    className={`py-2.5 px-3 rounded-xl text-xs font-mono flex items-center justify-center gap-2 border transition-all cursor-pointer ${
-                      isSelected
-                        ? "bg-[#36A783] text-white border-[#36A783] shadow-sm font-bold"
-                        : "bg-[#F8FAFC] text-[#334155] border-[#CBD5E1] hover:border-[#36A783] hover:bg-white"
+                    disabled={disabled}
+                    onClick={() => setSelectedSlot(slot.label)}
+                    className={`py-2.5 px-3 rounded-xl text-xs font-mono flex items-center justify-center gap-2 border transition-all ${
+                      disabled
+                        ? "bg-slate-100 text-slate-400 border-slate-200 line-through cursor-not-allowed opacity-60"
+                        : isSelected
+                          ? "bg-[#36A783] text-white border-[#36A783] shadow-sm font-bold cursor-pointer"
+                          : "bg-[#F8FAFC] text-[#334155] border-[#CBD5E1] hover:border-[#36A783] hover:bg-white cursor-pointer"
                     }`}
                   >
                     <Clock className="w-3.5 h-3.5" />
-                    <span>{slot}</span>
+                    <span>{slot.label}</span>
                   </button>
                 );
               })}
@@ -259,7 +375,7 @@ Please confirm my advisor appointment.`
               />
             </div>
 
-            <div className="sm:col-span-2">
+            <div>
               <label className="block text-xs font-semibold text-[#071426] mb-1">
                 Work Email *
               </label>
@@ -269,6 +385,19 @@ Please confirm my advisor appointment.`
                 value={clientEmail}
                 onChange={(e) => setClientEmail(e.target.value)}
                 placeholder="you@company.ae"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD5E1] text-xs bg-white focus:outline-none focus:border-[#36A783]"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-[#071426] mb-1">
+                Company / Entity Name
+              </label>
+              <input
+                type="text"
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
+                placeholder="e.g. Horizon Trading LLC"
                 className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD5E1] text-xs bg-white focus:outline-none focus:border-[#36A783]"
               />
             </div>
@@ -291,13 +420,29 @@ Please confirm my advisor appointment.`
             </div>
           </div>
 
+          {errorMsg && (
+            <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 font-medium">
+              {errorMsg}
+            </div>
+          )}
+
           {/* Submit Action */}
           <button
             type="submit"
-            className="w-full inline-flex items-center justify-center gap-2.5 bg-[#216D56] hover:bg-[#1a5744] text-white py-3.5 px-6 rounded-xl font-semibold text-sm transition-all shadow-md hover:shadow-lg cursor-pointer"
+            disabled={loading}
+            className="w-full inline-flex items-center justify-center gap-2.5 bg-[#216D56] hover:bg-[#1a5744] disabled:opacity-60 text-white py-3.5 px-6 rounded-xl font-semibold text-sm transition-all shadow-md hover:shadow-lg cursor-pointer"
           >
-            <span>Confirm {selectedSlot} on {selectedDate.dateStr}</span>
-            <ArrowRight className="w-4 h-4" />
+            {loading ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                <span>Scheduling Appointment...</span>
+              </>
+            ) : (
+              <>
+                <span>Confirm {selectedSlot} on {selectedDate.dateStr}</span>
+                <ArrowRight className="w-4 h-4" />
+              </>
+            )}
           </button>
         </form>
       ) : (
@@ -318,6 +463,10 @@ Please confirm my advisor appointment.`
           </div>
 
           <div className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#CBD5E1] max-w-sm mx-auto text-left text-xs space-y-1.5 font-mono">
+            {referenceId && (
+              <div><span className="text-[#64748B]">Reference ID:</span> <span className="font-bold text-[#216D56]">{referenceId}</span></div>
+            )}
+            <div><span className="text-[#64748B]">Practice:</span> {serviceNeeded}</div>
             <div><span className="text-[#64748B]">Channel:</span> {meetingType === "video" ? "Video (Zoom/Teams)" : "Phone Call"}</div>
             <div><span className="text-[#64748B]">Time Zone:</span> Gulf Standard Time (UTC+4)</div>
             <div><span className="text-[#64748B]">Send Invites To:</span> {clientEmail}</div>
