@@ -4,23 +4,28 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { IconType } from "react-icons";
 import {
   ArrowUpRight,
   ChevronDown,
-  Building2,
-  Scale,
-  ShieldCheck,
-  Calculator,
-  Briefcase,
-  Percent,
-  TrendingUp,
-  Repeat,
-  Compass,
-  ShieldAlert,
-  Cpu,
   Lock,
-  Calendar,
+  Briefcase,
 } from "lucide-react";
+import {
+  HiBuildingOffice2,
+  HiScale,
+  HiShieldCheck,
+  HiReceiptPercent,
+  HiArrowTrendingUp,
+  HiCalculator,
+  HiArrowsRightLeft,
+  HiBriefcase,
+  HiGlobeAlt,
+  HiShieldExclamation,
+  HiCpuChip,
+  HiCalendarDays,
+  HiFolderOpen,
+} from "react-icons/hi2";
 
 interface NavLinkItem {
   name: string;
@@ -50,86 +55,94 @@ const navLinks: NavLinkItem[] = [
   { name: "Contact", href: "/contact" },
 ];
 
-const MEGA_SERVICES_COL_1 = [
+interface ServiceNavItem {
+  title: string;
+  href: string;
+  svcs: string;
+  desc: string;
+  icon: IconType;
+}
+
+const MEGA_SERVICES_COL_1: ServiceNavItem[] = [
   {
     title: "Business Setup & Formation",
     href: "/services/business-setup",
     svcs: "16 Svcs",
     desc: "Mainland DED, Free Zones & bank-ready setup",
-    icon: Building2,
+    icon: HiBuildingOffice2,
   },
   {
     title: "UAE Corporate Tax",
     href: "/services/corporate-tax",
     svcs: "16 Svcs",
     desc: "Small Business Relief, QFZP 0% & FTA filing",
-    icon: Scale,
+    icon: HiScale,
   },
   {
     title: "Statutory Audit & Assurance",
     href: "/services/audit-assurance",
     svcs: "18 Svcs",
     desc: "IFRS financial statements & Free Zone renewal",
-    icon: ShieldCheck,
+    icon: HiShieldCheck,
   },
   {
     title: "UAE VAT Services",
     href: "/services/vat-services",
     svcs: "15 Svcs",
     desc: "Registrations, return filing & refund claims",
-    icon: Percent,
+    icon: HiReceiptPercent,
   },
   {
     title: "Virtual CFO Advisory",
     href: "/services/cfo-advisory",
     svcs: "17 Svcs",
     desc: "Financial modeling, budgeting & board reporting",
-    icon: TrendingUp,
+    icon: HiArrowTrendingUp,
   },
   {
     title: "Accounting & Bookkeeping",
     href: "/services/accounting-bookkeeping",
     svcs: "20 Svcs",
     desc: "Monthly bookkeeping, MIS & year-end closing",
-    icon: Calculator,
+    icon: HiCalculator,
   },
 ];
 
-const MEGA_SERVICES_COL_2 = [
+const MEGA_SERVICES_COL_2: ServiceNavItem[] = [
   {
     title: "Transfer Pricing",
     href: "/services/transfer-pricing",
     svcs: "11 Svcs",
     desc: "Arm's length policy, Local & Master file",
-    icon: Repeat,
+    icon: HiArrowsRightLeft,
   },
   {
     title: "Corporate Finance",
     href: "/services/corporate-finance",
     svcs: "16 Svcs",
     desc: "Bank loan facilities, trade finance & debt advisory",
-    icon: Briefcase,
+    icon: HiBriefcase,
   },
   {
     title: "Business Advisory",
     href: "/services/business-advisory",
     svcs: "16 Svcs",
     desc: "Valuations, M&A due diligence & restructuring",
-    icon: Compass,
+    icon: HiGlobeAlt,
   },
   {
     title: "Compliance Services",
     href: "/services/compliance-services",
     svcs: "13 Svcs",
     desc: "AML, GoAML, ESR, UBO & regulatory filing",
-    icon: ShieldAlert,
+    icon: HiShieldExclamation,
   },
   {
     title: "Technology & Digital Finance",
     href: "/services/technology-digital",
     svcs: "13 Svcs",
     desc: "Zoho, QuickBooks, Xero & e-invoicing Peppol",
-    icon: Cpu,
+    icon: HiCpuChip,
   },
 ];
 
@@ -138,7 +151,7 @@ interface KnowledgeHubItem {
   href: string;
   badge?: string;
   desc: string;
-  icon: typeof Calendar;
+  icon: IconType;
 }
 
 const KNOWLEDGE_HUB_ITEMS: KnowledgeHubItem[] = [
@@ -146,13 +159,13 @@ const KNOWLEDGE_HUB_ITEMS: KnowledgeHubItem[] = [
     title: "Compliance Calendar",
     href: "/compliance-calendar",
     desc: "CT, VAT, ESR & Free Zone statutory deadlines",
-    icon: Calendar,
+    icon: HiCalendarDays,
   },
   {
     title: "Mainland vs Free Zone",
     href: "/freezone-vs-mainland",
     desc: "10-point statutory comparison & decision tool",
-    icon: Compass,
+    icon: HiGlobeAlt,
   },
 ];
 
@@ -614,90 +627,39 @@ export default function Navbar() {
 
                     {/* Services Accordion */}
                     {isOpen && isServices && (
-                      <div className="mt-2 pl-3 space-y-2 border-l-2 border-[#36A783] py-2 bg-slate-50 rounded-r-xl">
-                        <Link
-                          href="/services/business-setup"
-                          onClick={closeMenu}
-                          className="block text-xs font-semibold text-[#071426] hover:text-[#216D56]"
-                        >
-                          🏢 Business Setup & Formation (16 Svcs)
-                        </Link>
-                        <Link
-                          href="/services/corporate-tax"
-                          onClick={closeMenu}
-                          className="block text-xs font-semibold text-[#071426] hover:text-[#216D56]"
-                        >
-                          ⚖️ UAE Corporate Tax (9%) (16 Svcs)
-                        </Link>
-                        <Link
-                          href="/services/audit-assurance"
-                          onClick={closeMenu}
-                          className="block text-xs font-semibold text-[#071426] hover:text-[#216D56]"
-                        >
-                          🛡️ Statutory Audit & Assurance (18 Svcs)
-                        </Link>
-                        <Link
-                          href="/services/vat-services"
-                          onClick={closeMenu}
-                          className="block text-xs font-semibold text-[#071426] hover:text-[#216D56]"
-                        >
-                          🏛️ UAE VAT Services (15 Svcs)
-                        </Link>
-                        <Link
-                          href="/services/cfo-advisory"
-                          onClick={closeMenu}
-                          className="block text-xs font-semibold text-[#071426] hover:text-[#216D56]"
-                        >
-                          📈 CFO & Finance Advisory (17 Svcs)
-                        </Link>
-                        <Link
-                          href="/services/accounting-bookkeeping"
-                          onClick={closeMenu}
-                          className="block text-xs font-semibold text-[#071426] hover:text-[#216D56]"
-                        >
-                          📊 Accounting & Bookkeeping (20 Svcs)
-                        </Link>
-                        <Link
-                          href="/services/transfer-pricing"
-                          onClick={closeMenu}
-                          className="block text-xs font-semibold text-[#071426] hover:text-[#216D56]"
-                        >
-                          🔄 Transfer Pricing (11 Svcs)
-                        </Link>
-                        <Link
-                          href="/services/corporate-finance"
-                          onClick={closeMenu}
-                          className="block text-xs font-semibold text-[#071426] hover:text-[#216D56]"
-                        >
-                          💼 Corporate Finance (16 Svcs)
-                        </Link>
-                        <Link
-                          href="/services/business-advisory"
-                          onClick={closeMenu}
-                          className="block text-xs font-semibold text-[#071426] hover:text-[#216D56]"
-                        >
-                          🧭 Business Advisory (16 Svcs)
-                        </Link>
-                        <Link
-                          href="/services/compliance-services"
-                          onClick={closeMenu}
-                          className="block text-xs font-semibold text-[#071426] hover:text-[#216D56]"
-                        >
-                          🚨 Compliance Services (13 Svcs)
-                        </Link>
-                        <Link
-                          href="/services/technology-digital"
-                          onClick={closeMenu}
-                          className="block text-xs font-semibold text-[#071426] hover:text-[#216D56]"
-                        >
-                          ⚡ Technology & Digital Finance (13 Svcs)
-                        </Link>
+                      <div className="mt-2 pl-2.5 pr-2 space-y-1.5 border-l-2 border-[#36A783] py-2 bg-slate-50/90 rounded-r-xl">
+                        {[...MEGA_SERVICES_COL_1, ...MEGA_SERVICES_COL_2].map(
+                          (item, idx) => {
+                            const Icon = item.icon;
+                            return (
+                              <Link
+                                key={idx}
+                                href={item.href}
+                                onClick={closeMenu}
+                                className="group/ms flex items-center justify-between gap-2.5 rounded-xl px-2 py-1.5 text-xs font-semibold text-[#071426] hover:bg-white hover:text-[#216D56] transition-all"
+                              >
+                                <div className="flex items-center gap-2.5 min-w-0">
+                                  <div className="w-7 h-7 rounded-lg bg-[#EAF4F0] text-[#216D56] group-hover/ms:bg-[#36A783] group-hover/ms:text-white flex items-center justify-center shrink-0 transition-colors shadow-2xs">
+                                    <Icon className="w-3.5 h-3.5" />
+                                  </div>
+                                  <span className="truncate">{item.title}</span>
+                                </div>
+                                <span className="text-[10px] font-mono font-bold text-[#216D56] bg-[#EAF4F0] px-1.5 py-0.5 rounded shrink-0">
+                                  {item.svcs}
+                                </span>
+                              </Link>
+                            );
+                          }
+                        )}
                         <Link
                           href="/#services"
                           onClick={closeMenu}
-                          className="block text-xs font-medium text-[#64748B] hover:text-[#071426]"
+                          className="group/ms flex items-center gap-2.5 rounded-xl px-2 py-1.5 pt-2 mt-1 border-t border-slate-200/80 text-xs font-semibold text-[#475569] hover:text-[#216D56] transition-colors"
                         >
-                          📂 All 11 Practice Directories
+                          <div className="w-7 h-7 rounded-lg bg-slate-200/70 text-[#233F5B] group-hover/ms:bg-[#36A783] group-hover/ms:text-white flex items-center justify-center shrink-0 transition-colors">
+                            <HiFolderOpen className="w-3.5 h-3.5" />
+                          </div>
+                          <span>All 11 Practice Directories</span>
                         </Link>
                       </div>
                     )}
