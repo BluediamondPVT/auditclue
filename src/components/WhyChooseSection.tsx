@@ -65,7 +65,7 @@ export default function WhyChooseSection() {
         >
           {/* Left Column: Eyebrow + Huge Heading */}
           <div className="lg:col-span-7">
-            <div className="why-header-item inline-flex items-center gap-2.5 font-mono text-xs uppercase tracking-[0.2em] text-[#83D9BE] mb-4">
+            <div className="why-header-item inline-flex items-center gap-2.5 font-sans text-xs uppercase tracking-[0.2em] text-[#83D9BE] mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-[#36A783] animate-pulse" />
               <span>[02] — Strategic Distinction</span>
             </div>
@@ -87,7 +87,7 @@ export default function WhyChooseSection() {
             </p>
 
             {/* Quick Minimalist Trust Strip */}
-            <div className="why-header-item mt-5 pt-4 border-t border-white/10 flex items-center gap-6 text-xs font-mono text-[#83D9BE]">
+            <div className="why-header-item mt-5 pt-4 border-t border-white/10 flex items-center gap-6 text-xs font-sans text-[#83D9BE]">
               <span>100% Digital Delivery</span>
               <span className="text-white/30">•</span>
               <span>FTA Certified Agents</span>
@@ -125,7 +125,7 @@ export default function WhyChooseSection() {
               <div className="relative z-10">
                 {/* Header Tag + Step Index */}
                 <div className="flex items-center justify-between mb-8">
-                  <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[#83D9BE] bg-[#36A783]/15 border border-[#36A783]/30 px-3.5 py-1 rounded-full">
+                  <span className="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-wider text-[#83D9BE] bg-[#36A783]/15 border border-[#36A783]/30 px-3.5 py-1 rounded-full">
                     <Laptop className="w-3.5 h-3.5" />
                     <span>01 • Core Operating Infrastructure</span>
                   </span>
@@ -161,7 +161,7 @@ export default function WhyChooseSection() {
                     UAE-Wide Delivery
                   </span>
                 </div>
-                <span className="text-[11px] font-mono text-[#83D9BE] uppercase tracking-wider">
+                <span className="text-[11px] font-sans text-[#83D9BE] uppercase tracking-wider">
                   100% Cloud-Native
                 </span>
               </div>
@@ -178,7 +178,7 @@ export default function WhyChooseSection() {
               <div>
                 {/* Header Tag + Step Index */}
                 <div className="flex items-center justify-between mb-8">
-                  <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[#83D9BE] bg-[#36A783]/15 border border-[#36A783]/30 px-3.5 py-1 rounded-full">
+                  <span className="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-wider text-[#83D9BE] bg-[#36A783]/15 border border-[#36A783]/30 px-3.5 py-1 rounded-full">
                     <ShieldCheck className="w-3.5 h-3.5" />
                     <span>02 • Statutory Mandate</span>
                   </span>
@@ -216,7 +216,7 @@ export default function WhyChooseSection() {
                 <span className="font-semibold text-[#83D9BE] bg-[#36A783]/15 px-3 py-1 rounded-md border border-[#36A783]/25">
                   FTA Tax Agent Authorization
                 </span>
-                <span className="text-[#A8B7C9] font-mono">
+                <span className="text-[#A8B7C9] font-sans">
                   IFRS • ISA • CPA / ACCA
                 </span>
               </div>
@@ -235,7 +235,7 @@ export default function WhyChooseSection() {
                   <div className="w-10 h-10 rounded-xl bg-[#36A783]/15 border border-[#36A783]/30 flex items-center justify-center text-[#36A783] group-hover:bg-[#36A783] group-hover:text-white transition-colors duration-300">
                     <Clock className="w-5 h-5" strokeWidth={1.6} />
                   </div>
-                  <span className="font-mono text-xs text-[#83D9BE] font-semibold transition-colors">
+                  <span className="font-sans text-xs text-[#83D9BE] font-semibold transition-colors">
                     {card3.number}
                   </span>
                 </div>
@@ -249,7 +249,7 @@ export default function WhyChooseSection() {
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs font-mono text-[#83D9BE]">
+              <div className="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs font-sans text-[#83D9BE]">
                 <span>24h Turnaround SLA</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#36A783]" />
               </div>
@@ -263,7 +263,7 @@ export default function WhyChooseSection() {
                   <div className="w-10 h-10 rounded-xl bg-[#36A783]/15 border border-[#36A783]/30 flex items-center justify-center text-[#36A783] group-hover:bg-[#36A783] group-hover:text-white transition-colors duration-300">
                     <CircleDollarSign className="w-5 h-5" strokeWidth={1.6} />
                   </div>
-                  <span className="font-mono text-xs text-[#83D9BE] font-semibold transition-colors">
+                  <span className="font-sans text-xs text-[#83D9BE] font-semibold transition-colors">
                     {card4.number}
                   </span>
                 </div>
@@ -277,7 +277,7 @@ export default function WhyChooseSection() {
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs font-mono text-[#83D9BE]">
+              <div className="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs font-sans text-[#83D9BE]">
                 <span>100% Fixed Scopes</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#36A783]" />
               </div>
@@ -291,7 +291,7 @@ export default function WhyChooseSection() {
                   <div className="w-10 h-10 rounded-xl bg-[#36A783]/15 border border-[#36A783]/30 flex items-center justify-center text-[#36A783] group-hover:bg-[#36A783] group-hover:text-white transition-colors duration-300">
                     <LockKeyhole className="w-5 h-5" strokeWidth={1.6} />
                   </div>
-                  <span className="font-mono text-xs text-[#83D9BE] font-semibold transition-colors">
+                  <span className="font-sans text-xs text-[#83D9BE] font-semibold transition-colors">
                     {card5.number}
                   </span>
                 </div>
@@ -305,7 +305,7 @@ export default function WhyChooseSection() {
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs font-mono text-[#83D9BE]">
+              <div className="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs font-sans text-[#83D9BE]">
                 <span>AES-256 Vault</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#36A783]" />
               </div>
@@ -319,7 +319,7 @@ export default function WhyChooseSection() {
                   <div className="w-10 h-10 rounded-xl bg-[#36A783]/15 border border-[#36A783]/30 flex items-center justify-center text-[#36A783] group-hover:bg-[#36A783] group-hover:text-white transition-colors duration-300">
                     <FileText className="w-5 h-5" strokeWidth={1.6} />
                   </div>
-                  <span className="font-mono text-xs text-[#83D9BE] font-semibold transition-colors">
+                  <span className="font-sans text-xs text-[#83D9BE] font-semibold transition-colors">
                     {card6.number}
                   </span>
                 </div>
@@ -333,7 +333,7 @@ export default function WhyChooseSection() {
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs font-mono text-[#83D9BE]">
+              <div className="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs font-sans text-[#83D9BE]">
                 <span>Executive MIS Packs</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#36A783]" />
               </div>
@@ -350,7 +350,7 @@ export default function WhyChooseSection() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
               {/* Left Column: 07 End-to-End Lifecycle */}
               <div className="lg:col-span-7 space-y-3">
-                <div className="flex items-center gap-2.5 font-mono text-xs uppercase tracking-wider text-[#83D9BE]">
+                <div className="flex items-center gap-2.5 font-sans text-xs uppercase tracking-wider text-[#83D9BE]">
                   <BriefcaseBusiness className="w-3.5 h-3.5 text-[#36A783]" />
                   <span>07 • Full Lifecycle Enterprise Coverage</span>
                 </div>
@@ -366,7 +366,7 @@ export default function WhyChooseSection() {
 
               {/* Right Column: 08 SME Practice & Direct Action */}
               <div className="lg:col-span-5 flex flex-col justify-between p-6 rounded-2xl bg-white/[0.03] border border-white/10 lg:border-l lg:border-white/10">
-                <div className="flex items-center gap-2 font-mono text-xs uppercase text-[#83D9BE] mb-2">
+                <div className="flex items-center gap-2 font-sans text-xs uppercase text-[#83D9BE] mb-2">
                   <UsersRound className="w-3.5 h-3.5 text-[#36A783]" />
                   <span>08 • {card8.title}</span>
                 </div>
