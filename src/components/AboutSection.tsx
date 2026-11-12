@@ -165,19 +165,19 @@ export default function AboutSection() {
               </Link>
 
               <Link
-                href="/about#leadership"
+                href="/about"
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#233F5B] hover:text-[var(--brand-teal)] transition-colors px-3 py-2"
               >
-                <span>Senior Partners & CPAs</span>
+                <span>About Our Practice</span>
                 <ArrowUpRight className="w-4 h-4 text-[var(--brand-teal)]" />
               </Link>
             </div>
 
-            {/* Quick Verifiable License Strip */}
+            {/* Verified Practice Standards Strip */}
             <div className="about-reveal-item mt-6 pt-4 border-t border-slate-200/80 flex flex-wrap items-center gap-3 text-xs font-mono text-[#475569]">
-              <span className="text-[#233F5B] font-semibold">DET Lic. No. 1094821</span>
+              <span className="text-[#233F5B] font-semibold">100% Digital UAE Delivery</span>
               <span>•</span>
-              <span className="text-[#16654E] font-semibold">FTA Agency TAN-20038914</span>
+              <span className="text-[#16654E] font-semibold">Mainland & Free Zones</span>
               <span>•</span>
               <span>IFRS & ISA Standards</span>
             </div>

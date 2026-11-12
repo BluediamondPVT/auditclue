@@ -1,11 +1,10 @@
 import React from "react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FlowText from "@/components/FlowText";
-import LeadershipSection from "@/components/LeadershipSection";
+// import LeadershipSection from "@/components/LeadershipSection";
 import {
   Star,
   Laptop,
@@ -14,13 +13,9 @@ import {
   Lock,
   FileText,
   Users2,
-  ArrowUpRight,
   ArrowRight,
   Building2,
   CheckCircle2,
-  Award,
-  Layers,
-  ChevronRight,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -92,9 +87,9 @@ const OPERATIONAL_PILLARS = [
 // UAE Regulatory & Authority Coverage
 const REGULATORY_BADGES = [
   {
-    badge: "FTA Registered",
-    title: "Federal Tax Authority",
-    subtitle: "Corporate Tax & VAT Compliant",
+    badge: "UAE Tax Advisory",
+    title: "Corporate Tax & VAT",
+    subtitle: "UAE Federal Tax Framework Aligned",
   },
   {
     badge: "Global Standard",
@@ -122,7 +117,7 @@ export default function AboutPage() {
         {/* ================================================================= */}
         {/* 1. HERO SECTION: Brand Statement & Thesis                         */}
         {/* ================================================================= */}
-        <section className="relative bg-white border-b border-[#E2E8F0] pt-12 sm:pt-16 lg:pt-20 pb-0 overflow-hidden">
+        <section className="relative bg-white border-b border-[#E2E8F0] pt-12 sm:pt-16 lg:pt-20 pb-14 sm:pb-18 lg:pb-22 overflow-hidden">
           {/* Subtle Ambient Background Texture */}
           <div
             className="pointer-events-none absolute inset-0 z-0 opacity-40"
@@ -145,9 +140,9 @@ export default function AboutPage() {
               <span className="text-[#071426] font-semibold">About Us</span>
             </nav>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               {/* Left Column: Client's Core Identity */}
-              <div className="lg:col-span-7 pb-12 sm:pb-16 lg:pb-20">
+              <div className="lg:col-span-7">
                 {/* Eyebrow Label */}
                 <div className="inline-flex items-center gap-2 bg-[#EAF4F0] text-[#216D56] border border-[#36A783]/25 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-5 font-mono">
                   <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
@@ -181,20 +176,16 @@ export default function AboutPage() {
                   </p>
                 </div>
 
-                {/* Official Statutory Accreditation & License Summary Bar */}
+                {/* Verified Digital Practice Capability Strip */}
                 <div className="mb-8 p-3.5 sm:p-4 rounded-2xl bg-[#F8FAFC] border border-[#CBD5E1] flex flex-wrap items-center gap-3 sm:gap-4 text-xs">
                   <div className="flex items-center gap-2 text-[#071426] font-medium">
-                    <ShieldCheck className="w-4 h-4 text-[#36A783] shrink-0" />
-                    <span>
-                      DET License: <strong>No. 1094821</strong>
-                    </span>
+                    <Laptop className="w-4 h-4 text-[#36A783] shrink-0" />
+                    <span>100% Digital UAE Delivery</span>
                   </div>
                   <span className="hidden sm:inline text-[#CBD5E1]">•</span>
                   <div className="flex items-center gap-2 text-[#071426] font-medium">
-                    <Award className="w-4 h-4 text-[#36A783] shrink-0" />
-                    <span>
-                      FTA Tax Agency: <strong>TAN-20038914</strong>
-                    </span>
+                    <ShieldCheck className="w-4 h-4 text-[#36A783] shrink-0" />
+                    <span>Mainland DED & Major Free Zones</span>
                   </div>
                   <span className="hidden sm:inline text-[#CBD5E1]">•</span>
                   <div className="flex items-center gap-2 text-[#216D56] font-mono font-semibold">
@@ -239,53 +230,74 @@ export default function AboutPage() {
                   </Link>
 
                   <Link
-                    href="#leadership"
+                    href="/process"
                     className="inline-flex items-center gap-2 bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#071426] text-sm sm:text-base font-semibold px-5 py-3.5 rounded-xl border border-[#CBD5E1] transition-colors"
                   >
-                    <span>Meet Practice Leadership</span>
+                    <span>Explore Our Process</span>
                     <ArrowRight className="w-4 h-4 text-[#64748B]" />
                   </Link>
                 </div>
               </div>
 
-              {/* Right Column: Professional Corporate Advisor with Verified Credential Badge */}
-              <div className="lg:col-span-5 flex justify-center lg:justify-end items-end relative self-end">
-                {/* Subtle soft ambient light glow behind advisor */}
-                <div
-                  className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-80 sm:w-96 h-80 sm:h-96 bg-[radial-gradient(circle_at_center,rgba(54,167,131,0.18),transparent_70%)] blur-2xl"
-                  aria-hidden="true"
-                />
-
-                {/* Large High-Res Transparent Advisor Image - Flush to Section Bottom */}
-                <div className="relative z-10 w-full max-w-[480px] flex justify-center lg:justify-end items-end">
-                  <Image
-                    src="/images/advisor-man.png"
-                    alt="Tariq Al-Hashimi, Managing Partner and Lead FTA Tax Principal at Auditclue"
-                    width={560}
-                    height={750}
-                    priority
-                    className="w-auto h-auto max-h-[500px] sm:max-h-[580px] lg:max-h-[640px] xl:max-h-[680px] object-contain object-bottom block -mb-[1px] drop-shadow-2xl"
+              {/* Right Column: Digital Advisory Practice Snapshot (No Stock Photos) */}
+              <div className="lg:col-span-5">
+                <div className="rounded-3xl bg-[#071426] text-white p-6 sm:p-8 border border-white/10 shadow-2xl relative overflow-hidden">
+                  <div
+                    className="pointer-events-none absolute -top-20 -right-20 w-56 h-56 bg-[#36A783]/20 rounded-full blur-3xl"
+                    aria-hidden="true"
                   />
+                  <div className="relative z-10">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/10 text-[11px] font-mono uppercase tracking-wider text-[#83D9BE] mb-4">
+                      <span className="w-2 h-2 rounded-full bg-[#C6F850]" />
+                      <span>DIGITAL-FIRST UAE PRACTICE</span>
+                    </div>
 
-                  {/* Floating Verified Advisor Credential Badge */}
-                  <div className="absolute bottom-6 sm:bottom-10 left-0 sm:left-2 bg-white/95 backdrop-blur-md border border-[#CBD5E1] p-3.5 sm:p-4 rounded-2xl shadow-xl max-w-[260px] sm:max-w-[280px] z-20">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
-                      <span className="font-mono text-[10px] uppercase tracking-wider text-[#216D56] font-bold">
-                        Lead Practice Principal
-                      </span>
-                    </div>
-                    <div className="text-sm font-serif font-bold text-[#071426] leading-tight">
-                      Tariq Al-Hashimi, FCA, CTA
-                    </div>
-                    <div className="text-[11px] text-[#64748B] font-mono mt-0.5">
-                      FTA Registered Tax Agent • TAN-20038914
-                    </div>
-                    <div className="mt-2 pt-2 border-t border-[#E2E8F0] text-[11px] text-[#071426] flex items-center justify-between">
-                      <span className="font-semibold text-[#216D56]">
-                        18+ Yrs UAE & UK
-                      </span>
-                      <span className="text-[#64748B]">Ex-Big 4 Tax</span>
+                    <h2 className="text-xl sm:text-2xl font-serif font-medium text-white mb-2 leading-snug">
+                      Built for Speed, Accuracy & Statutory Confidence
+                    </h2>
+                    <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed mb-6">
+                      Modern cloud accounting, tax, audit, and corporate advisory delivered remotely with dedicated partner oversight.
+                    </p>
+
+                    <div className="space-y-3">
+                      <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-xl bg-[#36A783]/20 text-[#83D9BE] flex items-center justify-center shrink-0">
+                            <Building2 className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-semibold text-white">11 Integrated Practices</div>
+                            <div className="text-[11px] text-[#94A3B8]">Setup, Tax, VAT, Audit & CFO</div>
+                          </div>
+                        </div>
+                        <span className="font-mono text-[11px] text-[#C6F850] font-bold">UAE</span>
+                      </div>
+
+                      <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-xl bg-[#36A783]/20 text-[#83D9BE] flex items-center justify-center shrink-0">
+                            <Lock className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-semibold text-white">Encrypted Client Portal</div>
+                            <div className="text-[11px] text-[#94A3B8]">Paperless intake & real-time tracking</div>
+                          </div>
+                        </div>
+                        <span className="font-mono text-[11px] text-[#83D9BE] font-bold">AES-256</span>
+                      </div>
+
+                      <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-xl bg-[#36A783]/20 text-[#83D9BE] flex items-center justify-center shrink-0">
+                            <Clock className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-semibold text-white">24-Hour Scoping Turnaround</div>
+                            <div className="text-[11px] text-[#94A3B8]">Fixed-fee, zero hidden costs</div>
+                          </div>
+                        </div>
+                        <span className="font-mono text-[11px] text-[#C6F850] font-bold">SLA</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -339,9 +351,9 @@ export default function AboutPage() {
                     Contractual SLAs & 100% Statutory Compliance
                   </h3>
                   <p className="text-xs text-white/70 leading-relaxed font-sans">
-                    Every deliverable is signed off by chartered CPAs and FTA
-                    Tax Agents strictly adhering to UAE Federal Tax Authority
-                    mandates.
+                    Every deliverable is reviewed by qualified financial,
+                    audit, and UAE tax professionals strictly adhering to
+                    statutory compliance mandates.
                   </p>
                 </div>
                 <Link

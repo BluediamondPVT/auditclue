@@ -485,7 +485,7 @@ export default function FreezoneVsMainlandClient() {
             </h2>
 
             <p className="text-sm sm:text-base text-[#CBD5E1] max-w-2xl mx-auto mb-8 font-sans leading-relaxed">
-              Schedule a scoping consultation with Mohammad Rashid Al-Falasi (Head of Corporate Services) or our FTA Tax Principals. We analyze your commercial contracts, target revenue, and bank requirements to design the optimal vehicle.
+              Schedule a scoping consultation with our senior Corporate Services and UAE Tax Advisory team. We analyze your commercial contracts, target revenue, and bank requirements to design the optimal vehicle.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
