@@ -344,10 +344,13 @@ export default function AboutPage() {
                     mandates.
                   </p>
                 </div>
-                <div className="pt-3 flex items-center gap-2 text-xs font-bold text-[#C6F850]">
+                <Link
+                  href="/process"
+                  className="pt-3 inline-flex items-center gap-2 text-xs font-bold text-[#C6F850] hover:text-white transition-colors group/cta w-fit"
+                >
                   <span>Explore Practice Standards</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </div>
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/cta:translate-x-1" />
+                </Link>
               </div>
             </div>
           </div>
