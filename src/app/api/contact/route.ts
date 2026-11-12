@@ -132,8 +132,48 @@ export async function POST(request: Request) {
       hour12: true,
     }).format(new Date());
 
-    // In a production environment, send an email to info@auditclue.com
-    // or trigger a webhook into CRM/Slack.
+    // 5. Forward lead to CRM Webhook (server-to-server)
+    const crmWebhookUrl = (
+      process.env.CRM_LEAD_WEBHOOK_URL ||
+      process.env.CRM_WEBHOOK_URL ||
+      ""
+    ).trim();
+
+    if (crmWebhookUrl) {
+      try {
+        const crmPayload = {
+          name: String(fullName).trim(),
+          email: String(email).trim(),
+          phone: String(mobile).trim(),
+          company: String(companyName).trim(),
+          message: notes ? String(notes).trim() : `Enquiry for ${service}`,
+          service: String(service).trim(),
+          reference_id: referenceId,
+        };
+
+        const crmRes = await fetch(crmWebhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(crmPayload),
+        });
+
+        if (crmRes.ok) {
+          console.log(`[CRM Webhook] Dispatched ${referenceId} - Status: ${crmRes.status}`);
+        } else {
+          const errBody = await crmRes.text().catch(() => "");
+          console.error(
+            `[CRM Webhook Error] ${referenceId} - HTTP ${crmRes.status}: ${errBody}`
+          );
+        }
+      } catch (crmErr) {
+        console.error("[CRM Webhook Forwarding Failed]:", crmErr);
+        // We do not fail the client request if CRM webhook encounters a transient issue
+      }
+    }
+
     console.log(`[Auditclue CRM] Consultation Inquiry Registered: ${referenceId}`, {
       referenceId,
       fullName,

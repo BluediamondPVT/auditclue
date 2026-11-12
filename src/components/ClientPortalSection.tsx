@@ -271,7 +271,9 @@ export default function ClientPortalSection() {
               </a>
 
               <a
-                href="#portal"
+                href="https://crm.auditclue.app/client-portal/login"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-[#83D9BE] hover:text-white px-5 py-3.5 rounded-xl border border-white/10 hover:border-[#36A783]/40 bg-white/[0.04] hover:bg-white/[0.08] transition-all cursor-pointer"
               >
                 <Lock className="w-4 h-4 text-[#36A783]" />

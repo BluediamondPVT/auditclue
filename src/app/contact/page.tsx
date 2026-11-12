@@ -14,12 +14,12 @@ import {
   ShieldCheck,
   CheckCircle2,
   ArrowUpRight,
-  MapPin,
-  Building2,
+  // MapPin,
+  // Building2,
   Layers,
   Compass,
-  Navigation,
-  ExternalLink,
+  // Navigation,
+  // ExternalLink,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -207,7 +207,7 @@ export default function ContactPage() {
                       </div>
                     </a>
 
-                    {/* Head Office Address */}
+                    {/* Head Office Address (Hidden until physical office is finalized)
                     <a
                       href="#offices"
                       className="group flex items-start gap-4 p-4 rounded-2xl bg-white border border-[#CBD5E1]/80 hover:border-[#36A783] hover:shadow-md transition-all"
@@ -227,6 +227,7 @@ export default function ContactPage() {
                         </div>
                       </div>
                     </a>
+                    */}
                   </div>
                 </div>
 
@@ -321,8 +322,8 @@ export default function ContactPage() {
         </section>
 
         {/* ================================================================= */}
-        {/* 4. PHYSICAL OFFICE LOCATIONS & INTERACTIVE MAP                    */}
-        {/* ================================================================= */}
+        {/* 4. PHYSICAL OFFICE LOCATIONS & INTERACTIVE MAP (Hidden until finalized) */}
+        {/* =================================================================
         <section id="offices" className="py-16 sm:py-24 bg-white border-t border-[#E2E8F0]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mb-12">
@@ -338,10 +339,10 @@ export default function ContactPage() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              {/* Office Details Cards (5 cols) */}
+              Office Details Cards (5 cols)
               <div className="lg:col-span-5 space-y-6">
                 
-                {/* Dubai Headquarters Card */}
+                Dubai Headquarters Card
                 <div className="p-6 sm:p-7 rounded-3xl bg-[#071426] text-white border border-white/10 relative overflow-hidden shadow-xl">
                   <div className="absolute top-0 right-0 w-48 h-48 bg-[#36A783]/15 rounded-full blur-2xl pointer-events-none" />
                   
@@ -387,11 +388,9 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-              
-
               </div>
 
-              {/* Interactive Google Map Embed (7 cols) */}
+              Interactive Google Map Embed (7 cols)
               <div className="lg:col-span-7 h-full">
                 <div className="rounded-3xl overflow-hidden border border-[#CBD5E1]/80 shadow-xl bg-white p-2 h-full flex flex-col">
                   <div className="relative w-full h-[480px] lg:h-[590px] rounded-2xl overflow-hidden bg-[#EDF2F7]">
@@ -407,7 +406,7 @@ export default function ContactPage() {
                       className="w-full h-full grayscale-[25%] contrast-[1.05]"
                     />
                     
-                    {/* Floating Info Pill on the Map */}
+                    Floating Info Pill on the Map
                     <div className="absolute top-4 left-4 right-4 sm:right-auto sm:max-w-xs bg-[#071426]/95 backdrop-blur-md text-white p-3.5 rounded-xl border border-white/10 shadow-lg text-xs font-sans">
                       <div className="flex items-center gap-2 font-mono text-[11px] font-bold text-[#83D9BE] uppercase mb-1">
                         <MapPin className="w-3.5 h-3.5 text-[#36A783]" />
@@ -428,6 +427,7 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
+        */}
 
         {/* ================================================================= */}
         {/* 5. JURISDICTION COVERAGE (Editorial Specifications Bar)           */}

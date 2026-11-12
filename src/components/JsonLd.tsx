@@ -24,11 +24,11 @@ export function OrganizationSchema() {
         email: "info@auditclue.com",
         address: {
           "@type": "PostalAddress",
-          streetAddress: "Sheikh Zayed Road, Downtown Business District",
+          // streetAddress: "Sheikh Zayed Road, Downtown Business District",
           addressLocality: "Dubai",
           addressRegion: "Dubai",
           addressCountry: "AE",
-          postalCode: "00000",
+          // postalCode: "00000",
         },
         geo: {
           "@type": "GeoCoordinates",

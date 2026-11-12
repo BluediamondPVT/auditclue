@@ -415,7 +415,7 @@ export default function AboutPage() {
         {/* ================================================================= */}
         {/* 4. SENIOR LEADERSHIP & PRACTICE DIRECTORS                         */}
         {/* ================================================================= */}
-        {/* <LeadershipSection /> */}
+        {/* <LeadershipSection />\ */}
 
         {/* ================================================================= */}
         {/* 5. UAE REGULATORY COVERAGE STRIP                                 */}

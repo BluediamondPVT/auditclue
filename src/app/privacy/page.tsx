@@ -108,7 +108,8 @@ export default function PrivacyPolicyPage() {
               </p>
               <div className="p-5 rounded-2xl bg-[#F8FAFC] border border-[#CBD5E1] space-y-2 font-mono text-sm">
                 <div><strong>Entity:</strong> Auditclue Global Advisory Services LLC</div>
-                <div><strong>Address:</strong> Business Bay, Level 14, Boulevard Plaza Tower, Dubai, UAE</div>
+                {/* <div><strong>Address:</strong> Business Bay, Level 14, Boulevard Plaza Tower, Dubai, UAE</div> */}
+                <div><strong>Region:</strong> Dubai, United Arab Emirates (100% Digital Advisory)</div>
                 <div><strong>Email:</strong> <a href="mailto:info@auditclue.com" className="text-[#216D56] hover:underline">info@auditclue.com</a></div>
                 <div><strong>Direct Telephone:</strong> <a href="tel:+971547338583" className="text-[#216D56] hover:underline">+971 54 733 8583</a></div>
               </div>
