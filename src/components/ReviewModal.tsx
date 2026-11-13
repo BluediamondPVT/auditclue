@@ -52,9 +52,15 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
     }
   }, [isOpen]);
 
-  // Lock background body scroll and listen for Escape key when modal is open
+  // Lock background body scroll, pause Lenis desktop scroll, and listen for Escape key when modal is open
   useEffect(() => {
     if (!isOpen) return;
+
+    // Pause desktop Lenis smooth scroll momentum while modal is open
+    const lenis = typeof window !== "undefined" ? (window as any).__lenis : null;
+    if (lenis && typeof lenis.stop === "function") {
+      lenis.stop();
+    }
 
     const originalOverflow = document.body.style.overflow;
     const originalPaddingRight = document.body.style.paddingRight;
@@ -71,6 +77,9 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
     window.addEventListener("keydown", handleEsc);
 
     return () => {
+      if (lenis && typeof lenis.start === "function") {
+        lenis.start();
+      }
       document.body.style.overflow = originalOverflow;
       document.body.style.paddingRight = originalPaddingRight;
       window.removeEventListener("keydown", handleEsc);
@@ -161,6 +170,12 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
   return (
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-[#071426]/75 backdrop-blur-xs overscroll-contain animate-in fade-in duration-200"
+      data-lenis-prevent="true"
+      onWheel={(e) => {
+        if (e.target === e.currentTarget && scrollRef.current) {
+          scrollRef.current.scrollTop += e.deltaY;
+        }
+      }}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -168,7 +183,10 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
       aria-modal="true"
       aria-labelledby="review-modal-title"
     >
-      <div className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden text-[#071426] max-h-[90vh] flex flex-col overscroll-contain">
+      <div
+        className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden text-[#071426] max-h-[90vh] flex flex-col overscroll-contain"
+        data-lenis-prevent="true"
+      >
         {/* Google-Review-Style Header Bar */}
         <div
           onWheel={(e) => {
@@ -209,6 +227,7 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
         {/* Scrollable Content */}
         <div
           ref={scrollRef}
+          data-lenis-prevent="true"
           tabIndex={0}
           className="p-5 sm:p-6 overflow-y-auto flex-1 min-h-0 overscroll-contain focus:outline-none"
         >
