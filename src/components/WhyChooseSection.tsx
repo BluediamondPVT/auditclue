@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Laptop,
   ShieldCheck,
@@ -192,22 +193,31 @@ export default function WhyChooseSection() {
                 </h3>
 
                 <p className="text-base text-[#A8B7C9] leading-relaxed font-sans mb-6">
-                  Direct statutory representation before the Federal Tax Authority. Every audit, corporate tax filing, and VAT reconciliation is prepared under IFRS / ISA standards and signed off by qualified CPAs and registered FTA Tax Agents.
+                  Direct statutory representation before the Federal Tax
+                  Authority. Every audit, corporate tax filing, and VAT
+                  reconciliation is prepared under IFRS / ISA standards and
+                  signed off by qualified CPAs and registered FTA Tax Agents.
                 </p>
 
                 {/* Explicit Regulatory Verification Checklist */}
                 <div className="space-y-2.5 mb-6 text-xs text-[#CBD5E1]">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#36A783] shrink-0" />
-                    <span>EmaraTax Agency Linked • Direct Return Submissions</span>
+                    <span>
+                      EmaraTax Agency Linked • Direct Return Submissions
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#36A783] shrink-0" />
-                    <span>FTA Audit Defense & Penalty Reconsideration Rights</span>
+                    <span>
+                      FTA Audit Defense & Penalty Reconsideration Rights
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#36A783] shrink-0" />
-                    <span>All 7 Emirates & 40+ Free Zones Statutory Accreditation</span>
+                    <span>
+                      All 7 Emirates & 40+ Free Zones Statutory Accreditation
+                    </span>
                   </div>
                 </div>
               </div>
@@ -375,8 +385,8 @@ export default function WhyChooseSection() {
                   {card8.desc}
                 </p>
 
-                <a
-                  href="#consult-form"
+                <Link
+                  href="/contact"
                   className="group/btn relative inline-flex items-center justify-between overflow-hidden rounded-xl bg-[#1d8062] px-6 py-3.5 text-sm font-semibold text-white shadow-lg transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[#16654e] hover:shadow-[#1d8062]/30 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
                 >
                   <span
@@ -384,7 +394,7 @@ export default function WhyChooseSection() {
                     aria-hidden="true"
                   />
                   <span
-                    className="absolute -left-full top-0 h-full w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transition-all duration-700 ease-out group-hover/btn:left-[150%]"
+                    className="absolute -left-full top-0 h-full w-1/2 bg-linear-to-r from-transparent via-white/20 to-transparent -skew-x-12 transition-all duration-700 ease-out group-hover/btn:left-[150%]"
                     aria-hidden="true"
                   />
                   <span className="relative z-10 block overflow-hidden leading-tight">
@@ -408,7 +418,7 @@ export default function WhyChooseSection() {
                       strokeWidth={2.4}
                     />
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

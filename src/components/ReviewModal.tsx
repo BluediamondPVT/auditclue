@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   X,
   Star,
@@ -43,6 +43,7 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [submittedRef, setSubmittedRef] = useState<string>("");
   const [copiedRef, setCopiedRef] = useState<boolean>(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -51,13 +52,29 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
     }
   }, [isOpen]);
 
+  // Lock background body scroll and listen for Escape key when modal is open
   useEffect(() => {
     if (!isOpen) return;
+
+    const originalOverflow = document.body.style.overflow;
+    const originalPaddingRight = document.body.style.paddingRight;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      document.body.style.paddingRight = originalPaddingRight;
+      window.removeEventListener("keydown", handleEsc);
+    };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
@@ -143,7 +160,7 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#071426]/65 backdrop-blur-sm animate-in fade-in duration-200"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-[#071426]/75 backdrop-blur-xs overscroll-contain animate-in fade-in duration-200"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -151,9 +168,14 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
       aria-modal="true"
       aria-labelledby="review-modal-title"
     >
-      <div className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden text-[#071426] max-h-[92vh] flex flex-col">
+      <div className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden text-[#071426] max-h-[90vh] flex flex-col overscroll-contain">
         {/* Google-Review-Style Header Bar */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-[#F8FAFC] shrink-0">
+        <div
+          onWheel={(e) => {
+            if (scrollRef.current) scrollRef.current.scrollTop += e.deltaY;
+          }}
+          className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-[#F8FAFC] shrink-0 select-none"
+        >
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-full bg-[#216D56] text-white font-serif font-bold text-sm flex items-center justify-center shadow-xs">
               A
@@ -185,7 +207,11 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
         </div>
 
         {/* Scrollable Content */}
-        <div className="p-6 overflow-y-auto">
+        <div
+          ref={scrollRef}
+          tabIndex={0}
+          className="p-5 sm:p-6 overflow-y-auto flex-1 min-h-0 overscroll-contain focus:outline-none"
+        >
           {!submittedRef ? (
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Honeypot Anti-Spam */}
