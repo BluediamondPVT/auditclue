@@ -176,6 +176,28 @@ export default function TestimonialsSection() {
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [visibleCards, setVisibleCards] = useState(3);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [isPageVisible, setIsPageVisible] = useState(true);
+
+  // Stop sliding and safely normalize index when tab is hidden / inactive
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      const visible = document.visibilityState === "visible";
+      setIsPageVisible(visible);
+      if (visible) {
+        // When returning to tab, safely normalize index if it deviated
+        setCurrentIndex((prev) => {
+          if (prev >= 2 * N || prev < N) {
+            setIsTransitioning(false);
+            return (prev % N) + N;
+          }
+          return prev;
+        });
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [N]);
 
   // Allow direct links like /#write-review or /?review=true to open the modal
   useEffect(() => {
@@ -215,13 +237,17 @@ export default function TestimonialsSection() {
   }, []);
 
   // Seamless infinite loop on transition end
-  const handleTransitionEnd = () => {
+  const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+    // Only respond to transitions on this track element itself, ignore child hover transitions
+    if (e.target !== e.currentTarget) return;
+    if (e.propertyName !== "transform") return;
+
     if (currentIndex >= 2 * N) {
       setIsTransitioning(false);
-      setCurrentIndex((prev) => prev - N);
+      setCurrentIndex((prev) => (prev % N) + N);
     } else if (currentIndex < N) {
       setIsTransitioning(false);
-      setCurrentIndex((prev) => prev + N);
+      setCurrentIndex((prev) => (prev % N) + N);
     }
   };
 
@@ -238,26 +264,48 @@ export default function TestimonialsSection() {
     }
   }, [isTransitioning]);
 
-  // Auto-slide effect with instant pause on hover (seamless forward motion)
+  // Auto-slide effect with instant pause on hover and when page is not visible
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || !isPageVisible) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => prev + 1);
-    }, 3600);
+      setCurrentIndex((prev) => {
+        // Prevent runaway index if transitionend was skipped while multitasking
+        if (prev >= 2 * N) {
+          setIsTransitioning(false);
+          return N + 1;
+        }
+        return prev + 1;
+      });
+    }, 3800);
 
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, [isPaused, isPageVisible, N]);
 
   const handleNext = () => {
-    if (!isTransitioning) return;
-    setCurrentIndex((prev) => prev + 1);
+    setCurrentIndex((prev) => {
+      if (prev >= 2 * N) {
+        setIsTransitioning(false);
+        return N + 1;
+      }
+      setIsTransitioning(true);
+      return prev + 1;
+    });
   };
 
   const handlePrev = () => {
-    if (!isTransitioning) return;
-    setCurrentIndex((prev) => prev - 1);
+    setCurrentIndex((prev) => {
+      if (prev <= 0) {
+        setIsTransitioning(false);
+        return 2 * N - 1;
+      }
+      setIsTransitioning(true);
+      return prev - 1;
+    });
   };
+
+  const maxSafeIndex = Math.max(0, TRIPLED_TESTIMONIALS.length - visibleCards);
+  const safeIndex = Math.min(Math.max(0, currentIndex), maxSafeIndex);
 
   return (
     <section
@@ -359,7 +407,7 @@ export default function TestimonialsSection() {
             className="flex py-2"
             onTransitionEnd={handleTransitionEnd}
             style={{
-              transform: `translateX(-${currentIndex * (100 / visibleCards)}%)`,
+              transform: `translateX(-${safeIndex * (100 / visibleCards)}%)`,
               transition: isTransitioning
                 ? "transform 0.75s cubic-bezier(0.16, 1, 0.3, 1)"
                 : "none",
