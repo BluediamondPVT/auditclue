@@ -34,8 +34,8 @@ const AUDIT_DETAILED_SERVICES = [
     num: "01",
     title: "Statutory Financial Statement Audit Coordination",
     scope:
-      "End-to-end management and coordination of mandatory annual statutory audits conducted in accordance with International Standards on Auditing (ISA) and UAE Commercial Companies Law.",
-    deliverable: "Bank-Ready Signed & Sealed Independent Auditor's Report",
+      "End-to-end management and coordination of mandatory annual statutory audits conducted by Ministry of Economy registered and Free Zone approved independent statutory auditors in accordance with International Standards on Auditing (ISA) and UAE Commercial Companies Law.",
+    deliverable: "Bank-Ready Signed & Sealed Independent Auditor's Report (Ministry of Economy Registered Partner)",
     turnaround: "Annual Mandate (10–14 Business Days)",
   },
   {

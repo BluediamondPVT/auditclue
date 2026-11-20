@@ -95,7 +95,7 @@ export default function PrivacyPolicyPage() {
                 4. Bank-Grade Security & Storage
               </h2>
               <p>
-                Client financial documents are safeguarded using AES-256 encryption at rest and TLS 1.3 encryption in transit. Access is strictly role-based and limited to certified auditors, tax agents, and accountants assigned to your specific engagement under non-disclosure agreements (NDAs).
+                Client financial documents are safeguarded using AES-256 encryption at rest and TLS 1.3 encryption in transit. Access is strictly role-based and limited to certified auditors, tax advisors, and accountants assigned to your specific engagement under non-disclosure agreements (NDAs).
               </p>
             </div>
 

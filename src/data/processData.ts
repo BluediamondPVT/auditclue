@@ -62,7 +62,7 @@ export const PROCESS_STEPS_DATA: ProcessStepItem[] = [
     homepagePreview: "Our advisors handle your requirements precisely.",
     fullDescription:
       "Our qualified advisors review your documents, identify gaps, and execute your audit, tax filing, accounting, or compliance requirements with precision.",
-    slaBadge: "Chartered CPA & Tax Agents",
+    slaBadge: "Chartered CPA & Tax Advisors",
     iconName: "ShieldCheck",
     side: "right",
     deliverableHighlight:

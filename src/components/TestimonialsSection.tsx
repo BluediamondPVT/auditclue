@@ -126,9 +126,9 @@ const TESTIMONIALS: TestimonialItem[] = [
     sector: "Private Equity & Holdings",
     initials: "MV",
     rating: 5,
-    highlightTitle: "Seamless ESR, UBO & SPV holding compliance",
+    highlightTitle: "Seamless AML, UBO & SPV holding compliance",
     quote:
-      "Navigating ADGM regulatory guidelines, Economic Substance Regulations (ESR), and Ultimate Beneficial Ownership (UBO) reporting requires top-tier expertise. The Auditclue advisory team handled our multi-tier holding structure with speed, accuracy, and absolute confidentiality.",
+      "Navigating ADGM regulatory guidelines, Anti-Money Laundering frameworks, and Ultimate Beneficial Ownership (UBO) reporting requires top-tier expertise. The Auditclue advisory team handled our multi-tier holding structure with speed, accuracy, and absolute confidentiality.",
     statHighlight: "100% Compliant",
     statLabel: "ADGM Regulatory Filing",
     date: "Verified Asset Holding Client",
@@ -331,7 +331,7 @@ export default function TestimonialsSection() {
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#071426] tracking-tight mb-4">
-              Trusted by 500+ UAE Businesses Across Sectors
+              Trusted by 350+ UAE Businesses Across Sectors
             </h2>
 
             <p className="text-base sm:text-lg text-[#475569] font-sans leading-relaxed">

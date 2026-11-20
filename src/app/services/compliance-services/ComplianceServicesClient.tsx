@@ -25,15 +25,15 @@ import {
 const COMPLIANCE_PAIRS = [
   {
     phase: "01",
-    label: "Statutory Substance & Beneficial Ownership",
+    label: "AML / CFT & Beneficial Ownership Mandates",
     items: [
       {
         num: "01",
-        title: "Economic Substance Regulation (ESR) Advisory",
+        title: "AML & CFT Statutory Compliance Framework",
         scope:
-          "Assessing relevant activity triggers, core income-generating activities (CIGA), and managing mandatory annual notifications and ESR reports via Ministry of Finance.",
-        deliverable: "Ministry of Finance Official ESR Filing Confirmation",
-        turnaround: "Statutory Window",
+          "Comprehensive Anti-Money Laundering (AML) and Counter-Financing of Terrorism (CFT) policy drafting, goAML registration, and DNFBPs risk classification under Federal Decree-Law No. 20 of 2018.",
+        deliverable: "Ministry of Economy / FIU goAML Compliance Dossier",
+        turnaround: "3–5 Business Days",
       },
       {
         num: "02",
@@ -53,7 +53,7 @@ const COMPLIANCE_PAIRS = [
         num: "03",
         title: "Compliance Calendar Management",
         scope:
-          "Centralized tracking of commercial trade license renewals, ESR filings, UBO updates, and statutory corporate deadlines preventing fines.",
+          "Centralized tracking of commercial trade license renewals, UBO updates, corporate governance records, and statutory corporate deadlines preventing fines.",
         deliverable: "Dynamic Annual Compliance Governance Tracker",
         turnaround: "Continuous Retainer",
       },

@@ -26,7 +26,7 @@ import {
 
 interface StatutoryDeadline {
   id: string;
-  category: "tax" | "vat" | "esr" | "audit";
+  category: "tax" | "vat" | "compliance" | "audit";
   title: string;
   authority: string;
   rule: string;
@@ -48,7 +48,7 @@ const STATUTORY_DEADLINES: StatutoryDeadline[] = [
     standardDeadline: "9 Months Post FY-End",
     nextUpcoming2026: "30 Sept 2026 (For FY ending 31 Dec 2025)",
     penaltyStatute: "Cabinet Decision No. 75 of 2023 on Tax Violations",
-    penaltyAmount: "AED 500/mo for late filing + AED 10,000 late registration + 14% p.a. interest",
+    penaltyAmount: "AED 500/mo for late filing + AED 10,000 late registration + monthly interest under Cabinet Decision No. 75 of 2023",
     actionRequired: "File audited/unadjusted financial statements on EmaraTax portal & settle 9% or 0% SBR.",
     status: "CRITICAL",
   },
@@ -118,34 +118,8 @@ const STATUTORY_DEADLINES: StatutoryDeadline[] = [
     status: "UPCOMING",
   },
   {
-    id: "esr-notification",
-    category: "esr",
-    title: "Economic Substance Regulations (ESR) Annual Notification",
-    authority: "Ministry of Finance (MoF Cabinet Resolution No. 57 of 2020)",
-    rule: "Within 6 months from the end of the licensee's financial year.",
-    standardDeadline: "6 Months Post FY-End",
-    nextUpcoming2026: "30 June 2026 (For FY ending 31 Dec 2025)",
-    penaltyStatute: "Cabinet Resolution No. 57 of 2020",
-    penaltyAmount: "AED 20,000 for failure to submit notification",
-    actionRequired: "Submit notification on MoF portal declaring Relevant Activities undertaken in the year.",
-    status: "UPCOMING",
-  },
-  {
-    id: "esr-report",
-    category: "esr",
-    title: "Economic Substance Regulations (ESR) Full Annual Report",
-    authority: "Ministry of Finance (MoF Cabinet Resolution No. 57 of 2020)",
-    rule: "Within 12 months from the end of the financial year for entities with relevant income.",
-    standardDeadline: "12 Months Post FY-End",
-    nextUpcoming2026: "31 Dec 2026 (For FY ending 31 Dec 2025)",
-    penaltyStatute: "Cabinet Resolution No. 57 of 2020",
-    penaltyAmount: "AED 50,000 initial penalty + AED 400,000 for repeated failure & potential license revocation",
-    actionRequired: "Demonstrate adequate CIGA (Core Income-Generating Activities), employees, and expenditure in the UAE.",
-    status: "UPCOMING",
-  },
-  {
     id: "ubo-declaration",
-    category: "esr",
+    category: "compliance",
     title: "Ultimate Beneficial Owner (UBO) Register Maintenance",
     authority: "Ministry of Economy (Cabinet Decision No. 109 of 2023)",
     rule: "Mandatory update within 15 calendar days of any change in ownership or management.",
@@ -154,6 +128,19 @@ const STATUTORY_DEADLINES: StatutoryDeadline[] = [
     penaltyStatute: "Cabinet Decision No. 109 of 2023",
     penaltyAmount: "AED 15,000 to AED 100,000 plus commercial license suspension",
     actionRequired: "Maintain internal register of beneficial owners (>25% shareholding) and register with DED/Free Zone.",
+    status: "CONTINUOUS",
+  },
+  {
+    id: "aml-cft-risk-review",
+    category: "compliance",
+    title: "AML / CFT Annual Risk Assessment & goAML Reporting",
+    authority: "Ministry of Economy / FIU (Federal Decree-Law No. 20 of 2018)",
+    rule: "Annual AML audit, risk assessment update, and suspicious transaction reporting via goAML.",
+    standardDeadline: "Annual Statutory Cycle",
+    nextUpcoming2026: "Continuous Statutory Mandate",
+    penaltyStatute: "Cabinet Decision No. 16 of 2021",
+    penaltyAmount: "AED 50,000 to AED 5,000,000 for non-compliance",
+    actionRequired: "Conduct internal AML/CFT review, screen sanctions lists, and maintain verified KYC records.",
     status: "CONTINUOUS",
   },
   {
@@ -198,7 +185,7 @@ const STATUTORY_DEADLINES: StatutoryDeadline[] = [
 ];
 
 export default function ComplianceCalendarClient() {
-  const [activeTab, setActiveTab] = useState<"all" | "tax" | "vat" | "esr" | "audit">("all");
+  const [activeTab, setActiveTab] = useState<"all" | "tax" | "vat" | "compliance" | "audit">("all");
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
@@ -253,13 +240,13 @@ export default function ComplianceCalendarClient() {
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-normal text-white tracking-tight leading-[1.15] mb-6">
                 <FlowText
-                  text="Never Miss a Statutory Deadline. Zero Penalties Guaranteed."
+                  text="Never Miss a Statutory Deadline. Stay 100% Fully Compliant."
                   as="span"
                 />
               </h1>
 
               <p className="text-base sm:text-lg text-[#CBD5E1] leading-relaxed font-sans mb-8">
-                Official statutory calendar tracking UAE Corporate Tax (Form CT6), Quarterly VAT (Form 201), Economic Substance Regulations (ESR), UBO disclosures, and Free Zone statutory audit submissions across all 7 Emirates.
+                Official statutory calendar tracking UAE Corporate Tax (Form CT6), Quarterly VAT (Form 201), UBO disclosures, AML mandates, and Free Zone statutory audit submissions across all 7 Emirates.
               </p>
 
               {/* Quick Stat Pill Strip */}
@@ -319,14 +306,14 @@ export default function ComplianceCalendarClient() {
                 Quarterly VAT (5%)
               </button>
               <button
-                onClick={() => setActiveTab("esr")}
+                onClick={() => setActiveTab("compliance")}
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
-                  activeTab === "esr"
+                  activeTab === "compliance"
                     ? "bg-[#071426] text-white shadow-md"
                     : "bg-white text-[#4A5D73] border border-[#CBD5E1] hover:bg-[#F1F5F9]"
                 }`}
               >
-                ESR & UBO Compliance
+                UBO & Regulatory Compliance
               </button>
               <button
                 onClick={() => setActiveTab("audit")}

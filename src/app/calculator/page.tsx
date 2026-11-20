@@ -209,7 +209,7 @@ export default function CalculatorPage() {
 
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center z-10">
             <div className="inline-flex items-center gap-2 bg-[#36A783]/20 border border-[#36A783]/40 text-[#83D9BE] text-xs font-semibold px-3.5 py-1.5 rounded-full mb-6 font-mono">
-              <span>CLAIM ELIGIBLE RELIEFS WITH CERTIFIED TAX AGENTS</span>
+              <span>CLAIM ELIGIBLE RELIEFS WITH QUALIFIED TAX ADVISORS</span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-white tracking-tight leading-tight mb-5">
@@ -217,7 +217,7 @@ export default function CalculatorPage() {
             </h2>
 
             <p className="text-base sm:text-lg text-[#CBD5E1] max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
-              Connect with our registered FTA tax agents for a confidential,
+              Connect with our qualified corporate tax specialists for a confidential,
               zero-obligation tax planning session.
             </p>
 
@@ -242,7 +242,7 @@ export default function CalculatorPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white text-base font-medium px-6 py-4 rounded-xl border border-white/15 transition-colors w-full sm:w-auto"
               >
-                <span>Chat With a Tax Agent</span>
+                <span>Chat With a Tax Advisor</span>
                 <ArrowRight className="w-4 h-4 text-white/70" />
               </a>
             </div>

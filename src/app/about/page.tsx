@@ -321,7 +321,7 @@ export default function AboutPage() {
             </div>
 
             {/* The 5 Star Highlight Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 items-start">
               {CORE_CAPABILITIES.map((point, idx) => (
                 <div
                   key={idx}
@@ -514,7 +514,7 @@ export default function AboutPage() {
                 href="/#services"
                 className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white text-base font-medium px-6 py-4 rounded-xl border border-white/15 transition-colors w-full sm:w-auto"
               >
-                <span>View All 10 Services</span>
+                <span>View All Services</span>
                 <ArrowRight className="w-4 h-4 text-white/70" />
               </Link>
             </div>

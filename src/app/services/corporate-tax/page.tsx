@@ -6,7 +6,7 @@ import { ServiceSchema, BreadcrumbSchema } from "@/components/JsonLd";
 export const metadata: Metadata = {
   title: "UAE Corporate Tax Services (9%) | Auditclue Advisory Dubai",
   description:
-    "Navigate UAE Corporate Tax with FTA Registered Tax Agents. Registration, 9% liability computation, Small Business Relief (up to AED 3M revenue), QFZP 0% status, and EmaraTax return filing.",
+    "Navigate UAE Corporate Tax with Chartered Tax Advisors. Registration, 9% liability computation, Small Business Relief (up to AED 3M revenue), QFZP 0% status, and EmaraTax return filing.",
   keywords: [
     "UAE Corporate Tax Registration",
     "Corporate Tax Return Filing UAE",

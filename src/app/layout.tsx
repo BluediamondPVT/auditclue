@@ -73,7 +73,6 @@ export const metadata: Metadata = {
     // CFO & Compliance Cluster
     "Fractional CFO Dubai",
     "Transfer pricing local file UAE",
-    "Economic substance regulations ESR UAE",
     "AML goAML compliance UAE",
   ],
   authors: [{ name: "Auditclue Global Advisory Services LLC", url: "https://auditclue.com" }],

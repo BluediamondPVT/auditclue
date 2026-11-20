@@ -294,7 +294,7 @@ export default function Footer() {
                   href="/services/compliance-services"
                   className="hover:text-white transition-colors"
                 >
-                  Compliance Services (AML/ESR)
+                  Compliance Services (AML/UBO)
                 </Link>
               </li>
               <li>
@@ -370,7 +370,7 @@ export default function Footer() {
         <div className="w-full px-5 sm:px-12 lg:px-20 xl:px-28 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-[#94A3B8] text-center sm:text-left">
           <span>© 2026 Auditclue Global Advisory Services LLC</span>
           <span className="text-center">
-            FTA Registered · IFRS / ISA Compliant · 100% Digital UAE Delivery
+            Chartered Tax Advisors · IFRS / ISA Compliant · 100% Digital UAE Delivery
           </span>
           <button
             onClick={scrollToTop}

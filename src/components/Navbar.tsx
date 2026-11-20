@@ -51,7 +51,6 @@ const navLinks: NavLinkItem[] = [
     dropdownType: "knowledge",
   },
   { name: "Process", href: "/process" },
-  { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -134,7 +133,7 @@ const MEGA_SERVICES_COL_2: ServiceNavItem[] = [
     title: "Compliance Services",
     href: "/services/compliance-services",
     svcs: "13 Svcs",
-    desc: "AML, GoAML, ESR, UBO & regulatory filing",
+    desc: "AML, GoAML, UBO & regulatory filing",
     icon: HiShieldExclamation,
   },
   {
@@ -156,16 +155,22 @@ interface KnowledgeHubItem {
 
 const KNOWLEDGE_HUB_ITEMS: KnowledgeHubItem[] = [
   {
-    title: "Compliance Calendar",
-    href: "/compliance-calendar",
-    desc: "CT, VAT, ESR & Free Zone statutory deadlines",
-    icon: HiCalendarDays,
+    title: "Regulatory Blog & Insights",
+    href: "/blog",
+    desc: "UAE Corporate Tax, VAT & statutory guides",
+    icon: HiFolderOpen,
   },
   {
     title: "Mainland vs Free Zone",
     href: "/freezone-vs-mainland",
     desc: "10-point statutory comparison & decision tool",
     icon: HiGlobeAlt,
+  },
+  {
+    title: "Tax & VAT Calculator",
+    href: "/calculator",
+    desc: "9% Corporate Tax, SBR relief & 5% VAT estimator",
+    icon: HiCalculator,
   },
 ];
 
@@ -174,6 +179,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileKnowledgeOpen, setMobileKnowledgeOpen] = useState(false);
+  const [desktopDropdown, setDesktopDropdown] = useState<"services" | "knowledge" | null>(null);
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
 
@@ -202,7 +208,10 @@ export default function Navbar() {
     document.body.style.overflow = menuOpen ? "hidden" : "";
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMenuOpen(false);
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        setDesktopDropdown(null);
+      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -217,6 +226,15 @@ export default function Navbar() {
     setMenuOpen(false);
     setMobileServicesOpen(false);
     setMobileKnowledgeOpen(false);
+    setDesktopDropdown(null);
+  };
+
+  const handleNavClick = () => {
+    setDesktopDropdown(null);
+    closeMenu();
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
   };
 
   return (
@@ -255,10 +273,28 @@ export default function Navbar() {
           >
             {navLinks.map((link) => {
               const active = isActive(link.href);
+              const isServices = link.dropdownType === "services";
+              const isKnowledge = link.dropdownType === "knowledge";
+              const isDropdownOpen =
+                (isServices && desktopDropdown === "services") ||
+                (isKnowledge && desktopDropdown === "knowledge");
+
               return (
-                <div key={link.name} className="relative group">
+                <div
+                  key={link.name}
+                  className="relative group"
+                  onMouseEnter={() => {
+                    if (link.dropdownType) setDesktopDropdown(link.dropdownType);
+                  }}
+                  onMouseLeave={() => setDesktopDropdown(null)}
+                >
                   <Link
                     href={link.href}
+                    onClick={() => {
+                      if (!link.dropdown) {
+                        handleNavClick();
+                      }
+                    }}
                     className={`nav-link inline-flex items-center gap-1.5 py-3 text-[13px] xl:text-[14px] font-medium transition-colors ${
                       active
                         ? "text-brand-teal-dark font-semibold"
@@ -276,15 +312,23 @@ export default function Navbar() {
                       <ChevronDown
                         size={14}
                         strokeWidth={1.8}
-                        className="transition-transform duration-200 group-hover:rotate-180"
+                        className={`transition-transform duration-200 ${
+                          isDropdownOpen ? "rotate-180" : "group-hover:rotate-180"
+                        }`}
                         aria-hidden="true"
                       />
                     )}
                   </Link>
 
                   {/* DROPDOWN MENUS ON HOVER */}
-                  {link.dropdown && link.dropdownType === "services" && (
-                    <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto z-50 before:content-[''] before:absolute before:-top-3 before:inset-x-0 before:h-4">
+                  {link.dropdown && isServices && (
+                    <div
+                      className={`absolute left-1/2 -translate-x-1/2 top-full pt-2 transition-all duration-200 z-50 before:content-[''] before:absolute before:-top-3 before:inset-x-0 before:h-4 ${
+                        isDropdownOpen
+                          ? "opacity-100 visible pointer-events-auto"
+                          : "opacity-0 invisible pointer-events-none"
+                      }`}
+                    >
                       <div className="w-195 max-w-[95vw] rounded-3xl bg-white p-5 shadow-2xl border border-slate-200/90 backdrop-blur-2xl text-[#071426]">
                         {/* Two Columns Grid 50% - 50% */}
                         <div className="grid grid-cols-2 gap-5">
@@ -297,6 +341,7 @@ export default function Navbar() {
                                   <Link
                                     key={idx}
                                     href={item.href}
+                                    onClick={handleNavClick}
                                     className="group/item flex items-start gap-2.5 p-2 rounded-xl hover:bg-[#F8FAFC] border border-transparent hover:border-slate-200 transition-all"
                                   >
                                     <div className="w-8 h-8 rounded-lg bg-[#EAF4F0] text-[#216D56] flex items-center justify-center shrink-0 group-hover/item:bg-[#36A783] group-hover/item:text-white transition-colors mt-0.5">
@@ -306,9 +351,6 @@ export default function Navbar() {
                                       <div className="flex items-center gap-1.5 flex-wrap">
                                         <span className="text-xs font-bold text-[#071426] group-hover/item:text-[#216D56] transition-colors truncate">
                                           {item.title}
-                                        </span>
-                                        <span className="text-[9px] font-mono font-bold text-[#36A783] bg-[#EAF4F0] px-1.5 py-0.2 rounded">
-                                          {item.svcs}
                                         </span>
                                       </div>
                                       <p className="text-[11px] text-[#64748B] leading-snug mt-0.5 line-clamp-1">
@@ -330,6 +372,7 @@ export default function Navbar() {
                                   <Link
                                     key={idx}
                                     href={item.href}
+                                    onClick={handleNavClick}
                                     className="group/item flex items-start gap-2.5 p-2 rounded-xl hover:bg-[#F8FAFC] border border-transparent hover:border-slate-200 transition-all"
                                   >
                                     <div className="w-8 h-8 rounded-lg bg-[#EAF4F0] text-[#216D56] flex items-center justify-center shrink-0 group-hover/item:bg-[#36A783] group-hover/item:text-white transition-colors mt-0.5">
@@ -339,9 +382,6 @@ export default function Navbar() {
                                       <div className="flex items-center gap-1.5 flex-wrap">
                                         <span className="text-xs font-bold text-[#071426] group-hover/item:text-[#216D56] transition-colors truncate">
                                           {item.title}
-                                        </span>
-                                        <span className="text-[9px] font-mono font-bold text-[#36A783] bg-[#EAF4F0] px-1.5 py-0.2 rounded">
-                                          {item.svcs}
                                         </span>
                                       </div>
                                       <p className="text-[11px] text-[#64748B] leading-snug mt-0.5 line-clamp-1">
@@ -359,20 +399,15 @@ export default function Navbar() {
                   )}
 
                   {/* KNOWLEDGE HUB DEDICATED DROPDOWN */}
-                  {link.dropdown && link.dropdownType === "knowledge" && (
-                    <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto z-50 before:content-[''] before:absolute before:-top-3 before:inset-x-0 before:h-4">
+                  {link.dropdown && isKnowledge && (
+                    <div
+                      className={`absolute left-1/2 -translate-x-1/2 top-full pt-2 transition-all duration-200 z-50 before:content-[''] before:absolute before:-top-3 before:inset-x-0 before:h-4 ${
+                        isDropdownOpen
+                          ? "opacity-100 visible pointer-events-auto"
+                          : "opacity-0 invisible pointer-events-none"
+                      }`}
+                    >
                       <div className="w-96 rounded-2xl bg-white p-3.5 shadow-2xl border border-slate-200/90 backdrop-blur-2xl text-[#071426]">
-                        {/* Header Banner */}
-                        {/* <div className="px-3.5 py-2 mb-2 rounded-xl bg-gradient-to-r from-[#EAF4F0] to-[#F1F6F4] border border-[#36A783]/20 flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
-                            <span className="text-[11px] font-mono font-bold tracking-wider uppercase text-[#216D56]">
-                              Knowledge Hub
-                            </span>
-                          </div>
-                          <span className="text-[10px] text-[#64748B] font-medium">UAE Statutory Guides</span>
-                        </div> */}
-
                         {/* List Items */}
                         <div className="space-y-1.5">
                           {KNOWLEDGE_HUB_ITEMS.map((item, idx) => {
@@ -381,6 +416,7 @@ export default function Navbar() {
                               <Link
                                 key={idx}
                                 href={item.href}
+                                onClick={handleNavClick}
                                 className="group/item flex items-start gap-3 p-2.5 rounded-xl bg-[#F8FAFC]/70 hover:bg-[#EAF4F0]/70 border border-slate-200/80 hover:border-[#36A783]/50 transition-all shadow-xs"
                               >
                                 <div className="w-8 h-8 rounded-full bg-[#36A783] text-white flex items-center justify-center shrink-0 shadow-xs mt-0.5">
@@ -496,7 +532,7 @@ export default function Navbar() {
 
             {/* Book a Consultation */}
             <Link
-              href="/contact"
+              href="/contact#book-session"
               className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-brand-teal px-5 py-2.5 text-[13px] font-semibold text-white shadow-[0_4px_16px_rgba(54,167,131,0.25)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_8px_24px_rgba(23,45,67,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]"
             >
               <span
@@ -635,7 +671,7 @@ export default function Navbar() {
                               <Link
                                 key={idx}
                                 href={item.href}
-                                onClick={closeMenu}
+                                onClick={handleNavClick}
                                 className="group/ms flex items-center justify-between gap-2.5 rounded-xl px-2 py-1.5 text-xs font-semibold text-[#071426] hover:bg-white hover:text-[#216D56] transition-all"
                               >
                                 <div className="flex items-center gap-2.5 min-w-0">
@@ -644,9 +680,6 @@ export default function Navbar() {
                                   </div>
                                   <span className="truncate">{item.title}</span>
                                 </div>
-                                <span className="text-[10px] font-mono font-bold text-[#216D56] bg-[#EAF4F0] px-1.5 py-0.5 rounded shrink-0">
-                                  {item.svcs}
-                                </span>
                               </Link>
                             );
                           }
@@ -673,7 +706,7 @@ export default function Navbar() {
                             <Link
                               key={idx}
                               href={item.href}
-                              onClick={closeMenu}
+                              onClick={handleNavClick}
                               className="group/km flex items-center justify-between text-xs font-semibold text-[#071426] hover:text-[#216D56] py-1"
                             >
                               <div className="flex items-center gap-2">
@@ -752,7 +785,7 @@ export default function Navbar() {
             </div>
 
             <Link
-              href="/contact"
+              href="/contact#book-session"
               onClick={closeMenu}
               tabIndex={menuOpen ? 0 : -1}
               className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-brand-teal py-3.5 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(54,167,131,0.25)] transition-all duration-500 active:scale-[0.98]"

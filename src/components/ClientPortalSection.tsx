@@ -81,12 +81,15 @@ export default function ClientPortalSection() {
                     AC
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-white flex items-center gap-1.5">
+                    <div className="text-sm font-semibold text-white flex items-center gap-2">
                       <span>Al-Mansoor Holdings LLC</span>
+                      <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-white/10 text-[#83D9BE] border border-[#36A783]/30">
+                        Sample
+                      </span>
                       <BadgeCheck className="w-4 h-4 text-[#36A783]" />
                     </div>
                     <div className="text-xs text-[#A8B7C9] font-mono">
-                      TRN: 100-3498-2819-0003 • Dubai Mainland
+                      TRN: 100-****-****-0003 • Dubai Mainland
                     </div>
                   </div>
                 </div>
@@ -120,7 +123,7 @@ export default function ClientPortalSection() {
 
                   <div className="flex items-center justify-between text-[11px] text-[#A8B7C9]">
                     <span>Taxable Income & Reliefs Validated</span>
-                    <span className="font-mono text-white/80">Filing Deadline: 28 Feb 2025</span>
+                    <span className="font-mono text-white/80">Filing Deadline: 30 Sep 2027</span>
                   </div>
                 </div>
 
@@ -239,7 +242,7 @@ export default function ClientPortalSection() {
                     Automated Statutory Deadlines
                   </h3>
                   <p className="text-xs text-[#A8B7C9] leading-relaxed">
-                    Automated SMS and email reminders prior to any FTA VAT or Corporate Tax due date, eliminating penalty risks.
+                    Automated SMS and email reminders prior to any FTA VAT or Corporate Tax due date, supporting strict statutory compliance.
                   </p>
                 </div>
               </div>

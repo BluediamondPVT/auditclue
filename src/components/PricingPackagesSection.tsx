@@ -73,7 +73,7 @@ const PRICING_PLANS: PricingPlan[] = [
       "Customs Box 6 & 7 declaration reconciliation",
       "Reverse charge mechanism (RCM) validation",
       "Tax invoice & credit note compliance check",
-      "FTA Registered Tax Agent review & sign-off",
+      "Chartered Tax Advisor review & sign-off",
     ],
     sla: "Submitted 5 days ahead of 28th cut-off",
   },

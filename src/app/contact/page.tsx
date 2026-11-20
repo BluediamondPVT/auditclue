@@ -41,8 +41,8 @@ const JURISDICTION_BENCHMARKS = [
   },
   {
     num: "03",
-    title: "FTA Registered Team",
-    desc: "Certified Chartered CPAs & Tax Agents",
+    title: "Chartered Advisory Team",
+    desc: "Certified Chartered CPAs & Tax Advisors",
   },
   {
     num: "04",
@@ -59,11 +59,9 @@ export default function ContactPage() {
 
       <main className="flex-1 pt-[76px] lg:pt-[86px]">
         {/* ================================================================= */}
-        {/* 1. EDITORIAL HEADER SECTION with Multi-Layer Wave Gradients       */}
+        {/* 1. HERO SECTION: Compact Header for Immediate Form Visibility     */}
         {/* ================================================================= */}
-        {/* 1. HERO SECTION: Smooth Multi-Layer Ambient Gradient Mesh          */}
-        {/* ================================================================= */}
-        <section className="relative bg-gradient-to-b from-[#EDF5F1] via-[#F8FAFC] to-[#EEF2F7] border-b border-[#CBD5E1]/60 pt-16 pb-16 sm:pt-20 sm:pb-22 overflow-hidden">
+        <section className="relative bg-gradient-to-b from-[#EDF5F1] via-[#F8FAFC] to-[#EEF2F7] border-b border-[#CBD5E1]/60 pt-6 pb-6 sm:pt-8 sm:pb-8 overflow-hidden">
           {/* Multi-Layer Ambient Gradient Mesh Container */}
           <div
             className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
@@ -82,7 +80,7 @@ export default function ContactPage() {
             {/* Minimalist Breadcrumb */}
             <nav
               aria-label="Breadcrumb"
-              className="flex items-center gap-2 text-xs text-[#64748B] font-medium mb-6"
+              className="flex items-center gap-2 text-xs text-[#64748B] font-medium mb-3"
             >
               <Link href="/" className="hover:text-[#36A783] transition-colors">
                 Home
@@ -94,23 +92,33 @@ export default function ContactPage() {
             </nav>
 
             <div className="max-w-4xl">
-              <div className="inline-flex items-center gap-2 bg-[#EAF4F0] text-[#216D56] border border-[#36A783]/25 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-5 font-mono shadow-xs">
+              <div className="inline-flex items-center gap-2 bg-[#EAF4F0] text-[#216D56] border border-[#36A783]/25 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase mb-2 font-mono shadow-xs">
                 <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
                 <span>DIRECT SENIOR ADVISOR ACCESS</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-[#071426] tracking-tight leading-[1.1] mb-6">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#071426] tracking-tight leading-tight mb-2">
                 <FlowText
                   text="Speak Directly With a Qualified Advisor."
                   as="span"
                 />
               </h1>
 
-              <p className="text-base sm:text-lg lg:text-xl text-[#334155] font-sans font-normal leading-relaxed max-w-3xl">
+              <p className="text-xs sm:text-sm text-[#475569] font-sans font-normal leading-relaxed max-w-2xl mb-3">
                 Receive practical, technology-enabled solutions for your audit,
                 accounting, corporate tax, VAT, finance, and compliance
                 requirements across Dubai and UAE Free Zones.
               </p>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href="#book-session"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#071426] text-white text-xs font-semibold hover:bg-[#216D56] transition-colors shadow-sm cursor-pointer"
+                >
+                  <span>Book Senior Partner Session (GST)</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#83D9BE]" />
+                </a>
+              </div>
             </div>
           </div>
         </section>
@@ -118,7 +126,7 @@ export default function ContactPage() {
         {/* ================================================================= */}
         {/* 2. MAIN CONSULTATION SECTION: Form + Contact Information          */}
         {/* ================================================================= */}
-        <section className="py-14 sm:py-20 lg:py-24 relative">
+        <section className="py-8 sm:py-12 lg:py-14 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
               
@@ -248,7 +256,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Social Proof: 500+ Businesses Served */}
+                {/* Social Proof: 350+ Businesses Served */}
                 <div className="p-6 rounded-2xl bg-white border border-[#CBD5E1]/80 flex items-center gap-5 shadow-sm">
                   {/* Stacked Sleek Avatars */}
                   <div className="flex -space-x-3 shrink-0">
@@ -265,7 +273,7 @@ export default function ContactPage() {
 
                   <div>
                     <div className="text-xl sm:text-2xl font-serif font-bold text-[#071426] leading-tight">
-                      500+ Businesses Served
+                      350+ Businesses Served
                     </div>
                     <div className="text-xs text-[#64748B] font-sans mt-0.5">
                       Mainland SMEs, Free Zone entities & high-growth startups
@@ -303,7 +311,7 @@ export default function ContactPage() {
         {/* ================================================================= */}
         {/* 3. CALENDAR RESERVATION: Direct Senior Advisor Booking            */}
         {/* ================================================================= */}
-        <section id="book-session" className="py-16 sm:py-20 bg-gradient-to-b from-[#F8FAFC] via-[#EDF5F1]/40 to-[#F8FAFC] border-t border-[#E2E8F0] relative overflow-hidden">
+        <section id="book-session" className="scroll-mt-28 py-16 sm:py-20 bg-gradient-to-b from-[#F8FAFC] via-[#EDF5F1]/40 to-[#F8FAFC] border-t border-[#E2E8F0] relative overflow-hidden">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#36A783] font-bold block mb-2">

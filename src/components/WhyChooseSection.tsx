@@ -189,14 +189,14 @@ export default function WhyChooseSection() {
                 </div>
 
                 <h3 className="text-2xl sm:text-3xl font-serif font-medium text-white tracking-tight leading-snug mb-3">
-                  FTA Certified Practice & EmaraTax Filing Authority
+                  Certified Tax Practice & EmaraTax Filing Authority
                 </h3>
 
                 <p className="text-base text-[#A8B7C9] leading-relaxed font-sans mb-6">
                   Direct statutory representation before the Federal Tax
                   Authority. Every audit, corporate tax filing, and VAT
                   reconciliation is prepared under IFRS / ISA standards and
-                  signed off by qualified CPAs and registered FTA Tax Agents.
+                  signed off by qualified CPAs and Chartered Tax Advisors.
                 </p>
 
                 {/* Explicit Regulatory Verification Checklist */}
@@ -224,7 +224,7 @@ export default function WhyChooseSection() {
 
               <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-xs">
                 <span className="font-semibold text-[#83D9BE] bg-[#36A783]/15 px-3 py-1 rounded-md border border-[#36A783]/25">
-                  FTA Tax Agent Authorization
+                  Chartered Tax Advisory Authorization
                 </span>
                 <span className="text-[#A8B7C9] font-sans">
                   IFRS • ISA • CPA / ACCA

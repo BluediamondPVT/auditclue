@@ -6,7 +6,7 @@ import { ServiceSchema, BreadcrumbSchema } from "@/components/JsonLd";
 export const metadata: Metadata = {
   title: "UAE VAT Compliance & Return Filing (5%) | Auditclue Advisory Dubai",
   description:
-    "FTA registered tax agents in Dubai. Complete UAE VAT compliance: VAT registration, quarterly Form 201 return filing, Voluntary Disclosure (Form 211), input VAT recovery, and customs Box 6/7 reconciliation.",
+    "Chartered tax consultants in Dubai. Complete UAE VAT compliance: VAT registration, quarterly Form 201 return filing, Voluntary Disclosure (Form 211), input VAT recovery, and customs Box 6/7 reconciliation.",
   keywords: [
     "UAE VAT compliance services",
     "VAT Registration UAE",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "Voluntary Disclosure Form 211",
     "VAT de-registration UAE",
     "Customs VAT reconciliation Box 6 Box 7",
-    "FTA Registered Tax Agent Dubai",
+    "Chartered Tax Advisor Dubai",
   ],
   alternates: {
     canonical: "https://auditclue.com/services/vat-services",

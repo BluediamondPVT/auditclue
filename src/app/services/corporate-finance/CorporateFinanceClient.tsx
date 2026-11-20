@@ -750,9 +750,12 @@ export default function CorporateFinanceClient() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-white mb-4">
               Speak With an Advisor Today
             </h2>
-            <p className="text-base sm:text-lg text-[#CBD5E1] font-sans max-w-2xl mx-auto mb-8">
+            <p className="text-base sm:text-lg text-[#CBD5E1] font-sans max-w-2xl mx-auto mb-4">
               Get professional support for audit, tax, accounting, compliance,
               finance and business advisory services.
+            </p>
+            <p className="text-xs text-[#94A3B8] italic max-w-xl mx-auto mb-8 font-sans">
+              *Note: Auditclue provides independent debt advisory, financial feasibility modeling, and bank dossier structuring. Loan approvals, credit facilities, and terms are governed by the respective lending institutions.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
