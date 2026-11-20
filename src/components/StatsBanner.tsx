@@ -7,10 +7,10 @@ import { Users, CalendarDays, Laptop, Zap } from "lucide-react";
 const stats = [
   {
     icon: Users,
-    countTo: 500,
+    countTo: 350,
     suffix: "+",
     label: "Enterprises Supported",
-    desc: "500+ across all 7 Emirates",
+    desc: "350+ across all 7 Emirates",
   },
   {
     icon: CalendarDays,

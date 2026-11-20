@@ -76,9 +76,9 @@ const SETUP_DETAILED_SERVICES = [
   },
   {
     num: "06",
-    title: "Ultimate Beneficial Owner (UBO) & Economic Substance (ESR) Filings",
+    title: "Ultimate Beneficial Owner (UBO) & Statutory Governance Filings",
     scope:
-      "Drafting mandatory Register of Partners and Register of Beneficial Owners in compliance with Cabinet Decision No. 109 of 2023, along with annual ESR notifications.",
+      "Drafting mandatory Register of Partners and Register of Beneficial Owners in compliance with Cabinet Decision No. 109 of 2023, along with corporate governance compliance registers.",
     deliverable: "Official Ministry of Economy UBO Declaration Certificate",
     turnaround: "Immediate with Formation",
   },
@@ -151,7 +151,7 @@ const SETUP_COMPARISON_MATRIX = [
   {
     feature: "Foreign Ownership",
     mainland: "100% Foreign Ownership (Commercial Companies Law)",
-    freezone: "100% Foreign Ownership guaranteed",
+    freezone: "100% Foreign Ownership recognized",
   },
   {
     feature: "Local UAE Market Access",
@@ -481,8 +481,8 @@ export default function BusinessSetupClient() {
                 Establish your enterprise with precision. Auditclue provides
                 end-to-end corporate formation across Mainland DED (Dubai, Abu
                 Dhabi) and 40+ premier Free Zones (DMCC, IFZA, DAFZA, JAFZA,
-                ADGM, DIFC). We combine company registration with guaranteed
-                corporate banking assistance, investor residency visas, and
+                ADGM, DIFC). We combine company registration with comprehensive
+                corporate banking support, investor residency visas, and
                 seamless tax compliance.
               </p>
 

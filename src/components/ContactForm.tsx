@@ -222,7 +222,7 @@ export default function ContactForm({ defaultService }: ContactFormProps = {}) {
           </div>
           <div className="flex items-start gap-2.5 text-xs text-[#334155]">
             <CheckCircle2 className="w-4 h-4 text-[#36A783] shrink-0 mt-0.5" />
-            <span>Assigned to an FTA Registered Tax Principal / Chartered CPA specializing in {formData.service}.</span>
+            <span>Assigned to a Chartered Tax Advisor / CPA Principal specializing in {formData.service}.</span>
           </div>
           <div className="flex items-start gap-2.5 text-xs text-[#334155]">
             <CheckCircle2 className="w-4 h-4 text-[#36A783] shrink-0 mt-0.5" />

@@ -64,7 +64,7 @@ export const BLOG_POSTS: BlogPostDetail[] = [
     author: {
       name: "Tariq Al-Mansoor, CTA",
       role: "Senior Partner, Direct Tax Advisory",
-      credentials: "FTA Registered Tax Agent | Chartered Tax Advisor",
+      credentials: "Chartered Tax Advisor | Corporate Tax Specialist",
     },
     featured: true,
     tableOfContents: [
@@ -120,7 +120,7 @@ export const BLOG_POSTS: BlogPostDetail[] = [
         id: "emaratax-submission",
         heading: "3. Step-by-Step EmaraTax Submission Protocol",
         paragraphs: [
-          "Filing your annual return requires meticulous synchronization between your statutory trial balance, tax adjustments, and the EmaraTax digital portal. Our certified tax agents follow a rigorous 5-step delivery process:",
+          "Filing your annual return requires meticulous synchronization between your statutory trial balance, tax adjustments, and the EmaraTax digital portal. Our certified tax specialists follow a rigorous 5-step delivery process:",
           "First, generate an audited or verified trial balance formatted under IFRS. Second, execute statutory book-to-tax adjustments: calculate non-deductible entertainment expenses (capped at 50%), adjust exempt dividends, and isolate non-qualifying transactions. Third, populate the EmaraTax Return Schedules including Revenue Reconciliation, Fixed Asset Additions, and Related Party Disclosures.",
           "Fourth, review Small Business Relief (SBR) election eligibility or Qualifying Free Zone Person (QFZP) qualifying income calculations before final submission. Finally, confirm generation of the GIBAN payment reference to ensure simultaneous fund settlement.",
         ],
@@ -185,7 +185,7 @@ export const BLOG_POSTS: BlogPostDetail[] = [
     author: {
       name: "Fatima Al-Hashemi, CA",
       role: "Director, Tax Compliance & Advisory",
-      credentials: "Member of ICAEW | UAE Registered Tax Agent",
+      credentials: "Member of ICAEW | Senior Tax Consultant",
     },
     featured: true,
     tableOfContents: [
@@ -623,7 +623,7 @@ export const BLOG_POSTS: BlogPostDetail[] = [
     author: {
       name: "Sultan Al-Dhaheri",
       role: "Partner, Indirect Tax & FTA Dispute Resolution",
-      credentials: "Former FTA Senior Tax Inspector | Registered Tax Agent",
+      credentials: "Senior Tax Director | Chartered Tax Advisor",
     },
     tableOfContents: [
       { id: "vat-audit-landscape", title: "1. The FTA VAT Audit Landscape" },
@@ -651,7 +651,7 @@ export const BLOG_POSTS: BlogPostDetail[] = [
         id: "top-seven-triggers",
         heading: "2. The Top 7 FTA VAT Audit Triggers",
         paragraphs: [
-          "Based on over 500+ client audit defense engagements, our registered tax agents identify the most common inspection triggers:",
+          "Based on over 500+ client audit defense engagements, our corporate tax specialists identify the most common inspection triggers:",
         ],
         bulletPoints: [
           "1. Box 6 vs Customs Import Discrepancies: Inconsistencies between Dubai Customs Bill of Entry import figures and declared Box 6/7 import VAT.",
@@ -684,7 +684,7 @@ export const BLOG_POSTS: BlogPostDetail[] = [
         heading: "5. Audit Readiness Defense Protocol",
         paragraphs: [
           "If your business receives an FTA Audit Notification:",
-          "1. Do not submit fragmented or unverified spreadsheets; engage an FTA Registered Tax Agent immediately.",
+          "1. Do not submit fragmented or unverified spreadsheets; engage a qualified Chartered Tax Advisor immediately.",
           "2. Request the specific tax period and transaction scope identified in the FTA notice.",
           "3. Conduct a pre-audit dry run to reconcile general ledgers, sales listings, purchase invoices, and bank statements.",
           "4. Submit clear, well-referenced electronic audit files within the statutory 5-day window to avoid obstruction penalties.",

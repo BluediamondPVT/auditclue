@@ -604,15 +604,15 @@ export default function CfoAdvisoryClient() {
         </section>
 
         {/* ================================================================= */}
-        {/* 3. NEED FUNDING, BUSINESS LOANS OR CORPORATE FINANCE SUPPORT?     */}
+        {/* 3. STRATEGIC CFO LEADERSHIP & CASH FLOW CONTROL                  */}
         {/* ================================================================= */}
         <section className="py-16 sm:py-20 bg-[#EEF2F7] border-b border-[#CBD5E1]">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-serif text-[#071426] mb-3">
-              Need Funding, Business Loans, Mortgage or Corporate Finance Support?
+              Need Strategic CFO Leadership, Cash Flow Control or Board Reporting?
             </h2>
             <p className="text-base sm:text-lg text-[#4A5D73] font-sans mb-8">
-              Talk with our CFO advisory team.
+              Schedule a confidential strategy session with our Virtual CFO &amp; financial modeling practice.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -620,7 +620,7 @@ export default function CfoAdvisoryClient() {
                 href="#consultation"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#071426] hover:bg-[#12273F] text-white text-base font-semibold px-7 py-3.5 rounded-xl transition-all shadow-md"
               >
-                <span>Talk With an Advisor</span>
+                <span>Talk With a CFO Advisor</span>
                 <span className="text-xs">↳</span>
               </a>
 

@@ -69,7 +69,7 @@ const STEP_TAKEAWAYS: Record<string, string[]> = {
     "Secure global upload anytime",
   ],
   "04": [
-    "Chartered Accountants & FTA Tax Agents",
+    "Chartered Accountants & Tax Advisors",
     "IFRS & ISA audit trail validation",
     "Proactive tax gap resolution",
   ],
@@ -99,8 +99,8 @@ const ARCHITECTURAL_BENCHMARKS = [
   },
   {
     num: "03",
-    title: "FTA Registered Team",
-    desc: "Chartered CPAs & FTA Tax Agents",
+    title: "Chartered Advisory Team",
+    desc: "Chartered CPAs & Tax Advisors",
   },
   {
     num: "04",
@@ -363,7 +363,7 @@ export default function ProcessPage() {
                   </div>
                   <div>
                     <div className="text-2xl sm:text-3xl font-serif text-[#071426] mb-1">
-                      Zero Penalties
+                      100% On-Time
                     </div>
                     <div className="text-xs text-[#64748B] font-mono">
                       Strict FTA statutory deadline adherence record

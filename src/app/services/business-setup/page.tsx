@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "UAE Company Formation & Business Setup | Auditclue Advisory",
     description:
-      "Form your UAE entity in 72 hours. Mainland DED, Free Zones, and Offshore company formation with guaranteed bank-ready structuring and 100% foreign ownership.",
+      "Form your UAE entity across Mainland DED, Free Zones, and Offshore jurisdictions with expert bank-ready structuring and 100% foreign ownership.",
     url: "https://auditclue.com/services/business-setup",
     siteName: "Auditclue Global Advisory Services LLC",
     locale: "en_AE",

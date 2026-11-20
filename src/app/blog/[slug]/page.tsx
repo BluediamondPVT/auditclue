@@ -400,7 +400,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     Need Direct Advisory Assistance?
                   </div>
                   <p className="text-xs text-[#64748B] mb-4 leading-relaxed">
-                    Our registered tax agents and auditors assist UAE businesses with complete filing and audit preparation.
+                    Our qualified tax advisors and auditors assist UAE businesses with complete filing and audit preparation.
                   </p>
                   <Link
                     href="/contact"

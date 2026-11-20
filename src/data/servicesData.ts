@@ -322,11 +322,11 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     number: "09",
     title: "Compliance Services",
     tagline:
-      "AML, ESR, UBO and regulatory mandates consolidated under a unified compliance calendar.",
+      "AML, UBO and regulatory mandates consolidated under a unified compliance calendar.",
     iconName: "ShieldAlert",
     count: 13,
     description:
-      "AML, ESR, UBO, and full compliance calendar management to keep your business penalty-free.",
+      "AML, UBO, and full compliance calendar management to keep your business penalty-free.",
     highlights: [
       "Penalty-free regulatory standing",
       "Bank KYC handled smoothly",
@@ -403,7 +403,7 @@ export const WORKFLOW_STEPS = [
   {
     step: "04",
     title: "Review & Technical Execution",
-    desc: "Certified UAE tax agents and auditors examine books, resolve data gaps, and structure defensible positions.",
+    desc: "Certified UAE tax consultants and auditors examine books, resolve data gaps, and structure defensible positions.",
     badge: "IFRS / ISA Standards",
   },
   {
@@ -468,7 +468,7 @@ export const WHY_CHOOSE_ITEMS: WhyChooseItem[] = [
     id: "compliance-expertise",
     number: "02",
     title: "UAE Tax & Compliance Expertise",
-    desc: "Deep expertise in UAE corporate tax, VAT, ESR, AML, and regulatory requirements updated with every FTA guideline.",
+    desc: "Deep expertise in UAE corporate tax, VAT, AML, UBO, and regulatory requirements updated with every FTA guideline.",
     iconName: "ShieldCheck",
   },
   {

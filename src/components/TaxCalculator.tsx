@@ -159,7 +159,7 @@ export default function TaxCalculator() {
           : "Eligible but Standard 9% viewed"
         : "Turnover > AED 3M (Standard 9%)"
     }
-I would like to speak with a chartered tax agent regarding statutory optimization and filing.`
+I would like to speak with a chartered tax advisor regarding statutory optimization and filing.`
   );
 
   return (

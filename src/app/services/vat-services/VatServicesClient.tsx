@@ -52,7 +52,7 @@ const VAT_DETAILED_SERVICES = [
     scope:
       "Comprehensive reconciliation of standard-rated, zero-rated, and exempt supplies. We compute eligible input tax recovery, cross-validate reverse charge liabilities, and handle the formal quarterly/monthly filing.",
     deliverable: "Reconciled Tax Dossier & Official FTA Form 201 Submission Receipt",
-    turnaround: "Guaranteed Ahead of 28th Deadline",
+    turnaround: "Delivered Before 28th Statutory Deadline",
   },
   {
     num: "03",
@@ -131,14 +131,14 @@ const VAT_DETAILED_SERVICES = [
     title: "Financial Services & Mixed-Supply Apportionment",
     scope:
       "For financial institutions, investment funds, and property developers with both taxable commercial and exempt residential supplies. We calculate precise input tax apportionment ratios using special methods.",
-    deliverable: "Standard & Special Input Tax Apportionment Model Signed by Tax Agent",
+    deliverable: "Standard & Special Input Tax Apportionment Model Signed by Lead Tax Consultant",
     turnaround: "Annual / Bi-annual Review",
   },
   {
     num: "13",
     title: "FTA Tax Audit Representation & Defense",
     scope:
-      "Direct representation by certified chartered accountants and registered tax agents during official FTA field inspections, notice requests, and compliance interviews. We manage the audit queue from start to sign-off.",
+      "Direct representation by certified chartered accountants and qualified tax specialists during official FTA field inspections, notice requests, and compliance interviews. We manage the audit queue from start to sign-off.",
     deliverable: "Certified Auditor Representation & Document Disclosure Queue Management",
     turnaround: "Active Case Management",
   },
@@ -154,7 +154,7 @@ const VAT_DETAILED_SERVICES = [
     num: "15",
     title: "Continuous VAT Advisory & Compliance Retainer",
     scope:
-      "Dedicated tax agent helpline for everyday billing queries, international supplier VAT review, contract vetting, and proactive alerts on evolving FTA cabinet decisions and public clarifications.",
+      "Dedicated advisory helpline for everyday billing queries, international supplier VAT review, contract vetting, and proactive alerts on evolving FTA cabinet decisions and public clarifications.",
     deliverable: "Unlimited Senior Advisor Access & Quarterly Compliance Calendar Tracking",
     turnaround: "Year-Round Ongoing",
   },
@@ -252,7 +252,7 @@ const REQUIRED_DOCUMENTS = [
     items: [
       "Passport and valid UAE Residence Visa copy of General Manager",
       "Emirates ID (Front & Back) of Authorized Signatory",
-      "Power of Attorney (POA) or Board Resolution appointing Tax Agent",
+      "Power of Attorney (POA) or Board Resolution appointing Tax Representative",
     ],
   },
   {
@@ -282,8 +282,8 @@ const ENGAGEMENT_TIMELINE = [
   },
   {
     day: "DAY 04",
-    phase: "Formal FTA Submission & Tax Agent Sign-Off",
-    desc: "We submit the verified dossier via the FTA EmaraTax platform under our certified Tax Agent credentials and track application progress in real time.",
+    phase: "Formal FTA Submission & Advisory Sign-Off",
+    desc: "We submit the verified dossier via the FTA EmaraTax platform under authorized credentials and track application progress in real time.",
   },
   {
     day: "DAYS 05–07",
@@ -613,7 +613,7 @@ export default function VatServicesClient() {
             <div className="max-w-4xl">
               <div className="inline-flex items-center gap-2 bg-[#EAF4F0] text-[#216D56] border border-[#36A783]/25 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-5 font-mono shadow-xs">
                 <span className="w-2 h-2 rounded-full bg-[#36A783] animate-pulse" />
-                <span>FTA REGISTERED TAX AGENT PRACTICE • 5% VAT SPECIALISTS</span>
+                <span>CHARTERED TAX ADVISORY PRACTICE • 5% VAT SPECIALISTS</span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-[#071426] tracking-tight leading-[1.1] mb-6">
@@ -621,7 +621,7 @@ export default function VatServicesClient() {
               </h1>
 
               <p className="text-base sm:text-lg lg:text-xl text-[#334155] font-sans font-normal leading-relaxed max-w-3xl mb-8">
-                Operating under Federal Decree-Law No. 8 of 2017, Auditclue delivers end-to-end Value Added Tax advisory across Dubai and the UAE. From strategic TRN registration and quarterly return filings to complex designated zone treatments and voluntary disclosures, our certified tax agents protect your business from statutory penalties.
+                Operating under Federal Decree-Law No. 8 of 2017, Auditclue delivers end-to-end Value Added Tax advisory across Dubai and the UAE. From strategic TRN registration and quarterly return filings to complex designated zone treatments and voluntary disclosures, our certified tax advisors protect your business from statutory penalties.
               </p>
 
               {/* Statutory Metric Highlights Bar */}
@@ -918,7 +918,7 @@ export default function VatServicesClient() {
                     <span className="text-xs text-[#64748B] font-sans">
                       Need urgent penalty remediation or reconsideration?{" "}
                       <a href="#consultation" className="text-[#36A783] font-semibold underline hover:text-[#216D56]">
-                        Speak with our Tax Agents
+                        Speak with our Tax Advisors
                       </a>
                     </span>
                   </div>
@@ -1095,7 +1095,7 @@ export default function VatServicesClient() {
                     Speak Directly With a UAE VAT Specialist
                   </h2>
                   <p className="text-base sm:text-lg text-[#4A5D73] font-sans leading-relaxed">
-                    Need immediate assistance with TRN registration, complex input recovery, or upcoming quarterly return filing? Speak with a licensed Tax Agent today.
+                    Need immediate assistance with TRN registration, complex input recovery, or upcoming quarterly return filing? Speak with a qualified Tax Advisor today.
                   </p>
                 </div>
 
@@ -1228,10 +1228,10 @@ export default function VatServicesClient() {
         <section className="py-16 sm:py-20 bg-[#071426] text-white text-center relative overflow-hidden">
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 z-10">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-white mb-4">
-              Protect Your Enterprise With FTA-Certified Tax Agents
+              Protect Your Enterprise With Qualified Tax Advisors
             </h2>
             <p className="text-base sm:text-lg text-[#CBD5E1] font-sans max-w-2xl mx-auto mb-8">
-              Guaranteed accuracy, itemized input tax optimization, and zero penalty liability across all seven Emirates.
+              Accurate computations, itemized input tax optimization, and statutory compliance across all seven Emirates.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

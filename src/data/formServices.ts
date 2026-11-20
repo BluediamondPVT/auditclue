@@ -78,7 +78,7 @@ export const FORM_SERVICES: FormServiceItem[] = [
     id: "compliance-services",
     title: "Compliance Services",
     svcs: "13 Svcs",
-    desc: "AML, GoAML, ESR, UBO & regulatory filing",
+    desc: "AML, GoAML, UBO & regulatory filing",
     href: "/services/compliance-services",
   },
   {

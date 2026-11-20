@@ -24,7 +24,7 @@ const VALID_SERVICES = [
   "UAE Corporate Tax (9%)",
   "UAE VAT Services (5%)",
   "Virtual CFO & Finance Advisory",
-  "Compliance Services (AML/ESR/UBO)",
+  "Compliance Services (AML/UBO)",
   "Other / General Enquiry",
   "business-setup",
   "corporate-tax",
@@ -128,21 +128,30 @@ export async function POST(request: Request) {
     const referenceId = generateReferenceId("AC");
     const timestamp = formatDubaiTimestamp();
 
-    // 5. Forward lead to CRM Webhook (server-to-server)
+    // 5. Forward lead to CRM Webhook (server-to-server — never exposed to client browser)
     const crmWebhookUrl = (
       process.env.CRM_LEAD_WEBHOOK_URL ||
       process.env.CRM_WEBHOOK_URL ||
-      ""
+      "https://crm.auditclue.app/webhooks/web-forms/1/M2BqAARVMtsd6yUODM4F4gTVzn0aCYlRZnP1x3Gm"
     ).trim();
 
     if (crmWebhookUrl) {
       try {
+        const formattedRemarks = [
+          `Service: ${String(service || "").trim()}`,
+          notes && String(notes).trim() ? `Note: ${String(notes).trim()}` : null,
+          `Reference ID: ${referenceId}`,
+          `Submitted: ${timestamp} GST`,
+        ]
+          .filter(Boolean)
+          .join(" | ");
+
         const crmPayload = {
           name: String(fullName).trim(),
-          email: String(email).trim(),
           phone: String(mobile).trim(),
+          email: String(email).trim(),
           company: String(companyName).trim(),
-          message: notes ? String(notes).trim() : `Enquiry for ${service}`,
+          message: formattedRemarks,
           service: String(service).trim(),
           reference_id: referenceId,
         };
@@ -152,12 +161,13 @@ export async function POST(request: Request) {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
+            "User-Agent": "Auditclue-Web/1.0",
           },
           body: JSON.stringify(crmPayload),
         });
 
         if (crmRes.ok) {
-          console.log(`[CRM Webhook] Dispatched ${referenceId} - Status: ${crmRes.status}`);
+          console.log(`[CRM Webhook] Lead synced successfully: ${referenceId} (HTTP ${crmRes.status})`);
         } else {
           const errBody = await crmRes.text().catch(() => "");
           console.error(
@@ -166,7 +176,7 @@ export async function POST(request: Request) {
         }
       } catch (crmErr) {
         console.error("[CRM Webhook Forwarding Failed]:", crmErr);
-        // We do not fail the client request if CRM webhook encounters a transient issue
+        // We do not fail the client response if the external CRM webhook is temporarily unreachable
       }
     }
 

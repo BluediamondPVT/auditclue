@@ -675,7 +675,7 @@ export default function ServicesSection() {
         <div className="mt-14 bg-gradient-to-br from-[#071426] via-[#0E2038] to-[#071426] text-white rounded-3xl p-8 sm:p-12 shadow-xl flex flex-col md:flex-row items-center justify-between gap-8 border border-[#162D4A] relative overflow-hidden">
           <div className="relative z-10 max-w-2xl">
             <div className="inline-flex items-center gap-2 text-[#83D9BE] text-xs font-mono font-bold tracking-widest uppercase mb-2">
-              <span>100% Digital UAE Delivery • FTA Registered</span>
+              <span>100% Digital UAE Delivery • Statutory Compliance</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-serif text-white mb-2 leading-snug">
               Need a Unified UAE Advisory Retainer?

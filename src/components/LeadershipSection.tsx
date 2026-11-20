@@ -33,8 +33,8 @@ export const LEADERSHIP_TEAM: LeadershipMember[] = [
   {
     id: "tariq-hashimi",
     name: "Tariq Al-Hashimi",
-    role: "Managing Partner & Lead FTA Tax Principal",
-    credentials: "FCA (ICAEW) • CTA • FTA Registered Tax Agent",
+    role: "Managing Partner & Lead Tax Principal",
+    credentials: "FCA (ICAEW) • CTA • Chartered Tax Advisor",
     photo: "/images/team/partner-tariq.jpg",
     experienceYears: "18+ Yrs UAE & UK",
     statutoryRegistration: "FTA Agency TAN-20038914",
@@ -75,7 +75,7 @@ export const LEADERSHIP_TEAM: LeadershipMember[] = [
     specialization: [
       "Mainland DED 100% Foreign Ownership",
       "40+ Free Zone Formations & Structuring",
-      "Ultimate Beneficial Owner (UBO) & ESR",
+      "Ultimate Beneficial Owner (UBO) & Governance",
       "Corporate Bank Account Structuring",
     ],
     bio: "Distinguished UAE corporate structuring specialist with deep institutional insight into ministerial licensing, foreign direct investment mandates, and cross-border corporate reorganizations across all seven Emirates and 40+ specialized Free Zones.",
@@ -86,7 +86,7 @@ export const LEADERSHIP_TEAM: LeadershipMember[] = [
 export const REGULATORY_CREDENTIALS = [
   {
     authority: "Federal Tax Authority (FTA)",
-    detail: "Registered Tax Agent & Corporate Tax Agency (TAN-20038914)",
+    detail: "Corporate Tax Advisory Agency & Chartered Principal (TAN-20038914)",
     code: "FTA / EmaraTax",
   },
   {
@@ -130,7 +130,7 @@ export default function LeadershipSection() {
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-serif font-normal text-[#071426] tracking-tight leading-[1.16] mb-4">
-            Led by Chartered CPAs, Licensed FTA Tax Agents & Legal Specialists
+            Led by Chartered CPAs, Licensed Tax Advisors & Legal Specialists
           </h2>
 
           <p className="text-base sm:text-lg text-[#4A5D73] font-sans leading-relaxed">
