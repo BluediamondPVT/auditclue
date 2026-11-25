@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import FlowText from "@/components/FlowText";
 import ContactForm from "@/components/ContactForm";
 import BookingCalendar from "@/components/BookingCalendar";
+import ContactHeroActions from "@/components/ContactHeroActions";
 import {
   Phone,
   Mail,
@@ -110,15 +111,8 @@ export default function ContactPage() {
                 requirements across Dubai and UAE Free Zones.
               </p>
 
-              <div className="flex flex-wrap items-center gap-3">
-                <a
-                  href="#book-session"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#071426] text-white text-xs font-semibold hover:bg-[#216D56] transition-colors shadow-sm cursor-pointer"
-                >
-                  <span>Book Senior Partner Session (GST)</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-[#83D9BE]" />
-                </a>
-              </div>
+              {/* Quick Navigation Action Buttons (Scroll to Form / Booking Calendar) */}
+              <ContactHeroActions />
             </div>
           </div>
         </section>
@@ -126,7 +120,7 @@ export default function ContactPage() {
         {/* ================================================================= */}
         {/* 2. MAIN CONSULTATION SECTION: Form + Contact Information          */}
         {/* ================================================================= */}
-        <section className="py-8 sm:py-12 lg:py-14 relative">
+        <section id="consult-form" className="py-8 sm:py-12 lg:py-14 relative scroll-mt-24 lg:scroll-mt-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
               
