@@ -237,10 +237,10 @@ export default function HeroSection() {
           id="consult-form"
           className="scroll-mt-20 lg:col-span-6 mt-4 lg:mt-0"
         >
-          <div className="relative rounded-2xl border border-[var(--border-default)] bg-white p-5 sm:p-8 lg:p-9 shadow-[0_24px_80px_rgba(35,63,91,0.10)]">
+          <div className="relative rounded-2xl border border-border bg-white p-5 sm:p-8 lg:p-9 shadow-[0_24px_80px_rgba(35,63,91,0.10)]">
             {submitted ? (
               <div
-                className="flex min-h-[410px] flex-col items-center justify-center text-center"
+                className="flex min-h-102.5 flex-col items-center justify-center text-center"
                 role="status"
                 aria-live="polite"
               >
@@ -563,7 +563,7 @@ export default function HeroSection() {
                     </div>
                   </form>
                 )}
-
+reader-optimized
                 <div className="mt-5 flex items-start gap-2.5 border-t border-[var(--border-default)] pt-4">
                   <LockKeyhole
                     size={16}

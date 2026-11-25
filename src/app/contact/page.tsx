@@ -275,8 +275,14 @@ export default function ContactPage() {
                   </div>
                 </div>
 
+              </div>
+
+              {/* Right Column: The Interactive Luxury Consultation Form (7 Cols) */}
+              <div className="lg:col-span-7 space-y-4">
+                <ContactForm />
+
                 {/* Key Commitments Badges */}
-                <div className="space-y-2.5 pt-2">
+                <div className="pt-2 px-1 space-y-2.5">
                   <div className="flex items-center gap-2.5 text-xs text-[#556980]">
                     <CheckCircle2 className="w-4 h-4 text-[#36A783] shrink-0" />
                     <span>Guaranteed 24-hour response on all consultation forms</span>
@@ -290,12 +296,6 @@ export default function ContactPage() {
                     <span>Itemized milestone proposals with zero hidden fees</span>
                   </div>
                 </div>
-
-              </div>
-
-              {/* Right Column: The Interactive Luxury Consultation Form (7 Cols) */}
-              <div className="lg:col-span-7">
-                <ContactForm />
               </div>
 
             </div>
