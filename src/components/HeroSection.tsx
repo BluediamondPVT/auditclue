@@ -564,7 +564,7 @@ export default function HeroSection() {
                   </form>
                 )}
 reader-optimized
-                <div className="mt-5 flex items-start gap-2.5 border-t border-[var(--border-default)] pt-4">
+                <div className="mt-5 flex items-start gap-2.5 border-t border-border pt-4">
                   <LockKeyhole
                     size={16}
                     className="mt-0.5 shrink-0 text-[var(--brand-teal-dark)]"
