@@ -75,7 +75,7 @@ export async function POST(request: Request) {
       }
     }
 
-    // 3. Server-side Validation: Required fields
+    // 3. Server-side Validation: Flexible Multi-Step Rules
     if (!fullName || typeof fullName !== "string" || fullName.trim().length < 2) {
       return NextResponse.json(
         { error: "Full Name is required (minimum 2 characters)." },
@@ -83,38 +83,37 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!companyName || typeof companyName !== "string" || companyName.trim().length < 2) {
-      return NextResponse.json(
-        { error: "Company Name is required." },
-        { status: 400 }
-      );
-    }
-
     // Email regex validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || !emailRegex.test(String(email).trim())) {
-      return NextResponse.json(
-        { error: "A valid corporate or work email address is required." },
-        { status: 400 }
-      );
-    }
-
-    // Phone / mobile validation (at least 7 digits)
+    const hasEmail = Boolean(email && emailRegex.test(String(email).trim()));
     const digitsOnly = String(mobile || "").replace(/\D/g, "");
-    if (!mobile || digitsOnly.length < 7) {
+    const hasPhone = Boolean(digitsOnly.length >= 7);
+
+    // Client Rule: Either email OR mobile number is mandatory
+    if (!hasEmail && !hasPhone) {
       return NextResponse.json(
-        { error: "A valid contact phone or WhatsApp number is required." },
+        { error: "Please provide either a valid email address or phone / WhatsApp number." },
         { status: 400 }
       );
     }
 
-    // Service validation
-    if (!service || !VALID_SERVICES.includes(service)) {
-      return NextResponse.json(
-        { error: "Please select a recognized UAE advisory practice." },
-        { status: 400 }
-      );
-    }
+    const resolvedEmail = hasEmail
+      ? String(email).trim()
+      : "no-email-provided@auditclue.internal";
+
+    const resolvedMobile = hasPhone
+      ? String(mobile).trim()
+      : "Direct Email Communication";
+
+    const resolvedCompany =
+      companyName && typeof companyName === "string" && companyName.trim().length >= 2
+        ? companyName.trim()
+        : `${fullName.trim()} (Direct Inquiry)`;
+
+    const resolvedService =
+      service && VALID_SERVICES.includes(service)
+        ? service
+        : "UAE Corporate Tax";
 
     // Consent check
     if (consent !== true && consent !== "true") {
@@ -138,7 +137,7 @@ export async function POST(request: Request) {
     if (crmWebhookUrl) {
       try {
         const formattedRemarks = [
-          `Service: ${String(service || "").trim()}`,
+          `Service: ${String(resolvedService).trim()}`,
           notes && String(notes).trim() ? `Note: ${String(notes).trim()}` : null,
           `Reference ID: ${referenceId}`,
           `Submitted: ${timestamp} GST`,
@@ -148,11 +147,11 @@ export async function POST(request: Request) {
 
         const crmPayload = {
           name: String(fullName).trim(),
-          phone: String(mobile).trim(),
-          email: String(email).trim(),
-          company: String(companyName).trim(),
+          phone: resolvedMobile,
+          email: resolvedEmail,
+          company: resolvedCompany,
           message: formattedRemarks,
-          service: String(service).trim(),
+          service: resolvedService,
           reference_id: referenceId,
         };
 
@@ -187,16 +186,16 @@ export async function POST(request: Request) {
     const mailResult = await sendMail({
       to: notifyTo,
       cc: notifyCc || undefined,
-      replyTo: String(email).trim(),
-      subject: `[${referenceId}] New Website Enquiry — ${String(service).trim()}`,
+      replyTo: hasEmail ? resolvedEmail : undefined,
+      subject: `[${referenceId}] New Website Enquiry — ${String(resolvedService).trim()}`,
       html: `
         <div style="font-family: Arial, sans-serif; color: #071426; line-height: 1.6;">
           <h2 style="margin-bottom: 12px; color: #216D56;">New Consultation / Appointment Request (${escapeHtml(referenceId)})</h2>
           <p><strong>Full Name:</strong> ${escapeHtml(fullName)}</p>
-          <p><strong>Company:</strong> ${escapeHtml(companyName)}</p>
-          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-          <p><strong>Phone / WhatsApp:</strong> ${escapeHtml(mobile)}</p>
-          <p><strong>Service:</strong> ${escapeHtml(service)}</p>
+          <p><strong>Company:</strong> ${escapeHtml(resolvedCompany)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(resolvedEmail)}</p>
+          <p><strong>Phone / WhatsApp:</strong> ${escapeHtml(resolvedMobile)}</p>
+          <p><strong>Service:</strong> ${escapeHtml(resolvedService)}</p>
           <p><strong>Details:</strong> ${escapeHtml(notes || "None provided")}</p>
           <p><strong>Submitted (UAE):</strong> ${escapeHtml(timestamp)} GST</p>
         </div>
